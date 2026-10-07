@@ -1,0 +1,777 @@
+{
+  "metrics": {
+    "n_queries": 10,
+    "n_queries_with_cross_camera_match": 6,
+    "cmc1_all_queries": 0.6,
+    "cmc3_all_queries": 0.6,
+    "cmc5_all_queries": 0.6,
+    "cmc1_matchable_only": 1.0,
+    "cmc3_matchable_only": 1.0,
+    "median_rank_matchable": 1.0
+  },
+  "label_collision_count": 41,
+  "label_collisions": [
+    {
+      "a": [
+        1,
+        "cam03",
+        163,
+        "gid_0001_cam_cam03_frame_000163.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        163,
+        "gid_0002_cam_cam03_frame_000163.png"
+      ]
+    },
+    {
+      "a": [
+        3,
+        "cam03",
+        383,
+        "gid_0003_cam_cam03_frame_000383.png"
+      ],
+      "b": [
+        4,
+        "cam03",
+        383,
+        "gid_0004_cam_cam03_frame_000383.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        170,
+        "gid_0001_cam_cam03_frame_000170.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        170,
+        "gid_0002_cam_cam03_frame_000170.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        180,
+        "gid_0001_cam_cam03_frame_000180.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        180,
+        "gid_0002_cam_cam03_frame_000180.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        190,
+        "gid_0001_cam_cam03_frame_000190.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        190,
+        "gid_0002_cam_cam03_frame_000190.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        200,
+        "gid_0001_cam_cam03_frame_000200.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        200,
+        "gid_0002_cam_cam03_frame_000200.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        210,
+        "gid_0001_cam_cam03_frame_000210.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        210,
+        "gid_0002_cam_cam03_frame_000210.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        220,
+        "gid_0001_cam_cam03_frame_000220.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        220,
+        "gid_0002_cam_cam03_frame_000220.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        230,
+        "gid_0001_cam_cam03_frame_000230.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        230,
+        "gid_0002_cam_cam03_frame_000230.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        240,
+        "gid_0001_cam_cam03_frame_000240.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        240,
+        "gid_0002_cam_cam03_frame_000240.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        250,
+        "gid_0001_cam_cam03_frame_000250.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        250,
+        "gid_0002_cam_cam03_frame_000250.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        260,
+        "gid_0001_cam_cam03_frame_000260.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        260,
+        "gid_0002_cam_cam03_frame_000260.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        270,
+        "gid_0001_cam_cam03_frame_000270.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        270,
+        "gid_0002_cam_cam03_frame_000270.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        280,
+        "gid_0001_cam_cam03_frame_000280.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        280,
+        "gid_0002_cam_cam03_frame_000280.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        290,
+        "gid_0001_cam_cam03_frame_000290.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        290,
+        "gid_0002_cam_cam03_frame_000290.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        300,
+        "gid_0001_cam_cam03_frame_000300.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        300,
+        "gid_0002_cam_cam03_frame_000300.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        310,
+        "gid_0001_cam_cam03_frame_000310.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        310,
+        "gid_0002_cam_cam03_frame_000310.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        320,
+        "gid_0001_cam_cam03_frame_000320.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        320,
+        "gid_0002_cam_cam03_frame_000320.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        330,
+        "gid_0001_cam_cam03_frame_000330.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        330,
+        "gid_0002_cam_cam03_frame_000330.png"
+      ]
+    },
+    {
+      "a": [
+        1,
+        "cam03",
+        340,
+        "gid_0001_cam_cam03_frame_000340.png"
+      ],
+      "b": [
+        2,
+        "cam03",
+        340,
+        "gid_0002_cam_cam03_frame_000340.png"
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "file": "gid_0001_cam_cam01_frame_000105.png",
+      "gid": 1,
+      "cam": "cam01",
+      "frame": 105,
+      "shape": [
+        256,
+        128
+      ],
+      "cross_camera_rank": 1,
+      "top5": [
+        {
+          "rank": 1,
+          "gid": 1,
+          "cam": "cam02",
+          "frame": 440,
+          "similarity": 0.6042418479919434
+        },
+        {
+          "rank": 2,
+          "gid": 1,
+          "cam": "cam02",
+          "frame": 350,
+          "similarity": 0.5897236466407776
+        },
+        {
+          "rank": 3,
+          "gid": 1,
+          "cam": "cam03",
+          "frame": 310,
+          "similarity": 0.5793634653091431
+        },
+        {
+          "rank": 4,
+          "gid": 2,
+          "cam": "cam03",
+          "frame": 310,
+          "similarity": 0.5793634653091431
+        },
+        {
+          "rank": 5,
+          "gid": 1,
+          "cam": "cam02",
+          "frame": 160,
+          "similarity": 0.5547717809677124
+        }
+      ]
+    },
+    {
+      "file": "gid_0001_cam_cam02_frame_000156.png",
+      "gid": 1,
+      "cam": "cam02",
+      "frame": 156,
+      "shape": [
+        256,
+        128
+      ],
+      "cross_camera_rank": 1,
+      "top5": [
+        {
+          "rank": 1,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 170,
+          "similarity": 0.7099580764770508
+        },
+        {
+          "rank": 2,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 420,
+          "similarity": 0.7013130187988281
+        },
+        {
+          "rank": 3,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 470,
+          "similarity": 0.6859449148178101
+        },
+        {
+          "rank": 4,
+          "gid": 3,
+          "cam": "cam01",
+          "frame": 360,
+          "similarity": 0.6797460913658142
+        },
+        {
+          "rank": 5,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 440,
+          "similarity": 0.6745845079421997
+        }
+      ]
+    },
+    {
+      "file": "gid_0001_cam_cam03_frame_000163.png",
+      "gid": 1,
+      "cam": "cam03",
+      "frame": 163,
+      "shape": [
+        256,
+        128
+      ],
+      "cross_camera_rank": 1,
+      "top5": [
+        {
+          "rank": 1,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 290,
+          "similarity": 0.506337583065033
+        },
+        {
+          "rank": 2,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 310,
+          "similarity": 0.4992852509021759
+        },
+        {
+          "rank": 3,
+          "gid": 3,
+          "cam": "cam02",
+          "frame": 410,
+          "similarity": 0.49459952116012573
+        },
+        {
+          "rank": 4,
+          "gid": 3,
+          "cam": "cam02",
+          "frame": 480,
+          "similarity": 0.4926721453666687
+        },
+        {
+          "rank": 5,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 300,
+          "similarity": 0.4662540555000305
+        }
+      ]
+    },
+    {
+      "file": "gid_0002_cam_cam03_frame_000163.png",
+      "gid": 2,
+      "cam": "cam03",
+      "frame": 163,
+      "shape": [
+        256,
+        128
+      ],
+      "cross_camera_rank": null,
+      "top5": [
+        {
+          "rank": 1,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 290,
+          "similarity": 0.506337583065033
+        },
+        {
+          "rank": 2,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 310,
+          "similarity": 0.4992852509021759
+        },
+        {
+          "rank": 3,
+          "gid": 3,
+          "cam": "cam02",
+          "frame": 410,
+          "similarity": 0.49459952116012573
+        },
+        {
+          "rank": 4,
+          "gid": 3,
+          "cam": "cam02",
+          "frame": 480,
+          "similarity": 0.4926721453666687
+        },
+        {
+          "rank": 5,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 300,
+          "similarity": 0.4662540555000305
+        }
+      ]
+    },
+    {
+      "file": "gid_0003_cam_cam01_frame_000327.png",
+      "gid": 3,
+      "cam": "cam01",
+      "frame": 327,
+      "shape": [
+        256,
+        128
+      ],
+      "cross_camera_rank": 1,
+      "top5": [
+        {
+          "rank": 1,
+          "gid": 3,
+          "cam": "cam02",
+          "frame": 430,
+          "similarity": 0.47857123613357544
+        },
+        {
+          "rank": 2,
+          "gid": 1,
+          "cam": "cam02",
+          "frame": 400,
+          "similarity": 0.3765164017677307
+        },
+        {
+          "rank": 3,
+          "gid": 1,
+          "cam": "cam02",
+          "frame": 160,
+          "similarity": 0.3619549572467804
+        },
+        {
+          "rank": 4,
+          "gid": 1,
+          "cam": "cam02",
+          "frame": 440,
+          "similarity": 0.3493974208831787
+        },
+        {
+          "rank": 5,
+          "gid": 2,
+          "cam": "cam03",
+          "frame": 310,
+          "similarity": 0.339832603931427
+        }
+      ]
+    },
+    {
+      "file": "gid_0003_cam_cam02_frame_000375.png",
+      "gid": 3,
+      "cam": "cam02",
+      "frame": 375,
+      "shape": [
+        256,
+        128
+      ],
+      "cross_camera_rank": 1,
+      "top5": [
+        {
+          "rank": 1,
+          "gid": 3,
+          "cam": "cam01",
+          "frame": 390,
+          "similarity": 0.6781216263771057
+        },
+        {
+          "rank": 2,
+          "gid": 3,
+          "cam": "cam01",
+          "frame": 360,
+          "similarity": 0.6710480451583862
+        },
+        {
+          "rank": 3,
+          "gid": 3,
+          "cam": "cam01",
+          "frame": 380,
+          "similarity": 0.6703627705574036
+        },
+        {
+          "rank": 4,
+          "gid": 3,
+          "cam": "cam01",
+          "frame": 420,
+          "similarity": 0.6522378921508789
+        },
+        {
+          "rank": 5,
+          "gid": 3,
+          "cam": "cam01",
+          "frame": 350,
+          "similarity": 0.645584762096405
+        }
+      ]
+    },
+    {
+      "file": "gid_0003_cam_cam03_frame_000383.png",
+      "gid": 3,
+      "cam": "cam03",
+      "frame": 383,
+      "shape": [
+        256,
+        128
+      ],
+      "cross_camera_rank": 1,
+      "top5": [
+        {
+          "rank": 1,
+          "gid": 3,
+          "cam": "cam02",
+          "frame": 460,
+          "similarity": 0.6180235147476196
+        },
+        {
+          "rank": 2,
+          "gid": 3,
+          "cam": "cam02",
+          "frame": 450,
+          "similarity": 0.608068585395813
+        },
+        {
+          "rank": 3,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 300,
+          "similarity": 0.5931981801986694
+        },
+        {
+          "rank": 4,
+          "gid": 3,
+          "cam": "cam02",
+          "frame": 470,
+          "similarity": 0.5929048657417297
+        },
+        {
+          "rank": 5,
+          "gid": 1,
+          "cam": "cam02",
+          "frame": 240,
+          "similarity": 0.5655186772346497
+        }
+      ]
+    },
+    {
+      "file": "gid_0004_cam_cam03_frame_000383.png",
+      "gid": 4,
+      "cam": "cam03",
+      "frame": 383,
+      "shape": [
+        256,
+        128
+      ],
+      "cross_camera_rank": null,
+      "top5": [
+        {
+          "rank": 1,
+          "gid": 3,
+          "cam": "cam02",
+          "frame": 460,
+          "similarity": 0.6180235147476196
+        },
+        {
+          "rank": 2,
+          "gid": 3,
+          "cam": "cam02",
+          "frame": 450,
+          "similarity": 0.608068585395813
+        },
+        {
+          "rank": 3,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 300,
+          "similarity": 0.5931981801986694
+        },
+        {
+          "rank": 4,
+          "gid": 3,
+          "cam": "cam02",
+          "frame": 470,
+          "similarity": 0.5929048657417297
+        },
+        {
+          "rank": 5,
+          "gid": 1,
+          "cam": "cam02",
+          "frame": 240,
+          "similarity": 0.5655186772346497
+        }
+      ]
+    },
+    {
+      "file": "gid_0005_cam_cam02_frame_000427.png",
+      "gid": 5,
+      "cam": "cam02",
+      "frame": 427,
+      "shape": [
+        256,
+        128
+      ],
+      "cross_camera_rank": null,
+      "top5": [
+        {
+          "rank": 1,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 110,
+          "similarity": 0.66209876537323
+        },
+        {
+          "rank": 2,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 130,
+          "similarity": 0.6048173308372498
+        },
+        {
+          "rank": 3,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 140,
+          "similarity": 0.5793663859367371
+        },
+        {
+          "rank": 4,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 120,
+          "similarity": 0.5566003918647766
+        },
+        {
+          "rank": 5,
+          "gid": 3,
+          "cam": "cam01",
+          "frame": 360,
+          "similarity": 0.5547734498977661
+        }
+      ]
+    },
+    {
+      "file": "gid_0006_cam_cam03_frame_000431.png",
+      "gid": 6,
+      "cam": "cam03",
+      "frame": 431,
+      "shape": [
+        256,
+        128
+      ],
+      "cross_camera_rank": null,
+      "top5": [
+        {
+          "rank": 1,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 110,
+          "similarity": 0.5552737712860107
+        },
+        {
+          "rank": 2,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 130,
+          "similarity": 0.547421395778656
+        },
+        {
+          "rank": 3,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 180,
+          "similarity": 0.5323331356048584
+        },
+        {
+          "rank": 4,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 200,
+          "similarity": 0.5302405953407288
+        },
+        {
+          "rank": 5,
+          "gid": 1,
+          "cam": "cam01",
+          "frame": 140,
+          "similarity": 0.5140121579170227
+        }
+      ]
+    }
+  ]
+}

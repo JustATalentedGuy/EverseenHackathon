@@ -1,0 +1,138 @@
+[
+  {
+    "view": "cor",
+    "proposals": [
+      {
+        "id": "activity_1",
+        "label": "Activity region \u2014 confirm meaning",
+        "polygon": [
+          [
+            0.1875,
+            0.109375
+          ],
+          [
+            0.484375,
+            0.109375
+          ],
+          [
+            0.484375,
+            0.609375
+          ],
+          [
+            0.1875,
+            0.609375
+          ]
+        ],
+        "support": 930,
+        "approved": false
+      },
+      {
+        "id": "activity_6",
+        "label": "Activity region \u2014 confirm meaning",
+        "polygon": [
+          [
+            0.3125,
+            0.921875
+          ],
+          [
+            1.0,
+            0.921875
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            0.3125,
+            1.0
+          ]
+        ],
+        "support": 388,
+        "approved": false
+      },
+      {
+        "id": "activity_3",
+        "label": "Activity region \u2014 confirm meaning",
+        "polygon": [
+          [
+            0.40625,
+            0.6875
+          ],
+          [
+            0.5,
+            0.6875
+          ],
+          [
+            0.5,
+            0.75
+          ],
+          [
+            0.40625,
+            0.75
+          ]
+        ],
+        "support": 32,
+        "approved": false
+      }
+    ],
+    "test_gt_point_coverage": 0.6762246117084827,
+    "image_area_fraction": 0.2080078125,
+    "scope": "Train predictions only; measures activity coverage, not department or floor-mask correctness."
+  },
+  {
+    "view": "front",
+    "proposals": [
+      {
+        "id": "activity_1",
+        "label": "Activity region \u2014 confirm meaning",
+        "polygon": [
+          [
+            0.515625,
+            0.3125
+          ],
+          [
+            0.6875,
+            0.3125
+          ],
+          [
+            0.6875,
+            0.59375
+          ],
+          [
+            0.515625,
+            0.59375
+          ]
+        ],
+        "support": 269,
+        "approved": false
+      },
+      {
+        "id": "activity_2",
+        "label": "Activity region \u2014 confirm meaning",
+        "polygon": [
+          [
+            0.75,
+            0.34375
+          ],
+          [
+            0.875,
+            0.34375
+          ],
+          [
+            0.875,
+            0.46875
+          ],
+          [
+            0.75,
+            0.46875
+          ]
+        ],
+        "support": 134,
+        "approved": false
+      }
+    ],
+    "test_gt_point_coverage": 0.3558926487747958,
+    "image_area_fraction": 0.06396484375,
+    "scope": "Train predictions only; measures activity coverage, not department or floor-mask correctness."
+  }
+]

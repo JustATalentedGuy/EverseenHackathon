@@ -1,0 +1,27 @@
+experiment,condition,metric,architecture_1_section_first,architecture_2_geometry_first,architecture_3_global_graph_or_predictive,interpretation
+Common CITIC stress,clean,B-cubed F1,0.843,0.954,0.927,Geometry-first best with healthy evidence
+Common CITIC stress,clean,mean dwell L1 error seconds,6.73,2.68,3.39,Lower is better; geometry-first best
+Common CITIC stress,moderate,B-cubed F1,0.534,0.669,0.509,Geometry-first best under realistic mixed corruption
+Common CITIC stress,moderate,link precision,0.840,0.925,0.897,Geometry-first makes fewer wrong links
+Common CITIC stress,moderate,link recall,0.783,0.875,0.694,Global graph over-splits
+Common CITIC stress,moderate,mean dwell L1 error seconds,40.65,28.60,52.14,Geometry-first lowest dwell error
+Common CITIC stress,appearance hard,B-cubed F1,0.296809,0.596863,0.363557,Geometry compensates for unreliable appearance
+Common CITIC stress,geometry hard,B-cubed F1,0.493156,0.325193,0.269263,Section/topology fallback preferable when geometry is unhealthy
+Common CITIC stress,severe,B-cubed F1,0.209365,0.199487,0.147725,All unreliable; downgrade to aggregate analytics
+PhysicalAI bottleneck,mild,bottleneck F1,0.837,0.834,0.834,All useful; geometry improves occupancy more than proxy-event F1
+PhysicalAI bottleneck,mild,occupancy MAE people,0.114,0.099,0.099,Geometry dedup improves counts
+PhysicalAI bottleneck,mild,conservation residual,0.216,0.189,0.189,Lower residual with geometry dedup
+PhysicalAI bottleneck,moderate,bottleneck F1,0.508,0.494,0.494,Recall degrades substantially for all
+PhysicalAI bottleneck,moderate,occupancy MAE people,0.287,0.243,0.243,Geometry retains more accurate spatial aggregate
+PhysicalAI bottleneck,severe,bottleneck F1,0.050,0.049,0.049,Alerts not trustworthy; health gating required
+Architecture3 forecast,10-second horizon,ROC-AUC,,,0.683,Predictive signal is modest
+Architecture3 forecast,10-second horizon,F1,,,0.448,Stretch feature not core claim
+WILDTRACK geometry,clean,projection median error cm,,11.15,,Real calibrated annotation result
+WILDTRACK geometry,clean,section accuracy,,0.9743,,Strong floor-to-section mapping
+WILDTRACK overlap,clean,fusion pair F1,,0.9980,,Near-perfect clean overlap fusion
+WILDTRACK overlap,clean,duplicate excess removed fraction,,0.9988,,Strong overlap deduplication
+WILDTRACK fragmentation,clean,time-only top1 repair,0.1888,0.1888,0.1888,Common baseline; timing alone weak
+WILDTRACK fragmentation,clean,geometry plus velocity top1 repair,,0.9796,,Strong evidence for geometry-based repair
+CITIC handoff,topology plus time,handoff F1,0.985,,,At conservative threshold 0.35
+CITIC handoff,topology plus time,false merges,0,,,Topology removed wrong links in tested sparse set
+CITIC analytics,10 cuts per minute,dwell MAE after full linking seconds,3.94,,,Section/topology system can recover dwell when paths are sparse and topology strong

@@ -1,0 +1,194 @@
+{
+  "cameras": [
+    "HallSeg",
+    "HallWide",
+    "PC",
+    "PF",
+    "Showroom"
+  ],
+  "captures": {
+    "1": {
+      "base_tracklets": 16,
+      "frame_max": 4290,
+      "frame_min": 59,
+      "gt_duration_s": 169.28,
+      "gt_people": 2,
+      "gt_rows": 7001,
+      "natural_cross_camera_handoffs": 12,
+      "owner_visible_fraction": 0.9007284673618055,
+      "owner_visible_rows": 6306,
+      "section_counts": {
+        "HA": 1464,
+        "HA3": 348,
+        "PC": 2168,
+        "PF": 2016,
+        "SH": 1005
+      }
+    },
+    "2": {
+      "base_tracklets": 17,
+      "frame_max": 4909,
+      "frame_min": 56,
+      "gt_duration_s": 194.16,
+      "gt_people": 2,
+      "gt_rows": 8089,
+      "natural_cross_camera_handoffs": 12,
+      "owner_visible_fraction": 0.9003585115589071,
+      "owner_visible_rows": 7283,
+      "section_counts": {
+        "ESC": 400,
+        "HA": 1810,
+        "HA3": 414,
+        "PC": 2376,
+        "PF": 1579,
+        "SH": 1510
+      }
+    },
+    "3": {
+      "base_tracklets": 16,
+      "frame_max": 4062,
+      "frame_min": 77,
+      "gt_duration_s": 159.44,
+      "gt_people": 2,
+      "gt_rows": 7631,
+      "natural_cross_camera_handoffs": 12,
+      "owner_visible_fraction": 0.920980212291967,
+      "owner_visible_rows": 7028,
+      "section_counts": {
+        "HA": 1660,
+        "HA3": 377,
+        "PC": 2543,
+        "PF": 1923,
+        "SH": 1128
+      }
+    }
+  },
+  "dataset": "CITIC-MTMC",
+  "entry_points": [
+    [
+      24.0,
+      12.6
+    ]
+  ],
+  "exit_points": [
+    [
+      24.0,
+      12.6
+    ]
+  ],
+  "fps": 25.0,
+  "room_adjacency": {
+    "ESC": [
+      "HA"
+    ],
+    "HA": [
+      "ESC",
+      "HA3"
+    ],
+    "HA2": [],
+    "HA3": [
+      "HA",
+      "PC"
+    ],
+    "OUT": [],
+    "PC": [
+      "HA3",
+      "PF",
+      "SH"
+    ],
+    "PF": [
+      "PC"
+    ],
+    "SG": [],
+    "SH": [
+      "PC"
+    ]
+  },
+  "section_camera_coverage_fraction": {
+    "ESC": {
+      "HallSeg": 0.0,
+      "HallWide": 0.00125,
+      "PC": 0.0,
+      "PF": 0.0,
+      "Showroom": 0.0
+    },
+    "HA": {
+      "HallSeg": 0.47875,
+      "HallWide": 0.920625,
+      "PC": 0.113125,
+      "PF": 0.0,
+      "Showroom": 0.0
+    },
+    "HA2": {
+      "HallSeg": 0.0,
+      "HallWide": 0.975,
+      "PC": 0.0,
+      "PF": 0.0,
+      "Showroom": 0.0
+    },
+    "HA3": {
+      "HallSeg": 0.0,
+      "HallWide": 0.298125,
+      "PC": 0.466875,
+      "PF": 0.0,
+      "Showroom": 0.0
+    },
+    "OUT": {
+      "HallSeg": 0.03875,
+      "HallWide": 0.0,
+      "PC": 0.0,
+      "PF": 0.0,
+      "Showroom": 0.0
+    },
+    "PC": {
+      "HallSeg": 0.0,
+      "HallWide": 0.0,
+      "PC": 0.899375,
+      "PF": 0.0,
+      "Showroom": 0.0
+    },
+    "PF": {
+      "HallSeg": 0.0,
+      "HallWide": 0.0,
+      "PC": 0.0,
+      "PF": 0.72625,
+      "Showroom": 0.0
+    },
+    "SG": {
+      "HallSeg": 0.0,
+      "HallWide": 0.0,
+      "PC": 0.0,
+      "PF": 0.0,
+      "Showroom": 0.0
+    },
+    "SH": {
+      "HallSeg": 0.0,
+      "HallWide": 0.0,
+      "PC": 0.0,
+      "PF": 0.0,
+      "Showroom": 0.6675
+    }
+  },
+  "section_owner_camera": {
+    "ESC": null,
+    "HA": "HallWide",
+    "HA2": "HallWide",
+    "HA3": "PC",
+    "OUT": "HallSeg",
+    "PC": "PC",
+    "PF": "PF",
+    "SG": null,
+    "SH": "Showroom"
+  },
+  "sections": [
+    "ESC",
+    "HA",
+    "HA2",
+    "HA3",
+    "OUT",
+    "PC",
+    "PF",
+    "SG",
+    "SH"
+  ]
+}

@@ -1,0 +1,437 @@
+{
+  "analytics": [
+    {
+      "capture": 1,
+      "dwell_mae_s_per_person_section": 22.456,
+      "flow_absolute_count_error": 4,
+      "flow_relative_absolute_error": 0.5,
+      "fragmentation_cuts_per_minute": 10.0,
+      "gt_flow_events": 8,
+      "gt_people": 2,
+      "handoff_links_used": 0,
+      "handoff_threshold": 1.0,
+      "local_links_used": 0,
+      "local_threshold": 0.35,
+      "observed_point_recall": 0.9575007928956549,
+      "occupancy_mae_people": 0.045216804454192676,
+      "pred_clusters": 58,
+      "stage": "fragmented_raw"
+    },
+    {
+      "capture": 1,
+      "dwell_mae_s_per_person_section": 19.592,
+      "flow_absolute_count_error": 4,
+      "flow_relative_absolute_error": 0.5,
+      "fragmentation_cuts_per_minute": 10.0,
+      "gt_flow_events": 8,
+      "gt_people": 2,
+      "handoff_links_used": 0,
+      "handoff_threshold": 1.0,
+      "local_links_used": 44,
+      "local_threshold": 0.35,
+      "observed_point_recall": 0.9575007928956549,
+      "occupancy_mae_people": 0.045216804454192676,
+      "pred_clusters": 14,
+      "stage": "after_local_repair"
+    },
+    {
+      "capture": 1,
+      "dwell_mae_s_per_person_section": 4.604,
+      "flow_absolute_count_error": 0,
+      "flow_relative_absolute_error": 0.0,
+      "fragmentation_cuts_per_minute": 10.0,
+      "gt_flow_events": 8,
+      "gt_people": 2,
+      "handoff_links_used": 11,
+      "handoff_threshold": 1.0,
+      "local_links_used": 44,
+      "local_threshold": 0.35,
+      "observed_point_recall": 0.9575007928956549,
+      "occupancy_mae_people": 0.045216804454192676,
+      "pred_clusters": 3,
+      "stage": "after_local_plus_handoff"
+    },
+    {
+      "capture": 2,
+      "dwell_mae_s_per_person_section": 25.536,
+      "flow_absolute_count_error": 4,
+      "flow_relative_absolute_error": 0.5,
+      "fragmentation_cuts_per_minute": 10.0,
+      "gt_flow_events": 8,
+      "gt_people": 2,
+      "handoff_links_used": 0,
+      "handoff_threshold": 1.0,
+      "local_links_used": 0,
+      "local_threshold": 0.35,
+      "observed_point_recall": 0.9703418920774406,
+      "occupancy_mae_people": 0.030100334448160536,
+      "pred_clusters": 53,
+      "stage": "fragmented_raw"
+    },
+    {
+      "capture": 2,
+      "dwell_mae_s_per_person_section": 22.631999999999998,
+      "flow_absolute_count_error": 4,
+      "flow_relative_absolute_error": 0.5,
+      "fragmentation_cuts_per_minute": 10.0,
+      "gt_flow_events": 8,
+      "gt_people": 2,
+      "handoff_links_used": 0,
+      "handoff_threshold": 1.0,
+      "local_links_used": 38,
+      "local_threshold": 0.35,
+      "observed_point_recall": 0.9703418920774406,
+      "occupancy_mae_people": 0.030100334448160536,
+      "pred_clusters": 15,
+      "stage": "after_local_repair"
+    },
+    {
+      "capture": 2,
+      "dwell_mae_s_per_person_section": 1.452,
+      "flow_absolute_count_error": 0,
+      "flow_relative_absolute_error": 0.0,
+      "fragmentation_cuts_per_minute": 10.0,
+      "gt_flow_events": 8,
+      "gt_people": 2,
+      "handoff_links_used": 12,
+      "handoff_threshold": 1.0,
+      "local_links_used": 38,
+      "local_threshold": 0.35,
+      "observed_point_recall": 0.9703418920774406,
+      "occupancy_mae_people": 0.030100334448160536,
+      "pred_clusters": 3,
+      "stage": "after_local_plus_handoff"
+    },
+    {
+      "capture": 3,
+      "dwell_mae_s_per_person_section": 25.136,
+      "flow_absolute_count_error": 4,
+      "flow_relative_absolute_error": 0.5,
+      "fragmentation_cuts_per_minute": 10.0,
+      "gt_flow_events": 8,
+      "gt_people": 2,
+      "handoff_links_used": 0,
+      "handoff_threshold": 1.0,
+      "local_links_used": 0,
+      "local_threshold": 0.35,
+      "observed_point_recall": 0.9678429140580534,
+      "occupancy_mae_people": 0.03976073187895848,
+      "pred_clusters": 51,
+      "stage": "fragmented_raw"
+    },
+    {
+      "capture": 3,
+      "dwell_mae_s_per_person_section": 22.259999999999998,
+      "flow_absolute_count_error": 4,
+      "flow_relative_absolute_error": 0.5,
+      "fragmentation_cuts_per_minute": 10.0,
+      "gt_flow_events": 8,
+      "gt_people": 2,
+      "handoff_links_used": 0,
+      "handoff_threshold": 1.0,
+      "local_links_used": 37,
+      "local_threshold": 0.35,
+      "observed_point_recall": 0.9678429140580534,
+      "occupancy_mae_people": 0.03976073187895848,
+      "pred_clusters": 14,
+      "stage": "after_local_repair"
+    },
+    {
+      "capture": 3,
+      "dwell_mae_s_per_person_section": 5.764,
+      "flow_absolute_count_error": 0,
+      "flow_relative_absolute_error": 0.0,
+      "fragmentation_cuts_per_minute": 10.0,
+      "gt_flow_events": 8,
+      "gt_people": 2,
+      "handoff_links_used": 11,
+      "handoff_threshold": 1.0,
+      "local_links_used": 37,
+      "local_threshold": 0.35,
+      "observed_point_recall": 0.9678429140580534,
+      "occupancy_mae_people": 0.03976073187895848,
+      "pred_clusters": 3,
+      "stage": "after_local_plus_handoff"
+    }
+  ],
+  "camera_topology_allowed_pairs": [
+    [
+      "HallSeg",
+      "HallWide"
+    ],
+    [
+      "HallSeg",
+      "PC"
+    ],
+    [
+      "HallWide",
+      "HallSeg"
+    ],
+    [
+      "HallWide",
+      "PC"
+    ],
+    [
+      "HallWide",
+      "PF"
+    ],
+    [
+      "HallWide",
+      "Showroom"
+    ],
+    [
+      "PC",
+      "HallSeg"
+    ],
+    [
+      "PC",
+      "HallWide"
+    ],
+    [
+      "PC",
+      "PF"
+    ],
+    [
+      "PC",
+      "Showroom"
+    ],
+    [
+      "PF",
+      "HallWide"
+    ],
+    [
+      "PF",
+      "PC"
+    ],
+    [
+      "PF",
+      "Showroom"
+    ],
+    [
+      "Showroom",
+      "HallWide"
+    ],
+    [
+      "Showroom",
+      "PC"
+    ],
+    [
+      "Showroom",
+      "PF"
+    ]
+  ],
+  "data_mode": "official world-GT + room graph + camera visibility/calibration; no detector output in these experiments",
+  "dataset": "CITIC-MTMC",
+  "fragmentation_best_by_rate": {
+    "10.0": {
+      "accepted_links": 51,
+      "base_tracklets": 49,
+      "candidate_links": 128,
+      "cuts_per_minute": 10.0,
+      "dropout_frames_per_cut": 6,
+      "f1": 1.0,
+      "false_merge_rate": 0.0,
+      "false_split_rate": 0.0,
+      "fn_false_splits": 0,
+      "fp_false_merges": 0,
+      "fragmented_tracklets": 159,
+      "precision": 1.0,
+      "recall": 1.0,
+      "score_threshold": 0.35,
+      "tp": 51,
+      "true_repair_links": 51
+    },
+    "15.0": {
+      "accepted_links": 68,
+      "base_tracklets": 49,
+      "candidate_links": 164,
+      "cuts_per_minute": 15.0,
+      "dropout_frames_per_cut": 6,
+      "f1": 1.0,
+      "false_merge_rate": 0.0,
+      "false_split_rate": 0.0,
+      "fn_false_splits": 0,
+      "fp_false_merges": 0,
+      "fragmented_tracklets": 193,
+      "precision": 1.0,
+      "recall": 1.0,
+      "score_threshold": 0.35,
+      "tp": 68,
+      "true_repair_links": 68
+    },
+    "2.0": {
+      "accepted_links": 22,
+      "base_tracklets": 49,
+      "candidate_links": 37,
+      "cuts_per_minute": 2.0,
+      "dropout_frames_per_cut": 6,
+      "f1": 1.0,
+      "false_merge_rate": 0.0,
+      "false_split_rate": 0.0,
+      "fn_false_splits": 0,
+      "fp_false_merges": 0,
+      "fragmented_tracklets": 80,
+      "precision": 1.0,
+      "recall": 1.0,
+      "score_threshold": 0.35,
+      "tp": 22,
+      "true_repair_links": 22
+    },
+    "5.0": {
+      "accepted_links": 30,
+      "base_tracklets": 49,
+      "candidate_links": 63,
+      "cuts_per_minute": 5.0,
+      "dropout_frames_per_cut": 6,
+      "f1": 1.0,
+      "false_merge_rate": 0.0,
+      "false_split_rate": 0.0,
+      "fn_false_splits": 0,
+      "fp_false_merges": 0,
+      "fragmented_tracklets": 101,
+      "precision": 1.0,
+      "recall": 1.0,
+      "score_threshold": 0.35,
+      "tp": 30,
+      "true_repair_links": 30
+    }
+  },
+  "handoff_best_by_strategy": {
+    "time_only": {
+      "accepted_links": 34,
+      "candidate_links": 60,
+      "f1": 0.9411764705882353,
+      "false_merge_rate": 0.05882352941176472,
+      "false_split_rate": 0.05882352941176472,
+      "fn_false_splits": 2,
+      "fp_false_merges": 2,
+      "precision": 0.9411764705882353,
+      "recall": 0.9411764705882353,
+      "score_threshold": 0.7,
+      "strategy": "time_only",
+      "tp": 32,
+      "true_handoffs": 34
+    },
+    "topology_time": {
+      "accepted_links": 34,
+      "candidate_links": 60,
+      "f1": 1.0,
+      "false_merge_rate": 0.0,
+      "false_split_rate": 0.0,
+      "fn_false_splits": 0,
+      "fp_false_merges": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "score_threshold": 1.0,
+      "strategy": "topology_time",
+      "tp": 34,
+      "true_handoffs": 34
+    }
+  },
+  "section_mapping_best_by_noise": {
+    "0.0": {
+      "boundary_churn_events": 0,
+      "dwell_mae_s_per_person_section": 0.0,
+      "frame_section_accuracy": 1.0,
+      "gt_transition_events": 50,
+      "hysteresis_frames": 1,
+      "hysteresis_seconds": 0.04,
+      "noise_sigma_m": 0.0,
+      "pred_transition_events": 50,
+      "transition_f1": 1.0,
+      "transition_precision": 1.0,
+      "transition_recall": 1.0,
+      "transition_timing_mae_s": 0.0
+    },
+    "0.05": {
+      "boundary_churn_events": 0,
+      "dwell_mae_s_per_person_section": 3.2000000000000006,
+      "frame_section_accuracy": 0.93371770608688,
+      "gt_transition_events": 50,
+      "hysteresis_frames": 6,
+      "hysteresis_seconds": 0.24,
+      "noise_sigma_m": 0.05,
+      "pred_transition_events": 50,
+      "transition_f1": 0.8399999999999999,
+      "transition_precision": 0.84,
+      "transition_recall": 0.84,
+      "transition_timing_mae_s": 0.23333333333333334
+    },
+    "0.1": {
+      "boundary_churn_events": 1,
+      "dwell_mae_s_per_person_section": 2.0309677419354837,
+      "frame_section_accuracy": 0.950222261344131,
+      "gt_transition_events": 50,
+      "hysteresis_frames": 6,
+      "hysteresis_seconds": 0.24,
+      "noise_sigma_m": 0.1,
+      "pred_transition_events": 60,
+      "transition_f1": 0.7636363636363636,
+      "transition_precision": 0.7,
+      "transition_recall": 0.84,
+      "transition_timing_mae_s": 0.2819047619047619
+    },
+    "0.25": {
+      "boundary_churn_events": 89,
+      "dwell_mae_s_per_person_section": 1.8296774193548386,
+      "frame_section_accuracy": 0.9598169094670129,
+      "gt_transition_events": 50,
+      "hysteresis_frames": 3,
+      "hysteresis_seconds": 0.12,
+      "noise_sigma_m": 0.25,
+      "pred_transition_events": 170,
+      "transition_f1": 0.44545454545454544,
+      "transition_precision": 0.28823529411764703,
+      "transition_recall": 0.98,
+      "transition_timing_mae_s": 0.1510204081632653
+    },
+    "0.5": {
+      "boundary_churn_events": 92,
+      "dwell_mae_s_per_person_section": 1.6442105263157896,
+      "frame_section_accuracy": 0.9514986136173584,
+      "gt_transition_events": 50,
+      "hysteresis_frames": 3,
+      "hysteresis_seconds": 0.12,
+      "noise_sigma_m": 0.5,
+      "pred_transition_events": 190,
+      "transition_f1": 0.375,
+      "transition_precision": 0.23684210526315788,
+      "transition_recall": 0.9,
+      "transition_timing_mae_s": 0.19911111111111113
+    }
+  },
+  "seed": 20261004,
+  "selected_handoff_threshold_for_analytics": {
+    "accepted_links": 34,
+    "candidate_links": 60,
+    "f1": 1.0,
+    "false_merge_rate": 0.0,
+    "false_split_rate": 0.0,
+    "fn_false_splits": 0,
+    "fp_false_merges": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "score_threshold": 1.0,
+    "strategy": "topology_time",
+    "tp": 34,
+    "true_handoffs": 34
+  },
+  "selected_local_threshold_for_analytics": {
+    "accepted_links": 51,
+    "base_tracklets": 49,
+    "candidate_links": 128,
+    "cuts_per_minute": 10.0,
+    "dropout_frames_per_cut": 6,
+    "f1": 1.0,
+    "false_merge_rate": 0.0,
+    "false_split_rate": 0.0,
+    "fn_false_splits": 0,
+    "fp_false_merges": 0,
+    "fragmented_tracklets": 159,
+    "precision": 1.0,
+    "recall": 1.0,
+    "score_threshold": 0.35,
+    "tp": 51,
+    "true_repair_links": 51
+  }
+}

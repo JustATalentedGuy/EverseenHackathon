@@ -1,0 +1,260 @@
+{
+  "source": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA1/",
+  "attribution": "EC Funded CAVIAR project/IST 2001 37540",
+  "source_terms": "Source page states Creative Commons BY-SA; retain attribution and source terms.",
+  "split_policy": "Entire scenarios and both associated views stay in one split. Same site and actors may recur; this is scenario generalization, not unseen-site generalization.",
+  "records": [
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "scenario": "EnterExitCrossingPaths1",
+      "view": "cor",
+      "split": "train",
+      "video": "datasets\\caviar\\EnterExitCrossingPaths1cor.mpg",
+      "xml": "datasets\\caviar\\EnterExitCrossingPaths1cor.xml",
+      "fps": 25.0,
+      "container_reported_frames": 4,
+      "width": 384,
+      "height": 288,
+      "frames": 383
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "scenario": "EnterExitCrossingPaths1",
+      "view": "front",
+      "split": "train",
+      "video": "datasets\\caviar\\EnterExitCrossingPaths1front.mpg",
+      "xml": "datasets\\caviar\\EnterExitCrossingPaths1front.xml",
+      "fps": 25.0,
+      "container_reported_frames": 4,
+      "width": 384,
+      "height": 288,
+      "frames": 383
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "scenario": "TwoEnterShop1",
+      "view": "cor",
+      "split": "train",
+      "video": "datasets\\caviar\\TwoEnterShop1cor.mpg",
+      "xml": "datasets\\caviar\\TwoEnterShop1cor.xml",
+      "fps": 25.0,
+      "container_reported_frames": 18,
+      "width": 384,
+      "height": 288,
+      "frames": 1645
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "scenario": "TwoEnterShop1",
+      "view": "front",
+      "split": "train",
+      "video": "datasets\\caviar\\TwoEnterShop1front.mpg",
+      "xml": "datasets\\caviar\\TwoEnterShop1front.xml",
+      "fps": 25.0,
+      "container_reported_frames": 18,
+      "width": 384,
+      "height": 288,
+      "frames": 1645
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "scenario": "OneLeaveShop1",
+      "view": "cor",
+      "split": "val",
+      "video": "datasets\\caviar\\OneLeaveShop1cor.mpg",
+      "xml": "datasets\\caviar\\OneLeaveShop1cor.xml",
+      "fps": 25.0,
+      "container_reported_frames": 3,
+      "width": 384,
+      "height": 288,
+      "frames": 295
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "scenario": "OneLeaveShop1",
+      "view": "front",
+      "split": "val",
+      "video": "datasets\\caviar\\OneLeaveShop1front.mpg",
+      "xml": "datasets\\caviar\\OneLeaveShop1front.xml",
+      "fps": 25.0,
+      "container_reported_frames": 3,
+      "width": 384,
+      "height": 288,
+      "frames": 295
+    },
+    {
+      "name": "EnterExitCrossingPaths2cor",
+      "scenario": "EnterExitCrossingPaths2",
+      "view": "cor",
+      "split": "test",
+      "video": "datasets\\caviar\\EnterExitCrossingPaths2cor.mpg",
+      "xml": "datasets\\caviar\\EnterExitCrossingPaths2cor.xml",
+      "fps": 25.0,
+      "container_reported_frames": 5,
+      "width": 384,
+      "height": 288,
+      "frames": 485
+    },
+    {
+      "name": "EnterExitCrossingPaths2front",
+      "scenario": "EnterExitCrossingPaths2",
+      "view": "front",
+      "split": "test",
+      "video": "datasets\\caviar\\EnterExitCrossingPaths2front.mpg",
+      "xml": "datasets\\caviar\\EnterExitCrossingPaths2front.xml",
+      "fps": 25.0,
+      "container_reported_frames": 5,
+      "width": 384,
+      "height": 288,
+      "frames": 485
+    },
+    {
+      "name": "OneShopOneWait2cor",
+      "scenario": "OneShopOneWait2",
+      "view": "cor",
+      "split": "test",
+      "video": "datasets\\caviar\\OneShopOneWait2cor.mpg",
+      "xml": "datasets\\caviar\\OneShopOneWait2cor.xml",
+      "fps": 25.0,
+      "container_reported_frames": 16,
+      "width": 384,
+      "height": 288,
+      "frames": 1462
+    },
+    {
+      "name": "OneShopOneWait2front",
+      "scenario": "OneShopOneWait2",
+      "view": "front",
+      "split": "test",
+      "video": "datasets\\caviar\\OneShopOneWait2front.mpg",
+      "xml": "datasets\\caviar\\OneShopOneWait2front.xml",
+      "fps": 25.0,
+      "container_reported_frames": 16,
+      "width": 384,
+      "height": 288,
+      "frames": 1462
+    }
+  ],
+  "files": [
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/EnterExitCrossingPaths1cor/ceecp1gt.xml",
+      "path": "datasets\\caviar\\EnterExitCrossingPaths1cor.xml",
+      "bytes": 1227399,
+      "sha256": "3525985d2ee60fdd91a584a1c6fd8b70f335c19c9bc26280d785b1c4e8ae123f"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/EnterExitCrossingPaths1cor/EnterExitCrossingPaths1cor.mpg",
+      "path": "datasets\\caviar\\EnterExitCrossingPaths1cor.mpg",
+      "bytes": 2257192,
+      "sha256": "f8363a5492e57787647c0e9e525b749a864e3bcbaee48a7353060525428a1367"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/EnterExitCrossingPaths1front/feecp1gt.xml",
+      "path": "datasets\\caviar\\EnterExitCrossingPaths1front.xml",
+      "bytes": 412116,
+      "sha256": "33677afddc823d8b47eb0fa20d59553b8edc6ed041310b071ae6746a86837494"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/EnterExitCrossingPaths1front/EnterExitCrossingPaths1front.mpg",
+      "path": "datasets\\caviar\\EnterExitCrossingPaths1front.mpg",
+      "bytes": 2260632,
+      "sha256": "4ad6b51f756cf5c05df6017137bdb11a31bc320dd53de75aaa06a9dccf8ea7c9"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/TwoEnterShop1cor/TwoEnterShop1cor.mpg",
+      "path": "datasets\\caviar\\TwoEnterShop1cor.mpg",
+      "bytes": 9514781,
+      "sha256": "6dbee6a37f09f0fc0fba9f6409dbf4876dec6389579da6ecdbab962378b5408b"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/TwoEnterShop1cor/c2es1gt.xml",
+      "path": "datasets\\caviar\\TwoEnterShop1cor.xml",
+      "bytes": 10375583,
+      "sha256": "5f8b728417644c47cd109b8ce30a5c317939c9fc194b92e1dcb5910de15de495"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/TwoEnterShop1front/TwoEnterShop1front.mpg",
+      "path": "datasets\\caviar\\TwoEnterShop1front.mpg",
+      "bytes": 9518398,
+      "sha256": "42e167669e422f462e9b3954c133d719607d398715701141381ba0987f067b9f"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/TwoEnterShop1front/f2es1gt.xml",
+      "path": "datasets\\caviar\\TwoEnterShop1front.xml",
+      "bytes": 4417093,
+      "sha256": "f5d1309b50fe6e135ff5a14476c68465c0550d0896bf8010b8a79d1e592245e0"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/OneLeaveShop1cor/OneLeaveShop1cor.mpg",
+      "path": "datasets\\caviar\\OneLeaveShop1cor.mpg",
+      "bytes": 1744340,
+      "sha256": "283b4abe464feea871d06dee6fd7b2248dc6f967ce30cd89480d9603c00254a8"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/OneLeaveShop1cor/cols1gt.xml",
+      "path": "datasets\\caviar\\OneLeaveShop1cor.xml",
+      "bytes": 1163865,
+      "sha256": "a602c75bd854c5075dd717da956956e5b5c8e57b725b414b0c85cb3c16b66765"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/OneLeaveShop1front/OneLeaveShop1front.mpg",
+      "path": "datasets\\caviar\\OneLeaveShop1front.mpg",
+      "bytes": 1746373,
+      "sha256": "3815e50633b7cb6a8615164f7201e1525f4a34ec22ee0a86e4b162ec329d2dda"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/OneLeaveShop1front/fols1gt.xml",
+      "path": "datasets\\caviar\\OneLeaveShop1front.xml",
+      "bytes": 321654,
+      "sha256": "7fb4e63cff0a9368da18d965143c73ec7338e2a30f9d29e39e84ba7a442677e8"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/EnterExitCrossingPaths2cor/ceecp2gt.xml",
+      "path": "datasets\\caviar\\EnterExitCrossingPaths2cor.xml",
+      "bytes": 639497,
+      "sha256": "aec11775deb5081f3f39c80f1281e84e8ff31d0c281390118857cf10b06fd8d9"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/EnterExitCrossingPaths2cor/EnterExitCrossingPaths2cor.mpg",
+      "path": "datasets\\caviar\\EnterExitCrossingPaths2cor.mpg",
+      "bytes": 2856243,
+      "sha256": "38748ca0c32cd602729f36c55830eb9667f7ecdbbc9b627e84099107319ab036"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/EnterExitCrossingPaths2front/EnterExitCrossingPaths2front.mpg",
+      "path": "datasets\\caviar\\EnterExitCrossingPaths2front.mpg",
+      "bytes": 2844857,
+      "sha256": "0040be1d2e36f29b2c2286c0ed9d62d70d997a16f7edd39e12bd35b6804fe311"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/EnterExitCrossingPaths2front/feecp2gt.xml",
+      "path": "datasets\\caviar\\EnterExitCrossingPaths2front.xml",
+      "bytes": 899836,
+      "sha256": "af474c91b39d9700b3f33d550836c72dc09f246017bcab7bc61e849c91ceeacd"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/OneShopOneWait2cor/OneShopOneWait2cor.mpg",
+      "path": "datasets\\caviar\\OneShopOneWait2cor.mpg",
+      "bytes": 8449585,
+      "sha256": "5adeb464ec45aa7b20e742115a42dec3328e99630362103aa2bba562a8f69ef3"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/OneShopOneWait2cor/cosow2gt.xml",
+      "path": "datasets\\caviar\\OneShopOneWait2cor.xml",
+      "bytes": 12471412,
+      "sha256": "12e7eee098af2cb505d1cfba696a4d387d0acfbd5b27fb5a0ae020e553a89b85"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/OneShopOneWait2front/OneShopOneWait2front.mpg",
+      "path": "datasets\\caviar\\OneShopOneWait2front.mpg",
+      "bytes": 8463276,
+      "sha256": "f3857f8d0b39b7677de26def9d7ef4669a3bd99836b3805b6d872907942cbe75"
+    },
+    {
+      "url": "https://homepages.inf.ed.ac.uk/rbf/CAVIARDATA2/OneShopOneWait2front/fosow2gt.xml",
+      "path": "datasets\\caviar\\OneShopOneWait2front.xml",
+      "bytes": 4612364,
+      "sha256": "3fe770546f34d1f0aa836eb77951e3e1877fb5eab23d12c2be5e8873dbb32173"
+    }
+  ]
+}

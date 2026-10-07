@@ -1,0 +1,218 @@
+{
+  "scene": "PhysicalAI Smart Spaces MTMC_Tracking_2026/train/Warehouse_000 metadata sample",
+  "camera_count": 25,
+  "map_shape_hw": [
+    1080,
+    1920
+  ],
+  "camera_ids": [
+    "Camera_0000",
+    "Camera_0001",
+    "Camera_0002",
+    "Camera_0003",
+    "Camera_0004",
+    "Camera_0005",
+    "Camera_0006",
+    "Camera_0007",
+    "Camera_0008",
+    "Camera_0009",
+    "Camera_0010",
+    "Camera_0011",
+    "Camera_0012",
+    "Camera_0013",
+    "Camera_0014",
+    "Camera_0015",
+    "Camera_0016",
+    "Camera_0017",
+    "Camera_0018",
+    "Camera_0019",
+    "Camera_0020",
+    "Camera_0021",
+    "Camera_0022",
+    "Camera_0023",
+    "Camera_0024"
+  ],
+  "all_have_intrinsic": true,
+  "all_have_extrinsic": true,
+  "all_have_camera_matrix": true,
+  "all_have_homography": true,
+  "all_have_xy_coordinates": true,
+  "all_have_fps_and_frame_size": true,
+  "homography_checks": {
+    "Camera_0000": {
+      "valid_matrix": true,
+      "determinant": -1049.4339432103677,
+      "condition_number": 72629.60279829479,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.0004536764172371477
+    },
+    "Camera_0001": {
+      "valid_matrix": true,
+      "determinant": -647.7371554558367,
+      "condition_number": 109823.98060646174,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.0014300994807854295
+    },
+    "Camera_0002": {
+      "valid_matrix": true,
+      "determinant": -600.0717413984589,
+      "condition_number": 30110.810773808535,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.005738602951169014
+    },
+    "Camera_0003": {
+      "valid_matrix": true,
+      "determinant": -261.0079843271066,
+      "condition_number": 78661.41849213821,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.0012567908270284534
+    },
+    "Camera_0004": {
+      "valid_matrix": true,
+      "determinant": -1108.2302309463103,
+      "condition_number": 113108.36515479405,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.003843276761472225
+    },
+    "Camera_0005": {
+      "valid_matrix": true,
+      "determinant": -31428.831647961615,
+      "condition_number": 35168.52149166273,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.016291700303554535
+    },
+    "Camera_0006": {
+      "valid_matrix": true,
+      "determinant": -2742.984564009307,
+      "condition_number": 15162.837213940442,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.003409784520044923
+    },
+    "Camera_0007": {
+      "valid_matrix": true,
+      "determinant": -2419.079091278397,
+      "condition_number": 151586.6919041204,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.0052716853097081184
+    },
+    "Camera_0008": {
+      "valid_matrix": true,
+      "determinant": -7420.83831894906,
+      "condition_number": 108789.7354653135,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.0040430896915495396
+    },
+    "Camera_0009": {
+      "valid_matrix": true,
+      "determinant": -490.647429125791,
+      "condition_number": 44254.42710635758,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.002634605625644326
+    },
+    "Camera_0010": {
+      "valid_matrix": true,
+      "determinant": -32230.701962090752,
+      "condition_number": 108697.72826367669,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.002460405696183443
+    },
+    "Camera_0011": {
+      "valid_matrix": true,
+      "determinant": -4859.101656986002,
+      "condition_number": 28714.96850511736,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.0026834653690457344
+    },
+    "Camera_0012": {
+      "valid_matrix": true,
+      "determinant": -915.715537407972,
+      "condition_number": 41565.69760780118,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.0031954688020050526
+    },
+    "Camera_0013": {
+      "valid_matrix": true,
+      "determinant": -792.5974676688237,
+      "condition_number": 26440.3673024504,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.004750558640807867
+    },
+    "Camera_0014": {
+      "valid_matrix": true,
+      "determinant": -178.8988911865201,
+      "condition_number": 105907.27532830839,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.0030260144267231226
+    },
+    "Camera_0015": {
+      "valid_matrix": true,
+      "determinant": 17937.40924066594,
+      "condition_number": 19655.829508066523,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.006207908503711224
+    },
+    "Camera_0016": {
+      "valid_matrix": true,
+      "determinant": -604.0121231850321,
+      "condition_number": 28468.631997977507,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.0015160818584263325
+    },
+    "Camera_0017": {
+      "valid_matrix": true,
+      "determinant": -783.6706235925841,
+      "condition_number": 33446.397693455336,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.005875247996300459
+    },
+    "Camera_0018": {
+      "valid_matrix": true,
+      "determinant": -3641.765901991153,
+      "condition_number": 92727.41830623885,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.007555797230452299
+    },
+    "Camera_0019": {
+      "valid_matrix": true,
+      "determinant": -2849282.496104149,
+      "condition_number": 14560.346923928138,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.010220427997410297
+    },
+    "Camera_0020": {
+      "valid_matrix": true,
+      "determinant": -419.1510607475095,
+      "condition_number": 28646.335318998947,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.004588610026985407
+    },
+    "Camera_0021": {
+      "valid_matrix": true,
+      "determinant": -1203.2659266614178,
+      "condition_number": 40636.06848164078,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.005571610759943724
+    },
+    "Camera_0022": {
+      "valid_matrix": true,
+      "determinant": -20009346.560800463,
+      "condition_number": 7652.036906574344,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.016640672460198402
+    },
+    "Camera_0023": {
+      "valid_matrix": true,
+      "determinant": -966.9098846564835,
+      "condition_number": 126308.30347798152,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.007044208236038685
+    },
+    "Camera_0024": {
+      "valid_matrix": true,
+      "determinant": -797.5265238547225,
+      "condition_number": 34651.39123503202,
+      "finite_sample_projection": true,
+      "max_pixel_roundtrip_error": 0.011223334819078445
+    }
+  }
+}

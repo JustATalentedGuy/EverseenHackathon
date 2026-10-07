@@ -1,0 +1,108 @@
+{
+  "model": "C:\\Coding\\ML\\Everseen\\models\\yolo11n.onnx",
+  "validation_images": 16,
+  "matched_fraction_at_iou95": 1.0,
+  "max_matched_box_difference_px": 0.00012969970703125,
+  "torch_median_sample_s_excluding_warmup": 0.22014070011209697,
+  "onnx_median_sample_s_excluding_warmup": 0.13680470001418144,
+  "records": [
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000000.jpg",
+      "torch_count": 5,
+      "onnx_count": 5,
+      "iou95_matches": 5
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000035.jpg",
+      "torch_count": 4,
+      "onnx_count": 4,
+      "iou95_matches": 4
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000075.jpg",
+      "torch_count": 3,
+      "onnx_count": 3,
+      "iou95_matches": 3
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000110.jpg",
+      "torch_count": 4,
+      "onnx_count": 4,
+      "iou95_matches": 4
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000150.jpg",
+      "torch_count": 4,
+      "onnx_count": 4,
+      "iou95_matches": 4
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000185.jpg",
+      "torch_count": 4,
+      "onnx_count": 4,
+      "iou95_matches": 4
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000225.jpg",
+      "torch_count": 3,
+      "onnx_count": 3,
+      "iou95_matches": 3
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000260.jpg",
+      "torch_count": 2,
+      "onnx_count": 2,
+      "iou95_matches": 2
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000000.jpg",
+      "torch_count": 0,
+      "onnx_count": 0,
+      "iou95_matches": 0
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000035.jpg",
+      "torch_count": 0,
+      "onnx_count": 0,
+      "iou95_matches": 0
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000075.jpg",
+      "torch_count": 1,
+      "onnx_count": 1,
+      "iou95_matches": 1
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000110.jpg",
+      "torch_count": 2,
+      "onnx_count": 2,
+      "iou95_matches": 2
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000150.jpg",
+      "torch_count": 1,
+      "onnx_count": 1,
+      "iou95_matches": 1
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000185.jpg",
+      "torch_count": 1,
+      "onnx_count": 1,
+      "iou95_matches": 1
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000225.jpg",
+      "torch_count": 0,
+      "onnx_count": 0,
+      "iou95_matches": 0
+    },
+    {
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000260.jpg",
+      "torch_count": 0,
+      "onnx_count": 0,
+      "iou95_matches": 0
+    }
+  ],
+  "input_policy": "Both engines use identical square letterboxing with rect=False. The main PyTorch video experiment uses automatic rectangular letterboxing.",
+  "note": "Small sequential CPU validation benchmark; concurrent experiments and camera decode are not represented. Export is a candidate, not the assessed deployment default."
+}

@@ -1,0 +1,46 @@
+{
+  "dataset": "NVIDIA PhysicalAI Smart Spaces 2026 Warehouse_000",
+  "experiment_class": "released synthetic scene metadata + ground truth; metadata validation only",
+  "files": {
+    "calibration_json_bytes": 81410,
+    "map_png_bytes": 515978,
+    "ground_truth_json_bytes_observed": 281636586
+  },
+  "camera_count": 25,
+  "required_metadata_missing": {
+    "intrinsicMatrix": [],
+    "extrinsicMatrix": [],
+    "cameraMatrix": [],
+    "homography": [],
+    "coordinates": [],
+    "scaleFactor": [],
+    "translationToGlobalCoordinates": []
+  },
+  "homography_condition_number": {
+    "min": 7652.036906574344,
+    "median": 40636.06848164078,
+    "max": 151586.6919041204
+  },
+  "max_numeric_homography_roundtrip_error_px": 1.2456363367333517e-11,
+  "sampled_frames": 100,
+  "object_type_records": {
+    "PalletTruck": 1000,
+    "Forklift": 900,
+    "Person": 5489
+  },
+  "person_frame_records": 5489,
+  "unique_person_ids": 57,
+  "person_visible_camera_count": {
+    "mean": 2.6024776826380034,
+    "median": 2.0,
+    "max": 6,
+    "fraction_multi_camera": 0.7888504281289852
+  },
+  "naive_inverse_homography_vs_3d_location": {
+    "n_visible_boxes": 14285,
+    "median_numeric_distance": 76.29268104116085,
+    "p90_numeric_distance": 198.19665169126924,
+    "interpretation": "Large mismatch: inverse-homography output and 3d location are not directly comparable without the released scene/global coordinate transform. Do not report this number as metre projection error."
+  },
+  "blocker": "Need authoritative PhysicalAI coordinate-transform convention linking homography/map coordinates to the ground-truth 3d location frame before quantitative image-to-world accuracy is claimed."
+}

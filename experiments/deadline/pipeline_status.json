@@ -1,0 +1,56 @@
+[
+  {
+    "command": [
+      "scripts/deadline/experiment.py",
+      "infer",
+      "--tag",
+      "reviewed",
+      "--model",
+      "experiments/deadline/training/reviewed/weights/best.pt",
+      "--splits",
+      "val",
+      "test"
+    ],
+    "exit_code": 0,
+    "seconds": 174.7956826686859,
+    "log": "experiments\\deadline\\pipeline_0.log"
+  },
+  {
+    "command": [
+      "scripts/deadline/experiment.py",
+      "train",
+      "--labels",
+      "pseudo",
+      "--epochs",
+      "6"
+    ],
+    "exit_code": 0,
+    "seconds": 322.3954041004181,
+    "log": "experiments\\deadline\\pipeline_1.log"
+  },
+  {
+    "command": [
+      "scripts/deadline/experiment.py",
+      "infer",
+      "--tag",
+      "pseudo",
+      "--model",
+      "experiments/deadline/training/pseudo/weights/best.pt",
+      "--splits",
+      "val",
+      "test"
+    ],
+    "exit_code": 0,
+    "seconds": 165.43227672576904,
+    "log": "experiments\\deadline\\pipeline_2.log"
+  },
+  {
+    "command": [
+      "scripts/deadline/experiment.py",
+      "evaluate"
+    ],
+    "exit_code": 0,
+    "seconds": 12.045989990234375,
+    "log": "experiments\\deadline\\pipeline_3.log"
+  }
+]

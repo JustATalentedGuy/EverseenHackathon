@@ -1,0 +1,7 @@
+{
+  "budget": 48,
+  "selected_mean_fp_plus_fn": 2.125,
+  "random_mean_fp_plus_fn": 1.500694444444444,
+  "random_std": 0.15398669425042164,
+  "scope": "Training-pool annotation triage; demonstrates error concentration, not training improvement or human time savings."
+}

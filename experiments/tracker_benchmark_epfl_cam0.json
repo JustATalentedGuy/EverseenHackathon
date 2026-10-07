@@ -1,0 +1,92 @@
+{
+  "video": "C:\\Coding\\ML\\Everseen\\samples\\epfl_lab\\cam0.avi",
+  "assumptions": {
+    "person_localization_point": "bounding-box bottom-center (approximate floor contact)",
+    "floor_mapping": "provided EPFL ground-plane homography",
+    "model": "YOLO11n pretrained COCO, person class only"
+  },
+  "runs": [
+    {
+      "tracker": "bytetrack.yaml",
+      "frames_processed": 180,
+      "input_fps": 25.0,
+      "runtime_seconds": 29.26187739998568,
+      "processing_fps_cpu": 6.151348306861818,
+      "mean_person_detections_per_frame": 0.1,
+      "mean_tracked_ids_per_frame": 0.08333333333333333,
+      "mean_detection_confidence": 0.7223481817377938,
+      "unique_local_track_ids": 2,
+      "tracks_ge_20_frames": 0,
+      "mean_coverage_long_tracks": null,
+      "total_internal_gaps_long_tracks": 0,
+      "track_stats": {
+        "2": {
+          "observed_frames": 4,
+          "first_frame": 164,
+          "last_frame": 167,
+          "span_frames": 4,
+          "internal_gaps": 0,
+          "coverage_in_span": 1.0,
+          "first_ground_point": [
+            267.8656311035156,
+            113.22991943359375
+          ],
+          "last_ground_point": [
+            262.3716125488281,
+            113.8961410522461
+          ]
+        },
+        "3": {
+          "observed_frames": 11,
+          "first_frame": 169,
+          "last_frame": 179,
+          "span_frames": 11,
+          "internal_gaps": 0,
+          "coverage_in_span": 1.0,
+          "first_ground_point": [
+            259.1311340332031,
+            119.60594177246094
+          ],
+          "last_ground_point": [
+            243.01951599121094,
+            120.7154312133789
+          ]
+        }
+      },
+      "note": "Without frame-level person-ID ground truth this measures track continuity/stability, not true IDF1/HOTA."
+    },
+    {
+      "tracker": "botsort.yaml",
+      "frames_processed": 180,
+      "input_fps": 25.0,
+      "runtime_seconds": 22.705337699968368,
+      "processing_fps_cpu": 7.9276513029026985,
+      "mean_person_detections_per_frame": 0.1,
+      "mean_tracked_ids_per_frame": 0.08888888888888889,
+      "mean_detection_confidence": 0.7223481817377938,
+      "unique_local_track_ids": 1,
+      "tracks_ge_20_frames": 0,
+      "mean_coverage_long_tracks": null,
+      "total_internal_gaps_long_tracks": 0,
+      "track_stats": {
+        "2": {
+          "observed_frames": 16,
+          "first_frame": 164,
+          "last_frame": 179,
+          "span_frames": 16,
+          "internal_gaps": 0,
+          "coverage_in_span": 1.0,
+          "first_ground_point": [
+            267.7783203125,
+            113.19091033935547
+          ],
+          "last_ground_point": [
+            242.91851806640625,
+            120.92501068115234
+          ]
+        }
+      },
+      "note": "Without frame-level person-ID ground truth this measures track continuity/stability, not true IDF1/HOTA."
+    }
+  ]
+}

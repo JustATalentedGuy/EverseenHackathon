@@ -1,0 +1,121 @@
+{
+  "scope": "Cached-detection downsampling, no new inference. Reduced temporal coverage changes tracking.",
+  "runs": [
+    {
+      "requested_hz": 5,
+      "sampled_frames": 780,
+      "detection": {
+        "frames": 780,
+        "tp": 1876,
+        "fp": 366,
+        "fn": 655,
+        "precision": 0.8367528991971455,
+        "recall": 0.7412090082971158,
+        "f1": 0.7860884139953908,
+        "count_mae": 0.8423076923076923,
+        "exact_count_fraction": 0.39871794871794874
+      },
+      "tracking": {
+        "sampled_idf1_iou50": 0.6274812102524571,
+        "id_switches_matched_within_0_8s": 14,
+        "matched_zone_accuracy_foot": 0.9684873949579832,
+        "matched_zone_accuracy_centre": 0.8371848739495799,
+        "zone_matched_observations": 1904,
+        "matched_with_human_feet": 1468,
+        "human_feet_only_zone_accuracy_foot": 0.9611716621253406,
+        "human_feet_only_zone_accuracy_centre": 0.8249318801089919,
+        "zone_persistence_s": 0.2,
+        "zone_occupancy_mae_people": 0.3671794871794872,
+        "oracle_mapped_observed_zone_duration_mae_s": 2.9191489361702145,
+        "duration_note": "Duration uses sampled observed frames, illustrative zones and oracle identity mapping for evaluation. Not completed visit wait-time or official retail zone labels."
+      }
+    },
+    {
+      "requested_hz": 2.5,
+      "sampled_frames": 392,
+      "detection": {
+        "frames": 392,
+        "tp": 946,
+        "fp": 197,
+        "fn": 322,
+        "precision": 0.8276465441819773,
+        "recall": 0.7460567823343849,
+        "f1": 0.7847366238075487,
+        "count_mae": 0.8443877551020408,
+        "exact_count_fraction": 0.3903061224489796
+      },
+      "tracking": {
+        "sampled_idf1_iou50": 0.5799285997619992,
+        "id_switches_matched_within_0_8s": 12,
+        "matched_zone_accuracy_foot": 0.9605855855855856,
+        "matched_zone_accuracy_centre": 0.8423423423423423,
+        "zone_matched_observations": 888,
+        "matched_with_human_feet": 697,
+        "human_feet_only_zone_accuracy_foot": 0.9569583931133429,
+        "human_feet_only_zone_accuracy_centre": 0.8220946915351507,
+        "zone_persistence_s": 0.2,
+        "zone_occupancy_mae_people": 0.4887755102040816,
+        "oracle_mapped_observed_zone_duration_mae_s": 3.793936413096279,
+        "duration_note": "Duration uses sampled observed frames, illustrative zones and oracle identity mapping for evaluation. Not completed visit wait-time or official retail zone labels."
+      }
+    },
+    {
+      "requested_hz": 2,
+      "sampled_frames": 314,
+      "detection": {
+        "frames": 314,
+        "tp": 751,
+        "fp": 149,
+        "fn": 268,
+        "precision": 0.8344444444444444,
+        "recall": 0.7369970559371933,
+        "f1": 0.7826993225638353,
+        "count_mae": 0.8439490445859873,
+        "exact_count_fraction": 0.40764331210191085
+      },
+      "tracking": {
+        "sampled_idf1_iou50": 0.6402535657686212,
+        "id_switches_matched_within_0_8s": 8,
+        "matched_zone_accuracy_foot": 0.9640804597701149,
+        "matched_zone_accuracy_centre": 0.8462643678160919,
+        "zone_matched_observations": 696,
+        "matched_with_human_feet": 550,
+        "human_feet_only_zone_accuracy_foot": 0.9618181818181818,
+        "human_feet_only_zone_accuracy_centre": 0.8236363636363636,
+        "zone_persistence_s": 0.2,
+        "zone_occupancy_mae_people": 0.42929936305732486,
+        "oracle_mapped_observed_zone_duration_mae_s": 3.692518922724868,
+        "duration_note": "Duration uses sampled observed frames, illustrative zones and oracle identity mapping for evaluation. Not completed visit wait-time or official retail zone labels."
+      }
+    },
+    {
+      "requested_hz": 1,
+      "sampled_frames": 158,
+      "detection": {
+        "frames": 158,
+        "tp": 379,
+        "fp": 73,
+        "fn": 132,
+        "precision": 0.838495575221239,
+        "recall": 0.7416829745596869,
+        "f1": 0.7871235721703012,
+        "count_mae": 0.8037974683544303,
+        "exact_count_fraction": 0.43670886075949367
+      },
+      "tracking": {
+        "sampled_idf1_iou50": 0.5767012687427913,
+        "id_switches_matched_within_0_8s": 0,
+        "matched_zone_accuracy_foot": 0.9688581314878892,
+        "matched_zone_accuracy_centre": 0.8304498269896193,
+        "zone_matched_observations": 289,
+        "matched_with_human_feet": 248,
+        "human_feet_only_zone_accuracy_foot": 0.967741935483871,
+        "human_feet_only_zone_accuracy_centre": 0.8104838709677419,
+        "zone_persistence_s": 0.2,
+        "zone_occupancy_mae_people": 0.5721518987341773,
+        "oracle_mapped_observed_zone_duration_mae_s": 5.119150950840367,
+        "duration_note": "Duration uses sampled observed frames, illustrative zones and oracle identity mapping for evaluation. Not completed visit wait-time or official retail zone labels."
+      }
+    }
+  ]
+}

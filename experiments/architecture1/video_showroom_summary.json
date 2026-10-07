@@ -1,0 +1,29 @@
+{
+  "camera": "Showroom",
+  "capture": 1,
+  "confidence_threshold": 0.25,
+  "dataset": "CITIC-MTMC",
+  "detections_projecting_inside_official_visibility_fraction": 0.9251870324189526,
+  "detections_projecting_inside_showroom_section_fraction": 0.9276807980049875,
+  "detections_total": 401,
+  "exact_person_count_frame_fraction": 0.61,
+  "frames_processed": 300,
+  "gt_visible_run_available": [
+    3125,
+    3633
+  ],
+  "mean_detected_people_per_frame": 1.3366666666666667,
+  "mean_gt_visible_people_per_frame": 1.0,
+  "median_track_length_frames": 54.0,
+  "model": "models\\yolo11n.pt",
+  "note": "Count comparison uses official world GT filtered by the official Showroom visibility polygon. It is a real-video sanity component, not a full detector benchmark; GT supplies floor positions rather than image boxes.",
+  "person_count_mae_per_frame": 0.39,
+  "segment_end_frame_1_based": 3424,
+  "segment_seconds_processed": 12.0,
+  "segment_start_frame_1_based": 3125,
+  "tracker": "Ultralytics ByteTrack",
+  "unique_bytetrack_ids": 4,
+  "video": "datasets\\citic_video_subset\\capture1\\Showroom.mp4",
+  "video_fps": 25.0,
+  "video_frame_count": 4318
+}

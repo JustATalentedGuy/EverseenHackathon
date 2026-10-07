@@ -1,0 +1,23 @@
+{
+  "persistence_s": 0.2,
+  "margin": 0.008,
+  "selection_scope": "Validation GT trajectory perturbation only, sigma=.01 normalized, 10 seeds.",
+  "sweep": [
+    {
+      "persistence_s": 0,
+      "validation_mean_transition_f1": 0.5578438496369531
+    },
+    {
+      "persistence_s": 0.2,
+      "validation_mean_transition_f1": 0.7662004662004662
+    },
+    {
+      "persistence_s": 0.4,
+      "validation_mean_transition_f1": 0.690909090909091
+    },
+    {
+      "persistence_s": 0.8,
+      "validation_mean_transition_f1": 0.32
+    }
+  ]
+}

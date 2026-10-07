@@ -1,0 +1,125 @@
+{
+  "scope": "Controlled point perturbations on real held-out annotated trajectories; not detector/video robustness.",
+  "runs": [
+    {
+      "sigma_normalized": 0.002,
+      "persistence_s": 0,
+      "seeds": 30,
+      "accuracy": 0.9973659949953902,
+      "transition_f1": 0.9543381394591073,
+      "false_transition_events": 2.466666666666667,
+      "dwell_mae_s": 0.026666666666666648,
+      "transition_f1_std": 0.030108704038730665
+    },
+    {
+      "sigma_normalized": 0.002,
+      "persistence_s": 0.2,
+      "seeds": 30,
+      "accuracy": 0.9722902673515078,
+      "transition_f1": 0.886060606060606,
+      "false_transition_events": 0.6333333333333333,
+      "dwell_mae_s": 0.18885416666666643,
+      "transition_f1_std": 0.01752343308460723
+    },
+    {
+      "sigma_normalized": 0.002,
+      "persistence_s": 0.4,
+      "seeds": 30,
+      "accuracy": 0.9506650862636639,
+      "transition_f1": 0.8412121212121212,
+      "false_transition_events": 1.8666666666666667,
+      "dwell_mae_s": 0.2924999999999997,
+      "transition_f1_std": 0.012361259426891601
+    },
+    {
+      "sigma_normalized": 0.002,
+      "persistence_s": 0.8,
+      "seeds": 30,
+      "accuracy": 0.9108916106940603,
+      "transition_f1": 0.7395061728395063,
+      "false_transition_events": 4.033333333333333,
+      "dwell_mae_s": 0.46374999999999955,
+      "transition_f1_std": 0.022393033515082778
+    },
+    {
+      "sigma_normalized": 0.01,
+      "persistence_s": 0,
+      "seeds": 30,
+      "accuracy": 0.9763598050836296,
+      "transition_f1": 0.7059007798368907,
+      "false_transition_events": 23.133333333333333,
+      "dwell_mae_s": 0.14583333333333318,
+      "transition_f1_std": 0.04855424128636947
+    },
+    {
+      "sigma_normalized": 0.01,
+      "persistence_s": 0.2,
+      "seeds": 30,
+      "accuracy": 0.9643882523376792,
+      "transition_f1": 0.8816064206001312,
+      "false_transition_events": 0.43333333333333335,
+      "dwell_mae_s": 0.22843749999999977,
+      "transition_f1_std": 0.02637846288820866
+    },
+    {
+      "sigma_normalized": 0.01,
+      "persistence_s": 0.4,
+      "seeds": 30,
+      "accuracy": 0.9435664427762414,
+      "transition_f1": 0.8170651524110643,
+      "false_transition_events": 2.1666666666666665,
+      "dwell_mae_s": 0.34916666666666635,
+      "transition_f1_std": 0.0505992463269739
+    },
+    {
+      "sigma_normalized": 0.01,
+      "persistence_s": 0.8,
+      "seeds": 30,
+      "accuracy": 0.8957855919926246,
+      "transition_f1": 0.6058797753951288,
+      "false_transition_events": 6.933333333333334,
+      "dwell_mae_s": 0.5938541666666662,
+      "transition_f1_std": 0.06634186187056781
+    },
+    {
+      "sigma_normalized": 0.03,
+      "persistence_s": 0,
+      "seeds": 30,
+      "accuracy": 0.9065191623864084,
+      "transition_f1": 0.296756405421062,
+      "false_transition_events": 127.6,
+      "dwell_mae_s": 0.5455208333333331,
+      "transition_f1_std": 0.022057995596658834
+    },
+    {
+      "sigma_normalized": 0.03,
+      "persistence_s": 0.2,
+      "seeds": 30,
+      "accuracy": 0.9023837745291715,
+      "transition_f1": 0.7002244994127448,
+      "false_transition_events": 8.433333333333334,
+      "dwell_mae_s": 0.6838541666666664,
+      "transition_f1_std": 0.05558706147033615
+    },
+    {
+      "sigma_normalized": 0.03,
+      "persistence_s": 0.4,
+      "seeds": 30,
+      "accuracy": 0.9008692216515211,
+      "transition_f1": 0.6667871809733193,
+      "false_transition_events": 4.966666666666667,
+      "dwell_mae_s": 0.6935416666666663,
+      "transition_f1_std": 0.07458798768776598
+    },
+    {
+      "sigma_normalized": 0.03,
+      "persistence_s": 0.8,
+      "seeds": 30,
+      "accuracy": 0.8377321216910313,
+      "transition_f1": 0.37445242577795085,
+      "false_transition_events": 10.166666666666666,
+      "dwell_mae_s": 1.136458333333333,
+      "transition_f1_std": 0.07184478645991811
+    }
+  ]
+}

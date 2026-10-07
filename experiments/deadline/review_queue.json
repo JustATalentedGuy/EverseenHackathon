@@ -1,0 +1,242 @@
+[
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 1370,
+    "priority": 15
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 1315,
+    "priority": 11
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 405,
+    "priority": 11
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 1200,
+    "priority": 10
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 695,
+    "priority": 10
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 625,
+    "priority": 10
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 1570,
+    "priority": 10
+  },
+  {
+    "name": "EnterExitCrossingPaths1front",
+    "frame": 360,
+    "priority": 10
+  },
+  {
+    "name": "EnterExitCrossingPaths1front",
+    "frame": 190,
+    "priority": 10
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 1535,
+    "priority": 9
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 455,
+    "priority": 9
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 75,
+    "priority": 9
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 1270,
+    "priority": 9
+  },
+  {
+    "name": "EnterExitCrossingPaths1front",
+    "frame": 300,
+    "priority": 9
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 1620,
+    "priority": 8
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 1260,
+    "priority": 8
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 1150,
+    "priority": 8
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 885,
+    "priority": 8
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 1625,
+    "priority": 8
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 1010,
+    "priority": 7
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 560,
+    "priority": 7
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 345,
+    "priority": 7
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 170,
+    "priority": 7
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 415,
+    "priority": 7
+  },
+  {
+    "name": "EnterExitCrossingPaths1front",
+    "frame": 10,
+    "priority": 7
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 1465,
+    "priority": 6
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 830,
+    "priority": 6
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 275,
+    "priority": 6
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 1515,
+    "priority": 6
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 345,
+    "priority": 6
+  },
+  {
+    "name": "EnterExitCrossingPaths1front",
+    "frame": 140,
+    "priority": 6
+  },
+  {
+    "name": "EnterExitCrossingPaths1front",
+    "frame": 60,
+    "priority": 6
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 1090,
+    "priority": 5
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 940,
+    "priority": 5
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 510,
+    "priority": 5
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 5,
+    "priority": 5
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 1325,
+    "priority": 5
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 1030,
+    "priority": 5
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 815,
+    "priority": 5
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 280,
+    "priority": 5
+  },
+  {
+    "name": "EnterExitCrossingPaths1front",
+    "frame": 250,
+    "priority": 5
+  },
+  {
+    "name": "EnterExitCrossingPaths1cor",
+    "frame": 60,
+    "priority": 5
+  },
+  {
+    "name": "TwoEnterShop1front",
+    "frame": 780,
+    "priority": 4
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 1460,
+    "priority": 4
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 1410,
+    "priority": 4
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 1215,
+    "priority": 4
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 1155,
+    "priority": 4
+  },
+  {
+    "name": "TwoEnterShop1cor",
+    "frame": 705,
+    "priority": 4
+  }
+]

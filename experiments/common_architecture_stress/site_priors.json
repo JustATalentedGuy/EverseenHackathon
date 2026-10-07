@@ -1,0 +1,67 @@
+{
+  "camera_priors": {
+    "HallWide->PC": {
+      "median": 0.1999999999999993,
+      "p95": 0.20000000000000284,
+      "max": 8.200000000000003
+    },
+    "PC->PF": {
+      "median": 6.199999999999999,
+      "p95": 19.600000000000005,
+      "max": 27.600000000000005
+    },
+    "PF->PC": {
+      "median": 1.499999999999993,
+      "p95": 1.5999999999999943,
+      "max": 9.599999999999994
+    },
+    "PC->Showroom": {
+      "median": 0.30000000000000426,
+      "p95": 0.4000000000000057,
+      "max": 8.400000000000006
+    },
+    "Showroom->PC": {
+      "median": 0.19999999999999574,
+      "p95": 0.3999999999999915,
+      "max": 8.399999999999991
+    },
+    "PC->HallWide": {
+      "median": 0.19999999999998863,
+      "p95": 0.20000000000001705,
+      "max": 8.200000000000017
+    }
+  },
+  "section_adjacency": {
+    "PF": [
+      "PC"
+    ],
+    "PC": [
+      "HA3",
+      "PF",
+      "SH"
+    ],
+    "SH": [
+      "PC"
+    ],
+    "HA3": [
+      "HA",
+      "PC"
+    ],
+    "HA": [
+      "ESC",
+      "HA3"
+    ],
+    "ESC": [
+      "HA"
+    ]
+  },
+  "real_trajectory_ids": [
+    "c1_p1",
+    "c1_p2",
+    "c2_p1",
+    "c2_p2",
+    "c3_p1",
+    "c3_p2"
+  ],
+  "note": "Real CITIC world paths + real camera visibility/topology; injected observation and appearance noise."
+}

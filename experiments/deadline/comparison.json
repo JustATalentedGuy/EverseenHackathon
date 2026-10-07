@@ -1,0 +1,518 @@
+{
+  "evidence_scope": "Real CAVIAR shopping-centre video, scenario holdout at same site; detector adaptation is a small pilot.",
+  "runs": [
+    {
+      "tag": "baseline",
+      "selected_confidence_on_val": 0.35,
+      "validation_sweep": [
+        {
+          "confidence": 0.15,
+          "frames": 118,
+          "tp": 262,
+          "fp": 192,
+          "fn": 106,
+          "precision": 0.5770925110132159,
+          "recall": 0.7119565217391305,
+          "f1": 0.6374695863746959,
+          "count_mae": 1.4067796610169492,
+          "exact_count_fraction": 0.3220338983050847
+        },
+        {
+          "confidence": 0.25,
+          "frames": 118,
+          "tp": 240,
+          "fp": 80,
+          "fn": 128,
+          "precision": 0.75,
+          "recall": 0.6521739130434783,
+          "f1": 0.6976744186046512,
+          "count_mae": 1.1355932203389831,
+          "exact_count_fraction": 0.23728813559322035
+        },
+        {
+          "confidence": 0.35,
+          "frames": 118,
+          "tp": 225,
+          "fp": 18,
+          "fn": 143,
+          "precision": 0.9259259259259259,
+          "recall": 0.6114130434782609,
+          "f1": 0.7364975450081833,
+          "count_mae": 1.228813559322034,
+          "exact_count_fraction": 0.1440677966101695
+        },
+        {
+          "confidence": 0.5,
+          "frames": 118,
+          "tp": 195,
+          "fp": 2,
+          "fn": 173,
+          "precision": 0.9898477157360406,
+          "recall": 0.529891304347826,
+          "f1": 0.6902654867256637,
+          "count_mae": 1.4491525423728813,
+          "exact_count_fraction": 0.09322033898305085
+        }
+      ],
+      "test": {
+        "frames": 780,
+        "tp": 1876,
+        "fp": 366,
+        "fn": 655,
+        "precision": 0.8367528991971455,
+        "recall": 0.7412090082971158,
+        "f1": 0.7860884139953908,
+        "count_mae": 0.8423076923076923,
+        "exact_count_fraction": 0.39871794871794874
+      },
+      "test_per_clip": {
+        "EnterExitCrossingPaths2cor": {
+          "frames": 97,
+          "tp": 136,
+          "fp": 95,
+          "fn": 19,
+          "precision": 0.5887445887445888,
+          "recall": 0.8774193548387097,
+          "f1": 0.7046632124352331,
+          "count_mae": 0.8865979381443299,
+          "exact_count_fraction": 0.1958762886597938
+        },
+        "EnterExitCrossingPaths2front": {
+          "frames": 97,
+          "tp": 116,
+          "fp": 35,
+          "fn": 140,
+          "precision": 0.7682119205298014,
+          "recall": 0.453125,
+          "f1": 0.5700245700245701,
+          "count_mae": 1.2474226804123711,
+          "exact_count_fraction": 0.16494845360824742
+        },
+        "OneShopOneWait2cor": {
+          "frames": 293,
+          "tp": 1300,
+          "fp": 212,
+          "fn": 219,
+          "precision": 0.8597883597883598,
+          "recall": 0.8558262014483212,
+          "f1": 0.8578027053777632,
+          "count_mae": 0.6245733788395904,
+          "exact_count_fraction": 0.4778156996587031
+        },
+        "OneShopOneWait2front": {
+          "frames": 293,
+          "tp": 324,
+          "fp": 24,
+          "fn": 277,
+          "precision": 0.9310344827586207,
+          "recall": 0.5391014975041597,
+          "f1": 0.6828240252897787,
+          "count_mae": 0.9112627986348123,
+          "exact_count_fraction": 0.4641638225255973
+        }
+      },
+      "timings": [
+        {
+          "clip": "EnterExitCrossingPaths1cor",
+          "samples": 77,
+          "seconds": 22.199295800062828,
+          "sample_fps": 3.4685784942683666
+        },
+        {
+          "clip": "EnterExitCrossingPaths1front",
+          "samples": 77,
+          "seconds": 13.739761000033468,
+          "sample_fps": 5.604173173013158
+        },
+        {
+          "clip": "TwoEnterShop1cor",
+          "samples": 329,
+          "seconds": 58.143495599972084,
+          "sample_fps": 5.658414524360967
+        },
+        {
+          "clip": "TwoEnterShop1front",
+          "samples": 329,
+          "seconds": 56.02772939996794,
+          "sample_fps": 5.87209232862805
+        },
+        {
+          "clip": "OneLeaveShop1cor",
+          "samples": 59,
+          "seconds": 10.107748999958858,
+          "sample_fps": 5.837105769072832
+        },
+        {
+          "clip": "OneLeaveShop1front",
+          "samples": 59,
+          "seconds": 9.890758399968036,
+          "sample_fps": 5.965164410465296
+        },
+        {
+          "clip": "EnterExitCrossingPaths2cor",
+          "samples": 97,
+          "seconds": 17.777543500065804,
+          "sample_fps": 5.4563219040718955
+        },
+        {
+          "clip": "EnterExitCrossingPaths2front",
+          "samples": 97,
+          "seconds": 20.72735649999231,
+          "sample_fps": 4.679805647190754
+        },
+        {
+          "clip": "OneShopOneWait2cor",
+          "samples": 293,
+          "seconds": 49.446143699926324,
+          "sample_fps": 5.925639050400538
+        },
+        {
+          "clip": "OneShopOneWait2front",
+          "samples": 293,
+          "seconds": 50.36217320000287,
+          "sample_fps": 5.817858551028201
+        }
+      ],
+      "tracking_and_zones": {
+        "sampled_idf1_iou50": 0.6274812102524571,
+        "id_switches_matched_within_0_8s": 14,
+        "matched_zone_accuracy_foot": 0.9684873949579832,
+        "matched_zone_accuracy_centre": 0.8371848739495799,
+        "zone_matched_observations": 1904,
+        "matched_with_human_feet": 1468,
+        "human_feet_only_zone_accuracy_foot": 0.9611716621253406,
+        "human_feet_only_zone_accuracy_centre": 0.8249318801089919,
+        "zone_persistence_s": 0.2,
+        "zone_occupancy_mae_people": 0.3671794871794872,
+        "oracle_mapped_observed_zone_duration_mae_s": 2.9191489361702145,
+        "duration_note": "Duration uses sampled observed frames, illustrative zones and oracle identity mapping for evaluation. Not completed visit wait-time or official retail zone labels."
+      }
+    },
+    {
+      "tag": "pseudo",
+      "selected_confidence_on_val": 0.15,
+      "validation_sweep": [
+        {
+          "confidence": 0.15,
+          "frames": 118,
+          "tp": 153,
+          "fp": 5,
+          "fn": 215,
+          "precision": 0.9683544303797469,
+          "recall": 0.4157608695652174,
+          "f1": 0.5817490494296578,
+          "count_mae": 1.7796610169491525,
+          "exact_count_fraction": 0.0
+        },
+        {
+          "confidence": 0.25,
+          "frames": 118,
+          "tp": 132,
+          "fp": 2,
+          "fn": 236,
+          "precision": 0.9850746268656716,
+          "recall": 0.358695652173913,
+          "f1": 0.5258964143426295,
+          "count_mae": 1.9830508474576272,
+          "exact_count_fraction": 0.0
+        },
+        {
+          "confidence": 0.35,
+          "frames": 118,
+          "tp": 120,
+          "fp": 2,
+          "fn": 248,
+          "precision": 0.9836065573770492,
+          "recall": 0.32608695652173914,
+          "f1": 0.4897959183673469,
+          "count_mae": 2.0847457627118646,
+          "exact_count_fraction": 0.0
+        },
+        {
+          "confidence": 0.5,
+          "frames": 118,
+          "tp": 88,
+          "fp": 1,
+          "fn": 280,
+          "precision": 0.9887640449438202,
+          "recall": 0.2391304347826087,
+          "f1": 0.3851203501094092,
+          "count_mae": 2.364406779661017,
+          "exact_count_fraction": 0.0
+        }
+      ],
+      "test": {
+        "frames": 780,
+        "tp": 1531,
+        "fp": 35,
+        "fn": 1000,
+        "precision": 0.9776500638569604,
+        "recall": 0.6048992493085736,
+        "f1": 0.7473761288747864,
+        "count_mae": 1.2525641025641026,
+        "exact_count_fraction": 0.32051282051282054
+      },
+      "test_per_clip": {
+        "EnterExitCrossingPaths2cor": {
+          "frames": 97,
+          "tp": 128,
+          "fp": 1,
+          "fn": 27,
+          "precision": 0.9922480620155039,
+          "recall": 0.8258064516129032,
+          "f1": 0.9014084507042254,
+          "count_mae": 0.28865979381443296,
+          "exact_count_fraction": 0.7628865979381443
+        },
+        "EnterExitCrossingPaths2front": {
+          "frames": 97,
+          "tp": 46,
+          "fp": 2,
+          "fn": 210,
+          "precision": 0.9583333333333334,
+          "recall": 0.1796875,
+          "f1": 0.3026315789473684,
+          "count_mae": 2.1443298969072164,
+          "exact_count_fraction": 0.0
+        },
+        "OneShopOneWait2cor": {
+          "frames": 293,
+          "tp": 1120,
+          "fp": 27,
+          "fn": 399,
+          "precision": 0.976460331299041,
+          "recall": 0.7373271889400922,
+          "f1": 0.8402100525131283,
+          "count_mae": 1.3037542662116042,
+          "exact_count_fraction": 0.27303754266211605
+        },
+        "OneShopOneWait2front": {
+          "frames": 293,
+          "tp": 237,
+          "fp": 5,
+          "fn": 364,
+          "precision": 0.9793388429752066,
+          "recall": 0.39434276206322794,
+          "f1": 0.5622775800711743,
+          "count_mae": 1.2252559726962458,
+          "exact_count_fraction": 0.32764505119453924
+        }
+      },
+      "timings": [
+        {
+          "clip": "OneLeaveShop1cor",
+          "samples": 59,
+          "seconds": 15.792417499935254,
+          "sample_fps": 3.7359701261850433
+        },
+        {
+          "clip": "OneLeaveShop1front",
+          "samples": 59,
+          "seconds": 10.82239300000947,
+          "sample_fps": 5.451659351120254
+        },
+        {
+          "clip": "EnterExitCrossingPaths2cor",
+          "samples": 97,
+          "seconds": 15.509056000038981,
+          "sample_fps": 6.2544103264412865
+        },
+        {
+          "clip": "EnterExitCrossingPaths2front",
+          "samples": 97,
+          "seconds": 17.88993120007217,
+          "sample_fps": 5.422044328466098
+        },
+        {
+          "clip": "OneShopOneWait2cor",
+          "samples": 293,
+          "seconds": 48.808521799976006,
+          "sample_fps": 6.003050065739627
+        },
+        {
+          "clip": "OneShopOneWait2front",
+          "samples": 293,
+          "seconds": 49.43894280004315,
+          "sample_fps": 5.926502133855181
+        }
+      ],
+      "tracking_and_zones": {
+        "sampled_idf1_iou50": 0.5273760330578512,
+        "id_switches_matched_within_0_8s": 12,
+        "matched_zone_accuracy_foot": 0.9811746987951807,
+        "matched_zone_accuracy_centre": 0.8591867469879518,
+        "zone_matched_observations": 1328,
+        "matched_with_human_feet": 1031,
+        "human_feet_only_zone_accuracy_foot": 0.976721629485936,
+        "human_feet_only_zone_accuracy_centre": 0.8341416100872939,
+        "zone_persistence_s": 0.2,
+        "zone_occupancy_mae_people": 0.48717948717948717,
+        "oracle_mapped_observed_zone_duration_mae_s": 4.821276595744683,
+        "duration_note": "Duration uses sampled observed frames, illustrative zones and oracle identity mapping for evaluation. Not completed visit wait-time or official retail zone labels."
+      }
+    },
+    {
+      "tag": "reviewed",
+      "selected_confidence_on_val": 0.15,
+      "validation_sweep": [
+        {
+          "confidence": 0.15,
+          "frames": 118,
+          "tp": 218,
+          "fp": 8,
+          "fn": 150,
+          "precision": 0.9646017699115044,
+          "recall": 0.592391304347826,
+          "f1": 0.734006734006734,
+          "count_mae": 1.2203389830508475,
+          "exact_count_fraction": 0.13559322033898305
+        },
+        {
+          "confidence": 0.25,
+          "frames": 118,
+          "tp": 182,
+          "fp": 5,
+          "fn": 186,
+          "precision": 0.9732620320855615,
+          "recall": 0.4945652173913043,
+          "f1": 0.6558558558558558,
+          "count_mae": 1.5338983050847457,
+          "exact_count_fraction": 0.025423728813559324
+        },
+        {
+          "confidence": 0.35,
+          "frames": 118,
+          "tp": 165,
+          "fp": 2,
+          "fn": 203,
+          "precision": 0.9880239520958084,
+          "recall": 0.4483695652173913,
+          "f1": 0.616822429906542,
+          "count_mae": 1.7033898305084745,
+          "exact_count_fraction": 0.0
+        },
+        {
+          "confidence": 0.5,
+          "frames": 118,
+          "tp": 125,
+          "fp": 2,
+          "fn": 243,
+          "precision": 0.984251968503937,
+          "recall": 0.33967391304347827,
+          "f1": 0.5050505050505051,
+          "count_mae": 2.042372881355932,
+          "exact_count_fraction": 0.0
+        }
+      ],
+      "test": {
+        "frames": 780,
+        "tp": 1952,
+        "fp": 260,
+        "fn": 579,
+        "precision": 0.8824593128390597,
+        "recall": 0.7712366653496642,
+        "f1": 0.8231077377187435,
+        "count_mae": 0.7705128205128206,
+        "exact_count_fraction": 0.4564102564102564
+      },
+      "test_per_clip": {
+        "EnterExitCrossingPaths2cor": {
+          "frames": 97,
+          "tp": 134,
+          "fp": 27,
+          "fn": 21,
+          "precision": 0.8322981366459627,
+          "recall": 0.864516129032258,
+          "f1": 0.8481012658227848,
+          "count_mae": 0.4742268041237113,
+          "exact_count_fraction": 0.6185567010309279
+        },
+        "EnterExitCrossingPaths2front": {
+          "frames": 97,
+          "tp": 109,
+          "fp": 7,
+          "fn": 147,
+          "precision": 0.9396551724137931,
+          "recall": 0.42578125,
+          "f1": 0.5860215053763441,
+          "count_mae": 1.443298969072165,
+          "exact_count_fraction": 0.05154639175257732
+        },
+        "OneShopOneWait2cor": {
+          "frames": 293,
+          "tp": 1332,
+          "fp": 217,
+          "fn": 187,
+          "precision": 0.8599096191091027,
+          "recall": 0.8768926925608953,
+          "f1": 0.8683181225554107,
+          "count_mae": 0.6825938566552902,
+          "exact_count_fraction": 0.49829351535836175
+        },
+        "OneShopOneWait2front": {
+          "frames": 293,
+          "tp": 377,
+          "fp": 9,
+          "fn": 224,
+          "precision": 0.9766839378238342,
+          "recall": 0.627287853577371,
+          "f1": 0.7639311043566362,
+          "count_mae": 0.7337883959044369,
+          "exact_count_fraction": 0.4948805460750853
+        }
+      },
+      "timings": [
+        {
+          "clip": "OneLeaveShop1cor",
+          "samples": 59,
+          "seconds": 18.732958799926564,
+          "sample_fps": 3.149529160349794
+        },
+        {
+          "clip": "OneLeaveShop1front",
+          "samples": 59,
+          "seconds": 10.365889900014736,
+          "sample_fps": 5.691744806195185
+        },
+        {
+          "clip": "EnterExitCrossingPaths2cor",
+          "samples": 97,
+          "seconds": 19.234308199957013,
+          "sample_fps": 5.043071941636913
+        },
+        {
+          "clip": "EnterExitCrossingPaths2front",
+          "samples": 97,
+          "seconds": 16.801997300004587,
+          "sample_fps": 5.773123175062855
+        },
+        {
+          "clip": "OneShopOneWait2cor",
+          "samples": 293,
+          "seconds": 51.096600899938494,
+          "sample_fps": 5.734236619257245
+        },
+        {
+          "clip": "OneShopOneWait2front",
+          "samples": 293,
+          "seconds": 50.86659590003546,
+          "sample_fps": 5.760165287565385
+        }
+      ],
+      "tracking_and_zones": {
+        "sampled_idf1_iou50": 0.7162832656743346,
+        "id_switches_matched_within_0_8s": 18,
+        "matched_zone_accuracy_foot": 0.9756232686980609,
+        "matched_zone_accuracy_centre": 0.8332409972299168,
+        "zone_matched_observations": 1805,
+        "matched_with_human_feet": 1410,
+        "human_feet_only_zone_accuracy_foot": 0.9702127659574468,
+        "human_feet_only_zone_accuracy_centre": 0.8241134751773049,
+        "zone_persistence_s": 0.2,
+        "zone_occupancy_mae_people": 0.34974358974358977,
+        "oracle_mapped_observed_zone_duration_mae_s": 2.855319148936174,
+        "duration_note": "Duration uses sampled observed frames, illustrative zones and oracle identity mapping for evaluation. Not completed visit wait-time or official retail zone labels."
+      }
+    }
+  ]
+}

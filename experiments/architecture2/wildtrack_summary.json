@@ -1,0 +1,1476 @@
+{
+  "dataset": "WILDTRACK",
+  "experiment_class": "real dataset calibration + real GT annotations; perturbations are simulated",
+  "subset": {
+    "annotation_frames": 50,
+    "time_span_seconds_at_2fps": 24.5,
+    "cameras": [
+      "CVLab1",
+      "CVLab2",
+      "CVLab3",
+      "CVLab4",
+      "IDIAP1",
+      "IDIAP2",
+      "IDIAP3"
+    ],
+    "rgb_downloaded": false,
+    "manifest": "C:\\Coding\\ML\\Everseen\\samples\\wildtrack_subset\\subset_manifest.json"
+  },
+  "coordinate_system": {
+    "unit": "centimeters",
+    "origin_cm": [
+      -300.0,
+      -900.0
+    ],
+    "grid_step_cm": 2.5,
+    "grid_shape": [
+      480,
+      1440
+    ],
+    "sections": "4x4 equal grid over WILDTRACK ground extent"
+  },
+  "fusion_threshold_cm": 75.0,
+  "clean_detailed": {
+    "projection": {
+      "n_observations": 4443,
+      "median_error_cm": 11.153889197265434,
+      "p90_error_cm": 21.868878315375472,
+      "mean_error_cm": 12.14199219987797,
+      "section_accuracy": 0.974341661039838,
+      "per_camera": {
+        "CVLab1": {
+          "n": 1003,
+          "median_error_cm": 14.064727041008851,
+          "p90_error_cm": 19.486786016792475
+        },
+        "CVLab2": {
+          "n": 948,
+          "median_error_cm": 8.23127707944404,
+          "p90_error_cm": 17.41591282700932
+        },
+        "CVLab3": {
+          "n": 670,
+          "median_error_cm": 7.8369504113173765,
+          "p90_error_cm": 17.208526930249196
+        },
+        "CVLab4": {
+          "n": 239,
+          "median_error_cm": 6.8381101444731245,
+          "p90_error_cm": 17.438096988636417
+        },
+        "IDIAP1": {
+          "n": 206,
+          "median_error_cm": 7.182868439386805,
+          "p90_error_cm": 9.954425790030092
+        },
+        "IDIAP2": {
+          "n": 1134,
+          "median_error_cm": 14.498482722559611,
+          "p90_error_cm": 26.851740748588895
+        },
+        "IDIAP3": {
+          "n": 243,
+          "median_error_cm": 13.530746275058497,
+          "p90_error_cm": 28.550281481579837
+        }
+      }
+    },
+    "overlap_agreement": {
+      "n_same_person_cross_camera_pairs": 6900,
+      "median_disagreement_cm": 12.412930751704913,
+      "p90_disagreement_cm": 21.552214318360846,
+      "fraction_within_50cm": 1.0,
+      "fraction_within_100cm": 1.0
+    },
+    "fusion": {
+      "threshold_cm": 75.0,
+      "pair_precision": 0.9979710144927536,
+      "pair_recall": 0.9979710144927536,
+      "pair_f1": 0.9979710144927536,
+      "pair_tp": 6886,
+      "pair_fp": 14,
+      "pair_fn": 14,
+      "wrong_merge_cluster_rate": 0.0034393809114359416,
+      "merged_clusters": 1163,
+      "duplicate_excess_before": 3280,
+      "duplicate_excess_after": 4,
+      "duplicate_excess_removed_fraction": 0.998780487804878,
+      "fused_position_median_error_cm": 9.717366055605037,
+      "fused_position_p90_error_cm": 17.11285172028769
+    },
+    "stitching": {
+      "experiment_type": "GT-derived simulated fragmentation over projected person-level world estimates",
+      "fragment_length_frames": 4,
+      "eligible_links": 196,
+      "time_only_top1_accuracy": 0.18877551020408162,
+      "geometry_nearest_top1_accuracy": 0.9540816326530612,
+      "geometry_velocity_top1_accuracy": 0.9795918367346939
+    },
+    "flow_conservation": {
+      "experiment_type": "closed-cohort flow-conservation diagnostic on GT-stable IDs",
+      "window_frames": 20,
+      "stable_gt_ids": 11,
+      "mean_abs_residual_people_per_section_step": 0.0,
+      "total_abs_residual": 0.0,
+      "normalized_abs_residual_per_observed_person": 0.0
+    }
+  },
+  "scenario_aggregate": {
+    "clean": {
+      "detection_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "n_observations": {
+        "mean": 4443.0,
+        "std": 0.0
+      },
+      "projection_median_error_cm": {
+        "mean": 11.153889197265434,
+        "std": 0.0
+      },
+      "projection_p90_error_cm": {
+        "mean": 21.868878315375472,
+        "std": 0.0
+      },
+      "section_accuracy": {
+        "mean": 0.974341661039838,
+        "std": 0.0
+      },
+      "overlap_pairs": {
+        "mean": 6900.0,
+        "std": 0.0
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 12.412930751704913,
+        "std": 0.0
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 21.552214318360843,
+        "std": 3.552713678800501e-15
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "fusion_pair_precision": {
+        "mean": 0.9979710144927537,
+        "std": 1.1102230246251565e-16
+      },
+      "fusion_pair_recall": {
+        "mean": 0.9979710144927537,
+        "std": 1.1102230246251565e-16
+      },
+      "fusion_pair_f1": {
+        "mean": 0.9979710144927537,
+        "std": 1.1102230246251565e-16
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.0034393809114359416,
+        "std": 0.0
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.9987804878048779,
+        "std": 1.1102230246251565e-16
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 9.717366055605037,
+        "std": 0.0
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9540816326530613,
+        "std": 1.1102230246251565e-16
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.9795918367346937,
+        "std": 1.1102230246251565e-16
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.18877551020408165,
+        "std": 2.7755575615628914e-17
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "detection_2px": {
+      "detection_sigma_px": {
+        "mean": 2.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "n_observations": {
+        "mean": 4443.0,
+        "std": 0.0
+      },
+      "projection_median_error_cm": {
+        "mean": 12.505422913927285,
+        "std": 0.19147321672358528
+      },
+      "projection_p90_error_cm": {
+        "mean": 41.81568670876839,
+        "std": 0.4843373823699235
+      },
+      "section_accuracy": {
+        "mean": 0.9606121989646635,
+        "std": 0.002346236892656877
+      },
+      "overlap_pairs": {
+        "mean": 6900.0,
+        "std": 0.0
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 18.843875992242253,
+        "std": 0.14981604540746626
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 50.71866197562009,
+        "std": 0.7791139011083373
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 0.8969082125603864,
+        "std": 0.003891213635865178
+      },
+      "fusion_pair_precision": {
+        "mean": 0.9849654223610304,
+        "std": 0.0006484270281554191
+      },
+      "fusion_pair_recall": {
+        "mean": 0.9590821256038646,
+        "std": 0.003827721311988473
+      },
+      "fusion_pair_f1": {
+        "mean": 0.9718486121747598,
+        "std": 0.0022441771907693794
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.03631757228856066,
+        "std": 0.0016334783355489491
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.9656504065040649,
+        "std": 0.0028309732270699454
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 10.71285108168405,
+        "std": 0.12049226723856588
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.945578231292517,
+        "std": 0.010483697283960832
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.9472789115646258,
+        "std": 0.004810250212153391
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.18877551020408165,
+        "std": 2.7755575615628914e-17
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "detection_5px": {
+      "detection_sigma_px": {
+        "mean": 5.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "n_observations": {
+        "mean": 4443.0,
+        "std": 0.0
+      },
+      "projection_median_error_cm": {
+        "mean": 20.35996076715486,
+        "std": 0.20736443562739526
+      },
+      "projection_p90_error_cm": {
+        "mean": 91.82462440388224,
+        "std": 0.8532992178836134
+      },
+      "section_accuracy": {
+        "mean": 0.9332282991972392,
+        "std": 0.001947746265398317
+      },
+      "overlap_pairs": {
+        "mean": 6900.0,
+        "std": 0.0
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 37.35882391740374,
+        "std": 0.2127023340248598
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 116.33192029957371,
+        "std": 1.6747692913464591
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 0.6235265700483091,
+        "std": 0.004074042249721342
+      },
+      "fusion_pair_precision": {
+        "mean": 0.9142970133319298,
+        "std": 0.0009708686346794397
+      },
+      "fusion_pair_recall": {
+        "mean": 0.7540096618357488,
+        "std": 0.002544385329905992
+      },
+      "fusion_pair_f1": {
+        "mean": 0.8264521396753133,
+        "std": 0.0019098728865571916
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.16917123909314866,
+        "std": 0.00279352787681431
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.7995934959349594,
+        "std": 0.0033055804811566013
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 20.233468315638518,
+        "std": 0.3218636764816004
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9047619047619048,
+        "std": 0.012025625530383449
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.8775510204081632,
+        "std": 0.019090088708030306
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.18877551020408165,
+        "std": 2.7755575615628914e-17
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "detection_10px": {
+      "detection_sigma_px": {
+        "mean": 10.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "n_observations": {
+        "mean": 4443.0,
+        "std": 0.0
+      },
+      "projection_median_error_cm": {
+        "mean": 36.65255003969599,
+        "std": 0.5641233069197379
+      },
+      "projection_p90_error_cm": {
+        "mean": 179.77585673127624,
+        "std": 1.0202983944117068
+      },
+      "section_accuracy": {
+        "mean": 0.8860379623377598,
+        "std": 0.002884294813825645
+      },
+      "overlap_pairs": {
+        "mean": 6900.0,
+        "std": 0.0
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 71.58890625264148,
+        "std": 0.6899131547259933
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 230.1861245747134,
+        "std": 3.4985532786705233
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 0.36130434782608695,
+        "std": 0.0029724869686792612
+      },
+      "fusion_pair_precision": {
+        "mean": 0.8068294540875373,
+        "std": 0.004203569169782772
+      },
+      "fusion_pair_recall": {
+        "mean": 0.5018357487922706,
+        "std": 0.0033643449944889153
+      },
+      "fusion_pair_f1": {
+        "mean": 0.6187915122717146,
+        "std": 0.0037699382552984747
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.32410630305786164,
+        "std": 0.010916373215142794
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.5879065040650407,
+        "std": 0.0036273512799948632
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 62.061756660439215,
+        "std": 3.9933291021013817
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.8180272108843537,
+        "std": 0.017343603787730578
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.7806122448979592,
+        "std": 0.044086671417740544
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.18877551020408165,
+        "std": 2.7755575615628914e-17
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "calibration_0p5px": {
+      "detection_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 0.5,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "n_observations": {
+        "mean": 4443.0,
+        "std": 0.0
+      },
+      "projection_median_error_cm": {
+        "mean": 12.418571585982699,
+        "std": 2.198476225143723
+      },
+      "projection_p90_error_cm": {
+        "mean": 30.748780247214835,
+        "std": 11.980660950978356
+      },
+      "section_accuracy": {
+        "mean": 0.9709655638082376,
+        "std": 0.004092784664111564
+      },
+      "overlap_pairs": {
+        "mean": 6900.0,
+        "std": 0.0
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 15.490016586680087,
+        "std": 3.0475154649997407
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 31.02743414784611,
+        "std": 9.231395838533498
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 0.9808212560386473,
+        "std": 0.023802947652063644
+      },
+      "fusion_pair_precision": {
+        "mean": 0.9911157908754552,
+        "std": 0.007959635033015817
+      },
+      "fusion_pair_recall": {
+        "mean": 0.9885990338164251,
+        "std": 0.010535167522164228
+      },
+      "fusion_pair_f1": {
+        "mean": 0.9898540567027693,
+        "std": 0.00924965687381034
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.018626043592553914,
+        "std": 0.01847528551331157
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.9913617886178862,
+        "std": 0.009004087981031196
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 12.34715286080318,
+        "std": 4.08575355881387
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9540816326530613,
+        "std": 1.1102230246251565e-16
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.9812925170068026,
+        "std": 0.0024051251060767213
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.18877551020408165,
+        "std": 2.7755575615628914e-17
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "calibration_1px": {
+      "detection_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "n_observations": {
+        "mean": 4443.0,
+        "std": 0.0
+      },
+      "projection_median_error_cm": {
+        "mean": 13.466742566183513,
+        "std": 3.6096565005852725
+      },
+      "projection_p90_error_cm": {
+        "mean": 42.15178233814141,
+        "std": 24.469170821920407
+      },
+      "section_accuracy": {
+        "mean": 0.9667641983644684,
+        "std": 0.008996046087102463
+      },
+      "overlap_pairs": {
+        "mean": 6900.0,
+        "std": 0.0
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 19.014587400466766,
+        "std": 6.324296590521804
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 43.744864245852305,
+        "std": 19.044923292763862
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 0.8991787439613527,
+        "std": 0.1077846742283261
+      },
+      "fusion_pair_precision": {
+        "mean": 0.9748553458176538,
+        "std": 0.026103200914093933
+      },
+      "fusion_pair_recall": {
+        "mean": 0.9590821256038646,
+        "std": 0.04306280301626162
+      },
+      "fusion_pair_f1": {
+        "mean": 0.9668227382027667,
+        "std": 0.034780889725376476
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.05337324126108236,
+        "std": 0.05785725566353281
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.9670731707317074,
+        "std": 0.0366792494589043
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 14.567978371006532,
+        "std": 7.608252299124061
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9540816326530613,
+        "std": 1.1102230246251565e-16
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.979591836734694,
+        "std": 0.004165798882284321
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.18877551020408165,
+        "std": 2.7755575615628914e-17
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "calibration_2px": {
+      "detection_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 2.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "n_observations": {
+        "mean": 4443.0,
+        "std": 0.0
+      },
+      "projection_median_error_cm": {
+        "mean": 16.830347381913636,
+        "std": 5.4658872099135944
+      },
+      "projection_p90_error_cm": {
+        "mean": 69.2984407519975,
+        "std": 46.30767768705594
+      },
+      "section_accuracy": {
+        "mean": 0.9552104433941032,
+        "std": 0.017700349246375775
+      },
+      "overlap_pairs": {
+        "mean": 6900.0,
+        "std": 0.0
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 27.00333734320939,
+        "std": 12.025231624783803
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 72.86402449665354,
+        "std": 39.003697361021395
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 0.8018840579710145,
+        "std": 0.1617682604972923
+      },
+      "fusion_pair_precision": {
+        "mean": 0.9323507946535238,
+        "std": 0.06912555675666415
+      },
+      "fusion_pair_recall": {
+        "mean": 0.8484541062801932,
+        "std": 0.15348778707706748
+      },
+      "fusion_pair_f1": {
+        "mean": 0.8855929531926319,
+        "std": 0.11772621917841157
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.1222258835222317,
+        "std": 0.11935206157474652
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.8771341463414636,
+        "std": 0.12992909031778474
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 17.66959978326489,
+        "std": 9.69234822668419
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9523809523809524,
+        "std": 0.002405125106076669
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.9778911564625851,
+        "std": 0.002405125106076669
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.18877551020408165,
+        "std": 2.7755575615628914e-17
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "calibration_4px": {
+      "detection_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 4.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "n_observations": {
+        "mean": 4443.0,
+        "std": 0.0
+      },
+      "projection_median_error_cm": {
+        "mean": 24.33916707110916,
+        "std": 9.722505112833254
+      },
+      "projection_p90_error_cm": {
+        "mean": 128.93105565085233,
+        "std": 92.87311658235755
+      },
+      "section_accuracy": {
+        "mean": 0.9244504463950783,
+        "std": 0.03136001257773701
+      },
+      "overlap_pairs": {
+        "mean": 6900.0,
+        "std": 0.0
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 46.17318533700646,
+        "std": 21.48592991169257
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 135.95684263923093,
+        "std": 82.53774339493373
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 0.6032850241545894,
+        "std": 0.1898398169676922
+      },
+      "fusion_pair_precision": {
+        "mean": 0.8690404047111845,
+        "std": 0.07509570083185196
+      },
+      "fusion_pair_recall": {
+        "mean": 0.6854589371980676,
+        "std": 0.17891582023987082
+      },
+      "fusion_pair_f1": {
+        "mean": 0.7597355686109655,
+        "std": 0.14640082621743108
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.2216098383255968,
+        "std": 0.12560057353927048
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.750711382113821,
+        "std": 0.16097297926322474
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 38.98571384417385,
+        "std": 28.853343361406875
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9506802721088435,
+        "std": 0.004810250212153391
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.9812925170068029,
+        "std": 0.0024051251060767213
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.18877551020408165,
+        "std": 2.7755575615628914e-17
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "timestamp_0p5s": {
+      "detection_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.5,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "n_observations": {
+        "mean": 4364.333333333333,
+        "std": 40.301640440833445
+      },
+      "projection_median_error_cm": {
+        "mean": 11.176728561997484,
+        "std": 0.018310957595765075
+      },
+      "projection_p90_error_cm": {
+        "mean": 21.889903227721458,
+        "std": 0.020365031408918537
+      },
+      "section_accuracy": {
+        "mean": 0.9742610910738675,
+        "std": 0.00015123931670462976
+      },
+      "overlap_pairs": {
+        "mean": 6478.0,
+        "std": 105.39765968306254
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 25.229590417245962,
+        "std": 3.4348887300155795
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 117.44134428867278,
+        "std": 26.15946359929768
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 0.6065008820880686,
+        "std": 0.02771911131986001
+      },
+      "fusion_pair_precision": {
+        "mean": 0.9425623406887991,
+        "std": 0.023264985673865587
+      },
+      "fusion_pair_recall": {
+        "mean": 0.7661501167808359,
+        "std": 0.10762569396313566
+      },
+      "fusion_pair_f1": {
+        "mean": 0.8423077563384079,
+        "std": 0.07654779316969747
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.07532061559356197,
+        "std": 0.0052280310609573895
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.8542796116779519,
+        "std": 0.05381935827448825
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 32.22510454531651,
+        "std": 17.646070598560314
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9402895970218291,
+        "std": 0.012523819183818664
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.970349882132647,
+        "std": 0.015643603979794963
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.1757970675271262,
+        "std": 0.0019527621694312687
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "timestamp_1s": {
+      "detection_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "n_observations": {
+        "mean": 4310.666666666667,
+        "std": 62.69680126520721
+      },
+      "projection_median_error_cm": {
+        "mean": 11.166837573609579,
+        "std": 0.013408879207702213
+      },
+      "projection_p90_error_cm": {
+        "mean": 21.892067173219555,
+        "std": 0.04452118962822402
+      },
+      "section_accuracy": {
+        "mean": 0.9742505708687745,
+        "std": 0.0002749724717797507
+      },
+      "overlap_pairs": {
+        "mean": 6137.333333333333,
+        "std": 195.55107318095244
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 57.14836518906933,
+        "std": 20.518003116121054
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 209.6716173406529,
+        "std": 50.418628150660794
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 0.4728820112877412,
+        "std": 0.08646494337477297
+      },
+      "fusion_pair_precision": {
+        "mean": 0.8614937807197061,
+        "std": 0.05557911145301106
+      },
+      "fusion_pair_recall": {
+        "mean": 0.6047806503441446,
+        "std": 0.11815706313984402
+      },
+      "fusion_pair_f1": {
+        "mean": 0.7078581609834386,
+        "std": 0.098907542686591
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.20999971696954225,
+        "std": 0.07844744903382213
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.6986069305667201,
+        "std": 0.11115895528773187
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 58.4937727284194,
+        "std": 25.964738205909264
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9407003698494556,
+        "std": 0.008191751559656171
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.9505413172197045,
+        "std": 0.020038043334823986
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.16256880415342675,
+        "std": 0.0073377618702788515
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "miss_5pct": {
+      "detection_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.05000000000000001,
+        "std": 6.938893903907228e-18
+      },
+      "n_observations": {
+        "mean": 4222.333333333333,
+        "std": 13.424687043734847
+      },
+      "projection_median_error_cm": {
+        "mean": 11.153917499929491,
+        "std": 0.08596001002927586
+      },
+      "projection_p90_error_cm": {
+        "mean": 21.827259788695255,
+        "std": 0.07645581030382974
+      },
+      "section_accuracy": {
+        "mean": 0.9743427571726292,
+        "std": 0.00021104029976668946
+      },
+      "overlap_pairs": {
+        "mean": 6242.333333333333,
+        "std": 41.907305117631005
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 12.432306343665948,
+        "std": 0.06493754286396862
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 21.510096506507992,
+        "std": 0.09462094019127439
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "fusion_pair_precision": {
+        "mean": 0.9979707304703744,
+        "std": 8.521650548170525e-05
+      },
+      "fusion_pair_recall": {
+        "mean": 0.9981308201193936,
+        "std": 7.977477693528869e-05
+      },
+      "fusion_pair_f1": {
+        "mean": 0.998050764628732,
+        "std": 5.073852734447118e-05
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.003751058678716264,
+        "std": 0.00041132912143984954
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.998692641183585,
+        "std": 5.918018214064789e-06
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 9.739275679318121,
+        "std": 0.11114884567274773
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9540031397174255,
+        "std": 0.00011100577412659375
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.9761555904413047,
+        "std": 0.002355789206464832
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.18738880167451596,
+        "std": 0.0019611020095702154
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "miss_10pct": {
+      "detection_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.10000000000000002,
+        "std": 1.3877787807814457e-17
+      },
+      "n_observations": {
+        "mean": 4001.6666666666665,
+        "std": 23.328570942563587
+      },
+      "projection_median_error_cm": {
+        "mean": 11.145608148099994,
+        "std": 0.10189324634095014
+      },
+      "projection_p90_error_cm": {
+        "mean": 21.807091718365456,
+        "std": 0.09930395986860699
+      },
+      "section_accuracy": {
+        "mean": 0.9745909373186764,
+        "std": 0.0007989883902812005
+      },
+      "overlap_pairs": {
+        "mean": 5591.0,
+        "std": 83.69388667439615
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 12.434205963367171,
+        "std": 0.0879598379922252
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 21.5220245893685,
+        "std": 0.09714506900349344
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "fusion_pair_precision": {
+        "mean": 0.9974337147005482,
+        "std": 0.00043845162846813557
+      },
+      "fusion_pair_recall": {
+        "mean": 0.9977320655578308,
+        "std": 0.0006110513243760743
+      },
+      "fusion_pair_f1": {
+        "mean": 0.9975828555265496,
+        "std": 0.0005201010301797248
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.004967994014569695,
+        "std": 0.0003979120792663216
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.9981213344631064,
+        "std": 0.0003333257205516892
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 9.764688464289186,
+        "std": 0.12901927905597152
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9538437136512635,
+        "std": 0.0003364682790884771
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.967554897606711,
+        "std": 0.0062232627696577935
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.18802650593916323,
+        "std": 0.0010592519897228913
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "miss_20pct": {
+      "detection_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.20000000000000004,
+        "std": 2.7755575615628914e-17
+      },
+      "n_observations": {
+        "mean": 3546.6666666666665,
+        "std": 11.145502331533658
+      },
+      "projection_median_error_cm": {
+        "mean": 11.163904807001908,
+        "std": 0.1101347199514048
+      },
+      "projection_p90_error_cm": {
+        "mean": 21.797218577832684,
+        "std": 0.10310701151617745
+      },
+      "section_accuracy": {
+        "mean": 0.9746239607896653,
+        "std": 0.0012164426005089645
+      },
+      "overlap_pairs": {
+        "mean": 4401.333333333333,
+        "std": 30.879694874715902
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 12.447964663298748,
+        "std": 0.10297977664849312
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 21.45325743706982,
+        "std": 0.1284606534822433
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "fusion_pair_precision": {
+        "mean": 0.9956846249363923,
+        "std": 0.0008341860813170432
+      },
+      "fusion_pair_recall": {
+        "mean": 0.9974177672799299,
+        "std": 0.0010678705956027575
+      },
+      "fusion_pair_f1": {
+        "mean": 0.9965504239153359,
+        "std": 0.000948129667241853
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.00740402725831717,
+        "std": 0.0013144640814076538
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.9980448178178744,
+        "std": 0.0007928133660071124
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 9.755529860445955,
+        "std": 0.1408285312036358
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9498536198862085,
+        "std": 0.001622263246597437
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.9740753506930301,
+        "std": 0.008280786182209746
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.18513689748766363,
+        "std": 0.0010636978435744253
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "combined_mild": {
+      "detection_sigma_px": {
+        "mean": 2.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 0.5,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.05000000000000001,
+        "std": 6.938893903907228e-18
+      },
+      "n_observations": {
+        "mean": 4163.666666666667,
+        "std": 15.3260852434302
+      },
+      "projection_median_error_cm": {
+        "mean": 14.345739169913747,
+        "std": 1.7435873073161765
+      },
+      "projection_p90_error_cm": {
+        "mean": 55.97609372193515,
+        "std": 15.886633896411638
+      },
+      "section_accuracy": {
+        "mean": 0.9568318971280582,
+        "std": 0.005495409169305561
+      },
+      "overlap_pairs": {
+        "mean": 5829.0,
+        "std": 153.9242237812706
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 41.07923889804264,
+        "std": 9.780071457622679
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 122.99628141767361,
+        "std": 23.043496083899605
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 0.5738269156473313,
+        "std": 0.0899157376864663
+      },
+      "fusion_pair_precision": {
+        "mean": 0.9185846674572136,
+        "std": 0.030948005562312742
+      },
+      "fusion_pair_recall": {
+        "mean": 0.7361867012232212,
+        "std": 0.07654019860070196
+      },
+      "fusion_pair_f1": {
+        "mean": 0.8163400041900868,
+        "std": 0.05864259942585051
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.1261039862379633,
+        "std": 0.03730666028918829
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.8068215375270208,
+        "std": 0.047438590386636705
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 35.576409388659364,
+        "std": 6.163976826194674
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.9334316951714389,
+        "std": 0.018674279767923498
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.9493559344076467,
+        "std": 0.01752836330034491
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.1753751251884393,
+        "std": 0.003963284100430741
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "combined_severe": {
+      "detection_sigma_px": {
+        "mean": 5.0,
+        "std": 0.0
+      },
+      "calibration_sigma_px": {
+        "mean": 2.0,
+        "std": 0.0
+      },
+      "timestamp_sigma_s": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "miss_rate": {
+        "mean": 0.10000000000000002,
+        "std": 1.3877787807814457e-17
+      },
+      "n_observations": {
+        "mean": 3876.3333333333335,
+        "std": 34.41253001774532
+      },
+      "projection_median_error_cm": {
+        "mean": 22.825921025947522,
+        "std": 2.1947460628334925
+      },
+      "projection_p90_error_cm": {
+        "mean": 114.38232995187575,
+        "std": 22.008248211077667
+      },
+      "section_accuracy": {
+        "mean": 0.9253123973428754,
+        "std": 0.00997316833936177
+      },
+      "overlap_pairs": {
+        "mean": 4963.666666666667,
+        "std": 290.35418983640574
+      },
+      "overlap_median_disagreement_cm": {
+        "mean": 78.79691198289446,
+        "std": 13.617517994576023
+      },
+      "overlap_p90_disagreement_cm": {
+        "mean": 226.78345831549416,
+        "std": 48.25600362948849
+      },
+      "overlap_fraction_within_50cm": {
+        "mean": 0.34632054383615496,
+        "std": 0.06083858923235102
+      },
+      "fusion_pair_precision": {
+        "mean": 0.7659407152323553,
+        "std": 0.0512106024818491
+      },
+      "fusion_pair_recall": {
+        "mean": 0.46820752755813605,
+        "std": 0.08979929497022167
+      },
+      "fusion_pair_f1": {
+        "mean": 0.5790642524266263,
+        "std": 0.08270058653084887
+      },
+      "fusion_wrong_merge_cluster_rate": {
+        "mean": 0.311963136972476,
+        "std": 0.052544636048782
+      },
+      "fusion_duplicate_removed_fraction": {
+        "mean": 0.5596878897284071,
+        "std": 0.08635440878755496
+      },
+      "fusion_position_median_error_cm": {
+        "mean": 82.93322519802244,
+        "std": 7.457422673365806
+      },
+      "stitch_geometry_nearest_accuracy": {
+        "mean": 0.8538692797160907,
+        "std": 0.025777897579803585
+      },
+      "stitch_geometry_velocity_accuracy": {
+        "mean": 0.7981960347259998,
+        "std": 0.05940087893003577
+      },
+      "stitch_time_only_accuracy": {
+        "mean": 0.17779532062877115,
+        "std": 0.007502998435672481
+      },
+      "flow_normalized_abs_residual": {
+        "mean": 0.01594896331738437,
+        "std": 0.019271205699512874
+      }
+    }
+  },
+  "notes": [
+    "Projection uses bbox bottom-center as an approximate foot contact point.",
+    "Timestamp perturbation is quantized to the released 2 FPS annotation interval.",
+    "Stitching is a controlled GT-derived fragmentation experiment over projected trajectories.",
+    "Flow residual uses a closed cohort of IDs present throughout the first 20-frame window."
+  ]
+}

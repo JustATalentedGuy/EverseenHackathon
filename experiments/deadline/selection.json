@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-07",
+  "criterion": "Maximum detection F1 on validation clips; test results are reported separately and do not choose the default.",
+  "selected": "baseline",
+  "model": "models/yolo11n.pt",
+  "model_sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+  "confidence": 0.35,
+  "zone_persistence_s": 0.2,
+  "zone_boundary_margin_normalized": 0.008,
+  "candidates": [
+    {
+      "tag": "baseline",
+      "best_val_f1": 0.7364975450081833,
+      "confidence": 0.35
+    },
+    {
+      "tag": "reviewed",
+      "best_val_f1": 0.734006734006734,
+      "confidence": 0.15
+    },
+    {
+      "tag": "pseudo",
+      "best_val_f1": 0.5817490494296578,
+      "confidence": 0.15
+    }
+  ],
+  "limitations": "One small same-site validation scenario; near tie with reviewed model is not statistically conclusive. Site-specific camera holdout required."
+}

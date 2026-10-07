@@ -1,0 +1,96 @@
+{
+  "architecture": "Architecture 1 - Section-First Topology-Aware Tracklets",
+  "dataset": {
+    "name": "CITIC-MTMC",
+    "official_repository": "https://github.com/GTEC-UDC/citic-mtmc-dataset",
+    "repository_commit": "c359afd3f63a629eae9e28f2657a7a974302d70c",
+    "zenodo_doi": "10.5281/zenodo.17511785",
+    "zenodo_current_archive_bytes": 763352844,
+    "zenodo_archive_md5": "11006494bb4c7580e57b0b65d09fb139",
+    "captures_used_for_gt_experiments": [1, 2, 3],
+    "real_video_component": "capture1/Showroom.mp4",
+    "real_video_component_bytes": 32557290,
+    "fps": 25.0
+  },
+  "random_seed": 20261004,
+  "section_mapping": {
+    "position_noise_sigma_m": [0.0, 0.05, 0.1, 0.25, 0.5],
+    "hysteresis_frames": [1, 3, 6, 12],
+    "transition_match_tolerance_frames": 12,
+    "metrics": [
+      "frame_section_accuracy",
+      "transition_precision",
+      "transition_recall",
+      "transition_f1",
+      "transition_timing_mae_s",
+      "dwell_mae_s_per_person_section",
+      "boundary_churn_events"
+    ]
+  },
+  "fragmentation_injection": {
+    "cuts_per_minute": [2.0, 5.0, 10.0, 15.0],
+    "dropout_frames_per_cut": 6,
+    "local_repair_max_gap_s": 1.5,
+    "local_repair_max_implied_speed_mps": 3.0,
+    "score_thresholds": [0.2, 0.35, 0.5, 0.65, 0.8, 1.0],
+    "metrics": [
+      "precision",
+      "recall",
+      "f1",
+      "false_merge_rate",
+      "false_split_rate"
+    ]
+  },
+  "cross_camera_handoff": {
+    "max_gap_s": 12.0,
+    "strategies": ["time_only", "topology_time"],
+    "score_thresholds": [0.1, 0.2, 0.35, 0.5, 0.7, 1.0],
+    "time_prior_protocol": "leave-one-capture-out: transition-time priors for a test capture are learned only from the other two captures",
+    "topology_basis": "official room/door graph plus official camera visibility polygons",
+    "metrics": [
+      "precision",
+      "recall",
+      "f1",
+      "false_merge_rate",
+      "false_split_rate"
+    ]
+  },
+  "analytics_robustness": {
+    "fragmentation_cuts_per_minute": 10.0,
+    "dropout_frames_per_cut": 6,
+    "stages": [
+      "fragmented_raw",
+      "after_local_repair",
+      "after_local_plus_handoff"
+    ],
+    "threshold_selection": "best F1 on the deterministic sweep; therefore descriptive/data-tuned, not a held-out deployment estimate",
+    "metrics": [
+      "occupancy_mae_people",
+      "dwell_mae_s_per_person_section",
+      "flow_absolute_count_error",
+      "flow_relative_absolute_error",
+      "observed_point_recall"
+    ]
+  },
+  "real_video": {
+    "camera": "Showroom",
+    "capture": 1,
+    "segment_seconds": 12.0,
+    "segment_selection": "start of the longest contiguous interval where official GT is inside the official Showroom visibility polygon",
+    "detector": "YOLO11n",
+    "detector_weights": "models/yolo11n.pt",
+    "tracker": "Ultralytics ByteTrack",
+    "confidence_threshold": 0.25,
+    "device": "CPU",
+    "metrics": [
+      "person_count_mae_per_frame",
+      "exact_person_count_frame_fraction",
+      "detections_projecting_inside_official_visibility_fraction",
+      "detections_projecting_inside_showroom_section_fraction"
+    ]
+  },
+  "reproduction": {
+    "gt_command": ".\\.venv\\Scripts\\python.exe .\\scripts\\architecture1\\run_gt_experiments.py --dataset-root .\\datasets\\citic_mtmc --output-dir .\\experiments\\architecture1 --seed 20261004",
+    "video_command": ".\\.venv\\Scripts\\python.exe .\\scripts\\architecture1\\run_video_component.py --dataset-root .\\datasets\\citic_mtmc --video .\\datasets\\citic_video_subset\\capture1\\Showroom.mp4 --model .\\models\\yolo11n.pt --output-dir .\\experiments\\architecture1 --capture 1 --camera Showroom --seconds 12 --conf 0.25"
+  }
+}

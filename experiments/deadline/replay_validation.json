@@ -1,0 +1,13 @@
+{
+  "camera_samples": 194,
+  "videos_loaded": 2,
+  "playback_verified": true,
+  "ui_triggered_final_config_analysis": true,
+  "stale_results_blocked": true,
+  "changed_source_proposals_blocked": true,
+  "unsynchronized_floor_fusion_disabled": true,
+  "page_errors": [],
+  "wall_seconds": 43.318107899976894,
+  "both_videos_playback_verified": true,
+  "operator_dwell_table_verified": true
+}

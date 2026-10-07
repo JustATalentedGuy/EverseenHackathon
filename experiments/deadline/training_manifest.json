@@ -1,0 +1,1737 @@
+{
+  "counts": {
+    "train": 198,
+    "val": 48
+  },
+  "frames": [
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 0,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000000.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 5,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000005.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 15,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000015.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 20,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000020.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 30,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000030.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 40,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000040.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 45,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000045.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 55,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000055.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 60,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000060.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 70,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000070.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 80,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000080.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 85,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000085.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 95,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000095.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 105,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000105.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 110,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000110.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 120,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000120.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 125,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000125.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 135,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000135.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 145,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000145.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 150,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000150.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 160,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000160.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 165,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000165.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 175,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000175.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 185,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000185.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 190,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000190.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 200,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000200.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 210,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000210.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 215,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000215.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 225,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000225.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 230,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000230.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 240,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000240.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 250,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000250.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 255,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000255.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 265,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000265.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 270,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000270.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 280,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000280.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 290,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000290.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 295,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000295.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 305,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000305.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 315,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000315.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 320,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000320.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 330,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000330.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 335,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000335.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 345,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000345.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 355,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000355.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 360,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000360.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 370,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000370.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1cor",
+      "split": "train",
+      "frame": 380,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1cor_000380.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 0,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000000.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 5,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000005.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 15,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000015.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 20,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000020.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 30,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000030.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 40,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000040.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 45,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000045.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 55,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000055.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 60,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000060.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 70,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000070.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 80,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000080.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 85,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000085.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 95,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000095.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 105,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000105.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 110,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000110.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 120,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000120.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 125,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000125.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 135,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000135.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 145,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000145.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 150,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000150.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 160,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000160.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 165,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000165.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 175,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000175.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 185,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000185.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 190,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000190.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 200,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000200.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 210,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000210.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 215,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000215.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 225,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000225.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 230,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000230.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 240,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000240.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 250,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000250.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 255,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000255.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 265,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000265.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 270,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000270.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 280,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000280.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 290,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000290.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 295,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000295.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 305,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000305.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 315,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000315.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 320,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000320.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 330,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000330.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 335,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000335.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 345,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000345.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 355,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000355.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 360,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000360.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 370,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000370.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "EnterExitCrossingPaths1front",
+      "split": "train",
+      "frame": 380,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\EnterExitCrossingPaths1front_000380.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 0,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000000.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 30,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000030.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 65,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000065.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 100,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000100.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 135,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000135.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 170,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000170.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 205,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000205.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 240,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000240.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 275,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000275.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 310,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000310.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 345,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000345.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 380,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000380.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 415,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000415.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 450,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000450.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 485,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000485.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 520,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000520.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 555,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000555.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 590,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000590.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 625,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000625.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 660,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000660.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 695,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000695.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 730,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000730.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 765,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000765.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 800,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000800.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 835,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000835.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 870,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000870.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 905,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000905.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 940,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000940.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 975,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000975.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1010,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001010.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1045,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001045.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1080,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001080.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1115,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001115.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1150,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001150.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1185,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001185.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1220,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001220.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1255,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001255.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1290,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001290.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1325,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001325.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1360,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001360.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1395,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001395.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1430,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001430.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1465,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001465.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1500,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001500.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1535,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001535.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1570,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001570.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1605,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001605.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 1640,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_001640.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 0,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000000.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 30,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000030.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 65,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000065.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 100,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000100.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 135,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000135.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 170,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000170.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 205,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000205.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 240,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000240.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 275,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000275.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 310,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000310.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 345,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000345.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 380,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000380.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 415,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000415.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 450,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000450.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 485,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000485.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 520,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000520.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 555,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000555.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 590,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000590.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 625,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000625.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 660,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000660.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 695,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000695.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 730,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000730.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 765,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000765.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 800,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000800.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 835,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000835.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 870,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000870.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 905,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000905.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 940,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000940.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 975,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000975.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1010,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001010.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1045,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001045.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1080,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001080.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1115,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001115.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1150,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001150.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1185,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001185.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1220,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001220.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1255,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001255.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1290,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001290.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1325,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001325.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1360,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001360.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1395,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001395.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1430,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001430.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1465,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001465.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1500,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001500.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1535,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001535.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1570,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001570.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1605,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001605.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 1640,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_001640.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 0,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000000.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 10,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000010.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 25,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000025.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 35,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000035.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 50,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000050.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 60,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000060.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 75,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000075.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 85,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000085.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 100,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000100.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 110,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000110.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 125,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000125.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 135,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000135.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 150,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000150.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 160,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000160.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 175,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000175.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 185,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000185.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 200,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000200.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 210,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000210.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 225,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000225.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 235,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000235.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 250,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000250.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 260,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000260.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 275,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000275.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1cor",
+      "split": "val",
+      "frame": 290,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1cor_000290.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 0,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000000.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 10,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000010.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 25,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000025.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 35,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000035.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 50,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000050.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 60,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000060.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 75,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000075.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 85,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000085.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 100,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000100.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 110,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000110.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 125,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000125.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 135,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000135.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 150,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000150.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 160,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000160.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 175,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000175.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 185,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000185.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 200,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000200.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 210,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000210.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 225,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000225.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 235,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000235.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 250,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000250.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 260,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000260.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 275,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000275.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "OneLeaveShop1front",
+      "split": "val",
+      "frame": 290,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\val\\OneLeaveShop1front_000290.jpg",
+      "label_source": "official human CAVIAR XML"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 5,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000005.jpg",
+      "label_source": "official human CAVIAR XML",
+      "note": "Additional early preparation sample retained"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 10,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000010.jpg",
+      "label_source": "official human CAVIAR XML",
+      "note": "Additional early preparation sample retained"
+    },
+    {
+      "name": "TwoEnterShop1cor",
+      "split": "train",
+      "frame": 15,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1cor_000015.jpg",
+      "label_source": "official human CAVIAR XML",
+      "note": "Additional early preparation sample retained"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 5,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000005.jpg",
+      "label_source": "official human CAVIAR XML",
+      "note": "Additional early preparation sample retained"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 10,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000010.jpg",
+      "label_source": "official human CAVIAR XML",
+      "note": "Additional early preparation sample retained"
+    },
+    {
+      "name": "TwoEnterShop1front",
+      "split": "train",
+      "frame": 15,
+      "image": "datasets\\caviar\\yolo_reviewed\\images\\train\\TwoEnterShop1front_000015.jpg",
+      "label_source": "official human CAVIAR XML",
+      "note": "Additional early preparation sample retained"
+    }
+  ],
+  "test_exported": false
+}

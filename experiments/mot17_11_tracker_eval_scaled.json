@@ -1,0 +1,51 @@
+{
+  "annotation_resolution": [
+    1920,
+    1080
+  ],
+  "preview_video_resolution": [
+    960,
+    540
+  ],
+  "prediction_scale_to_annotation": [
+    2.0,
+    2.0
+  ],
+  "note": "Predictions were generated on MOTChallenge preview MP4, which is exactly half the original annotation dimensions. Boxes are scaled by 2 before IoU evaluation.",
+  "runs": {
+    "bytetrack": {
+      "num_frames": 900.0,
+      "num_objects": 9436.0,
+      "mota": 0.5276600254345061,
+      "motp": 0.1656271001031196,
+      "idf1": 0.5303811159890565,
+      "idp": 0.6635886005413151,
+      "idr": 0.4417125900805426,
+      "num_matches": 5615.0,
+      "num_switches": 30.0,
+      "num_false_positives": 636.0,
+      "num_misses": 3791.0,
+      "mostly_tracked": 16.0,
+      "partially_tracked": 22.0,
+      "mostly_lost": 37.0,
+      "num_fragmentations": 57.0
+    },
+    "botsort": {
+      "num_frames": 900.0,
+      "num_objects": 9436.0,
+      "mota": 0.53984739296312,
+      "motp": 0.15305466980599358,
+      "idf1": 0.5445469480601541,
+      "idp": 0.6743348982785603,
+      "idr": 0.45665536244171256,
+      "num_matches": 5729.0,
+      "num_switches": 26.0,
+      "num_false_positives": 635.0,
+      "num_misses": 3681.0,
+      "mostly_tracked": 18.0,
+      "partially_tracked": 21.0,
+      "mostly_lost": 36.0,
+      "num_fragmentations": 62.0
+    }
+  }
+}

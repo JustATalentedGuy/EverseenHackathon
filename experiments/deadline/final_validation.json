@@ -1,0 +1,32 @@
+{
+  "selected": "baseline",
+  "val_f1": 0.7364975450081833,
+  "tests": 10,
+  "json_files_parsed": [
+    "baseline_predictions.json",
+    "baseline_test_tracks.json",
+    "comparison.json",
+    "contract_tests.json",
+    "cpu_export_original_rect_mismatch.json",
+    "cpu_export_validation.json",
+    "final_validation.json",
+    "pipeline_status.json",
+    "pseudo_label_quality.json",
+    "pseudo_predictions.json",
+    "pseudo_test_tracks.json",
+    "replay_validation.json",
+    "reviewed_predictions.json",
+    "reviewed_test_tracks.json",
+    "review_queue.json",
+    "review_selection.json",
+    "sampling_cadence.json",
+    "selection.json",
+    "training_manifest.json",
+    "ui_validation.json",
+    "zone_parameters.json",
+    "zone_proposals.json",
+    "zone_stress.json"
+  ],
+  "prototype_and_scripts_compile": true,
+  "config_validated": true
+}
