@@ -26,6 +26,14 @@ def validate_polygon(points):
 
 def validate_config(config):
     if config.get('schema_version') != 1: raise ValueError('Expected schema_version 1')
+    # These settings are shared by batch replay and on-demand live inference.
+    for key, minimum, maximum in [('sample_hz', 0, 30), ('confidence', 0, 1),
+                                  ('cpu_threads', 0, 32), ('imgsz', 127, 2048)]:
+        if key in config:
+            try: v=float(config[key])
+            except (TypeError,ValueError) as exc: raise ValueError(f'{key} must be numeric') from exc
+            if not math.isfinite(v) or not minimum < v <= maximum:
+                raise ValueError(f'{key} must be greater than {minimum} and no more than {maximum}')
     cams = config.get('cameras', [])
     if not cams: raise ValueError('At least one camera is required')
     ids = [c.get('id') for c in cams]
@@ -38,6 +46,16 @@ def validate_config(config):
         for z in c.get('zones', []):
             if not z.get('id') or z['id'] in names: raise ValueError('Zone IDs must be unique per camera')
             names.add(z['id']); validate_polygon(z['polygon'])
+            if z.get('role', 'other') not in {'checkout','aisle','display','entrance','other'}:
+                raise ValueError('Zone role must be checkout, aisle, display, entrance or other')
+            try:
+                threshold=int(z.get('crowd_threshold',4))
+                duration=float(z.get('persistence_s',5))
+            except (ValueError,TypeError) as exc:
+                raise ValueError('Invalid zone threshold or persistence') from exc
+            if (not isinstance(z.get('crowd_threshold',4),int) or not 1 <= threshold <= 100
+                    or not math.isfinite(duration) or not 2 <= duration <= 120):
+                raise ValueError('Zone threshold 1-100 and persistence 2-120 seconds are required')
             if z.get('owner_camera',c['id']) not in ids: raise ValueError('Unknown owner camera')
         if c.get('calibration'):
             c['calibration'] = fit_calibration(c['calibration'])

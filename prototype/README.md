@@ -1,6 +1,6 @@
 # Everseen deadline prototype
 
-Implemented camera-zone setup and local video replay. Research conclusion: ../research/FINAL_DEADLINE_DATA_AND_DEPLOYMENT_ARCHITECTURE.md.
+Implemented camera-zone setup, local video replay, and the unified live operations dashboard. See [INTEGRATION.md](INTEGRATION.md) for combined repository features, live video usage and the accuracy limitations. Research conclusion: ../research/FINAL_DEADLINE_DATA_AND_DEPLOYMENT_ARCHITECTURE.md.
 
 ## Launch
 
@@ -9,7 +9,7 @@ Set-Location C:\Coding\ML\Everseen
 .\.venv\Scripts\python.exe -m prototype.server
 ```
 
-Open http://127.0.0.1:8791. The supplied environment already contains the dependencies. The loopback server may already be running; do not launch a second copy.
+Open http://127.0.0.1:8791 for live operations, or http://127.0.0.1:8791/setup for this original setup/replay editor. The supplied environment already contains the dependencies. The loopback server may already be running; do not launch a second copy.
 
 Choose a camera, click the visible floor to draw a polygon, name it, finish and save. Click Analyze 30 seconds. Inspect overlays and partial dwell. Suggestions use prior observations from the same installed source and require acceptance/naming. Save changes and analyze again. Old results become unavailable when setup changes.
 

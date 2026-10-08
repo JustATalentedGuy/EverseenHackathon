@@ -9,7 +9,7 @@ with sync_playwright() as p:
     browser=p.chromium.launch(executable_path=r'C:\Program Files\Google\Chrome\Application\chrome.exe',headless=True)
     page=browser.new_page(viewport={'width':1280,'height':1100})
     errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
-    page.goto('http://127.0.0.1:8791/',wait_until='networkidle')
+    page.goto('http://127.0.0.1:8791/setup',wait_until='networkidle')
     expect(page.locator('#camera option')).to_have_count(2)
     page.wait_for_function('img.complete && img.naturalWidth > 0')
     old=page.request.get('http://127.0.0.1:8791/api/config').json()
@@ -30,6 +30,7 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':390,'height':844});page.screenshot(path=str(OUT/'setup_mobile.png'),full_page=True)
     assert not errors,errors
     browser.close()
-(OUT/'ui_validation.json').write_text(json.dumps({'camera_options':2,'polygon_add_save_restore':True,
+LATEST=ROOT/'runs'/'ui_checks'/'setup_validation_latest.json';LATEST.parent.mkdir(parents=True,exist_ok=True)
+LATEST.write_text(json.dumps({'camera_options':2,'polygon_add_save_restore':True,
          'self_intersection_rejected':True,'page_errors':errors,'desktop_and_mobile_screenshots':True},indent=2))
 print('UI validation passed')

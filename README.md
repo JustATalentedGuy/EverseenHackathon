@@ -15,13 +15,15 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m prototype.server
 ```
 
-Open **http://127.0.0.1:8791**. Select a camera, draw and name floor polygons, save, analyze, and inspect the overlays and partial-dwell table. Activity suggestions require user confirmation. FFmpeg must be on PATH for H264 browser-compatible overlays. The footage acquisition script currently uses Windows curl.exe.
+Open **http://127.0.0.1:8791** for the integrated live operations dashboard. Add a local video, RTSP/HTTP(S) stream or webcam index, draw and save floor zones, then start live monitoring. Watch camera-local occupancy, annotated MJPEG, heatmaps, rolling occupancy, and partial visible dwell; export the JSONL observation log. Use **http://127.0.0.1:8791/setup** for the existing offline replay and calibration tools. FFmpeg must be on PATH for H264 browser-compatible *offline* overlays. The footage acquisition script currently uses Windows curl.exe.
+
+See **[Unified prototype guide](prototype/INTEGRATION.md)** for the two-repository comparison, architecture, shopkeeper workflow, guarded recommendations, formulas, configuration, limitations and validation. In live mode, a locally available ONNX export may be selected automatically on CPU for better throughput; the evaluated PyTorch checkpoint remains the fallback. To enable that optional path on a new machine, install `requirements-accelerated.txt` and create/obtain the matching validated ONNX export. Do not treat small-sample ONNX parity as a new accuracy benchmark.
 
 The setup helper acquires the official pretrained YOLO11n asset through Ultralytics and official CAVIAR videos/labels. Dataset provenance and hashes are retained in [the manifest](datasets/caviar/manifest.json). The existing evaluated baseline's SHA256 is recorded in [selection.json](experiments/deadline/selection.json).
 
 ## What is included
 
-- **prototype/**: local FastAPI setup/dashboard, polygon validation, detection/tracking engine and latest-frame live buffer.
+- **prototype/**: integrated local FastAPI live operations dashboard, camera onboarding, on-demand MJPEG monitoring/heatmaps, offline setup/replay, validated zones and tracking, and bounded latest-frame input.
 - **scripts/**: reproducible acquisition, architecture tests, detector adaptation and evaluation.
 - **research/**: full research history and the single consolidated final document.
 - **experiments/**: selected compact numerical evidence and training configuration/results.

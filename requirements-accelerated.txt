@@ -1,0 +1,4 @@
+# Optional faster CPU inference for an already exported models/yolo11n.onnx.
+# Missing export/runtime automatically falls back to selected PyTorch weights.
+-r requirements.txt
+onnxruntime==1.19.2

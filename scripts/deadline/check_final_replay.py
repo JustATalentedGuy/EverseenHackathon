@@ -9,7 +9,7 @@ with sync_playwright() as p:
     page.on('pageerror',lambda e:errors.append(str(e)))
     url='http://127.0.0.1:8791'
     try:
-        page.goto(url,wait_until='networkidle')
+        page.goto(url+'/setup',wait_until='networkidle')
         saved=page.request.get(url+'/api/config').json()
         assert saved['confidence']==.35 and saved['zone_persistence_s']==.2
         page.locator('#run').click()
@@ -40,7 +40,8 @@ with sync_playwright() as p:
     finally:
         if 'saved' in locals():page.request.put(url+'/api/config',data=saved)
         b.close()
-(OUT/'replay_validation.json').write_text(json.dumps({'camera_samples':194,'videos_loaded':2,
+LATEST=ROOT/'runs'/'ui_checks'/'replay_validation_latest.json';LATEST.parent.mkdir(parents=True,exist_ok=True)
+LATEST.write_text(json.dumps({'camera_samples':194,'videos_loaded':2,
  'playback_verified':True,'ui_triggered_final_config_analysis':True,'stale_results_blocked':True,
  'changed_source_proposals_blocked':True,'unsynchronized_floor_fusion_disabled':True,'page_errors':errors,
  'wall_seconds':result['wall_seconds']},indent=2))

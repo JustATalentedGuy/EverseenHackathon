@@ -1,17 +1,23 @@
 """Local camera-zone setup and replay dashboard. Bind loopback only."""
 import json
 from pathlib import Path
+import csv
+import io
+import re
 import threading
 import time
 import cv2
 from fastapi import FastAPI,HTTPException,Request
-from fastapi.responses import FileResponse,Response
+from fastapi.responses import FileResponse,Response,StreamingResponse
 from .core import validate_config,propose_zones
 from .run import run
+from .sources import resolve_source
+from .live import LiveManager
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=ROOT/'prototype'/'site.json'
 app=FastAPI(title='Everseen setup')
 lock=threading.Lock(); job={'status':'idle'}
+live=LiveManager(ROOT)
 
 @app.middleware('http')
 async def local_only(request:Request,call_next):
@@ -25,35 +31,72 @@ async def local_only(request:Request,call_next):
 def load(): return json.loads(CONFIG.read_text(encoding='utf-8'))
 
 @app.get('/')
-def index(): return FileResponse(ROOT/'prototype'/'index.html')
+def index(): return FileResponse(ROOT/'prototype'/'dashboard.html')
+
+@app.get('/setup')
+def setup(): return FileResponse(ROOT/'prototype'/'index.html')
 
 @app.get('/api/config')
 def get_config(): return load()
 
-@app.put('/api/config')
-def put_config(config:dict):
+def persist(config):
+    """Validate and atomically save a site configuration, retaining prior versions."""
     try:
         for cam in config.get('cameras',[]):
-            src=cam.get('source','')
-            if not src.startswith(('rtsp://','http://','https://')):
-                path=(ROOT/src).resolve()
-                if not path.is_relative_to(ROOT) or not path.is_file(): raise ValueError('Choose a video inside Everseen')
+            resolve_source(cam.get('source',''),ROOT)
         validate_config(config)
     except (ValueError,KeyError,TypeError) as exc: raise HTTPException(422,str(exc))
     with lock:
         if job['status']=='running': raise HTTPException(409,'Wait for analysis to finish before editing zones')
         versions=ROOT/'prototype'/'config_versions'; versions.mkdir(exist_ok=True)
-        (versions/f'{time.time_ns()}.json').write_text(CONFIG.read_text(),encoding='utf-8')
+        (versions/f'{time.time_ns()}.json').write_text(CONFIG.read_text(encoding='utf-8'),encoding='utf-8')
         tmp=CONFIG.with_suffix('.tmp'); tmp.write_text(json.dumps(config,indent=2),encoding='utf-8'); tmp.replace(CONFIG)
-    return {'saved':True,'camera_count':len(config['cameras'])}
+    # Running cameras hold a snapshot; prevent stale zones and misleading stats.
+    live.stop_all()
+    return {'saved':True,'camera_count':len(config['cameras']), 'live_restarted':False}
+
+@app.put('/api/config')
+def put_config(config:dict):
+    return persist(config)
+
+@app.post('/api/cameras')
+def add_camera(camera:dict):
+    name=str(camera.get('name','')).strip()[:80]
+    source=str(camera.get('source','')).strip()
+    if not name: raise HTTPException(422,'Camera name is required')
+    config=load()
+    if len(config['cameras']) >= 8: raise HTTPException(422,'Maximum eight configured cameras')
+    stem=re.sub(r'[^a-z0-9_-]+','_',name.lower()).strip('_')[:32] or 'camera'
+    taken={c['id'] for c in config['cameras']}
+    cid=stem; counter=2
+    while cid in taken:
+        cid=f'{stem}_{counter}';counter+=1
+    config['cameras'].append({'id':cid,'name':name,'source':source,'sync_verified':False,'zones':[]})
+    persist(config)
+    return {'id':cid,'name':name}
+
+@app.delete('/api/cameras/{camera_id}')
+def remove_camera(camera_id:str):
+    config=load()
+    if len(config['cameras']) <= 1: raise HTTPException(422,'Keep at least one camera')
+    if camera_id not in [c['id'] for c in config['cameras']]: raise HTTPException(404,'Unknown camera')
+    config['cameras']=[c for c in config['cameras'] if c['id']!=camera_id]
+    config['zone_owners']={k:v for k,v in config.get('zone_owners',{}).items() if v!=camera_id}
+    persist(config)
+    return {'removed':camera_id}
 
 @app.get('/api/frame/{camera_id}')
 def frame(camera_id:str):
     c=next((c for c in load()['cameras'] if c['id']==camera_id),None)
     if c is None: raise HTTPException(404,'Unknown camera')
-    src=c['source']; path=src if src.startswith(('rtsp://','http://','https://')) else str(ROOT/src)
-    cap=cv2.VideoCapture(path); ok,img=cap.read(); cap.release()
-    if not ok: raise HTTPException(422,'Cannot read camera')
+    try: path,_=resolve_source(c['source'],ROOT)
+    except ValueError as exc: raise HTTPException(422,str(exc))
+    cap=cv2.VideoCapture(path)
+    opened=cap.isOpened()
+    ok,img=cap.read() if opened else (False,None)
+    cap.release()
+    if not ok:
+        raise HTTPException(422,'Source could not decode a video frame. Use a playable direct HTTP/RTSP video URL, check credentials/codecs, and for MP4-over-HTTP use a fast-start file or a range-capable server.')
     ok,enc=cv2.imencode('.jpg',img)
     return Response(enc.tobytes(),media_type='image/jpeg',headers={'Cache-Control':'no-store'})
 
@@ -106,6 +149,87 @@ def overlay(camera_id:str):
     f=ROOT/'experiments'/'deadline'/'demo'/(camera_id+'_overlay.mp4')
     if not f.exists(): raise HTTPException(404,'Run analysis first')
     return FileResponse(f,media_type='video/mp4')
+
+@app.get('/api/live/status')
+def live_status(): return live.stats()
+
+@app.post('/api/live/start/{camera_id}')
+def live_start(camera_id:str):
+    try: return live.start(camera_id,load())
+    except KeyError: raise HTTPException(404,'Unknown camera')
+    except (ValueError,TypeError) as exc: raise HTTPException(422,str(exc))
+
+@app.post('/api/live/stop/{camera_id}')
+def live_stop(camera_id:str):
+    try: return live.stop(camera_id)
+    except KeyError: raise HTTPException(404,'Camera is not active')
+
+@app.get('/api/live/video/{camera_id}')
+def live_video(camera_id:str):
+    cam=live.get(camera_id)
+    if cam is None: raise HTTPException(404,'Start camera first')
+    def frames():
+        last=0
+        while not cam.stop_event.is_set():
+            with cam.lock:
+                seq,jpg=cam.jpg_seq,cam.jpeg
+            if jpg and seq!=last:
+                last=seq
+                yield b'--frame\r\nContent-Type: image/jpeg\r\n\r\n'+jpg+b'\r\n'
+            time.sleep(.1)
+    return StreamingResponse(frames(),media_type='multipart/x-mixed-replace; boundary=frame',
+                             headers={'Cache-Control':'no-store'})
+
+@app.get('/api/live/heat/{camera_id}.jpg')
+def live_heat(camera_id:str):
+    cam=live.get(camera_id)
+    if cam is None: raise HTTPException(404,'Start camera first')
+    jpg=cam.heatmap_jpeg()
+    if jpg is None: return Response(status_code=204)
+    return Response(jpg,media_type='image/jpeg',headers={'Cache-Control':'no-store'})
+
+@app.get('/api/live/events/{camera_id}')
+def live_events(camera_id:str):
+    cam=live.get(camera_id)
+    if cam is None or not cam.events_path.exists(): raise HTTPException(404,'No observations yet')
+    # A growing log must not use FileResponse's size-based Content-Length:
+    # concurrent writes can otherwise abort downloads with a length mismatch.
+    path=cam.events_path
+    upper_bound=path.stat().st_size
+    def snapshot():
+        remaining=upper_bound
+        with path.open('rb') as stream:
+            while remaining:
+                chunk=stream.read(min(65536,remaining))
+                if not chunk:break
+                remaining-=len(chunk)
+                yield chunk
+    return StreamingResponse(snapshot(),media_type='application/x-ndjson',
+                             headers={'Content-Disposition':f'attachment; filename="{camera_id}_observations.jsonl"',
+                                      'Cache-Control':'no-store'})
+
+@app.get('/api/live/report/{camera_id}.csv')
+def live_report(camera_id:str):
+    cam=live.get(camera_id)
+    if cam is None: raise HTTPException(404,'Start camera first')
+    data=cam.stats()
+    file=io.StringIO(newline=''); writer=csv.writer(file)
+    writer.writerow(['camera','zone','current_observed_occupancy','peak_observed_occupancy',
+                     'p90_occupancy_5m','observed_track_entries_not_people',
+                     'mean_partial_visible_dwell_seconds','partial_track_zone_segments',
+                     'zone_role','review_threshold_people','measurement_state','age_of_last_sample_seconds',
+                     'measured_fps_30s','target_hz'])
+    for z in data['zones']:
+        # Avoid spreadsheet formula interpretation of operator-authored labels.
+        label=z['label']
+        if label and label[0] in '=+-@': label="'"+label
+        writer.writerow([camera_id,label,z['occupancy'],z['peak'],z['p90_occupancy_5m'],
+                         z['observed_track_entries'],z['partial_dwell_mean_s'],z['partial_dwell_tracks'],
+                         z['role'],z['crowd_threshold'],data['measurement']['state'],
+                         data['measurement']['age_s'],data['measurement']['observed_fps_30s'],
+                         data['measurement']['target_hz']])
+    return Response(file.getvalue(),media_type='text/csv',headers={
+        'Content-Disposition':f'attachment; filename="{camera_id}_observed_zones.csv"'})
 
 if __name__=='__main__':
     import uvicorn
