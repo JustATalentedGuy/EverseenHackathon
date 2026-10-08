@@ -19,6 +19,8 @@ Open **http://127.0.0.1:8791** for the integrated live operations dashboard. Add
 
 See **[Unified prototype guide](prototype/INTEGRATION.md)** for the two-repository comparison, architecture, shopkeeper workflow, guarded recommendations, formulas, configuration, limitations and validation. In live mode, a locally available ONNX export may be selected automatically on CPU for better throughput; the evaluated PyTorch checkpoint remains the fallback. To enable that optional path on a new machine, install `requirements-accelerated.txt` and create/obtain the matching validated ONNX export. Do not treat small-sample ONNX parity as a new accuracy benchmark.
 
+**Retail demo footage catalog:** Open the home dashboard to use **Curated demonstration footage**. Research-sourced clips are prepared and checked by `scripts/prepare_retail_demo.py` and `scripts/test_retail_demo.py`; source credits, reuse conditions, intended demonstrations, and limitations are in [prototype/DEMO_FOOTAGE.md](prototype/DEMO_FOOTAGE.md). Third-party video bytes and local validation runs remain excluded from Git.
+
 The setup helper acquires the official pretrained YOLO11n asset through Ultralytics and official CAVIAR videos/labels. Dataset provenance and hashes are retained in [the manifest](datasets/caviar/manifest.json). The existing evaluated baseline's SHA256 is recorded in [selection.json](experiments/deadline/selection.json).
 
 ## What is included

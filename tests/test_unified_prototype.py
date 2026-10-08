@@ -78,6 +78,7 @@ class EndpointTests(unittest.TestCase):
         self.config_path.write_text(json.dumps(self.config))
         self.patches = [patch.object(server, 'ROOT', self.root),
                         patch.object(server, 'CONFIG', self.config_path),
+                        patch.object(server, 'DEMO_CATALOG', self.root / 'prototype' / 'demo_catalog.json'),
                         patch.object(server.live, 'stop_all')]
         for p in self.patches:
             p.start()
@@ -130,6 +131,40 @@ class EndpointTests(unittest.TestCase):
         r = self.client.post('/api/cameras', json={'name':'Bad','source':'0'},
                              headers={'origin':'https://example.org'})
         self.assertEqual(r.status_code, 403)
+
+    def test_demo_catalog_rejects_unvalidated_sources(self):
+        catalog=[{'id':'sample','title':'Sample Video','source':'demo.mp4','validation_key':'sample',
+                  'best_use':'testing','caveat':'fake','research_only':True,'role':'other'}]
+        (self.root/'prototype'/'demo_catalog.json').write_text(json.dumps(catalog))
+        data=self.client.get('/api/demo/catalog').json()['videos']
+        self.assertEqual(data[0]['state'],'needs_validation')
+        r=self.client.post('/api/demo/activate/sample')
+        self.assertEqual(r.status_code,422)
+        self.assertEqual(self.client.get('/api/config').json(),self.config)
+
+    def test_demo_activation_is_idempotent_and_requires_validated_bytes(self):
+        path=self.root/'demo.mp4'
+        path.write_bytes(b'fake video bytes'*800)
+        import hashlib
+        catalog=[{'id':'sample','title':'Sample video','source':'demo.mp4','validation_key':'sample',
+                  'best_use':'testing','caveat':'fake','research_only':True,'role':'other'}]
+        (self.root/'prototype'/'demo_catalog.json').write_text(json.dumps(catalog))
+        runs=self.root/'runs';runs.mkdir()
+        (runs/'retail_demo_validation.json').write_text(json.dumps({'sample':{
+          'path':'demo.mp4','status':'tested','samples_decoded':12,
+          'nonempty_sample_fraction':1.,'file_bytes':path.stat().st_size,
+          'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}}))
+        class FakeCapture:
+            def read(self):return True, object()
+            def release(self):pass
+        with patch.object(server.cv2,'VideoCapture',return_value=FakeCapture()):
+            item=self.client.get('/api/demo/catalog').json()['videos'][0]
+            self.assertTrue(item['available'])
+            self.assertEqual(self.client.post('/api/demo/activate/sample').json()['id'],'demo_sample')
+            self.assertEqual(self.client.post('/api/demo/activate/sample').json()['id'],'demo_sample')
+        self.assertEqual(len(self.client.get('/api/config').json()['cameras']),2)
+        path.write_bytes(b'replaced bad frames'*850)
+        self.assertEqual(self.client.post('/api/demo/activate/sample').status_code,422)
 
     def test_growing_live_event_log_has_no_fixed_content_length(self):
         from types import SimpleNamespace

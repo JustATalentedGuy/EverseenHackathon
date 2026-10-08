@@ -15,6 +15,7 @@ from .sources import resolve_source
 from .live import LiveManager
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=ROOT/'prototype'/'site.json'
+DEMO_CATALOG=ROOT/'prototype'/'demo_catalog.json'
 app=FastAPI(title='Everseen setup')
 lock=threading.Lock(); job={'status':'idle'}
 live=LiveManager(ROOT)
@@ -58,6 +59,60 @@ def persist(config):
 @app.put('/api/config')
 def put_config(config:dict):
     return persist(config)
+
+def list_demo_catalog():
+    """Only advertise playback-ready, audited videos as one-click camera sources."""
+    records=json.loads(DEMO_CATALOG.read_text(encoding='utf-8'))
+    validation_path=ROOT/'runs'/'retail_demo_validation.json'
+    audits=json.loads(validation_path.read_text(encoding='utf-8')) if validation_path.exists() else {}
+    for item in records:
+        path=ROOT/item['source']
+        audit=audits.get(item['validation_key'],{})
+        valid=(path.is_file() and path.stat().st_size>4096 and
+               path.stat().st_size==audit.get('file_bytes') and
+               audit.get('status')=='tested' and audit.get('path')==item['source'] and
+               audit.get('samples_decoded',0)>=8 and audit.get('nonempty_sample_fraction',0)>0)
+        item['available']=bool(valid)
+        item['state']='validated' if valid else ('needs_validation' if path.is_file() else 'not_downloaded')
+        item['measurements']={key:audit[key] for key in
+                ('resolution','estimated_duration_s','samples_decoded','mean_predicted_persons',
+                 'max_predicted_persons','nonempty_sample_fraction') if key in audit} if valid else {}
+    return records
+
+@app.get('/api/demo/catalog')
+def demo_catalog(): return {'videos':list_demo_catalog(),
+                            'note':'Predictions are unlabelled model outputs, not validated accuracy; downloaded videos remain local.'}
+
+@app.post('/api/demo/activate/{demo_id}')
+def activate_demo(demo_id:str):
+    item=next((i for i in list_demo_catalog() if i['id']==demo_id),None)
+    if item is None:raise HTTPException(404,'Unknown demo video')
+    if not item['available']:raise HTTPException(422,'Footage must first be downloaded, decoded and validated locally.')
+    config=load()
+    old=next((c for c in config['cameras'] if c.get('demo_catalog_id')==demo_id),None)
+    if old:return {'id':old['id'],'already_added':True}
+    if len(config['cameras'])>=8:raise HTTPException(422,'Maximum eight configured cameras. Remove an unused one first.')
+    try:
+        source,_=resolve_source(item['source'],ROOT)
+        import hashlib
+        digest=hashlib.sha256()
+        with Path(source).open('rb') as stream:
+            for block in iter(lambda:stream.read(1048576),b''):
+                digest.update(block)
+        audit_path=ROOT/'runs'/'retail_demo_validation.json'
+        audit=json.loads(audit_path.read_text(encoding='utf-8'))[item['validation_key']]
+        if digest.hexdigest()!=audit['sha256']:
+            raise ValueError('Video changed after validation; run scripts/test_retail_demo.py again.')
+        cap=cv2.VideoCapture(source)
+        ok,_=cap.read()
+        cap.release()
+        if not ok:raise ValueError('The selected video cannot decode a frame. Re-run demo validation.')
+    except ValueError as exc:raise HTTPException(422,str(exc))
+    cid='demo_'+demo_id
+    config['cameras'].append({'id':cid,'name':item['title'],'source':item['source'],
+                              'sync_verified':False,'demo_catalog_id':demo_id,'zones':[]})
+    persist(config)
+    return {'id':cid,'added':True,'note':'Preview video and draw your own floor zones; no unverified area boundaries are supplied.'}
 
 @app.post('/api/cameras')
 def add_camera(camera:dict):

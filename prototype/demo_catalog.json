@@ -1,0 +1,74 @@
+[
+  {
+    "id": "caviar_walkby", "title": "Walk-by storefront — corridor view",
+    "source": "datasets/caviar/WalkByShop1cor.mpg", "role": "entrance",
+    "scene": "Shop entrance and passing traffic", "best_use": "Show people passing storefronts, entering and exiting, and spatial occupancy changes.",
+    "caveat": "Acted research footage. Corridor is not a grocery checkout; do not claim purchases or conversion.",
+    "license": "CC BY-SA (CAVIAR project)", "research_only": false,
+    "source_page": "https://groups.inf.ed.ac.uk/vision/DATASETS/CAVIAR/CAVIARDATA1/",
+    "validation_key": "caviar_walkby"
+  },
+  {
+    "id": "caviar_assistant", "title": "Store assistant interaction — front view",
+    "source": "datasets/caviar/ShopAssistant1front.mpg", "role": "display",
+    "scene": "Customer stops and interacts near a storefront", "best_use": "Explain observed dwell and how browsing differs from congestion.",
+    "caveat": "Acted retail research footage; interactions are not purchases. Do not infer shopper intent from motion alone.",
+    "license": "CC BY-SA (CAVIAR project)", "research_only": false,
+    "source_page": "https://groups.inf.ed.ac.uk/vision/DATASETS/CAVIAR/CAVIARDATA1/",
+    "validation_key": "caviar_assistant"
+  },
+  {
+    "id": "caviar_entry", "title": "Store entrance — two couples",
+    "source": "datasets/caviar/TwoEnterShop3front.mpg", "role": "entrance",
+    "scene": "Two groups entering a store", "best_use": "Demonstrate entrance-area grouping, short tracks and occlusion.",
+    "caveat": "Camera-local temporary tracks are not reliable store-wide unique visitor counts.",
+    "license": "CC BY-SA (CAVIAR project)", "research_only": false,
+    "source_page": "https://groups.inf.ed.ac.uk/vision/DATASETS/CAVIAR/CAVIARDATA1/",
+    "validation_key": "caviar_entry"
+  },
+  {
+    "id": "caviar_existing_busy", "title": "Busy corridor — shopping/waiting scene",
+    "source": "datasets/caviar/OneShopOneWait2cor.mpg", "role": "aisle",
+    "scene": "Several people crossing a shopping-centre corridor", "best_use": "Compare changing zone occupancy during dense group movement.",
+    "caveat": "Busy groups can fragment tracks; inferred dwell is partial, not a validated queue length.",
+    "license": "CC BY-SA (CAVIAR project)", "research_only": false,
+    "source_page": "https://groups.inf.ed.ac.uk/vision/DATASETS/CAVIAR/CAVIARDATA1/",
+    "validation_key": "caviar_existing_busy"
+  },
+  {
+    "id": "caviar_existing_entry", "title": "Store entry — paired views alternative",
+    "source": "datasets/caviar/TwoEnterShop1front.mpg", "role": "entrance",
+    "scene": "Store entry viewed from the front", "best_use": "Demonstrate camera-angle sensitivity and local entrance zones.",
+    "caveat": "Do not assume synchronization with other views without verifying timecodes.",
+    "license": "CC BY-SA (CAVIAR project)", "research_only": false,
+    "source_page": "https://groups.inf.ed.ac.uk/vision/DATASETS/CAVIAR/CAVIARDATA1/",
+    "validation_key": "caviar_existing_entry"
+  },
+  {
+    "id": "mall_crowd", "title": "Shopping mall — crowded overhead webcam",
+    "source": "samples/retail_demo/mall_crowd.mp4", "role": "aisle",
+    "scene": "Dense indoor shopping-mall pedestrian traffic", "best_use": "Show crowd-density stress and undercounting risks; use as an honesty/limitations demo.",
+    "caveat": "Frames are sampled below 2 Hz, exported at nominal 2 FPS. Head-point ground truth is NOT directly comparable to our full-person box counts. Dwell, speed and event timing are NOT validated.",
+    "license": "Research only / no commercial use (CUHK Mall Dataset)", "research_only": true,
+    "source_page": "https://staff.ie.cuhk.edu.hk/~ccloy/downloads_mall_dataset.html",
+    "validation_key": "mall_crowd"
+  },
+  {
+    "id": "merl_shelf", "title": "Shelf browsing — fixed overhead retail view",
+    "source": "samples/retail_demo/merl_shelf_browse.mp4", "role": "display",
+    "scene": "Single shopper near grocery shelves in an overhead lab video", "best_use": "Show stationary browsing, unusual camera angle and challenging person detections.",
+    "caveat": "Single actor filmed in a lab store. Shelf-action labels do not train or validate Everseen's person detector; non-commercial research only.",
+    "license": "Non-commercial research only (MERL Shopping Dataset)", "research_only": true,
+    "source_page": "https://www.merl.com/research/downloads/MERL_Shopping_Dataset",
+    "validation_key": "merl_shelf"
+  },
+  {
+    "id": "teammate_store", "title": "Teammate's store footage — multi-person",
+    "source": ".cache/teammate-EverseenML/store.mp4", "role": "aisle",
+    "scene": "Multi-person supermarket/store footage", "best_use": "Show realistic customer movement with better video resolution than CAVIAR.",
+    "caveat": "Available only when the teammate checkout is present; redistribution/use permissions must be confirmed with the teammate. Not ground-truth labelled for our metrics.",
+    "license": "Collaborator-provided, redistribution rights not verified", "research_only": true,
+    "source_page": "https://github.com/myselfGokul-1111/EverseenML",
+    "validation_key": "teammate_store"
+  }
+]
