@@ -18,6 +18,15 @@ The gallery automatically marks local files as **validated** only after a frame-
 | MERL overhead shelf browsing | Fixed top-down video, prolonged browsing, person-detection challenge | [MERL Shopping Dataset](https://www.merl.com/research/downloads/MERL_Shopping_Dataset), **noncommercial research only** | `samples/retail_demo/merl_shelf_browse.mp4` |
 | Teammate store clip | Multi-person store video, more modern resolution | [EverseenML teammate repository](https://github.com/myselfGokul-1111/EverseenML), **permission to redistribute/use publicly must be confirmed** | `.cache/teammate-EverseenML/store.mp4` |
 
+| **Store CCTV multi-aisle** | Ordinary aisle traffic and occupancy change | User-supplied clip, **provenance/redistribution rights unverified** | `data/cctv/store_cctv_multi_aisle.mp4` |
+| **Store CCTV mall atrium** | Crowded two-level mall; undercount and false-positive stress test | User-supplied clip, **provenance/redistribution rights unverified** | `data/cctv/store_cctv_mall_atrium.mp4` |
+| **Store CCTV pharmacy** | Counter-area dwell; explicitly not a checkout-wait measurement | User-supplied clip, **provenance/redistribution rights unverified** | `data/cctv/store_cctv_pharmacy.mp4` |
+| **Store CCTV convenience** | Sparse-traffic control case | User-supplied clip, **provenance/redistribution rights unverified** | `data/cctv/store_cctv_convenience.mp4` |
+| **Store CCTV liquor aisle** | Narrow-aisle zone placement and track fragmentation | User-supplied clip, **provenance/redistribution rights unverified** | `data/cctv/store_cctv_liquor_aisle.mp4` |
+| **Store CCTV produce corner** | Second sparse case, contrast against the mall clip | User-supplied clip, **provenance/redistribution rights unverified** | `data/cctv/store_cctv_produce_corner.mp4` |
+
+**Store CCTV clips:** all six are `research_only` and carry an unverified provenance note. The gallery asks for confirmation before adding them, and they must not be redistributed as repository assets or used in commercial material until the source is established.
+
 **Licensing:** CAVIAR's official page lists CC BY-SA and requests acknowledgment; verify the applicable share-alike/attribution requirements for external demo materials. Mall and MERL are research-only and must **not** be placed into a commercial marketing video or redistributed as repository assets without permission. All footage is excluded from Git. Research/demo permission is distinct from a commercial product license. For public product marketing, use your own consented footage or a commercial-friendly stock clip with proper rights. Pexels has [free-use terms](https://www.pexels.com/license/), but its catalog landing-page URLs are **not direct video streams**; they were not downloaded/validated here, so none have been falsely added as playable cameras.
 
 ## Reproduce downloads and audit

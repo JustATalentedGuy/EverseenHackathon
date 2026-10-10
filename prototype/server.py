@@ -1,5 +1,6 @@
 """Local camera-zone setup and replay dashboard. Bind loopback only."""
 import json
+import os
 from pathlib import Path
 import csv
 import io
@@ -15,7 +16,8 @@ from .sources import resolve_source
 from .live import LiveManager
 from .topology import validate_layout, full_report
 ROOT=Path(__file__).resolve().parents[1]
-CONFIG=ROOT/'prototype'/'site.json'
+# Point EVERSEEN_CONFIG at another site file (e.g. site_cctv.json) to run a different camera set.
+CONFIG=Path(os.environ.get('EVERSEEN_CONFIG') or ROOT/'prototype'/'site.json')
 DEMO_CATALOG=ROOT/'prototype'/'demo_catalog.json'
 LAYOUT=ROOT/'prototype'/'floor_layout.json'
 app=FastAPI(title='Everseen setup')
@@ -70,6 +72,22 @@ def layout_analytics():
 
 @app.get('/api/config')
 def get_config(): return load()
+
+@app.get('/api/source_health')
+def source_health():
+    """Report, per camera, whether its source actually resolves.
+
+    Kept separate from /api/config so the config round-trip stays byte-identical, and so a
+    missing file is visible in the UI instead of surfacing later as an opaque save error.
+    """
+    out=[]
+    for cam in load().get('cameras',[]):
+        try:
+            resolve_source(cam.get('source',''),ROOT)
+            out.append({'id':cam.get('id'),'source':cam.get('source'),'source_present':True,'source_error':None})
+        except ValueError as exc:
+            out.append({'id':cam.get('id'),'source':cam.get('source'),'source_present':False,'source_error':str(exc)})
+    return {'cameras':out}
 
 def persist(config):
     """Validate and atomically save a site configuration, retaining prior versions."""
@@ -324,6 +342,79 @@ def live_report(camera_id:str):
                          data['measurement']['target_hz']])
     return Response(file.getvalue(),media_type='text/csv',headers={
         'Content-Disposition':f'attachment; filename="{camera_id}_observed_zones.csv"'})
+
+# ---------------------------------------------------------------- assistant
+# Additive block: a voice/text assistant and a scheduled briefing that read the
+# same measured values this dashboard renders. Nothing here modifies detection,
+# tracking or the existing metric definitions.
+from . import assistant as assistant_mod, assistant_llm, briefing as briefing_mod  # noqa: E402
+
+_ASSISTANT=None
+briefing_service=None
+
+def _get_assistant():
+    """Build the assistant lazily so heavy dependencies stay off the startup path."""
+    global _ASSISTANT
+    if _ASSISTANT is None:
+        from . import assistant_docs
+        obj=assistant_mod.Assistant(live,assistant_docs.build_index(ROOT))
+        obj.llm=assistant_llm.build()
+        _ASSISTANT=obj
+    return _ASSISTANT
+
+@app.on_event('startup')
+async def _start_briefing():
+    global briefing_service
+    briefing_service=briefing_mod.BriefingService(_get_assistant())
+    briefing_service.start()
+
+@app.get('/api/assistant/capabilities')
+def assistant_capabilities():
+    import importlib.util
+    llm=_get_assistant().llm
+    try: stt=bool(importlib.util.find_spec('faster_whisper'))
+    except Exception: stt=False
+    return {'ready':True,'llm':bool(llm and llm.ready()),
+            'llm_model':getattr(llm,'model',None),'speech_to_text':stt,
+            'speech_output':'browser speechSynthesis',
+            'transports':['text','microphone'] if stt else ['text']}
+
+@app.post('/api/assistant/ask')
+def assistant_ask(payload:dict):
+    question=payload.get('question','')
+    camera_id=payload.get('camera_id') or None
+    # Validate against the configuration, not live sessions: a configured camera that is
+    # stopped must still produce the honest "no camera is monitoring" answer, not a 404.
+    if camera_id and camera_id not in {c.get('id') for c in load().get('cameras',[])}:
+        raise HTTPException(404,'Unknown camera')
+    return _get_assistant().answer(question,camera_id)
+
+@app.get('/api/assistant/briefing')
+def briefing_preview(camera_id:str=None):
+    return briefing_mod.build_summary(_get_assistant(),camera_id)
+
+@app.get('/api/briefing/config')
+def briefing_config(): return briefing_service.snapshot()
+
+@app.put('/api/briefing/config')
+def briefing_config_put(payload:dict):
+    try: return briefing_service.update(payload)
+    except ValueError as error: raise HTTPException(400,str(error))
+
+@app.post('/api/briefing/send')
+def briefing_send(payload:dict):
+    try: return briefing_service.send_now(payload.get('camera_id') or None)
+    except ValueError as error: raise HTTPException(400,str(error))
+
+@app.post('/api/briefing/confirm')
+def briefing_confirm(payload:dict):
+    at=payload.get('at'); number=payload.get('number')
+    if not at or not number: raise HTTPException(400,'at and number are required')
+    if not briefing_service.confirm(at,number): raise HTTPException(404,'No matching prepared briefing')
+    return {'confirmed':True,'note':'Recorded your confirmation. Click-to-chat has no automatic receipt.'}
+
+@app.get('/api/briefing/deliveries')
+def briefing_deliveries(): return {'deliveries':briefing_mod.read_log(50)}
 
 if __name__=='__main__':
     import uvicorn

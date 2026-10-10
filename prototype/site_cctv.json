@@ -1,0 +1,341 @@
+{
+  "schema_version": 1,
+  "model": "models/yolo11n.pt",
+  "device": "cpu",
+  "imgsz": 640,
+  "sample_hz": 5,
+  "confidence": 0.3,
+  "cameras": [
+    {
+      "id": "multi_aisle",
+      "source": "data/cctv/store_cctv_multi_aisle.mp4",
+      "sync_verified": false,
+      "zones": [
+        {
+          "id": "main_aisle",
+          "semantic_id": "main_aisle",
+          "label": "Main aisle",
+          "polygon": [
+            [
+              0.02,
+              0.36
+            ],
+            [
+              0.34,
+              0.33
+            ],
+            [
+              0.48,
+              0.99
+            ],
+            [
+              0.02,
+              0.99
+            ]
+          ],
+          "crowd_threshold": 3,
+          "role": "aisle"
+        },
+        {
+          "id": "store_entrance",
+          "semantic_id": "store_entrance",
+          "label": "Store entrance",
+          "polygon": [
+            [
+              0.6,
+              0.03
+            ],
+            [
+              0.72,
+              0.02
+            ],
+            [
+              0.75,
+              0.46
+            ],
+            [
+              0.61,
+              0.47
+            ]
+          ],
+          "crowd_threshold": 2,
+          "role": "entrance"
+        }
+      ],
+      "demo_catalog_id": "cctv_multi_aisle",
+      "name": "multi aisle"
+    },
+    {
+      "id": "mall_atrium",
+      "source": "data/cctv/store_cctv_mall_atrium.mp4",
+      "sync_verified": false,
+      "zones": [
+        {
+          "id": "upper_walkway",
+          "semantic_id": "upper_walkway",
+          "label": "Upper walkway",
+          "polygon": [
+            [
+              0.0,
+              0.03
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.22
+            ],
+            [
+              0.0,
+              0.26
+            ]
+          ],
+          "crowd_threshold": 6,
+          "role": "aisle"
+        },
+        {
+          "id": "atrium_floor",
+          "semantic_id": "atrium_floor",
+          "label": "Atrium floor",
+          "polygon": [
+            [
+              0.16,
+              0.55
+            ],
+            [
+              0.82,
+              0.5
+            ],
+            [
+              0.97,
+              0.99
+            ],
+            [
+              0.08,
+              0.99
+            ]
+          ],
+          "crowd_threshold": 8,
+          "role": "other"
+        }
+      ],
+      "demo_catalog_id": "cctv_mall_atrium",
+      "name": "mall atrium"
+    },
+    {
+      "id": "pharmacy",
+      "source": "data/cctv/store_cctv_pharmacy.mp4",
+      "sync_verified": false,
+      "zones": [
+        {
+          "id": "pharmacy_counter",
+          "semantic_id": "pharmacy_counter",
+          "label": "Pharmacy counter",
+          "polygon": [
+            [
+              0.28,
+              0.52
+            ],
+            [
+              0.74,
+              0.56
+            ],
+            [
+              0.82,
+              0.99
+            ],
+            [
+              0.26,
+              0.99
+            ]
+          ],
+          "crowd_threshold": 4,
+          "role": "other"
+        },
+        {
+          "id": "pharmacy_aisle",
+          "semantic_id": "pharmacy_aisle",
+          "label": "Counter service area",
+          "polygon": [
+            [
+              0.22,
+              0.12
+            ],
+            [
+              0.56,
+              0.15
+            ],
+            [
+              0.62,
+              0.46
+            ],
+            [
+              0.2,
+              0.44
+            ]
+          ],
+          "crowd_threshold": 3,
+          "role": "other"
+        }
+      ],
+      "demo_catalog_id": "cctv_pharmacy",
+      "name": "pharmacy"
+    },
+    {
+      "id": "convenience",
+      "source": "data/cctv/store_cctv_convenience.mp4",
+      "sync_verified": false,
+      "zones": [
+        {
+          "id": "counter_front",
+          "semantic_id": "counter_front",
+          "label": "Counter front",
+          "polygon": [
+            [
+              0.08,
+              0.56
+            ],
+            [
+              0.56,
+              0.6
+            ],
+            [
+              0.62,
+              0.99
+            ],
+            [
+              0.06,
+              0.99
+            ]
+          ],
+          "crowd_threshold": 3,
+          "role": "other"
+        },
+        {
+          "id": "front_door",
+          "semantic_id": "front_door",
+          "label": "Front door",
+          "polygon": [
+            [
+              0.72,
+              0.05
+            ],
+            [
+              0.99,
+              0.05
+            ],
+            [
+              0.99,
+              0.56
+            ],
+            [
+              0.72,
+              0.5
+            ]
+          ],
+          "crowd_threshold": 2,
+          "role": "entrance"
+        }
+      ],
+      "demo_catalog_id": "cctv_convenience",
+      "name": "convenience"
+    },
+    {
+      "id": "liquor_aisle",
+      "source": "data/cctv/store_cctv_liquor_aisle.mp4",
+      "sync_verified": false,
+      "zones": [
+        {
+          "id": "liquor_aisle",
+          "semantic_id": "liquor_aisle",
+          "label": "Liquor aisle (left walkway)",
+          "polygon": [
+            [
+              0.24,
+              0.05
+            ],
+            [
+              0.34,
+              0.05
+            ],
+            [
+              0.44,
+              0.97
+            ],
+            [
+              0.22,
+              0.97
+            ]
+          ],
+          "crowd_threshold": 3,
+          "role": "aisle"
+        },
+        {
+          "id": "liquor_aisle_right",
+          "semantic_id": "liquor_aisle_right",
+          "label": "Liquor aisle (right walkway)",
+          "polygon": [
+            [
+              0.56,
+              0.05
+            ],
+            [
+              0.66,
+              0.05
+            ],
+            [
+              0.8,
+              0.97
+            ],
+            [
+              0.56,
+              0.97
+            ]
+          ],
+          "crowd_threshold": 3,
+          "role": "aisle"
+        }
+      ],
+      "demo_catalog_id": "cctv_liquor_aisle",
+      "name": "liquor aisle"
+    },
+    {
+      "id": "produce_corner",
+      "source": "data/cctv/store_cctv_produce_corner.mp4",
+      "sync_verified": false,
+      "zones": [
+        {
+          "id": "produce_aisle",
+          "semantic_id": "produce_aisle",
+          "label": "Produce aisle",
+          "polygon": [
+            [
+              0.28,
+              0.12
+            ],
+            [
+              0.56,
+              0.12
+            ],
+            [
+              0.74,
+              0.99
+            ],
+            [
+              0.18,
+              0.99
+            ]
+          ],
+          "crowd_threshold": 3,
+          "role": "aisle"
+        }
+      ],
+      "demo_catalog_id": "cctv_produce_corner",
+      "name": "produce corner"
+    }
+  ],
+  "cpu_threads": 4,
+  "zone_persistence_s": 0.2
+}

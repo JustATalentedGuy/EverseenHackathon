@@ -1,0 +1,12 @@
+# Optional assistant extras. The dashboard, the assistant, the briefing and the
+# WhatsApp hand-off all run without these; install only what you want.
+#
+#   pip install -r requirements-assistant.txt
+#
+# Microphone input (browser speech recognition works without this too):
+faster-whisper>=1.0
+
+# The local LLM is optional and needs no Python package. Either
+#   - llama.cpp:  ./llama-server -m qwen3-1.7b-q4_k_m.gguf --port 8081 -c 4096
+#   - Ollama:     ollama pull qwen3:1.7b
+# then set ASSISTANT_BACKEND=llamacpp (with ASSISTANT_GGUF) or auto.

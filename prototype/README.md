@@ -2,6 +2,8 @@
 
 Implemented camera-zone setup, local video replay, and the unified live operations dashboard. See [INTEGRATION.md](INTEGRATION.md) for combined repository features, live video usage and the accuracy limitations. Research conclusion: ../research/FINAL_DEADLINE_DATA_AND_DEPLOYMENT_ARCHITECTURE.md.
 
+The dashboard also ships a voice/text assistant over the live status and an hourly WhatsApp briefing, both read-only over the same metrics. See [ASSISTANT.md](ASSISTANT.md); they add no dependency and no server process unless you enable the optional local model.
+
 ## Launch
 
 ```powershell
@@ -12,6 +14,15 @@ Set-Location C:\Coding\ML\Everseen
 Open http://127.0.0.1:8791 for live operations, or http://127.0.0.1:8791/setup for this original setup/replay editor. The supplied environment already contains the dependencies. The loopback server may already be running; do not launch a second copy.
 
 Choose a camera, click the visible floor to draw a polygon, name it, finish and save. Click Analyze 30 seconds. Inspect overlays and partial dwell. Suggestions use prior observations from the same installed source and require acceptance/naming. Save changes and analyze again. Old results become unavailable when setup changes.
+
+## CCTV replay set
+
+Six real retail CCTV clips are configured in `site_cctv.json` (mall atrium, pharmacy,
+convenience, liquor aisle, produce, multi-aisle). Run them with
+`python3 -m prototype.run --config prototype/site_cctv.json --output experiments/deadline/cctv --seconds 60`,
+or serve them with `EVERSEEN_CONFIG=prototype/site_cctv.json python3 -m prototype.server`.
+See [CCTV_DATASET.md](CCTV_DATASET.md) for zones, measured results and the limitations
+these clips impose.
 
 ## Configuration and scope
 

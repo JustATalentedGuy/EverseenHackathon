@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "model": "models/yolo11n.pt",
+  "device": "cpu",
+  "imgsz": 416,
+  "sample_hz": 5,
+  "confidence": 0.35,
+  "zone_owners": {
+    "corridor_middle": "corridor",
+    "store_front": "front"
+  },
+  "cameras": [
+    {
+      "id": "corridor",
+      "source": "datasets/caviar/EnterExitCrossingPaths2cor.mpg",
+      "sync_verified": false,
+      "zones": [
+        {
+          "id": "corridor_middle",
+          "semantic_id": "corridor_middle",
+          "label": "Corridor observation region",
+          "polygon": [
+            [
+              0.14,
+              0.32
+            ],
+            [
+              0.73,
+              0.32
+            ],
+            [
+              0.92,
+              0.98
+            ],
+            [
+              0.1,
+              0.98
+            ]
+          ],
+          "crowd_threshold": 4
+        }
+      ]
+    },
+    {
+      "id": "front",
+      "source": "datasets/caviar/EnterExitCrossingPaths2front.mpg",
+      "sync_verified": false,
+      "zones": [
+        {
+          "id": "store_front",
+          "semantic_id": "store_front",
+          "label": "Store front observation region",
+          "polygon": [
+            [
+              0.04,
+              0.47
+            ],
+            [
+              0.97,
+              0.47
+            ],
+            [
+              0.97,
+              0.7
+            ],
+            [
+              0.04,
+              0.7
+            ]
+          ],
+          "crowd_threshold": 4
+        }
+      ]
+    }
+  ],
+  "cpu_threads": 4,
+  "zone_persistence_s": 0.2,
+  "_note": "CAVIAR configuration kept for machines where scripts/prepare_retail_demo.py has been run. Those .mpg files are research-licensed and are not stored in the repository, so this config is inactive by default. Run: EVERSEEN_CONFIG=prototype/site_caviar.json python3 -m prototype.server"
+}

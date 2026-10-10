@@ -109,3 +109,12 @@ dist/
 !/experiments/deadline/training/reviewed/results.csv
 !/experiments/deadline/training/pseudo/args.yaml
 !/experiments/deadline/training/pseudo/results.csv
+
+# Assistant + briefing local state (recipient phone numbers, delivery history)
+prototype/assistant_config.json
+runs/assistant/
+
+# local recovery helpers that reference paths outside the repo
+tools/merge_dashboard.py
+tools/build_cctv_calibration.py
+tools/check_calibration.py

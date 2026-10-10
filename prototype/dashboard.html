@@ -8,35 +8,69 @@
 *{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer;border:1px solid #365261;border-radius:9px;padding:10px 14px;color:#eef6f6;background:#213442}button:hover{border-color:var(--aqua)}button:disabled{opacity:.5;cursor:wait}button.primary{background:var(--aqua);color:#06352e;border-color:var(--aqua);font-weight:750}
 input,select{background:#101e2a;color:#edf7ff;border:1px solid #344a59;border-radius:9px;padding:11px;width:100%;min-width:0}label{display:block;color:var(--muted);font-size:13px;margin-bottom:7px}
 .shell{max-width:1600px;margin:auto;padding:22px 30px 50px}header{border-bottom:1px solid var(--border);background:#0e1923}.top{max-width:1600px;margin:auto;padding:18px 30px;display:flex;align-items:center;gap:18px;justify-content:space-between}.brand{font-size:23px;letter-spacing:-1px;font-weight:800}.brand em{color:var(--aqua);font-style:normal}.nav{display:flex;align-items:center;gap:14px}.nav a{color:var(--muted);text-decoration:none;font-size:14px}.nav a.active{color:var(--aqua)}.tag{border:1px solid #34524b;background:#18372f;border-radius:20px;color:var(--aqua);font-size:12px;padding:7px 11px}
-h1{font-size:clamp(26px,3vw,38px);margin:8px 0 6px;letter-spacing:-1.2px}h2{font-size:18px;margin:0 0 16px}h3{margin:0 0 9px;font-size:15px}p{color:var(--muted);line-height:1.55;margin:6px 0 12px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--aqua);font-weight:800}.intro{display:flex;align-items:center;justify-content:space-between;gap:24px}.hint{max-width:630px}.card{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:19px;min-width:0}.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:24px 0}.kpi small{color:var(--muted);font-size:12px}.kpi b{display:block;font-size:29px;margin:6px 0 3px;letter-spacing:-1px}.kpi p{font-size:12px;margin:0}.columns{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(330px,1fr);gap:16px}.subtle{color:var(--muted);font-size:12px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:15px}.toolbar select{width:auto;max-width:240px}.toolbar button{padding:9px 11px}.pill{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:6px 10px;background:#283b47;font-size:12px;color:#c8d8df}.pill:before{content:'';width:7px;height:7px;border-radius:50%;background:#8795a2}.pill.live:before{background:var(--aqua)}.pill.failed:before{background:#ef8279}
+h1{font-size:clamp(26px,3vw,38px);margin:8px 0 6px;letter-spacing:-1.2px}h2{font-size:18px;margin:0 0 16px}h3{margin:0 0 9px;font-size:15px}p{color:var(--muted);line-height:1.55;margin:6px 0 12px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--aqua);font-weight:800}.intro{display:flex;align-items:center;justify-content:space-between;gap:24px}.hint{max-width:630px}.card{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:19px;min-width:0}.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:24px 0}.kpi small{color:var(--muted);font-size:12px}.kpi b{display:block;font-size:29px;margin:6px 0 3px;letter-spacing:-1px}.kpi p{font-size:12px;margin:0}.columns{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(330px,1fr);gap:16px;align-items:start}.columns>div{display:contents}.subtle{color:var(--muted);font-size:12px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:15px}.toolbar select{width:auto;max-width:240px}.toolbar button{padding:9px 11px}.pill{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:6px 10px;background:#283b47;font-size:12px;color:#c8d8df}.pill:before{content:'';width:7px;height:7px;border-radius:50%;background:#8795a2}.pill.live:before{background:var(--aqua)}.pill.failed:before{background:#ef8279}
 .video-frame{background:#050b10;border:1px solid #2c4353;border-radius:10px;position:relative;overflow:hidden;min-height:220px;display:grid;place-items:center}.video-frame img{display:block;width:100%;height:auto;min-height:220px;object-fit:contain}.video-frame canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.video-frame.marking canvas{pointer-events:auto;cursor:crosshair}.placeholder{position:absolute;text-align:center;color:#788c98;background:#050b10a9;padding:30px;max-width:100%}.video-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:13px;flex-wrap:wrap}.video-foot small{color:var(--muted)}.formrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:10px}.formrow button{grid-column:1/-1}.section-list{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 0}.section-chip{background:#1c3a40;border:1px solid #356269;padding:8px 9px;border-radius:8px;font-size:12px}.section-chip button{padding:0 4px;background:none;border:none;color:#eea7a7;margin-left:6px}.divider{border-top:1px solid var(--border);margin:16px 0}.mini{font-size:12px}.controls{display:flex;flex-wrap:wrap;gap:5px}.heat img{width:100%;border-radius:9px;display:block;min-height:180px;background:#0b141d}.empty{border:1px dashed #3f5262;border-radius:10px;padding:20px;color:var(--muted);text-align:center;font-size:13px}.analytics{margin-top:16px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse}th{text-align:left;font-weight:500;font-size:12px;color:var(--muted);white-space:nowrap}td,th{padding:11px;border-bottom:1px solid var(--border)}td{font-size:13px}td strong{color:var(--aqua)}.alerts{display:grid;gap:8px}.alert{padding:11px;border-radius:9px;border:1px solid #806334;background:#3c3024;color:#f3deb8;font-size:13px}.note{background:#142b32;border:1px solid #294852;border-radius:10px;padding:12px 15px;color:#a6d2cc;font-size:12px;line-height:1.6}.chart{width:100%;height:130px;display:block;background:#0c1925;border-radius:10px}.statusline{min-height:20px;color:var(--aqua);font-size:13px;margin:9px 0}.muted{color:var(--muted)}.small-link{color:var(--aqua);text-decoration:none;font-size:13px}.sectionheader{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}#heat{object-fit:contain}#zoneName{max-width:230px}
 @media(max-width:1050px){.columns{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}}@media(max-width:630px){.top,.shell{padding-left:15px;padding-right:15px}.intro{display:block}.kpis{gap:8px}.card{padding:13px}.formrow{grid-template-columns:1fr}.nav{gap:8px}.brand{font-size:19px}.tag{display:none}}
 .section-list{display:grid;gap:8px}.section-chip{display:flex;flex-wrap:wrap;align-items:center;gap:7px}.section-chip span{min-width:130px;flex:1}.section-chip select{width:115px;padding:6px}.section-chip input{width:70px;padding:6px}.section-chip button{padding:6px 8px;margin:0;color:#eef6f6;background:#213442;border:1px solid #365261}
 .demo-list{display:grid;gap:10px;max-height:465px;overflow:auto;padding-right:3px}.demo-item{border:1px solid #315064;background:#112634;padding:13px;border-radius:10px}.demo-item h3{font-size:14px;margin:0 0 3px}.demo-item p{font-size:12px;margin:5px 0}.demo-item .demo-foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.demo-item button{padding:6px 9px;font-size:12px}.demo-item .demo-license{color:#f5c38a}.demo-item .demo-ready{color:#88deb5}.demo-item .demo-missing{color:#a8b9c7}
 .heat-header{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}.heat-header h2{margin:0}.heat-select{width:auto;padding:6px 9px;font-size:12px}.heat-key{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin:12px 0 7px}.heat-key span{font-size:11px;text-align:center;color:#fff;padding:8px 2px;border-radius:5px}.heat-key span:nth-child(1){background:#4480e2}.heat-key span:nth-child(2){background:#37bf89;color:#092a27}.heat-key span:nth-child(3){background:#f5b744;color:#34240a}.heat-key span:nth-child(4){background:#ed4441}.heat-brief{font-size:13px;color:#d6ecec;line-height:1.55;padding:10px 12px;border-radius:9px;border:1px solid #355b60;background:#132b31;margin:10px 0}
-</style></head>
-<body>
+.viewtabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}.viewtab{background:#14212b;border:1px solid var(--border);color:var(--muted);padding:9px 15px;border-radius:9px;font-size:13px;cursor:pointer}.viewtab:hover{color:#dceaf2;border-color:#3c5b6c}.viewtab.active{background:#123a3f;border-color:#2f7d76;color:var(--aqua)}.card[data-view]{display:none}body[data-view="live"] .card[data-view="live"],body[data-view="assistant"] .card[data-view="assistant"],body[data-view="footage"] .card[data-view="footage"]{display:block}</style></head>
+<body data-view="live">
 <header><div class="top"><div class="brand">EVERSEEN<em> / intelligence</em></div><div class="nav"><a class="active" href="/">Live operations</a><a href="/layout">Layout design &amp; topology</a><a href="/setup">Replay &amp; calibration</a><span class="tag">LOCAL ANALYTICS</span></div></div></header>
 <div class="shell">
  <div class="intro"><div><div class="eyebrow">RETAIL OPERATIONS · CAMERA INTELLIGENCE</div><h1>See how spaces are actually used.</h1><p class="hint">Monitor observed occupancy, visible dwell and motion across your store. Every insight is traceable to camera observations—not an inferred customer identity.</p></div><a href="/setup" class="small-link">Analyze recorded footage →</a></div>
  <div class="kpis"><div class="card kpi"><small>ACTIVE VIDEO SOURCES</small><b id="activeCount">0</b><p>Connected inference sessions</p></div><div class="card kpi"><small>PEOPLE · SELECTED CAMERA</small><b id="peopleCount">—</b><p>Not a store-unique count</p></div><div class="card kpi"><small>ZONES CONFIGURED</small><b id="zoneCount">0</b><p>Floor regions defined by operators</p></div><div class="card kpi"><small>REVIEW RECOMMENDATIONS</small><b id="cueCount">0</b><p>Sustained observations only</p></div></div>
- <div class="columns">
+ <nav class="viewtabs" role="tablist" aria-label="Dashboard sections"><button class="viewtab active" data-view="live" role="tab" aria-selected="true">Live operations</button><button class="viewtab" data-view="assistant" role="tab" aria-selected="false">Ask &amp; brief</button><button class="viewtab" data-view="footage" role="tab" aria-selected="false">Footage library</button></nav>
+<div class="columns">
   <div>
-   <div class="card"><div class="sectionheader"><h2>Camera monitoring</h2><span id="statePill" class="pill">Not started</span></div>
+   <div class="card" data-view="live"><div class="sectionheader"><h2>Camera monitoring</h2><span id="statePill" class="pill">Not started</span></div>
     <div class="toolbar"><select id="camera" aria-label="Select camera"></select><button class="primary" id="start">Start monitoring</button><button id="stop">Stop</button><button id="snapshot">Show original frame</button><a id="download" class="small-link" hidden>Export event log</a><a id="csv" class="small-link" hidden>Export zone report (.csv)</a></div>
     <div id="videoWrap" class="video-frame"><img id="feed" alt="Live annotated camera feed"><canvas id="canvas" aria-label="Zone boundary editor"></canvas><div id="placeholder" class="placeholder">Choose a camera and start monitoring, or preview its original video frame.</div></div>
     <div class="video-foot"><small id="frameInfo">No frames processed yet</small><div class="controls"><button id="mark">Draw new zone</button><button id="undo">Undo vertex</button><button id="finish">Finish zone</button><button id="cancel">Cancel</button></div></div>
     <div style="margin-top:12px"><label for="zoneName">New zone name</label><input id="zoneName" placeholder="e.g. Checkout / dairy aisle" maxlength="70"><div class="formrow" style="margin-top:9px"><div><label for="zoneRole">Business area type</label><select id="zoneRole"><option value="checkout">Checkout</option><option value="aisle">Aisle</option><option value="display">Product display</option><option value="entrance">Entrance</option><option value="other" selected>Other / general</option></select></div><div><label for="zoneThreshold">Review threshold (observed people)</label><input type="number" id="zoneThreshold" min="1" max="100" value="4"></div></div><div id="zones" class="section-list"></div></div>
     <p class="subtle">Draw the visible floor (3+ points). Saving zone changes stops active sessions; restart to use the new layout. Overlapping equal-priority zones are intentionally marked ambiguous.</p><div id="notice" class="statusline" role="status"></div>
    </div>
-    <div class="card analytics"><div class="sectionheader"><h2>Zone performance</h2><small class="subtle">Rolling 5-minute samples</small></div><div class="tablewrap"><table><thead><tr><th>Zone / type</th><th>Now</th><th>Peak</th><th>P90</th><th>Track IDs seen</th><th>Visible dwell (partial)</th></tr></thead><tbody id="metrics"><tr><td colspan="6" class="muted">Start a camera to see measurements.</td></tr></tbody></table></div><h3 style="margin-top:20px">Observed occupancy trend</h3><canvas id="trend" class="chart"></canvas><p class="subtle" id="trendLabel">Select a camera with configured zones to see its occupancy.</p></div>
+    <div class="card analytics" data-view="live"><div class="sectionheader"><h2>Zone performance</h2><small class="subtle">Rolling 5-minute samples</small></div><div class="tablewrap"><table><thead><tr><th>Zone / type</th><th>Now</th><th>Peak</th><th>P90</th><th>Track IDs seen</th><th>Visible dwell (partial)</th></tr></thead><tbody id="metrics"><tr><td colspan="6" class="muted">Start a camera to see measurements.</td></tr></tbody></table></div><h3 style="margin-top:20px">Observed occupancy trend</h3><canvas id="trend" class="chart"></canvas><p class="subtle" id="trendLabel">Select a camera with configured zones to see its occupancy.</p></div>
   </div>
   <div>
-   <div class="card heat"><div class="heat-header"><h2>Where did people spend observed time?</h2><label for="heatWindow" style="margin:0">Time range <select id="heatWindow" class="heat-select"><option value="30">Last 30 seconds</option><option value="120" selected>Last 2 minutes</option><option value="300">Last 5 minutes</option></select></label></div><p class="subtle">Each square is 1/16 of camera width × 1/9 of camera height. Stronger colors mean more continuously observed tracked presence, not necessarily more unique shoppers.</p><img id="heat" alt="Image-area grid showing average continuously observed tracked people per tile"><div class="heat-key" aria-label="Fixed scale for observed average tracked people per image tile"><span>Blue: 0–0.25</span><span>Green: 0.25–0.5</span><span>Amber: 0.5–1</span><span>Red: 1+</span></div><p class="subtle">Color scale: average tracked people per image square during the selected period. An uncolored square means no *verified continuous* presence, not guaranteed absence. This fixed scale does not change between camera frames.</p><div id="heatBrief" class="heat-brief" aria-live="polite">Start monitoring to calculate observed person-time.</div><p class="subtle">Example: 1 person continuously visible in the same square for 10 of the observed 20 seconds = 10 person-seconds, or 0.5 average people in that square. Tracking gaps are excluded; no physical floor area, sales or unique visitors are inferred.</p></div>
-   <div class="card" style="margin-top:16px"><h2>What should I check?</h2><div id="health" class="note" role="status">Waiting for camera observations.</div><div id="alerts" class="alerts" style="margin-top:12px"><div class="empty">No recommendations yet.</div></div><p class="subtle">Review cues require multiple sustained, recent observations. They are not proof of queueing, customer intent or lost sales.</p></div>
-   <div class="card" style="margin-top:16px"><div class="sectionheader"><h2>Curated demonstration footage</h2><span id="demoTotal" class="subtle">Checking local videos…</span></div><p class="subtle">Choose a validated sample to add it as a camera. Videos are stored locally; the GitHub repository contains only source credits and download instructions.</p><div id="demoList" class="demo-list" aria-live="polite"><div class="empty">Loading available samples…</div></div><p class="subtle">Research-only footage must not be used for commercial marketing without appropriate rights. Predictions are not verified counts.</p></div>
-    <div class="card" style="margin-top:16px"><h2>Add a camera / video URL</h2><div class="formrow"><div><label for="newName">Camera name</label><input id="newName" placeholder="Aisle A" maxlength="80"></div><div><label for="newSource">RTSP, HTTP video, webcam index or local file</label><input id="newSource" placeholder="rtsp://… / https://… / 0 / samples/demo.mp4"></div><button id="add">+ Add camera source</button></div><p class="subtle">Files must already be inside the project. Webcam “0” uses the first connected camera. Credentials in URLs remain in the local configuration—use a dedicated demo account.</p><div class="divider"></div><div class="toolbar"><button id="remove">Remove selected camera</button><a href="/setup" class="small-link">Advanced setup: source, calibration, inference options ↗</a></div></div>
-   <div class="note" style="margin-top:16px"><strong>Measurement integrity</strong><div>Tracks are camera-local, and “track entries” can repeat when a tracker loses somebody. Dwell is accrued only between reliable successive sightings. No full-store unique visitors, completed checkouts or cross-camera identity matching are claimed without appropriate verification.</div></div>
+   <div class="card heat" data-view="live"><div class="heat-header"><h2>Where did people spend observed time?</h2><label for="heatWindow" style="margin:0">Time range <select id="heatWindow" class="heat-select"><option value="30">Last 30 seconds</option><option value="120" selected>Last 2 minutes</option><option value="300">Last 5 minutes</option></select></label></div><p class="subtle">Each square is 1/16 of camera width × 1/9 of camera height. Stronger colors mean more continuously observed tracked presence, not necessarily more unique shoppers.</p><img id="heat" alt="Image-area grid showing average continuously observed tracked people per tile"><div class="heat-key" aria-label="Fixed scale for observed average tracked people per image tile"><span>Blue: 0–0.25</span><span>Green: 0.25–0.5</span><span>Amber: 0.5–1</span><span>Red: 1+</span></div><p class="subtle">Color scale: average tracked people per image square during the selected period. An uncolored square means no *verified continuous* presence, not guaranteed absence. This fixed scale does not change between camera frames.</p><div id="heatBrief" class="heat-brief" aria-live="polite">Start monitoring to calculate observed person-time.</div><p class="subtle">Example: 1 person continuously visible in the same square for 10 of the observed 20 seconds = 10 person-seconds, or 0.5 average people in that square. Tracking gaps are excluded; no physical floor area, sales or unique visitors are inferred.</p></div>
+   <div class="card" style="margin-top:16px" data-view="live"><h2>What should I check?</h2><div id="health" class="note" role="status">Waiting for camera observations.</div><div id="alerts" class="alerts" style="margin-top:12px"><div class="empty">No recommendations yet.</div></div><p class="subtle">Review cues require multiple sustained, recent observations. They are not proof of queueing, customer intent or lost sales.</p></div>
+   <div class="card" style="margin-top:16px" data-view="footage"><div class="sectionheader"><h2>Curated demonstration footage</h2><span id="demoTotal" class="subtle">Checking local videos…</span></div><p class="subtle">Choose a validated sample to add it as a camera. Videos are stored locally; the GitHub repository contains only source credits and download instructions.</p><div id="demoList" class="demo-list" aria-live="polite"><div class="empty">Loading available samples…</div></div><p class="subtle">Research-only footage must not be used for commercial marketing without appropriate rights. Predictions are not verified counts.</p></div>
+    <div class="card" style="margin-top:16px" data-view="footage"><h2>Add a camera / video URL</h2><div class="formrow"><div><label for="newName">Camera name</label><input id="newName" placeholder="Aisle A" maxlength="80"></div><div><label for="newSource">RTSP, HTTP video, webcam index or local file</label><input id="newSource" placeholder="rtsp://… / https://… / 0 / samples/demo.mp4"></div><button id="add">+ Add camera source</button></div><p class="subtle">Files must already be inside the project. Webcam “0” uses the first connected camera. Credentials in URLs remain in the local configuration—use a dedicated demo account.</p><div class="divider"></div><div class="toolbar"><button id="remove">Remove selected camera</button><a href="/setup" class="small-link">Advanced setup: source, calibration, inference options ↗</a></div></div>
+   <div class="note" style="margin-top:16px" data-view="live"><strong>Measurement integrity</strong><div>Tracks are camera-local, and “track entries” can repeat when a tracker loses somebody. Dwell is accrued only between reliable successive sightings. No full-store unique visitors, completed checkouts or cross-camera identity matching are claimed without appropriate verification.</div>
+<div class="card" data-view="assistant" id="assistantCard" style="margin-top:16px">
+     <div class="sectionheader"><h2>Ask the store</h2><small class="subtle" id="assistCaps">voice and text</small></div>
+     <p class="subtle">Answers come from the same measured values shown above: observed zone occupancy, peak, 90th percentile, partial visible dwell, observed track entries and review cues. The assistant never calculates or estimates a figure itself.</p>
+     <div class="toolbar" style="margin-top:10px">
+      <input id="askInput" placeholder="How many people are in the checkout zone right now?" maxlength="300" style="flex:1;min-width:240px">
+      <button class="primary" id="askSend">Ask</button>
+      <button id="askMic" title="Speak your question" hidden>Speak</button>
+      <button id="askSpeak" title="Read the answer aloud" hidden>Read aloud</button>
+     </div>
+     <div id="askReply" class="note" style="margin-top:12px" role="status">Ask about the current zone status, dwell analytics, active review cues or what a documented metric means.</div>
+     <p class="subtle" id="askSources" style="margin-top:8px"></p>
+    </div>
+    <div class="card" data-view="assistant" id="briefCard" style="margin-top:16px">
+     <div class="sectionheader"><h2>Hourly briefing to managers</h2><small class="subtle">WhatsApp · free · no business account</small></div>
+     <p class="subtle">Builds a short briefing from the current measurements and hands it to WhatsApp with the message pre-filled. Each recipient presses send once. Uses WhatsApp’s official click-to-chat link, so there is no business account, no template approval and no cost.</p>
+     <div class="divider"></div>
+     <div class="sectionheader"><h2 style="font-size:15px">Recipients</h2><small class="subtle" id="briefCount">none yet</small></div>
+     <div class="tablewrap"><table><thead><tr><th>Name</th><th>WhatsApp number (E.164)</th><th>Role</th><th></th></tr></thead><tbody id="briefRecipients"><tr><td colspan="4" class="muted">No recipients configured.</td></tr></tbody></table></div>
+     <div class="formrow" style="margin-top:10px"><div><label for="rcName">Name</label><input id="rcName" placeholder="Store manager" maxlength="60"></div><div><label for="rcNumber">Number</label><input id="rcNumber" placeholder="+919000000000" maxlength="20"></div><button id="rcAdd">+ Add recipient</button></div>
+     <div class="divider"></div>
+     <div class="toolbar">
+      <label for="briefFreq" style="font-size:13px">Frequency</label>
+      <select id="briefFreq" aria-label="Briefing frequency"></select>
+      <button id="briefPause">Pause</button>
+      <button class="primary" id="briefSend">Send now</button>
+      <small class="subtle" id="briefDue"></small>
+     </div>
+     <div id="briefMsg" class="note" style="margin-top:12px;white-space:pre-wrap" hidden></div>
+     <div class="divider"></div>
+     <h2 style="font-size:15px">Delivery log</h2>
+     <div class="tablewrap"><table><thead><tr><th>When</th><th>Recipient</th><th>Status</th><th></th></tr></thead><tbody id="briefLog"><tr><td colspan="4" class="muted">Nothing sent yet.</td></tr></tbody></table></div>
+    </div>
+</div>
   </div>
  </div>
  <section class="card analytics" style="margin-top:18px" id="overall-layout"><div class="sectionheader"><h2>Whole-store section analytics</h2><a href="/layout" class="small-link">Design or map the floor plan →</a></div><p>Mapped camera-zone observations across the schematic store. Each section uses the highest fresh camera view, not the sum of possibly overlapping feeds.</p><div class="tablewrap"><table><thead><tr><th>Floor section</th><th>Observed now</th><th>P90 occupancy · 5m</th><th>Partial visible dwell</th><th>Live / mapped cameras</th><th>State</th></tr></thead><tbody id="layoutOverall"><tr><td colspan="6" class="muted">Load or create a layout to see combined section analytics.</td></tr></tbody></table></div><p class="subtle">Section counts are not verified unique customers; overlapping physical areas and unsynchronized cameras may still duplicate people.</p></section>
@@ -213,6 +247,121 @@ $('mark').onclick=()=>{if(!$('feed').getAttribute('src')){notice('Preview or sta
 $('canvas').onclick=e=>{if(!drawing)return;const r=$('canvas').getBoundingClientRect();vertices.push([Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))]);draw()};
 $('undo').onclick=()=>{vertices.pop();draw()};$('cancel').onclick=()=>{drawing=false;vertices=[];$('videoWrap').classList.remove('marking');draw()};$('finish').onclick=withError(finish);
 new ResizeObserver(draw).observe($('videoWrap'));window.addEventListener('resize',()=>paintTrend(chartPoints[selected]||[]));
+document.querySelectorAll('.viewtab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.viewtab').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false')});b.classList.add('active');b.setAttribute('aria-selected','true');document.body.dataset.view=b.dataset.view;});
 loadConfig().then(async()=>{await loadDemoCatalog();poll();pollLayoutOverall();setInterval(poll,1800);setInterval(pollLayoutOverall,3500)}).catch(e=>notice(e.message));
+/* ---------------- assistant (text + voice) ---------------- */
+let lastAnswer='', speechRecognition=null, recorder=null, chunks=[];
+const SUPPORTED='speechSynthesis' in window;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+async function initAssistant(){
+ try{
+  const caps=await (await fetch('/api/assistant/capabilities')).json();
+const hasSpeech=(window.SpeechRecognition||window.webkitSpeechRecognition);
+   const lines=[];
+   lines.push(hasSpeech?'voice and text':'text only · this browser has no speech recognition');
+   if(caps.llm)lines.push('local model '+caps.llm_model);else lines.push('no local model, answers are template-based');
+   $('assistCaps').textContent=lines.join(' · ');
+   if(SUPPORTED)$('askSpeak').hidden=false;
+   // Browser speech recognition needs no backend. faster-whisper (caps.speech_to_text) is only
+   // a heavier local fallback, so it must not gate the microphone button.
+   if(hasSpeech){
+    $('askMic').hidden=false;
+    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+    speechRecognition=new SR();speechRecognition.lang='en-US';speechRecognition.interimResults=false;
+    speechRecognition.onresult=e=>{$('askInput').value=e.results[0][0].transcript;askQuestion()};
+   }
+ }catch(e){}
+}
+async function askQuestion(){
+ const question=$('askInput').value.trim();
+ if(!question)return;
+ $('askReply').textContent='Checking the current observations…';
+ try{
+  const r=await (await fetch('/api/assistant/ask',{method:'POST',headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({question,camera_id:selected||null})})).json();
+  lastAnswer=r.answer||'';
+  $('askReply').textContent=r.answer||'No answer.';
+  $('askSources').textContent=(r.sources&&r.sources.length)?('Source: '+r.sources.join(' · ')):'';
+  if(SUPPORTED)speak(lastAnswer);
+ }catch(e){$('askReply').textContent='Assistant unavailable: '+e.message}
+}
+$('askSend').onclick=askQuestion;
+$('askInput').addEventListener('keydown',e=>{if(e.key==='Enter')askQuestion()});
+$('askMic').onclick=()=>{if(!speechRecognition)return;try{speechRecognition.start();$('askMic').textContent='Listening…'}
+ catch(e){notice('Microphone unavailable: '+e.message)}finally{setTimeout(()=>$('askMic').textContent='Speak',4000)}};
+$('askSpeak').onclick=()=>{if(lastAnswer)speak(lastAnswer)};
+function speak(text){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);
+ u.rate=1.02;speechSynthesis.speak(u)}catch(e){}}
+
+/* ---------------- briefing ---------------- */
+let briefCfg={recipients:[],frequency_minutes:60,paused:false,frequencies:[15,30,60,120,240,1440]};
+async function loadBriefing(){
+ try{
+  briefCfg=await (await fetch('/api/briefing/config')).json();
+  const sel=$('briefFreq');
+  sel.innerHTML=(briefCfg.frequencies||[]).map(m=>`<option value="${m}">${m>=1440?'End of day':m+' minutes'}${m===60?' (default)':''}</option>`).join('');
+  sel.value=briefCfg.frequency_minutes;
+  renderRecipients();
+  renderLog(briefCfg.deliveries||[]);
+  const due=briefCfg.next_due_in_s;
+  $('briefDue').textContent=briefCfg.paused?'paused':(due===null||due===undefined?'counting down to the first briefing':'next in '+Math.floor(due/60)+'m '+due%60+'s');
+  $('briefPause').textContent=briefCfg.paused?'Resume':'Pause';
+ }catch(e){$('briefDue').textContent='briefing config unavailable'}
+}
+function renderRecipients(){
+ const rows=briefCfg.recipients||[];
+ $('briefCount').textContent=rows.length?rows.length+' configured':('none yet — add your number to test');
+ $('briefRecipients').innerHTML=rows.length?rows.map((r,i)=>
+  `<tr><td>${esc(r.name)}</td><td>${esc(r.number)}</td><td>${esc(r.role||'')}</td>
+   <td><button data-rm="${i}" style="background:none;border:none;color:#eea7a7">remove</button></td></tr>`).join('')
+  :'<tr><td colspan="4" class="muted">No recipients configured.</td></tr>';
+ $('briefRecipients').querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>saveRecipients(rows.filter((_,i)=>i!==+b.dataset.rm)));
+}
+function renderLog(list){
+ $('briefLog').innerHTML=list.length?list.slice().reverse().map(d=>
+  `<tr><td>${esc((d.at||'').replace('T',' ').slice(0,19))}</td><td>${esc(d.name||'—')}</td>
+   <td>${esc(({link_ready:'link ready',sent_confirmed:'sent (confirmed)'}[d.status]||d.status||''))}</td><td>${d.link?`<a class="small-link" href="${esc(d.link)}" target="_blank" rel="noopener">open WhatsApp</a> <button class="small-link" data-confirm-at="${esc(d.at)}" data-confirm-num="${esc(d.number)}" style="background:none;border:none;color:#61e7be;cursor:pointer;text-decoration:underline">mark sent</button> <button class="small-link" data-copymsg="${encodeURIComponent(decodeURIComponent((d.link.split('text=')[1]||'')))}" style="background:none;border:none;color:#8fc7ff;cursor:pointer;text-decoration:underline">copy message</button>`:''}</td></tr>`).join('')
+  :'<tr><td colspan="4" class="muted">Nothing sent yet.</td></tr>';
+  $('briefLog').querySelectorAll('[data-confirm-at]').forEach(b=>b.onclick=async()=>{
+   try{await api('/api/briefing/confirm',jsonOpt('POST',{at:b.dataset.confirmAt,number:b.dataset.confirmNum}));
+       b.remove();loadBriefing()}catch(e){notice('Could not confirm: '+e.message)}});
+  $('briefLog').querySelectorAll('[data-copymsg]').forEach(b=>b.onclick=async()=>{
+   try{await navigator.clipboard.writeText(decodeURIComponent(b.dataset.copymsg));b.textContent='copied ✓'}
+   catch(e){b.textContent='copy failed'}});
+}
+async function saveRecipients(recipients){
+ try{const r=await (await fetch('/api/briefing/config',{method:'PUT',headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({recipients})})).json();briefCfg=r;renderRecipients()}catch(e){notice('Could not save recipients: '+e.message)}
+}
+$('rcAdd').onclick=()=>{
+ const name=$('rcName').value.trim(),number=$('rcNumber').value.trim();
+ if(!name||!number){notice('Both a name and a number are required.');return}
+ saveRecipients([...(briefCfg.recipients||[]),{name,number,role:'manager'}]);
+ $('rcName').value='';$('rcNumber').value='';
+};
+$('briefFreq').onchange=async e=>{await fetch('/api/briefing/config',{method:'PUT',headers:{'Content-Type':'application/json'},
+ body:JSON.stringify({frequency_minutes:+e.target.value})});loadBriefing()};
+$('briefPause').onclick=async()=>{await fetch('/api/briefing/config',{method:'PUT',headers:{'Content-Type':'application/json'},
+ body:JSON.stringify({paused:!briefCfg.paused})});loadBriefing()};
+$('briefSend').onclick=async()=>{
+ const box=$('briefMsg');box.hidden=false;box.textContent='Building the briefing…';
+ try{
+  const r=await (await fetch('/api/briefing/send',{method:'POST',headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({camera_id:selected||null})})).json();
+  box.textContent=r.summary.text;
+  if(!(r.deliveries||[]).length){box.textContent+=r.note;return}
+const rows=r.deliveries.map(d=>`<div style="margin-top:8px">${esc(d.name)} · <a class="small-link" href="${esc(d.link)}" target="_blank" rel="noopener">open WhatsApp with the message ready</a> · <button class="small-link" data-copy="${esc(d.link)}" style="background:none;border:none;color:#8fc7ff;cursor:pointer;text-decoration:underline">copy link</button></div>`).join('');
+   box.innerHTML=`<div style="white-space:pre-wrap">${esc(r.summary.text)}</div>${rows}
+    <div class="subtle" style="margin-top:8px">${esc(r.note)}</div>`;
+   box.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{
+    const text=decodeURIComponent((b.dataset.copy.split('text=')[1]||''));
+    try{await navigator.clipboard.writeText(text);b.textContent='message copied ✓'}
+    catch(e){b.textContent='press Ctrl+C on the link above'}});
+   loadBriefing();
+ }catch(e){box.textContent='Could not build the briefing: '+e.message}
+};
+initAssistant();loadBriefing();setInterval(loadBriefing,30000);
+
 </script>
 </body></html>
