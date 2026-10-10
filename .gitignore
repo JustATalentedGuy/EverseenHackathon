@@ -30,6 +30,8 @@ dist/
 *.pth
 *.onnx
 *.mp4
+# the six store CCTV clips are committed deliberately so site_cctv.json works on a clone
+!data/cctv/*.mp4
 *.mpg
 *.avi
 *.mov

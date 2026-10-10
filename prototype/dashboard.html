@@ -15,13 +15,42 @@ h1{font-size:clamp(26px,3vw,38px);margin:8px 0 6px;letter-spacing:-1.2px}h2{font
 .section-list{display:grid;gap:8px}.section-chip{display:flex;flex-wrap:wrap;align-items:center;gap:7px}.section-chip span{min-width:130px;flex:1}.section-chip select{width:115px;padding:6px}.section-chip input{width:70px;padding:6px}.section-chip button{padding:6px 8px;margin:0;color:#eef6f6;background:#213442;border:1px solid #365261}
 .demo-list{display:grid;gap:10px;max-height:465px;overflow:auto;padding-right:3px}.demo-item{border:1px solid #315064;background:#112634;padding:13px;border-radius:10px}.demo-item h3{font-size:14px;margin:0 0 3px}.demo-item p{font-size:12px;margin:5px 0}.demo-item .demo-foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.demo-item button{padding:6px 9px;font-size:12px}.demo-item .demo-license{color:#f5c38a}.demo-item .demo-ready{color:#88deb5}.demo-item .demo-missing{color:#a8b9c7}
 .heat-header{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}.heat-header h2{margin:0}.heat-select{width:auto;padding:6px 9px;font-size:12px}.heat-key{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin:12px 0 7px}.heat-key span{font-size:11px;text-align:center;color:#fff;padding:8px 2px;border-radius:5px}.heat-key span:nth-child(1){background:#4480e2}.heat-key span:nth-child(2){background:#37bf89;color:#092a27}.heat-key span:nth-child(3){background:#f5b744;color:#34240a}.heat-key span:nth-child(4){background:#ed4441}.heat-brief{font-size:13px;color:#d6ecec;line-height:1.55;padding:10px 12px;border-radius:9px;border:1px solid #355b60;background:#132b31;margin:10px 0}
-.viewtabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}.viewtab{background:#14212b;border:1px solid var(--border);color:var(--muted);padding:9px 15px;border-radius:9px;font-size:13px;cursor:pointer}.viewtab:hover{color:#dceaf2;border-color:#3c5b6c}.viewtab.active{background:#123a3f;border-color:#2f7d76;color:var(--aqua)}.card[data-view],.note[data-view]{display:none}body[data-view="live"] .card[data-view="live"],body[data-view="live"] .note[data-view="live"],body[data-view="assistant"] .card[data-view="assistant"],body[data-view="footage"] .card[data-view="footage"]{display:block}</style></head>
+.viewtabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}.viewtab{background:#14212b;border:1px solid var(--border);color:var(--muted);padding:9px 15px;border-radius:9px;font-size:13px;cursor:pointer}.viewtab:hover{color:#dceaf2;border-color:#3c5b6c}.viewtab.active{background:#123a3f;border-color:#2f7d76;color:var(--aqua)}.card[data-view],.note[data-view]{display:none}body[data-view="live"] .card[data-view="live"],body[data-view="live"] .note[data-view="live"],body[data-view="footage"] .card[data-view="footage"]{display:block}
+/* ---- agent launcher: a four-pointed sparkle in a blue-to-violet gradient ---- */
+#agentLauncher{position:fixed;top:18px;right:20px;z-index:60;width:54px;height:54px;border-radius:50%;
+ border:1px solid #35506b;background:radial-gradient(circle at 30% 25%,#1b2b3d,#0d1620);cursor:pointer;
+ display:grid;place-items:center;box-shadow:0 6px 22px rgba(0,0,0,.45);transition:transform .18s ease,box-shadow .18s ease}
+#agentLauncher:hover{transform:scale(1.06);box-shadow:0 8px 26px rgba(108,140,255,.35)}
+#agentLauncher:focus-visible{outline:2px solid #8ab4ff;outline-offset:3px}
+#agentLauncher svg{width:30px;height:30px}
+.spark-path{transform-origin:32px 32px;animation:sparkPulse 4.5s ease-in-out infinite}
+@keyframes sparkPulse{0%,100%{transform:scale(1) rotate(0deg);opacity:.95}50%{transform:scale(1.08) rotate(8deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){.spark-path{animation:none}}
+#agentLauncher.thinking .spark-path{animation:sparkThink .9s ease-in-out infinite}
+@keyframes sparkThink{0%,100%{transform:scale(.86) rotate(-12deg)}50%{transform:scale(1.16) rotate(12deg)}}
+.agent-badge{position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;
+ background:#61e7be;color:#06231d;font-size:11px;font-weight:600;display:grid;place-items:center}
+/* ---- drawer ---- */
+#agentDrawer[hidden],#agentScrim[hidden],#agentLauncher[hidden]{display:none!important}
+#agentScrim{position:fixed;inset:0;background:#03080cb3;z-index:59;backdrop-filter:blur(2px)}
+#agentDrawer{position:fixed;top:0;right:0;height:100vh;width:min(560px,94vw);z-index:60;display:flex;flex-direction:column;
+ background:linear-gradient(180deg,#0e1b26,#0a141d 40%);border-left:1px solid #2c4353;
+ box-shadow:-18px 0 46px rgba(0,0,0,.55);animation:drawerIn .22s ease}
+@keyframes drawerIn{from{transform:translateX(24px);opacity:.4}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){#agentDrawer{animation:none}}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #22384a}
+.drawer-title{font-weight:600;letter-spacing:.2px}
+.drawer-head button{background:none;border:none;color:#9fb6c6;font-size:24px;line-height:1;cursor:pointer;padding:0 4px;border-radius:6px}
+.drawer-head button:hover{color:#e6f2f8}
+.drawer-body{padding:16px 18px 28px;overflow-y:auto;flex:1}
+.drawer-body .card{margin-top:0 !important;margin-bottom:16px}
+</style></head>
 <body data-view="live">
 <header><div class="top"><div class="brand">EVERSEEN<em> / intelligence</em></div><div class="nav"><a class="active" href="/">Live operations</a><a href="/layout">Layout design &amp; topology</a><a href="/setup">Replay &amp; calibration</a><span class="tag">LOCAL ANALYTICS</span></div></div></header>
 <div class="shell">
  <div class="intro"><div><div class="eyebrow">RETAIL OPERATIONS · CAMERA INTELLIGENCE</div><h1>See how spaces are actually used.</h1><p class="hint">Monitor observed occupancy, visible dwell and motion across your store. Every insight is traceable to camera observations—not an inferred customer identity.</p></div><a href="/setup" class="small-link">Analyze recorded footage →</a></div>
  <div class="kpis"><div class="card kpi"><small>ACTIVE VIDEO SOURCES</small><b id="activeCount">0</b><p>Connected inference sessions</p></div><div class="card kpi"><small>PEOPLE · SELECTED CAMERA</small><b id="peopleCount">—</b><p>Not a store-unique count</p></div><div class="card kpi"><small>ZONES CONFIGURED</small><b id="zoneCount">0</b><p>Floor regions defined by operators</p></div><div class="card kpi"><small>REVIEW RECOMMENDATIONS</small><b id="cueCount">0</b><p>Sustained observations only</p></div></div>
- <nav class="viewtabs" role="tablist" aria-label="Dashboard sections"><button class="viewtab active" data-view="live" role="tab" aria-selected="true">Live operations</button><button class="viewtab" data-view="assistant" role="tab" aria-selected="false">Ask &amp; brief</button><button class="viewtab" data-view="footage" role="tab" aria-selected="false">Footage library</button></nav>
+ <nav class="viewtabs" role="tablist" aria-label="Dashboard sections"><button class="viewtab active" data-view="live" role="tab" aria-selected="true">Live operations</button><button class="viewtab" data-view="footage" role="tab" aria-selected="false">Footage library</button></nav>
 <div class="columns">
   <div>
    <div class="card" data-view="live"><div class="sectionheader"><h2>Camera monitoring</h2><span id="statePill" class="pill">Not started</span></div>
@@ -40,7 +69,28 @@ h1{font-size:clamp(26px,3vw,38px);margin:8px 0 6px;letter-spacing:-1.2px}h2{font
     <div class="card" style="margin-top:16px" data-view="footage"><h2>Add a camera / video URL</h2><div class="formrow"><div><label for="newName">Camera name</label><input id="newName" placeholder="Aisle A" maxlength="80"></div><div><label for="newSource">RTSP, HTTP video, webcam index or local file</label><input id="newSource" placeholder="rtsp://… / https://… / 0 / samples/demo.mp4"></div><button id="add">+ Add camera source</button></div><p class="subtle">Files must already be inside the project. Webcam “0” uses the first connected camera. Credentials in URLs remain in the local configuration—use a dedicated demo account.</p><div class="divider"></div><div class="toolbar"><button id="remove">Remove selected camera</button><a href="/setup" class="small-link">Advanced setup: source, calibration, inference options ↗</a></div></div>
    <div class="note" style="margin-top:16px" data-view="live"><strong>Measurement integrity</strong><div>Tracks are camera-local, and “track entries” can repeat when a tracker loses somebody. Dwell is accrued only between reliable successive sightings. No full-store unique visitors, completed checkouts or cross-camera identity matching are claimed without appropriate verification.</div>
 </div>
-<div class="card" data-view="assistant" id="assistantCard" style="margin-top:16px">
+<section class="card analytics" style="margin-top:18px" id="overall-layout"><div class="sectionheader"><h2>Whole-store section analytics</h2><a href="/layout" class="small-link">Design or map the floor plan →</a></div><p>Mapped camera-zone observations across the schematic store. Each section uses the highest fresh camera view, not the sum of possibly overlapping feeds.</p><div class="tablewrap"><table><thead><tr><th>Floor section</th><th>Observed now</th><th>P90 occupancy · 5m</th><th>Partial visible dwell</th><th>Live / mapped cameras</th><th>State</th></tr></thead><tbody id="layoutOverall"><tr><td colspan="6" class="muted">Load or create a layout to see combined section analytics.</td></tr></tbody></table></div><p class="subtle">Section counts are not verified unique customers; overlapping physical areas and unsynchronized cameras may still duplicate people.</p></section>
+</div>
+<button id="agentLauncher" aria-label="Open the store assistant" aria-expanded="false" title="Ask the store">
+ <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <defs>
+   <linearGradient id="sparkGrad" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0%" stop-color="#8ab4ff"/><stop offset="45%" stop-color="#6c8cff"/>
+    <stop offset="78%" stop-color="#9b7bff"/><stop offset="100%" stop-color="#c86dd7"/>
+   </linearGradient>
+  </defs>
+  <!-- four-pointed sparkle: concave edges, sharp leading point, drawn as four bezier arcs -->
+  <path class="spark-path" fill="url(#sparkGrad)"
+   d="M32 3 C34.5 20 44 29.5 61 32 C44 34.5 34.5 44 32 61 C29.5 44 20 34.5 3 32 C20 29.5 29.5 20 32 3 Z"/>
+ </svg>
+ <span class="agent-badge" hidden></span>
+</button>
+<aside id="agentDrawer" aria-label="Store assistant" hidden>
+ <div class="drawer-head">
+  <span class="drawer-title">Store assistant</span>
+  <button id="agentClose" aria-label="Close the assistant">&times;</button>
+ </div>
+ <div class="drawer-body"><div class="card" id="assistantCard">
      <div class="sectionheader"><h2>Ask the store</h2><small class="subtle" id="assistCaps">voice and text</small></div>
      <p class="subtle">Answers come from the same measured values shown above: observed zone occupancy, peak, 90th percentile, partial visible dwell, observed track entries and review cues. The assistant never calculates or estimates a figure itself.</p>
      <div class="toolbar" style="margin-top:10px">
@@ -52,7 +102,7 @@ h1{font-size:clamp(26px,3vw,38px);margin:8px 0 6px;letter-spacing:-1.2px}h2{font
      <div id="askReply" class="note" style="margin-top:12px" role="status">Ask about the current zone status, dwell analytics, active review cues or what a documented metric means.</div>
      <p class="subtle" id="askSources" style="margin-top:8px"></p>
     </div>
-    <div class="card" data-view="assistant" id="briefCard" style="margin-top:16px">
+    <div class="card" id="briefCard">
      <div class="sectionheader"><h2>Hourly briefing to managers</h2><small class="subtle">WhatsApp · free · no business account</small></div>
      <p class="subtle">Builds a short briefing from the current measurements and hands it to WhatsApp with the message pre-filled. Each recipient presses send once. Uses WhatsApp’s official click-to-chat link, so there is no business account, no template approval and no cost.</p>
      <div class="divider"></div>
@@ -74,12 +124,13 @@ h1{font-size:clamp(26px,3vw,38px);margin:8px 0 6px;letter-spacing:-1.2px}h2{font
     </div>
   </div>
  </div>
-<section class="card analytics" style="margin-top:18px" id="overall-layout"><div class="sectionheader"><h2>Whole-store section analytics</h2><a href="/layout" class="small-link">Design or map the floor plan →</a></div><p>Mapped camera-zone observations across the schematic store. Each section uses the highest fresh camera view, not the sum of possibly overlapping feeds.</p><div class="tablewrap"><table><thead><tr><th>Floor section</th><th>Observed now</th><th>P90 occupancy · 5m</th><th>Partial visible dwell</th><th>Live / mapped cameras</th><th>State</th></tr></thead><tbody id="layoutOverall"><tr><td colspan="6" class="muted">Load or create a layout to see combined section analytics.</td></tr></tbody></table></div><p class="subtle">Section counts are not verified unique customers; overlapping physical areas and unsynchronized cameras may still duplicate people.</p></section>
 </div>
+</aside>
+<div id="agentScrim" hidden></div>
 <script>
 'use strict';
 const $ = id => document.getElementById(id);
-let config = null, selected = null, sessions = {}, demoCatalog = [], drawing = false, vertices = [], preview = false, lastLive = '', chartPoints = {}, polling = false, heatRequest = 0;
+let config = null, selected = null, cloudStt = false, sessions = {}, demoCatalog = [], drawing = false, vertices = [], preview = false, lastLive = '', chartPoints = {}, polling = false, heatRequest = 0;
 const ctx = $('canvas').getContext('2d');
 function notice(s){$('notice').textContent=s}
 async function api(url, options){const r=await fetch(url,options);const j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.detail||`Request failed (${r.status})`);return j}
@@ -249,16 +300,27 @@ $('canvas').onclick=e=>{if(!drawing)return;const r=$('canvas').getBoundingClient
 $('undo').onclick=()=>{vertices.pop();draw()};$('cancel').onclick=()=>{drawing=false;vertices=[];$('videoWrap').classList.remove('marking');draw()};$('finish').onclick=withError(finish);
 new ResizeObserver(draw).observe($('videoWrap'));window.addEventListener('resize',()=>paintTrend(chartPoints[selected]||[]));
 document.querySelectorAll('.viewtab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.viewtab').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false')});b.classList.add('active');b.setAttribute('aria-selected','true');document.body.dataset.view=b.dataset.view;});
+
+/* ---- agent launcher behaviour ---- */
+const agentOpen=()=>{$('agentDrawer').hidden=false;$('agentScrim').hidden=false;$('agentLauncher').setAttribute('aria-expanded','true');$('agentLauncher').hidden=true;$('askInput').focus()};
+const agentClose=()=>{$('agentDrawer').hidden=true;$('agentScrim').hidden=true;$('agentLauncher').setAttribute('aria-expanded','false');$('agentLauncher').hidden=false;$('agentLauncher').focus()};
+$('agentLauncher').onclick=()=>{agentOpen();loadBriefing();initAssistant()};
+$('agentClose').onclick=agentClose;$('agentScrim').onclick=agentClose;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('agentDrawer').hidden)agentClose()});
+
 loadConfig().then(async()=>{await loadDemoCatalog();poll();pollLayoutOverall();setInterval(poll,1800);setInterval(pollLayoutOverall,3500)}).catch(e=>notice(e.message));
 /* ---------------- assistant (text + voice) ---------------- */
 let lastAnswer='', speechRecognition=null, recorder=null, chunks=[];
 const SUPPORTED='speechSynthesis' in window;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
+let assistantReady=false;
 async function initAssistant(){
+ if(assistantReady)return;
  try{
   const caps=await (await fetch('/api/assistant/capabilities')).json();
-const hasSpeech=(window.SpeechRecognition||window.webkitSpeechRecognition);
+  cloudStt=!!caps.cloud_stt;
+const hasSpeech=!!(window.SpeechRecognition||window.webkitSpeechRecognition)||cloudStt;
    const lines=[];
    lines.push(hasSpeech?'voice and text':'text only · this browser has no speech recognition');
    if(caps.llm)lines.push('local model '+caps.llm_model);else lines.push('no local model, answers are template-based');
@@ -291,8 +353,27 @@ async function askQuestion(){
 }
 $('askSend').onclick=askQuestion;
 $('askInput').addEventListener('keydown',e=>{if(e.key==='Enter')askQuestion()});
-$('askMic').onclick=()=>{if(!speechRecognition)return;try{speechRecognition.start();$('askMic').textContent='Listening…'}
- catch(e){notice('Microphone unavailable: '+e.message)}finally{setTimeout(()=>$('askMic').textContent='Speak',4000)}};
+async function recordAndTranscribe(){
+ const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+ const recorder=new MediaRecorder(stream);const chunks=[];
+ recorder.ondataavailable=e=>chunks.push(e.data);
+ const stopped=new Promise(r=>recorder.onstop=r);
+ recorder.start();$('askMic').textContent='Listening…';
+ await new Promise(r=>setTimeout(r,5000));
+ recorder.stop();await stopped;stream.getTracks().forEach(t=>t.stop());
+ $('askMic').textContent='Transcribing…';
+ const body=new FormData();body.append('audio',new Blob(chunks,{type:recorder.mimeType||'audio/webm'}),'clip.webm');
+ const response=await fetch('/api/assistant/transcribe',{method:'POST',body});
+ const data=await response.json();
+ $('askMic').textContent='Speak';
+ if(response.ok&&data.text){$('askInput').value=data.text;askQuestion()}
+ else{notice(data.detail||'Nothing recognised')}
+}
+$('askMic').onclick=async()=>{
+ if(speechRecognition){try{speechRecognition.start();$('askMic').textContent='Listening…'}
+  catch(e){notice('Microphone unavailable: '+e.message)}finally{setTimeout(()=>$('askMic').textContent='Speak',4000)};return}
+ if(!cloudStt){notice('This browser has no speech recognition and no transcription key is configured');return}
+ try{await recordAndTranscribe()}catch(e){$('askMic').textContent='Speak';notice('Microphone unavailable: '+e.message)}};
 $('askSpeak').onclick=()=>{if(lastAnswer)speak(lastAnswer)};
 function speak(text){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);
  u.rate=1.02;speechSynthesis.speak(u)}catch(e){}}

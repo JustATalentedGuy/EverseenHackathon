@@ -1,4 +1,170 @@
 {
-  "version": 1,
-  "sections": []
+ "version": 1,
+ "sections": [
+  {
+   "id": "multi_aisle__main_aisle",
+   "name": "Main aisle",
+   "role": "aisle",
+   "x": 0,
+   "y": 0,
+   "w": 3,
+   "h": 2,
+   "links": [
+    {
+     "camera_id": "multi_aisle",
+     "zone_id": "main_aisle"
+    }
+   ]
+  },
+  {
+   "id": "multi_aisle__store_entrance",
+   "name": "Store entrance",
+   "role": "entrance",
+   "x": 3,
+   "y": 0,
+   "w": 3,
+   "h": 2,
+   "links": [
+    {
+     "camera_id": "multi_aisle",
+     "zone_id": "store_entrance"
+    }
+   ]
+  },
+  {
+   "id": "mall_atrium__upper_walkway",
+   "name": "Upper walkway",
+   "role": "aisle",
+   "x": 6,
+   "y": 0,
+   "w": 3,
+   "h": 2,
+   "links": [
+    {
+     "camera_id": "mall_atrium",
+     "zone_id": "upper_walkway"
+    }
+   ]
+  },
+  {
+   "id": "mall_atrium__atrium_floor",
+   "name": "Atrium floor",
+   "role": "other",
+   "x": 9,
+   "y": 0,
+   "w": 3,
+   "h": 2,
+   "links": [
+    {
+     "camera_id": "mall_atrium",
+     "zone_id": "atrium_floor"
+    }
+   ]
+  },
+  {
+   "id": "pharmacy__pharmacy_counter",
+   "name": "Pharmacy counter",
+   "role": "other",
+   "x": 0,
+   "y": 2,
+   "w": 3,
+   "h": 2,
+   "links": [
+    {
+     "camera_id": "pharmacy",
+     "zone_id": "pharmacy_counter"
+    }
+   ]
+  },
+  {
+   "id": "pharmacy__pharmacy_aisle",
+   "name": "Counter service area",
+   "role": "other",
+   "x": 3,
+   "y": 2,
+   "w": 3,
+   "h": 2,
+   "links": [
+    {
+     "camera_id": "pharmacy",
+     "zone_id": "pharmacy_aisle"
+    }
+   ]
+  },
+  {
+   "id": "convenience__counter_front",
+   "name": "Counter front",
+   "role": "other",
+   "x": 6,
+   "y": 2,
+   "w": 3,
+   "h": 2,
+   "links": [
+    {
+     "camera_id": "convenience",
+     "zone_id": "counter_front"
+    }
+   ]
+  },
+  {
+   "id": "convenience__front_door",
+   "name": "Front door",
+   "role": "entrance",
+   "x": 9,
+   "y": 2,
+   "w": 3,
+   "h": 2,
+   "links": [
+    {
+     "camera_id": "convenience",
+     "zone_id": "front_door"
+    }
+   ]
+  },
+  {
+   "id": "liquor_aisle__liquor_aisle",
+   "name": "Liquor aisle (left walkway)",
+   "role": "aisle",
+   "x": 0,
+   "y": 4,
+   "w": 3,
+   "h": 2,
+   "links": [
+    {
+     "camera_id": "liquor_aisle",
+     "zone_id": "liquor_aisle"
+    }
+   ]
+  },
+  {
+   "id": "liquor_aisle__liquor_aisle_right",
+   "name": "Liquor aisle (right walkway)",
+   "role": "aisle",
+   "x": 3,
+   "y": 4,
+   "w": 3,
+   "h": 2,
+   "links": [
+    {
+     "camera_id": "liquor_aisle",
+     "zone_id": "liquor_aisle_right"
+    }
+   ]
+  },
+  {
+   "id": "produce_corner__produce_aisle",
+   "name": "Produce aisle",
+   "role": "aisle",
+   "x": 6,
+   "y": 4,
+   "w": 3,
+   "h": 2,
+   "links": [
+    {
+     "camera_id": "produce_corner",
+     "zone_id": "produce_aisle"
+    }
+   ]
+  }
+ ]
 }

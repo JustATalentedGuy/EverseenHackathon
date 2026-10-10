@@ -357,7 +357,9 @@ def _get_assistant():
     global _ASSISTANT
     if _ASSISTANT is None:
         from . import assistant_docs
-        obj=assistant_mod.Assistant(live,assistant_docs.build_index(ROOT))
+        obj=assistant_mod.Assistant(
+            live, assistant_docs.build_index(ROOT),
+            context=lambda: {'config': load(), 'status': live.stats()})
         obj.llm=assistant_llm.build()
         _ASSISTANT=obj
     return _ASSISTANT
@@ -393,6 +395,33 @@ async def assistant_transcribe(request:Request):
     if error: raise HTTPException(422,error)
     return {'text':text,'model':assistant_stt.MODEL,
             'note':'Audio is transcribed by a third-party service; video never leaves the machine.'}
+
+
+@app.get('/api/assistant/knowledge')
+def assistant_knowledge():
+    from . import assistant_ingest
+    directory = assistant_ingest.knowledge_dir()
+    files = sorted(p.name for p in directory.glob('*')) if directory else []
+    return {'generated_at': assistant_ingest.latest_stamp(), 'documents': files,
+            'note': ('Analytics written here by prototype/assistant_ingest.py. The assistant answers '
+                     'by retrieving from these documents; it never analyses the video itself.')}
+
+
+@app.post('/api/assistant/ingest')
+def assistant_ingest_now():
+    from . import assistant_ingest, topology
+    report = None
+    layout_path = ROOT / 'prototype' / 'floor_layout.json'
+    if layout_path.exists():
+        try:
+            report = topology.full_report(json.loads(layout_path.read_text(encoding='utf-8')),
+                                          load(), live.stats())
+        except Exception:
+            report = None
+    manifest = assistant_ingest.ingest(status=live.stats(), report=report)
+    from . import assistant_docs as _docs
+    _get_assistant().docs = _docs.build_index(ROOT)   # re-index with the new documents
+    return manifest
 
 
 @app.post('/api/assistant/ask')

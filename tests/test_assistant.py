@@ -221,7 +221,8 @@ def test_stale_camera_never_prints_a_none_count():
         text = a.compose_metric('what are the bottlenecks', {
             'measurement': {'state': 'stale', 'reliable': False, 'text': 'No recent frame'},
             'zones': [{'label': 'Atrium floor', 'occupancy': None, 'peak': 9, 'entries': 4}],
-            'cues': [], 'intent': 'bottleneck'})
+            'cues': [], 'intent': 'bottleneck',
+            'store': {'has_layout': False, 'sections': [], 'cues': []}})
         assert 'None' not in text, text
 
 
@@ -234,6 +235,30 @@ def test_dead_zone_answer_is_caveated():
             'cues': [], 'intent': 'dead'})
         assert 'Quiet corner' in text
         assert 'not proof' in text.lower() or 'cannot see' in text.lower()
+
+
+def test_camera_discovery_uses_the_live_manager_api():
+    """LiveManager exposes `cameras`, not `sessions`; reading the wrong one hid all data."""
+    with tempfile.TemporaryDirectory() as tmp:
+        a = make_assistant(tmp)
+        assert a._cameras() == ['cam1'], a._cameras()
+        result = a.answer('how many people are here')      # no camera_id given
+        assert result['route'] == 'metric', result
+
+
+def test_dead_zone_rule_requires_a_measured_section():
+    """An unmeasured section must never be reported as a dead zone."""
+    a = A.Assistant.__new__(A.Assistant)
+    unmeasured = {'sections': [{'id': 's1', 'name': 'Back corner', 'state': 'no_live_evidence',
+                                'samples_5m': 0, 'count': None, 'mean_5m': None,
+                                'review_evidence': []}], 'has_layout': True, 'cues': []}
+    text = a._compose_dead([], unmeasured)
+    assert 'Back corner' not in text, text
+    measured = {'sections': [{'id': 's2', 'name': 'Quiet bay', 'state': 'observing',
+                              'samples_5m': 120, 'count': 0, 'mean_5m': 0.1,
+                              'review_evidence': []}], 'has_layout': True, 'cues': []}
+    text2 = a._compose_dead([], measured)
+    assert 'Quiet bay' in text2 and 'not proven unused' in text2, text2
 
 
 def test_spoken_answers_are_short_answer_first_and_hook():

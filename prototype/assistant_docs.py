@@ -63,7 +63,24 @@ class DocIndex:
         'people': 'person trajectory track section', 'shopper': 'person track',
     }
 
-    def search(self, query, top=3, prefer=None, only=None):
+    def with_live(self, sections):
+        """A copy of this index plus the current system state, searchable alongside the docs.
+
+        The live chunks answer "what is happening now"; the static corpus answers "what
+        does that mean". One search can now return both, which is what makes the assistant
+        able to explain a bottleneck using the rule and the current numbers together.
+        """
+        if not sections:
+            return self
+        extra = []
+        for source, text in sections:
+            for heading, body in _sections(text, source):
+                extra.append(('[%s] %s' % (source, heading), body, False))
+        if not extra:
+            return self
+        return DocIndex(list(self.chunks) + extra)
+
+    def search(self, query, top=3, prefer=None, only=None, exclude=None):
         terms = _tokens(query)
         for word, expansion in self.VOCABULARY.items():
             if word in query.lower().split():
@@ -73,6 +90,8 @@ class DocIndex:
         scored = []
         for heading, text, is_title in self.chunks:
             if only and not any(name in heading for name in only):
+                continue
+            if exclude and any(name in heading for name in exclude):
                 continue
             # "how does this system behave" should answer from the operational docs, not
             # the research notes: the research explains why, INTEGRATION says what we do.
@@ -145,9 +164,27 @@ def _quote(text, terms, words=70):
     return ('...' if start else '') + snippet + ('...' if end < len(body) else '')
 
 
-def build_index(root: Path):
+KNOWLEDGE_DIR = 'runs/assistant/knowledge'
+
+
+def is_ingested(source):
+    return KNOWLEDGE_DIR in source
+
+
+def build_index(root: Path, include_knowledge: bool = True):
+    """Index the project documents plus the ingested analytics corpus.
+
+    The knowledge folder is written by assistant_ingest from what the detector produced,
+    so the assistant answers from stored analytics rather than from the video feed.
+    """
     chunks = []
-    for rel in DOC_FILES:
+    sources = list(DOC_FILES)
+    if include_knowledge:
+        knowledge = Path(root) / KNOWLEDGE_DIR
+        if knowledge.is_dir():
+            sources += sorted(str(p.relative_to(Path(root)))
+                              for p in knowledge.glob('*.md'))
+    for rel in sources:
         path = Path(root) / rel
         if not path.exists():
             continue

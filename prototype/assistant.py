@@ -288,15 +288,71 @@ def _meaning(z):
 class Assistant:
     """Stateless facade used by the FastAPI layer. No model is required to answer."""
 
-    def __init__(self, live_manager, docs=None):
+    def __init__(self, live_manager, docs=None, context=None):
         self.live = live_manager
+        # context() -> {'config':…, 'status':…} lets the assistant use the operator's
+        # drawn floor layout, which carries store-wide dwell and bottleneck analytics.
+        self.context = context or (lambda: {})
         self.docs = docs if docs is not None else assistant_docs.build_index(ROOT)
         self.llm = None            # injected lazily; see assistant_llm
         self._lock = threading.RLock()
 
+    # ---- store-wide analytics ---------------------------------------------
+    def store(self):
+        """Merge the drawn layout with live observations via the topology module.
+
+        Returns {'has_layout', 'sections', 'cues'}. When no layout has been drawn the
+        assistant falls back to per-camera zones, which cover less but never invent.
+        """
+        try:
+            from . import topology
+        except Exception:
+            return {'has_layout': False, 'sections': [], 'cues': []}
+        context = self.context() or {}
+        config = context.get('config') or {}
+        status = context.get('status') or {'cameras': []}
+        try:
+            import json as _json
+            layout_path = Path(ROOT) / 'prototype' / 'floor_layout.json'
+            layout = _json.loads(layout_path.read_text(encoding='utf-8')) if layout_path.exists() else {}
+        except Exception:
+            layout = {}
+        sections = layout.get('sections') or []
+        if not sections:
+            return {'has_layout': False, 'sections': [], 'cues': []}
+        try:
+            topology.validate_layout(layout, config)
+            data = topology.aggregate(layout, config, status)
+            graph = topology.build_topology(sections)
+            cues = topology.insights(data, graph)
+        except Exception:
+            return {'has_layout': True, 'sections': [], 'cues': []}
+        return {'has_layout': True, 'sections': data, 'cues': cues}
+
+    @staticmethod
+    def _underused(sections):
+        """The same rule topology.insights uses: measured, quiet, and not flagged.
+
+        Deliberately stricter than "no track entries": an unmeasured area is not a dead
+        zone, and the documentation says so.
+        """
+        verified = [s for s in sections if s.get('state') == 'observing'
+                    and s.get('samples_5m', 0) >= 10]
+        return [s for s in verified if not s.get('count') and s.get('mean_5m') is not None
+                and s['mean_5m'] <= 0.5 and not s.get('review_evidence')]
+
     # ---- helpers -----------------------------------------------------------
     def _cameras(self):
-        return list(self.live.sessions) if hasattr(self.live, 'sessions') else []
+        """Every camera the manager knows about.
+
+        LiveManager exposes `cameras`; the test double exposes `sessions`. Reading the
+        wrong one made every question that did not name a camera silently report no data.
+        """
+        for attribute in ('cameras', 'sessions'):
+            registry = getattr(self.live, attribute, None)
+            if isinstance(registry, dict):
+                return list(registry)
+        return []
 
     def _stats(self, camera_id=None):
         if camera_id:
@@ -307,7 +363,8 @@ class Assistant:
         # default: the busiest live camera, else the first configured one
         best = None
         for cam_id in self._cameras():
-            stats = self.live.stats(cam_id) if hasattr(self.live, 'stats') else self.live.get(cam_id).stats()
+            camera = self.live.get(cam_id)
+            stats = camera.stats() if camera is not None else None
             if not stats or stats.get('status') != 'live':
                 continue
             total = sum((z.get('occupancy') or 0) for z in stats.get('zones', []))
@@ -376,9 +433,9 @@ class Assistant:
             'cues': stats.get('inspection_cues', []),
             # Rule-seeking questions ask what this system does, so search the operational
             # docs; theory questions fall back to the whole corpus.
-            'definitions': self.docs.search(
-                question, top=3,
-                only=OPERATIONAL_DOCS if asks_for_rule else None) if doc_hits else [],
+            # Hybrid retrieval: the static corpus explains, the live chunks report.
+            'definitions': self._search(question, prefer=OPERATIONAL_DOCS if asks_for_rule else None,
+                                        definitions=wants_definition) if doc_hits else [],
         }
         if doc_hits and not metric_hits:
             payload['trend'] = None
@@ -409,6 +466,17 @@ class Assistant:
         return {'ok': True, 'route': route, 'answer': answer, 'spoken': spoken,
                 'sources': self._sources(payload, route),
                 'measurement': health, 'zones': zones, 'cues': payload['cues']}
+
+    def _search(self, question, top=3, prefer=None, definitions=False):
+        """Search the project documents and the ingested analytics corpus.
+
+        No video is read here: assistant_ingest has already turned detector output into
+        documents, and this is a plain retrieval over those.
+        """
+        # A definition lives in the documentation. The ingested analytics repeat the same
+        # words with high frequency, so they would otherwise bury the explanation.
+        exclude = ('runs/assistant/knowledge',) if definitions else None
+        return self.docs.search(question, top=top, only=prefer, exclude=exclude)
 
     def _zone_in_question(self, question, zones):
         q = question.lower()
@@ -490,7 +558,43 @@ class Assistant:
         return '. '.join(spoken).rstrip('.') + '.'
 
     @staticmethod
-    def _compose_bottleneck(zones, cues):
+    def _compose_bottleneck(zones, cues, store=None):
+        store = store or {'has_layout': False, 'sections': [], 'cues': []}
+        if store['has_layout'] and store['cues']:
+            out = []
+            for cue in store['cues'][:3]:
+                if cue['kind'] == 'redistribution_candidate':
+                    busy = next((s['name'] for s in store['sections'] if s['id'] == cue['section_id']), cue['section_id'])
+                    alt = next((s['name'] for s in store['sections'] if s['id'] == cue['candidate_id']), cue['candidate_id'])
+                    out.append('%s is carrying sustained activity while %s has been quiet, so moving a '
+                               'display or activity from the first to the second is worth trialling' % (busy, alt))
+                elif cue['kind'] == 'inspection':
+                    name = next((s['name'] for s in store['sections'] if s['id'] == cue['section_id']), cue['section_id'])
+                    out.append('%s has been busy enough to hold a sustained cue, so check access and aisle '
+                               'clearance there' % name)
+                elif cue['kind'] == 'topology_watch':
+                    out.append(cue['title'] + ', which sits on several computed walking routes')
+            return ('Across the whole floor, ' + '; '.join(out) +
+                    '. These are suggestions to check against the shop, not causes I have proven.')
+        return Assistant._compose_zone_bottleneck(zones, cues)
+
+    @staticmethod
+    def _compose_section_dwell(sections):
+        scored = [s for s in sections if s.get('partial_dwell_s') and s.get('observed_tracks')]
+        if not scored:
+            return ('No dwell has been recorded on the drawn sections yet. '
+                    'Dwell is time actually seen between two sightings, so it needs a little movement first.')
+        best = max(scored, key=lambda s: s['partial_dwell_s'])
+        rest = sorted(scored, key=lambda s: s['partial_dwell_s'], reverse=True)[1:3]
+        text = ('Across the drawn sections, people spend the longest around %s, at about %ss each time'
+                % (best['name'], _fmt(best['partial_dwell_s'])))
+        if rest:
+            text += ', then %s' % ', '.join('%s at %ss' % (s['name'], _fmt(s['partial_dwell_s'])) for s in rest)
+        return (text + '. That is time the cameras actually saw someone, so anyone who walked behind a '
+                      'fixture contributes less than they really were there.')
+
+    @staticmethod
+    def _compose_zone_bottleneck(zones, cues):
         """Rank zones by sustained observed pressure, never by model opinion.
 
         A zone counts as a bottleneck only when it carries a sustained cue from
@@ -528,8 +632,23 @@ class Assistant:
         return 'Ranked by sustained observed pressure. ' + '. '.join(parts) + '.' + tail
 
     @staticmethod
-    def _compose_dead(zones):
-        """Zones with no observed entries and near-zero occupancy, phrased as a cue to check."""
+    def _compose_dead(zones, store=None):
+        """Zones with no observed entries and near-zero occupancy, phrased as a cue to check.
+
+        With a floor plan drawn, the stricter layout rule is used: a section only counts
+        when it was actually measured, stayed at or below half a person on average, and is
+        not already flagged. An area we have never measured is not a dead zone.
+        """
+        store = store or {'has_layout': False, 'sections': [], 'cues': []}
+        if store.get('has_layout') and store.get('sections'):
+            quiet = Assistant._underused(store['sections'])
+            if not quiet:
+                return ('No dead zones. Every section that has been measured has seen someone, and no '
+                        'unmeasured area is being called dead on the strength of having no data.')
+            listed = ', '.join('%s (average %s people over %s samples)'
+                               % (s['name'], _fmt(s['mean_5m'], 2), s['samples_5m']) for s in quiet[:4])
+            return ('Quiet areas worth a look: %s. Quiet means measured and barely used, not proven '
+                    'unused, so walk over before you change anything.' % listed)
         if not zones:
             return 'There are no configured zones to evaluate yet.'
         dead = [z for z in zones
@@ -553,11 +672,16 @@ class Assistant:
         if intent == 'health':
             return lead + health['text'] + '.'
 
+        store = p.get('store') or {'has_layout': False, 'sections': [], 'cues': []}
+
         if intent == 'bottleneck':
-            return lead + self._compose_bottleneck(zones, cues)
+            return lead + self._compose_bottleneck(zones, cues, store)
 
         if intent == 'dead':
-            return lead + self._compose_dead(zones)
+            return lead + self._compose_dead(zones, store)
+
+        if intent == 'dwell' and store['has_layout']:
+            return lead + self._compose_section_dwell(store['sections'])
 
         if intent == 'cues':
             if not cues:
