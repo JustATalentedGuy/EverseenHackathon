@@ -49,12 +49,36 @@ class DocIndex:
         self.n = max(1, len(chunks))
         self.avg_len = sum(len(_tokens(t)) for _, t, _x in chunks) / self.n or 1.0
 
-    def search(self, query, top=3):
+    # Shopkeepers say "cue" and "dead zone"; the research notes say "review recommendation"
+    # and "low occupancy". Expand the question so retrieval lands on the same passage.
+    VOCABULARY = {
+        'cue': 'review recommendation', 'alert': 'review recommendation',
+        'flag': 'review recommendation', 'warning': 'review recommendation',
+        'bottleneck': 'congestion severity persistence',
+        'jam': 'congestion', 'crowding': 'crowd pressure congestion',
+        'dead': 'unused low occupancy', 'empty': 'low occupancy',
+        'deserted': 'low occupancy section', 'idle': 'low occupancy',
+        'busy': 'occupancy throughput', 'queue': 'queueing service rate',
+        'sticky': 'dwell persistence', 'linger': 'dwell',
+        'people': 'person trajectory track section', 'shopper': 'person track',
+    }
+
+    def search(self, query, top=3, prefer=None, only=None):
         terms = _tokens(query)
+        for word, expansion in self.VOCABULARY.items():
+            if word in query.lower().split():
+                terms += _tokens(expansion)
         if not terms:
             return []
         scored = []
         for heading, text, is_title in self.chunks:
+            if only and not any(name in heading for name in only):
+                continue
+            # "how does this system behave" should answer from the operational docs, not
+            # the research notes: the research explains why, INTEGRATION says what we do.
+            boost = 1.0
+            if prefer and any(name in heading for name in prefer) and not is_title:
+                boost = 1.35
             tokens = _tokens(text)
             if not tokens:
                 continue
@@ -67,6 +91,7 @@ class DocIndex:
                 score += idf * tf[term] * 2.2 / (tf[term] + 1.2 * (0.25 + 0.75 * len(tokens) / self.avg_len))
             if heading and not is_title:
                 score += 4.0 * sum(1 for t in terms if t in _tokens(heading))
+            score *= boost
             # definitional phrasing beats a passing mention in a summary section
             if re.search(r'\b(is|are)\b[^.]{0,60}\b(defined as|means|is the)\b|=\s*sum of|\bmeans\b', text, re.I):
                 score += 2.5

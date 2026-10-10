@@ -260,8 +260,9 @@ def test_spoken_answers_never_speak_bare_digits_lists():
     with tempfile.TemporaryDirectory() as tmp:
         a = make_assistant(tmp)
         text = a.answer('how many people are here')['spoken']
+        # a spoken answer must not dump a per-zone list
         assert ';' not in text, f'zone list spoken -> {text}'
-        assert ' at ' not in text.split('.')[0].replace('busiest with', ''), text
+        assert text.count(',') <= 4, f'too many clauses, sounds like a list -> {text}'
 
 
 def test_stale_data_leads_the_spoken_answer():

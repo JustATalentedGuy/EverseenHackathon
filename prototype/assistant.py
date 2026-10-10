@@ -41,11 +41,17 @@ NUM_WORDS = r'(?:how many|persons?|people|count|occupancy|occupied|busy|crowded|
 # A definition question asks what something *is*, not what it currently measures.
 # It must win over a metric keyword like "dwell" that happens to appear in it.
 DEFINITION_MARKERS = r'\b(meaning|mean|means|define|definition|explain|stands for)\b'
+# "how do I know if X" asks for the rule behind the metric, so the documents answer it,
+# even though it names a metric the live path would otherwise claim.
+OPERATIONAL_DOCS = ('prototype/INTEGRATION.md', 'prototype/README.md', 'README.md')
+RULE_MARKERS = (r'\bhow do i know\b|\bhow would you know\b|\bhow do you (?:decide|know|judge)\b'
+                r'|\bwhat counts\b|\bwhat makes\b|\bwhen is .*flagged\b'
+                r'|\bhow is .*(?:defined|calculated|measured|decided)\b')
 
 # intent -> (regex, handler key)
 METRIC_INTENTS = [
     ('health',    r'(measurement|fps|frame rate|stale|throughput|health|fresh|warm)'),
-    ('cues',      r'(alert|cue|warning|flag|review|recommend|suggestion|problem)'),
+    ('cues',      r'(alert|cue|warning|flag|review|recommend|suggestion|problem|worried|worry|concern|trouble|troubling|attention)'),
     ('bottleneck', r'(bottleneck|blocked|blocking|congestion|congested|crowd(ed|ing)?|jam|gridlock|choke)'),
     ('dead',      r'(dead[ _-]?zone|dead ?spot|underused|under[ -]?used|unused|empty|deserted|idle|never used)'),
     ('trends',    r'(trend|over time|last \d+|peak(est)? time|when did|history|first \d+)'),
@@ -200,6 +206,85 @@ def read_events(path, limit=4000):
     return rows[-limit:]
 
 
+_MARKDOWN_NOISE = re.compile(
+    r'\[([^\]]+)\]\([^)]+\)'          # links -> text
+    r'|\*\*|\*|`{1,3}'                 # emphasis and code ticks
+    r'|\$[^$]*\$'                      # inline math
+    r'|^\s*[|:#-]{2,}.*$'              # table rows and rules
+    r'|^\s*[-*+]\s+',                  # bullet markers
+    flags=re.M)
+
+
+def _plain(text, query='', max_sentences=4, max_chars=520):
+    """Turn a retrieved chunk into something a shopkeeper can actually read.
+
+    The corpus is written for engineers: markdown tables, LaTeX and paper citations all
+    reach this point, and reading them aloud is useless.
+    """
+    cleaned = re.sub(r'\[([^\]]+)\]\([^)]*\)', r'\1', text)
+    cleaned = _MARKDOWN_NOISE.sub(' ', cleaned)
+    cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+    sentences = [s.strip() for s in re.split(r'(?<=[.!?])\s+', cleaned) if s.strip()]
+    out = []
+    for sentence in sentences:
+        # skip bibliography entries, formula fragments and mid-clause remainders
+        if re.search(r'doi:|arxiv|^\W*$', sentence, re.I):
+            continue
+        if re.search(r'[=∫Σ<>]|\bsum\b|\bintegral\b|\bnormalized congestion\b', sentence, re.I):
+            continue
+        if re.search(r'\b[A-Za-z]_\w+\s*\(|\(\s*t\s*\)|\bthreshold\b\s*$', sentence):
+            continue
+        if sentence.lstrip().startswith('...') or not sentence[:1].isupper():
+            continue                      # a capitalised start means a real sentence
+        if re.match(r'^(see|refer to|details in|for full|read )\b', sentence, re.I):
+            continue                      # a cross-reference is not an explanation
+        if len(sentence.split()) < 5:
+            continue
+        out.append((sentence, set(re.findall(r'[a-z]{4,}', (query or '').lower()))))
+    if out:
+        # keep the sentences that overlap the question most, but restore reading order
+        def _score(item):
+            words = set(re.findall(r'[a-z]{4,}', item[0].lower()))
+            return len(item[1] & words) / (len(item[1]) or 1)
+        best = sorted(out, key=_score, reverse=True)[:max_sentences]
+        out = [sentence for sentence, _ in sorted(best, key=lambda x: out.index(x))]
+    text_out = ' '.join(out)
+    if not text_out:
+        return ''
+    if len(text_out) > max_chars:
+        # drop the trailing partial sentence rather than cutting mid-clause
+        kept = [x for x in out if len(' '.join(out[:out.index(x) + 1])) <= max_chars]
+        text_out = ' '.join(kept) if kept else out[0][:max_chars].rsplit(' ', 1)[0]
+    return text_out.rstrip(' ,;.') + '.'
+
+
+def spoken_meaning(z):
+    """_meaning() phrased for the ear."""
+    occupancy, threshold = z.get('occupancy'), z.get('threshold')
+    if occupancy is None:
+        return 'though I have no current count'
+    if threshold and occupancy >= threshold:
+        return 'which is at or over your %s person limit' % _fmt(threshold)
+    if threshold:
+        return 'which is under your %s person limit' % _fmt(threshold)
+    return 'and there is no review limit set for it'
+
+
+def _meaning(z):
+    """Plain-language reading of a zone against the operator's own review threshold."""
+    occupancy = z.get('occupancy')
+    threshold = z.get('threshold')
+    if occupancy is None:
+        return 'no current count'
+    if threshold:
+        if occupancy >= threshold:
+            return 'at or over your %s-person review limit' % _fmt(threshold)
+        if occupancy >= max(1, int(threshold * 0.7)):
+            return 'approaching your %s-person review limit' % _fmt(threshold)
+        return 'comfortably under your %s-person review limit' % _fmt(threshold)
+    return '%s people right now' % _fmt(occupancy)
+
+
 class Assistant:
     """Stateless facade used by the FastAPI layer. No model is required to answer."""
 
@@ -255,6 +340,7 @@ class Assistant:
             }
 
         wants_definition = re.search(DEFINITION_MARKERS, question.lower()) is not None
+        asks_for_rule = re.search(RULE_MARKERS, question.lower()) is not None
         stats, events_path = self._stats(camera_id)
         if stats is None:
             # A documentation question does not need a live camera to be answerable.
@@ -274,8 +360,8 @@ class Assistant:
         zones = zone_lines(camera_id or stats.get('id'), stats)
         metric_hits = _matches(METRIC_INTENTS, question)
         doc_hits = _matches(DOC_INTENTS, question)
-        if wants_definition:
-            metric_hits = []          # "what does partial dwell mean" is a documentation question
+        if wants_definition or asks_for_rule:
+            metric_hits = []          # a question about the rule belongs to the documents
         # "what is the measurement limitation" mentions "measurement", which the health intent
         # would otherwise claim; a limits question is a documentation question.
         if 'limits' in doc_hits and 'health' in metric_hits:
@@ -288,7 +374,11 @@ class Assistant:
             'measurement': health,
             'zones': zones,
             'cues': stats.get('inspection_cues', []),
-            'definitions': self.docs.search(question, top=3) if doc_hits else [],
+            # Rule-seeking questions ask what this system does, so search the operational
+            # docs; theory questions fall back to the whole corpus.
+            'definitions': self.docs.search(
+                question, top=3,
+                only=OPERATIONAL_DOCS if asks_for_rule else None) if doc_hits else [],
         }
         if doc_hits and not metric_hits:
             payload['trend'] = None
@@ -332,6 +422,68 @@ class Assistant:
         return sorted(set(out))
 
     # ---- deterministic composition ----------------------------------------
+    @staticmethod
+    def _compose_story(zones, cues, trend=None):
+        """The shift briefing: what is happening, why it matters, what to do next.
+
+        Written as a supervisor would say it, not as a table of metrics. Every number
+        still comes from measured values; the interpretation is only ever a comparison
+        against the review threshold the operator set for that zone.
+        """
+        if not zones:
+            return 'There are no floor zones set up yet, so there is nothing to report. ' \
+                   'Draw a zone on the video and I will start watching it.'
+        live = [z for z in zones if z.get('occupancy') is not None]
+        sentences = []
+        busiest_zone = max(live, key=lambda z: (z.get('occupancy') or 0, z.get('peak') or 0)) if live else None
+
+        if not live:
+            sentences.append('No zone has a current count right now, so I cannot tell you what is happening')
+        else:
+            count = busiest_zone.get('occupancy') or 0
+            head = ('The busiest spot right now is %s, with %s people, %s'
+                    % (busiest_zone['label'], _fmt(count), _meaning(busiest_zone)))
+            if cues:
+                head += ', and there %s' % ('is something worth checking' if len(cues) == 1
+                                             else 'are %d things worth checking' % len(cues))
+            elif count == 0:
+                head += ', so the visible floor is empty'
+            else:
+                head += ', and nothing has crossed a review limit'
+            sentences.append(head)
+
+        quiet = [z for z in live if not z.get('entries') and not z.get('peak')]
+        if quiet:
+            sentences.append('%s has not seen anyone come through yet in this session'
+                             % quiet[0]['label'])
+
+        if trend and trend.get('zone') != (busiest_zone or {}).get('zone'):
+            label = next((z['label'] for z in zones if z.get('zone') == trend.get('zone')), None)
+            if label:
+                sentences.append('over the last %ss, %s peaked at %s'
+                                 % (_fmt(trend['window_s']), label, _fmt(trend['peak'])))
+
+        lingered = [z for z in zones if z.get('dwell_tracks')]
+        if lingered:
+            slow = max(lingered, key=lambda z: z['dwell_s'])
+            sentences.append('people linger longest around %s, at about %ss at a time'
+                             % (slow['label'], _fmt(slow['dwell_s'])))
+
+        # the single most useful next step, stated plainly
+        if cues:
+            cue = cues[0]
+            ev = cue.get('evidence') or {}
+            action = ('%s has stayed at or above its review limit for %ss, so that is the one place '
+                      'worth walking over to' % (cue.get('zone_label') or cue.get('zone'),
+                                                  _fmt(ev.get('duration_s'))))
+            if len(cues) > 1:
+                action += ', and there %s %d more flagged' % ('is' if len(cues) == 2 else 'are', len(cues) - 1)
+        else:
+            action = 'Nothing needs your attention right now, so you can leave it be'
+        sentences.append(action)
+        spoken = [(x[0].upper() + x[1:]) if x else x for x in sentences]
+        return '. '.join(spoken).rstrip('.') + '.'
+
     @staticmethod
     def _compose_bottleneck(zones, cues):
         """Rank zones by sustained observed pressure, never by model opinion.
@@ -441,21 +593,12 @@ class Assistant:
             trend = p.get('trend')
             if not trend:
                 return lead + 'There is not enough observation history yet to show a trend.'
-            label = next((z['label'] for z in zones if z['zone'] == trend['zone']), trend['zone'])
+            label = next((z['label'] for z in zones if z.get('zone') == trend.get('zone')), trend['zone'])
             return lead + ('Over the last %ss, %s peaked at %s observed people with a mean of %s across %s samples.'
                            % (_fmt(trend['window_s']), label, _fmt(trend['peak']), _fmt(trend['mean'], 2), trend['samples']))
 
         if intent == 'summary':
-            lines = []
-            if top:
-                lines.append('Busiest zone is %s at %s people now, peak %s.'
-                             % (top['label'], _fmt(top['occupancy'] if top.get('occupancy') else top['peak']), _fmt(top['peak'])))
-            scored = [z for z in zones if z.get('dwell_tracks')]
-            if scored:
-                b = max(scored, key=lambda z: z['dwell_s'])
-                lines.append('Longest partial visible dwell is %s at %ss.' % (b['label'], _fmt(b['dwell_s'])))
-            lines.append('%s review cue(s) active.' % len(cues) if cues else 'No review cues are active.')
-            return lead + ' '.join(lines)
+            return lead + self._compose_story(zones, cues, p.get('trend'))
 
         # occupancy
         target = self._zone_in_question(question, zones)
@@ -542,35 +685,50 @@ class Assistant:
             trend = p.get('trend')
             if not trend:
                 return '%sI need a bit more history before I can show a trend. ' % trust
-            label = next((z['label'] for z in zones if z['zone'] == trend['zone']), trend['zone'])
+            label = next((z['label'] for z in zones if z.get('zone') == trend.get('zone')), trend['zone'])
             return ('%s%s has averaged %s people and peaked at %s. Want me to keep watching it?'
                     % (trust, label, say_count(round(trend['mean'])), say_count(trend['peak'])))
 
         if intent == 'summary':
             if not top:
-                return '%sNothing to summarise yet. Start a camera and ask me again. ' % trust
-            return ('%s%s is the busiest zone with %s right now, and %s. Want me to break that down?'
+                return '%sNothing to report yet. Start a camera and I will watch it for you. ' % trust
+            if cues:
+                cue = cues[0]
+                return ('%sThe busiest spot is %s with %s, and %s has been over its review limit for %s. '
+                        'That is the one I would walk over to. Want me to keep watching?'
+                        % (trust, top['label'], say_people(top['occupancy'] or 0),
+                           cue.get('zone_label') or cue.get('zone'),
+                           say_seconds((cue.get('evidence') or {}).get('duration_s'))))
+            return ('%s%s is the busiest spot with %s, %s. Nothing needs your attention right now. '
+                    'Want me to check anything else?'
                     % (trust, top['label'], say_people(top['occupancy'] or 0),
-                       'something needs checking' if cues else 'nothing needs checking'))
+                       'comfortably under your review limit' if top.get('threshold') and
+                       (top.get('occupancy') or 0) < top['threshold'] else 'still under its review limit'))
 
         # occupancy
         target = self._zone_in_question(question, zones)
         chosen = next((z for z in zones if z['zone'] == target), None)
         if chosen:
-            return ('%s%s has %s right now, and it has peaked at %s. %s'
+            return ('%s%s has %s right now, %s, and it has peaked at %s. %s'
                     % (trust, chosen['label'], say_people(chosen['occupancy'] or 0),
-                       say_people(chosen['peak'] or 0),
-                       'Want the dwell time there too?'))
+                       spoken_meaning(chosen), say_people(chosen['peak'] or 0),
+                       'Want me to keep an eye on it?'))
         if not top:
             return '%sThere is nothing moving in view right now. ' % trust
-        return ('%s%s is the busiest with %s. %s'
+        return ('%sThe busiest spot is %s with %s, %s. %s'
                 % (trust, top['label'], say_people(top['occupancy'] or 0),
-                   'Want a per-zone breakdown?'))
+                   spoken_meaning(top), 'Want a per-zone breakdown?'))
 
     def compose_doc(self, question, p):
         docs = p.get('definitions') or []
         if not docs:
             return ('I do not have a project document that covers that. I can answer status questions about the '
                     'observed zones, or explain what the documented metrics and limitations mean.')
-        best = docs[0]
-        return '%s %s' % (best['text'].strip(), ' Source: %s.' % best['source'])
+        # prefer a chunk that actually reads as prose; the corpus is engineering-grade
+        readable = [(d, _plain(d['text'], question)) for d in docs]
+        readable = [(d, t) for d, t in readable if len(t.split()) >= 8]
+        if not readable:
+            return ('The project notes cover that, but only in engineering terms I would not read aloud. '
+                    'I can still tell you what the cameras are seeing right now.')
+        doc, text = readable[0]
+        return '%s (From %s.)' % (text, doc['source'].split('/')[-1])
