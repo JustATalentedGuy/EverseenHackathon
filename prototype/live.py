@@ -21,6 +21,7 @@ from ultralytics.trackers.byte_tracker import BYTETracker
 from .core import Analytics, validate_config
 from .insights import make_recommendation, sustained_pressure
 from .sources import resolve_source
+from .heatmap import PresenceHeatmap
 
 INFERENCE_LOCK = threading.Lock()  # CPU inference across camera workers
 MODEL_CACHE = {}  # protected by INFERENCE_LOCK: avoids loading the same weights per camera
@@ -80,7 +81,7 @@ class LiveCamera:
         self.latest = None
         self.jpeg = None
         self.jpg_seq = 0
-        self.heat = np.zeros((180, 320), np.float32)
+        self.presence_heatmap = PresenceHeatmap()
         self.analytics = Analytics(camera.get('zones', []),
                                   persistence_s=float(site.get('zone_persistence_s', 0.2)),
                                   max_gap_s=max(0.45, 1.6 / float(site.get('sample_hz', 5))))
@@ -204,6 +205,8 @@ class LiveCamera:
     def _step(self, frame, tracks, t, out):
         h, w = frame.shape[:2]
         counts, speeds, observations = Counter(), defaultdict(list), []
+        visible_feet = {}
+        visible_zones = {}
         self.last_track_count = len(tracks)
         self.last_truncated_count = 0
         for track in tracks:
@@ -225,15 +228,15 @@ class LiveCamera:
                 if speed is not None:
                     speeds[zone].append(speed)
             if not truncated:
-                hx, hy = min(319, int(point[0]*320)), min(179, int(point[1]*180))
-                self.heat[hy, hx] += 1
+                visible_feet[tid] = point
+                visible_zones[tid] = zone
             observations.append({'track_id': tid, 'point': point, 'zone': zone,
                                  'truncated': bool(truncated), 'speed_body_heights_s': speed})
             cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (93, 219, 155), 2)
             cv2.putText(frame, f'#{tid} {zone or "unassigned"}',
                         (max(0, int(x1)), max(14, int(y1) - 5)),
                         cv2.FONT_HERSHEY_SIMPLEX, .45, (93, 219, 155), 1)
-        self.heat *= .996
+        self.presence_heatmap.update(t,visible_feet,frame,zones=visible_zones)
         risks = []
         now = time.monotonic()
         for zone in self.camera.get('zones', []):
@@ -315,21 +318,18 @@ class LiveCamera:
                     'output': str(self.output.relative_to(self.root)).replace('\\', '/'),
                     'scope': 'Observed camera-local tracks and partial visible dwell only'}
 
-    def heatmap_jpeg(self):
+    def heatmap_jpeg(self, window_s=120):
         with self.lock:
-            item = self.latest
-            heat = self.heat.copy()
-        if item is None:
-            return None
-        frame = item[2]
-        blurred = cv2.GaussianBlur(heat, (0, 0), 4)
-        strength = blurred.max()
-        heat8 = (255 * blurred / strength).astype(np.uint8) if strength > 0 else np.zeros_like(blurred, np.uint8)
-        heat8 = cv2.resize(heat8, (frame.shape[1], frame.shape[0]))
-        tinted = cv2.addWeighted(frame, .53, cv2.applyColorMap(heat8, cv2.COLORMAP_JET), .47, 0)
-        masked = np.where((heat8 > 16)[..., None], tinted, frame)
-        ok, buffer = cv2.imencode('.jpg', masked)
-        return buffer.tobytes() if ok else None
+            return self.presence_heatmap.jpeg(window_s)
+
+    def heatmap_summary(self, window_s=120):
+        with self.lock:
+            _, result = self.presence_heatmap.snapshot(window_s)
+            result['status'] = self.status
+            result['note'] = ('Time-weighted observations of *continuous camera-local tracks*; '
+                'incomplete tracks and missing frames lower measured presence. '
+                'Tiles are equal fractions of the image, not equal floor area.')
+            return result
 
     def stop(self):
         self.stop_event.set()

@@ -13,9 +13,10 @@ h1{font-size:clamp(26px,3vw,38px);margin:8px 0 6px;letter-spacing:-1.2px}h2{font
 @media(max-width:1050px){.columns{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}}@media(max-width:630px){.top,.shell{padding-left:15px;padding-right:15px}.intro{display:block}.kpis{gap:8px}.card{padding:13px}.formrow{grid-template-columns:1fr}.nav{gap:8px}.brand{font-size:19px}.tag{display:none}}
 .section-list{display:grid;gap:8px}.section-chip{display:flex;flex-wrap:wrap;align-items:center;gap:7px}.section-chip span{min-width:130px;flex:1}.section-chip select{width:115px;padding:6px}.section-chip input{width:70px;padding:6px}.section-chip button{padding:6px 8px;margin:0;color:#eef6f6;background:#213442;border:1px solid #365261}
 .demo-list{display:grid;gap:10px;max-height:465px;overflow:auto;padding-right:3px}.demo-item{border:1px solid #315064;background:#112634;padding:13px;border-radius:10px}.demo-item h3{font-size:14px;margin:0 0 3px}.demo-item p{font-size:12px;margin:5px 0}.demo-item .demo-foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.demo-item button{padding:6px 9px;font-size:12px}.demo-item .demo-license{color:#f5c38a}.demo-item .demo-ready{color:#88deb5}.demo-item .demo-missing{color:#a8b9c7}
+.heat-header{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}.heat-header h2{margin:0}.heat-select{width:auto;padding:6px 9px;font-size:12px}.heat-key{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin:12px 0 7px}.heat-key span{font-size:11px;text-align:center;color:#fff;padding:8px 2px;border-radius:5px}.heat-key span:nth-child(1){background:#4480e2}.heat-key span:nth-child(2){background:#37bf89;color:#092a27}.heat-key span:nth-child(3){background:#f5b744;color:#34240a}.heat-key span:nth-child(4){background:#ed4441}.heat-brief{font-size:13px;color:#d6ecec;line-height:1.55;padding:10px 12px;border-radius:9px;border:1px solid #355b60;background:#132b31;margin:10px 0}
 </style></head>
 <body>
-<header><div class="top"><div class="brand">EVERSEEN<em> / intelligence</em></div><div class="nav"><a class="active" href="/">Live operations</a><a href="/setup">Replay &amp; calibration</a><span class="tag">LOCAL ANALYTICS</span></div></div></header>
+<header><div class="top"><div class="brand">EVERSEEN<em> / intelligence</em></div><div class="nav"><a class="active" href="/">Live operations</a><a href="/layout">Layout design &amp; topology</a><a href="/setup">Replay &amp; calibration</a><span class="tag">LOCAL ANALYTICS</span></div></div></header>
 <div class="shell">
  <div class="intro"><div><div class="eyebrow">RETAIL OPERATIONS · CAMERA INTELLIGENCE</div><h1>See how spaces are actually used.</h1><p class="hint">Monitor observed occupancy, visible dwell and motion across your store. Every insight is traceable to camera observations—not an inferred customer identity.</p></div><a href="/setup" class="small-link">Analyze recorded footage →</a></div>
  <div class="kpis"><div class="card kpi"><small>ACTIVE VIDEO SOURCES</small><b id="activeCount">0</b><p>Connected inference sessions</p></div><div class="card kpi"><small>PEOPLE · SELECTED CAMERA</small><b id="peopleCount">—</b><p>Not a store-unique count</p></div><div class="card kpi"><small>ZONES CONFIGURED</small><b id="zoneCount">0</b><p>Floor regions defined by operators</p></div><div class="card kpi"><small>REVIEW RECOMMENDATIONS</small><b id="cueCount">0</b><p>Sustained observations only</p></div></div>
@@ -31,24 +32,25 @@ h1{font-size:clamp(26px,3vw,38px);margin:8px 0 6px;letter-spacing:-1.2px}h2{font
     <div class="card analytics"><div class="sectionheader"><h2>Zone performance</h2><small class="subtle">Rolling 5-minute samples</small></div><div class="tablewrap"><table><thead><tr><th>Zone / type</th><th>Now</th><th>Peak</th><th>P90</th><th>Track IDs seen</th><th>Visible dwell (partial)</th></tr></thead><tbody id="metrics"><tr><td colspan="6" class="muted">Start a camera to see measurements.</td></tr></tbody></table></div><h3 style="margin-top:20px">Observed occupancy trend</h3><canvas id="trend" class="chart"></canvas><p class="subtle" id="trendLabel">Select a camera with configured zones to see its occupancy.</p></div>
   </div>
   <div>
-   <div class="card"><div class="sectionheader"><h2>Curated demonstration footage</h2><span id="demoTotal" class="subtle">Checking local videos…</span></div><p class="subtle">Choose a validated sample to add it as a camera. Videos are stored locally; the GitHub repository contains only source credits and download instructions.</p><div id="demoList" class="demo-list" aria-live="polite"><div class="empty">Loading available samples…</div></div><p class="subtle">Research-only footage must not be used for commercial marketing without appropriate rights. Predictions are not verified counts.</p></div>
+   <div class="card heat"><div class="heat-header"><h2>Where did people spend observed time?</h2><label for="heatWindow" style="margin:0">Time range <select id="heatWindow" class="heat-select"><option value="30">Last 30 seconds</option><option value="120" selected>Last 2 minutes</option><option value="300">Last 5 minutes</option></select></label></div><p class="subtle">Each square is 1/16 of camera width × 1/9 of camera height. Stronger colors mean more continuously observed tracked presence, not necessarily more unique shoppers.</p><img id="heat" alt="Image-area grid showing average continuously observed tracked people per tile"><div class="heat-key" aria-label="Fixed scale for observed average tracked people per image tile"><span>Blue: 0–0.25</span><span>Green: 0.25–0.5</span><span>Amber: 0.5–1</span><span>Red: 1+</span></div><p class="subtle">Color scale: average tracked people per image square during the selected period. An uncolored square means no *verified continuous* presence, not guaranteed absence. This fixed scale does not change between camera frames.</p><div id="heatBrief" class="heat-brief" aria-live="polite">Start monitoring to calculate observed person-time.</div><p class="subtle">Example: 1 person continuously visible in the same square for 10 of the observed 20 seconds = 10 person-seconds, or 0.5 average people in that square. Tracking gaps are excluded; no physical floor area, sales or unique visitors are inferred.</p></div>
+   <div class="card" style="margin-top:16px"><h2>What should I check?</h2><div id="health" class="note" role="status">Waiting for camera observations.</div><div id="alerts" class="alerts" style="margin-top:12px"><div class="empty">No recommendations yet.</div></div><p class="subtle">Review cues require multiple sustained, recent observations. They are not proof of queueing, customer intent or lost sales.</p></div>
+   <div class="card" style="margin-top:16px"><div class="sectionheader"><h2>Curated demonstration footage</h2><span id="demoTotal" class="subtle">Checking local videos…</span></div><p class="subtle">Choose a validated sample to add it as a camera. Videos are stored locally; the GitHub repository contains only source credits and download instructions.</p><div id="demoList" class="demo-list" aria-live="polite"><div class="empty">Loading available samples…</div></div><p class="subtle">Research-only footage must not be used for commercial marketing without appropriate rights. Predictions are not verified counts.</p></div>
     <div class="card" style="margin-top:16px"><h2>Add a camera / video URL</h2><div class="formrow"><div><label for="newName">Camera name</label><input id="newName" placeholder="Aisle A" maxlength="80"></div><div><label for="newSource">RTSP, HTTP video, webcam index or local file</label><input id="newSource" placeholder="rtsp://… / https://… / 0 / samples/demo.mp4"></div><button id="add">+ Add camera source</button></div><p class="subtle">Files must already be inside the project. Webcam “0” uses the first connected camera. Credentials in URLs remain in the local configuration—use a dedicated demo account.</p><div class="divider"></div><div class="toolbar"><button id="remove">Remove selected camera</button><a href="/setup" class="small-link">Advanced setup: source, calibration, inference options ↗</a></div></div>
-   <div class="card heat" style="margin-top:16px"><div class="sectionheader"><h2>Foot-traffic heatmap</h2><small class="subtle">Recent observed foot points</small></div><img id="heat" alt="Camera foot-point density heatmap"><p>Heat is a relative visualization of tracked locations. It does not indicate sales, unique footfall or customer intent.</p></div>
-    <div class="card" style="margin-top:16px"><h2>What should I check?</h2><div id="health" class="note" role="status">Waiting for camera observations.</div><div id="alerts" class="alerts" style="margin-top:12px"><div class="empty">No recommendations yet.</div></div><p class="subtle">Review cues require multiple sustained, recent observations. They are not proof of queueing, customer intent or lost sales.</p></div>
    <div class="note" style="margin-top:16px"><strong>Measurement integrity</strong><div>Tracks are camera-local, and “track entries” can repeat when a tracker loses somebody. Dwell is accrued only between reliable successive sightings. No full-store unique visitors, completed checkouts or cross-camera identity matching are claimed without appropriate verification.</div></div>
   </div>
  </div>
+ <section class="card analytics" style="margin-top:18px" id="overall-layout"><div class="sectionheader"><h2>Whole-store section analytics</h2><a href="/layout" class="small-link">Design or map the floor plan →</a></div><p>Mapped camera-zone observations across the schematic store. Each section uses the highest fresh camera view, not the sum of possibly overlapping feeds.</p><div class="tablewrap"><table><thead><tr><th>Floor section</th><th>Observed now</th><th>P90 occupancy · 5m</th><th>Partial visible dwell</th><th>Live / mapped cameras</th><th>State</th></tr></thead><tbody id="layoutOverall"><tr><td colspan="6" class="muted">Load or create a layout to see combined section analytics.</td></tr></tbody></table></div><p class="subtle">Section counts are not verified unique customers; overlapping physical areas and unsynchronized cameras may still duplicate people.</p></section>
 </div>
 <script>
 'use strict';
 const $ = id => document.getElementById(id);
-let config = null, selected = null, sessions = {}, demoCatalog = [], drawing = false, vertices = [], preview = false, lastLive = '', chartPoints = {}, polling = false;
+let config = null, selected = null, sessions = {}, demoCatalog = [], drawing = false, vertices = [], preview = false, lastLive = '', chartPoints = {}, polling = false, heatRequest = 0;
 const ctx = $('canvas').getContext('2d');
 function notice(s){$('notice').textContent=s}
 async function api(url, options){const r=await fetch(url,options);const j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.detail||`Request failed (${r.status})`);return j}
 const jsonOpt=(method,data)=>({method,headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
 function cam(){return config?.cameras?.find(c=>c.id===selected)}
-function choose(id){selected=id; $('camera').value=id; vertices=[]; drawing=false; $('videoWrap').classList.remove('marking');preview=false;lastLive='';$('feed').removeAttribute('src');$('heat').removeAttribute('src');$('placeholder').hidden=false;draw();renderZoneList();renderSelected();}
+function choose(id){selected=id;heatRequest++;$('heatBrief').textContent='Start monitoring to calculate observed person-time.';$('camera').value=id; vertices=[]; drawing=false; $('videoWrap').classList.remove('marking');preview=false;lastLive='';$('feed').removeAttribute('src');$('heat').removeAttribute('src');$('placeholder').hidden=false;draw();renderZoneList();renderSelected();}
 function renderCameraList(){const keep=selected;const select=$('camera');select.replaceChildren();for(const c of config.cameras){const o=document.createElement('option');o.value=c.id;o.textContent=c.name||c.id;select.append(o)}choose(config.cameras.some(c=>c.id===keep)?keep:config.cameras[0].id)}
 async function loadConfig(){config=await api('/api/config');renderCameraList()}
 async function loadDemoCatalog(){const data=await api('/api/demo/catalog');demoCatalog=data.videos;renderDemoCatalog()}
@@ -172,11 +174,36 @@ async function poll(){
   const s=sessions[selected];
   $('peopleCount').textContent=s?.measurement?.fresh?s.zones.reduce((n,z)=>n+(z.occupancy??0),0):'—';
   $('cueCount').textContent=data.cameras.reduce((n,c)=>n+c.inspection_cues.length,0);
-  if(selected){renderSelected();if(s&&['starting','connecting','live'].includes(s.status)&&s.frames){
-    $('heat').src='/api/live/heat/'+encodeURIComponent(selected)+'.jpg?v='+Date.now();}}
+  if(selected){renderSelected();if(s?.frames){await refreshHeat(selected);}}
  }catch(e){notice(e.message)}finally{polling=false}
 }
+async function pollLayoutOverall(){
+ try{const data=await api('/api/layout/analytics'),tbody=$('layoutOverall');tbody.replaceChildren();
+  if(!data.sections.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;td.textContent='No sections created yet. Open Layout Design to build a floor plan.';tr.append(td);tbody.append(tr);return}
+  for(const s of data.sections){const tr=document.createElement('tr');
+   for(const v of [s.name,s.count??'—',s.p90_5m??'—',s.partial_dwell_s==null?'—':s.partial_dwell_s+' s',s.active_feeds+' / '+s.configured_links,s.state==='observing'?'Observed':'No live data']){const td=document.createElement('td');td.textContent=v;tr.append(td)}tbody.append(tr)}
+ }catch(e){const tbody=$('layoutOverall');tbody.textContent='Layout analytics temporarily unavailable: '+e.message}
+}
+async function refreshHeat(cameraId){
+ const request=++heatRequest, windowS=Number($('heatWindow').value);
+ const summary=await api('/api/live/heat/'+encodeURIComponent(cameraId)+'/summary?window_s='+windowS);
+ if(request!==heatRequest || selected!==cameraId)return;
+ $('heat').src='/api/live/heat/'+encodeURIComponent(cameraId)+'.jpg?window_s='+windowS+'&v='+Date.now();
+ const brief=$('heatBrief');
+ if(summary.elapsed_s<=0){brief.textContent='Waiting for two consecutive observations of a tracked person before assigning observed time.';return;}
+ const coverage=Math.round(summary.coverage_fraction*100);
+ const namedZones=Object.entries(summary.zones_person_seconds||{}).map(([id,seconds])=>({
+   name:cam()?.zones?.find(z=>z.id===id)?.label||id,seconds
+ })).sort((a,b)=>b.seconds-a.seconds).slice(0,3);
+ brief.textContent=`${summary.person_seconds.toFixed(1)} observed person-seconds across the camera image · `+
+   `${coverage}% of the ${summary.elapsed_s.toFixed(1)}s measured period has adjacent readable frames · `+
+   `hottest square: ${summary.peak_observed_avg_people_per_tile.toFixed(2)} average tracked people. `+
+   (summary.status==='live'?'Live observation.':'Recorded observation; clip is no longer live.')+
+   (coverage<75?' Low coverage: the colors may substantially understate activity.':'')+
+   (namedZones.length?' Within configured zones: '+namedZones.map(z=>`${z.name}: ${z.seconds.toFixed(1)} person-seconds`).join(' · ')+'. These are total observed times, not size-normalized densities.':'');
+}
 $('camera').onchange=()=>choose($('camera').value);
+$('heatWindow').onchange=()=>{if(sessions[selected]?.frames){refreshHeat(selected).catch(e=>notice(e.message))}};
 $('add').onclick=withError(add);$('remove').onclick=withError(remove);
 $('start').onclick=withError(async()=>{await api('/api/live/start/'+encodeURIComponent(selected),{method:'POST'});lastLive='';await poll();notice('Monitoring started. First processed frame will appear shortly.')});
 $('stop').onclick=withError(async()=>{await api('/api/live/stop/'+encodeURIComponent(selected),{method:'POST'});lastLive='';preview=false;await poll();notice('Monitoring stopped. Observations can be exported.')});
@@ -186,6 +213,6 @@ $('mark').onclick=()=>{if(!$('feed').getAttribute('src')){notice('Preview or sta
 $('canvas').onclick=e=>{if(!drawing)return;const r=$('canvas').getBoundingClientRect();vertices.push([Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))]);draw()};
 $('undo').onclick=()=>{vertices.pop();draw()};$('cancel').onclick=()=>{drawing=false;vertices=[];$('videoWrap').classList.remove('marking');draw()};$('finish').onclick=withError(finish);
 new ResizeObserver(draw).observe($('videoWrap'));window.addEventListener('resize',()=>paintTrend(chartPoints[selected]||[]));
-loadConfig().then(async()=>{await loadDemoCatalog();poll();setInterval(poll,1800)}).catch(e=>notice(e.message));
+loadConfig().then(async()=>{await loadDemoCatalog();poll();pollLayoutOverall();setInterval(poll,1800);setInterval(pollLayoutOverall,3500)}).catch(e=>notice(e.message));
 </script>
 </body></html>

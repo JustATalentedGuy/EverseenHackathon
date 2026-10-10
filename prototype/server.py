@@ -13,9 +13,11 @@ from .core import validate_config,propose_zones
 from .run import run
 from .sources import resolve_source
 from .live import LiveManager
+from .topology import validate_layout, full_report
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=ROOT/'prototype'/'site.json'
 DEMO_CATALOG=ROOT/'prototype'/'demo_catalog.json'
+LAYOUT=ROOT/'prototype'/'floor_layout.json'
 app=FastAPI(title='Everseen setup')
 lock=threading.Lock(); job={'status':'idle'}
 live=LiveManager(ROOT)
@@ -36,6 +38,35 @@ def index(): return FileResponse(ROOT/'prototype'/'dashboard.html')
 
 @app.get('/setup')
 def setup(): return FileResponse(ROOT/'prototype'/'index.html')
+
+@app.get('/layout')
+def layout_page(): return FileResponse(ROOT/'prototype'/'layout.html')
+
+@app.get('/static/layout.js')
+def layout_script():return FileResponse(ROOT/'prototype'/'layout.js', media_type='text/javascript')
+
+def load_layout():
+    if not LAYOUT.exists():return {'version':1,'sections':[]}
+    return json.loads(LAYOUT.read_text(encoding='utf-8'))
+
+@app.get('/api/layout')
+def get_layout():return load_layout()
+
+@app.put('/api/layout')
+def put_layout(payload:dict):
+    try: validate_layout(payload,load())
+    except (ValueError,TypeError,KeyError) as exc:raise HTTPException(422,str(exc))
+    normalized={'version':1,'sections':payload['sections']}
+    with lock:
+        LAYOUT.parent.mkdir(parents=True,exist_ok=True)
+        tmp=LAYOUT.with_suffix('.tmp')
+        tmp.write_text(json.dumps(normalized,indent=2,ensure_ascii=False),encoding='utf-8')
+        tmp.replace(LAYOUT)
+    return {'saved':True,'sections':len(normalized['sections'])}
+
+@app.get('/api/layout/analytics')
+def layout_analytics():
+    return full_report(load_layout(),load(),live.stats())
 
 @app.get('/api/config')
 def get_config(): return load()
@@ -91,7 +122,7 @@ def activate_demo(demo_id:str):
     config=load()
     old=next((c for c in config['cameras'] if c.get('demo_catalog_id')==demo_id),None)
     if old:return {'id':old['id'],'already_added':True}
-    if len(config['cameras'])>=8:raise HTTPException(422,'Maximum eight configured cameras. Remove an unused one first.')
+    if len(config['cameras'])>=128:raise HTTPException(422,'Maximum 128 configured sources for this local installation.')
     try:
         source,_=resolve_source(item['source'],ROOT)
         import hashlib
@@ -120,7 +151,7 @@ def add_camera(camera:dict):
     source=str(camera.get('source','')).strip()
     if not name: raise HTTPException(422,'Camera name is required')
     config=load()
-    if len(config['cameras']) >= 8: raise HTTPException(422,'Maximum eight configured cameras')
+    if len(config['cameras']) >= 128: raise HTTPException(422,'Maximum 128 configured sources for this local installation')
     stem=re.sub(r'[^a-z0-9_-]+','_',name.lower()).strip('_')[:32] or 'camera'
     taken={c['id'] for c in config['cameras']}
     cid=stem; counter=2
@@ -236,12 +267,20 @@ def live_video(camera_id:str):
                              headers={'Cache-Control':'no-store'})
 
 @app.get('/api/live/heat/{camera_id}.jpg')
-def live_heat(camera_id:str):
+def live_heat(camera_id:str, window_s:int=120):
     cam=live.get(camera_id)
     if cam is None: raise HTTPException(404,'Start camera first')
-    jpg=cam.heatmap_jpeg()
+    if window_s not in (30,120,300):raise HTTPException(422,'Choose a heatmap window of 30, 120 or 300 seconds')
+    jpg=cam.heatmap_jpeg(window_s)
     if jpg is None: return Response(status_code=204)
     return Response(jpg,media_type='image/jpeg',headers={'Cache-Control':'no-store'})
+
+@app.get('/api/live/heat/{camera_id}/summary')
+def live_heat_summary(camera_id:str, window_s:int=120):
+    cam=live.get(camera_id)
+    if cam is None:raise HTTPException(404,'Start camera first')
+    if window_s not in (30,120,300):raise HTTPException(422,'Choose a heatmap window of 30, 120 or 300 seconds')
+    return cam.heatmap_summary(window_s)
 
 @app.get('/api/live/events/{camera_id}')
 def live_events(camera_id:str):

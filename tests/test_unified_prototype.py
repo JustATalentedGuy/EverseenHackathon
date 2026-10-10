@@ -176,6 +176,11 @@ class EndpointTests(unittest.TestCase):
         self.assertEqual(r.text,'{"camera":"first"}\n')
         self.assertNotIn('content-length',r.headers)
 
+    def test_heatmap_api_rejects_unsupported_time_ranges(self):
+        with patch.object(server.live,'get',return_value=object()):
+            self.assertEqual(self.client.get('/api/live/heat/first.jpg?window_s=45').status_code,422)
+            self.assertEqual(self.client.get('/api/live/heat/first/summary?window_s=999').status_code,422)
+
 
 if __name__ == '__main__':
     unittest.main()

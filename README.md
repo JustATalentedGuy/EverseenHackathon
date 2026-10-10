@@ -21,6 +21,8 @@ See **[Unified prototype guide](prototype/INTEGRATION.md)** for the two-reposito
 
 **Retail demo footage catalog:** Open the home dashboard to use **Curated demonstration footage**. Research-sourced clips are prepared and checked by `scripts/prepare_retail_demo.py` and `scripts/test_retail_demo.py`; source credits, reuse conditions, intended demonstrations, and limitations are in [prototype/DEMO_FOOTAGE.md](prototype/DEMO_FOOTAGE.md). Third-party video bytes and local validation runs remain excluded from Git.
 
+**Everseen 2.0 floor intelligence:** use the **Layout Design & Topology** tab (`http://127.0.0.1:8791/layout`) to design and resize floor-plan sections, link them to camera zones, inspect a rotatable 3D occupancy view and review conservative topology-aware redistribution suggestions. An aggregated section table also appears at the bottom of Live Operations. Read [prototype/V2_LAYOUT.md](prototype/V2_LAYOUT.md) for mapping semantics, graph assumptions, aggregation rules, limitations, and tests.
+
 The setup helper acquires the official pretrained YOLO11n asset through Ultralytics and official CAVIAR videos/labels. Dataset provenance and hashes are retained in [the manifest](datasets/caviar/manifest.json). The existing evaluated baseline's SHA256 is recorded in [selection.json](experiments/deadline/selection.json).
 
 ## What is included

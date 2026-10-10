@@ -29,16 +29,19 @@ def main():
         time.sleep(args.seconds)
         status = next(c for c in client.get('/api/live/status').json()['cameras'] if c['id'] == camera_id)
         heat = client.get(f'/api/live/heat/{camera_id}.jpg')
+        heat_summary = client.get(f'/api/live/heat/{camera_id}/summary?window_s=30')
         record = client.get(f'/api/live/events/{camera_id}')
         report = client.get(f'/api/live/report/{camera_id}.csv')
         result = {'camera': camera_id, 'status': status['status'], 'frames': status['frames'],
                   'heat_http': heat.status_code, 'heat_bytes': len(heat.content),
+                  'heat_summary_http':heat_summary.status_code,
+                  'heat_summary':heat_summary.json() if heat_summary.status_code==200 else None,
                   'events_http': record.status_code, 'event_lines': len(record.text.splitlines()),
                   'csv_http': report.status_code, 'csv_rows': len(report.text.splitlines()),
                   'elapsed_seconds': args.seconds,
                   'stats': status['zones'], 'output': status['output']}
         print(json.dumps(result, indent=2))
-        if status['frames'] <= 0 or any(r.status_code != 200 for r in (heat, record, report)):
+        if status['frames'] <= 0 or any(r.status_code != 200 for r in (heat, heat_summary, record, report)):
             raise AssertionError('Model, source, event, CSV or heatmap integration did not produce output')
     finally:
         live.stop(camera_id)

@@ -40,6 +40,10 @@ with sync_playwright() as p:
         page.wait_for_function('Number(document.querySelector("#frameInfo").textContent.match(/\\d+/)?.[0] || 0) > 0',
                                timeout=50000)
         expect(page.locator('#csv')).to_be_visible()
+        expect(page.locator('#heatBrief')).to_contain_text('observed person-seconds',timeout=15000)
+        page.locator('#heatWindow').select_option('30')
+        expect(page.locator('#heatWindow')).to_have_value('30')
+        expect(page.locator('#heat')).to_have_attribute('src',__import__('re').compile(r'window_s=30'),timeout=15000)
         page.screenshot(path=str(OUT / 'unified_dashboard_desktop.png'), full_page=True)
         page.set_viewport_size({'width':390,'height':844})
         page.screenshot(path=str(OUT / 'unified_dashboard_mobile.png'), full_page=True)
