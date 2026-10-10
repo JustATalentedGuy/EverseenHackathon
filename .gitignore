@@ -127,3 +127,6 @@ tools/check_calibration.py
 .env
 .env.local
 *.key
+
+# Private hackathon presentation workspace
+/hackathon_presentation/
