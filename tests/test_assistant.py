@@ -237,6 +237,28 @@ def test_dead_zone_answer_is_caveated():
         assert 'not proof' in text.lower() or 'cannot see' in text.lower()
 
 
+def test_analytics_questions_report_the_store_not_a_document():
+    """"what analytics do you have" must never return a pasted research excerpt."""
+    with tempfile.TemporaryDirectory() as tmp:
+        a = make_assistant(tmp)
+        for question in ['tell me about analytics', 'what analytics do you have',
+                         'show me the analytics', 'which metrics do you track']:
+            result = a.answer(question)
+            assert result['route'] == 'metric', f'{question} -> {result["route"]}'
+            text = result['answer']
+            for leak in ('Research date', 'Scope:', 'METRICS_AND_BOTTLENECK', 'From '):
+                assert leak not in text, f'{question} leaked {leak!r}: {text[:120]}'
+
+
+def test_document_front_matter_is_never_spoken():
+    import prototype.assistant as A
+    text = ('Research date: 2026-10-04 Scope: section mapping and bottleneck detection for the study. '
+            'A review recommendation is the same zone staying above its operator threshold for a while.')
+    out = A._plain(text, 'what is a review cue')
+    assert 'Research date' not in out and 'Scope:' not in out, out
+    assert 'review recommendation' in out.lower(), out
+
+
 def test_camera_discovery_uses_the_live_manager_api():
     """LiveManager exposes `cameras`, not `sessions`; reading the wrong one hid all data."""
     with tempfile.TemporaryDirectory() as tmp:

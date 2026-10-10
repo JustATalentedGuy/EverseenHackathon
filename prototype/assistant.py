@@ -56,6 +56,8 @@ METRIC_INTENTS = [
     ('dead',      r'(dead[ _-]?zone|dead ?spot|underused|under[ -]?used|unused|empty|deserted|idle|never used)'),
     ('trends',    r'(trend|over time|last \d+|peak(est)? time|when did|history|first \d+)'),
     ('summary',   r'(summar|overview|status|how is|how\'s|report|brief|everything)'),
+    ('metrics',   r'\b(analytics|what can you (tell|measure|see)|what do you (track|measure|have)|'
+                 r'what metrics|which metrics|what data|your data)\b'),
     ('dwell',     r'(dwell|linger|lingering|how long|stay|staying|stayed)'),
     ('occupancy', rf'({NUM_WORDS}|occupancy)'),
     ('entries',   r'(track entries|entries|tracks|how many times|repeat)'),
@@ -238,6 +240,9 @@ def _plain(text, query='', max_sentences=4, max_chars=520):
             continue                      # a capitalised start means a real sentence
         if re.match(r'^(see|refer to|details in|for full|read )\b', sentence, re.I):
             continue                      # a cross-reference is not an explanation
+        if re.match(r'^(research date|scope|status|version|updated|author|date|project|'
+                    r'final decision|baseline|algorithm|preparation)\s*:', sentence, re.I):
+            continue                      # document front-matter, not an explanation
         if len(sentence.split()) < 5:
             continue
         out.append((sentence, set(re.findall(r'[a-z]{4,}', (query or '').lower()))))
@@ -329,6 +334,33 @@ class Assistant:
             return {'has_layout': True, 'sections': [], 'cues': []}
         return {'has_layout': True, 'sections': data, 'cues': cues}
 
+    def ingest(self):
+        """Refresh the knowledge corpus from current analytics (called on a timer)."""
+        try:
+            from . import assistant_ingest
+        except Exception:
+            return None
+        context = self.context() or {}
+        status = context.get('status')
+        config = context.get('config')
+        if not status or not config:
+            return None
+        report = None
+        try:
+            from . import topology
+            layout_path = Path(ROOT) / 'prototype' / 'floor_layout.json'
+            if layout_path.exists():
+                import json as _json
+                report = topology.full_report(_json.loads(layout_path.read_text(encoding='utf-8')),
+                                              config, status)
+        except Exception:
+            report = None
+        manifest = assistant_ingest.ingest(status=status, report=report)
+        # refresh the retrieval corpus too, otherwise the new documents are invisible
+        from . import assistant_docs as _docs
+        self.docs = _docs.build_index(ROOT)
+        return manifest
+
     @staticmethod
     def _underused(sections):
         """The same rule topology.insights uses: measured, quiet, and not flagged.
@@ -409,6 +441,12 @@ class Assistant:
                 return {'ok': True, 'route': 'document', 'answer': self.compose_doc(question, payload),
                         'sources': [d['source'] for d in payload['definitions']],
                         'measurement': payload['measurement'], 'zones': [], 'cues': []}
+            # No camera is running, but the corpus still holds the last ingested snapshot,
+            # so answer from it and say when it was taken rather than claiming there is
+            # nothing to report.
+            archived = self._compose_from_corpus(question, asks_for_rule)
+            if archived:
+                return archived
             return {'ok': False, 'route': 'no_data',
                     'answer': 'No camera is monitoring right now, so there is nothing to report. '
                               'Start a camera on the dashboard and ask again.'}
@@ -466,6 +504,44 @@ class Assistant:
         return {'ok': True, 'route': route, 'answer': answer, 'spoken': spoken,
                 'sources': self._sources(payload, route),
                 'measurement': health, 'zones': zones, 'cues': payload['cues']}
+
+    def _compose_from_corpus(self, question, asks_for_rule=False):
+        """Answer from an ingested snapshot when nothing is running right now."""
+        try:
+            from . import assistant_docs as _docs
+            from . import assistant_ingest
+        except Exception:
+            return None
+        prefer = OPERATIONAL_DOCS if asks_for_rule else None
+        hits = self.docs.search(question, top=3, only=prefer) or []
+        ingested = [h for h in hits if _docs.KNOWLEDGE_DIR in h.get('source', '')]
+        stamp = assistant_ingest.latest_stamp()
+        if not ingested or not stamp:
+            return None
+        best = ingested[0]
+        lines = []
+        for line in (best.get('text') or '').split('\n'):
+            text = line.strip().lstrip('- ').strip()
+            if not text or text.startswith('#'):
+                continue
+            if any(word in text.lower() for word in question.lower().split() if len(word) > 3):
+                lines.append(text)
+        if not lines:
+            lines = [l.strip().lstrip('- ').strip() for l in (best.get('text') or '').split('\n')
+                     if l.strip().startswith('- ')][:2]
+        if not lines:
+            return None
+        when = stamp.replace('T', ' ').replace('+00:00', ' UTC')
+        detail = ' '.join(lines[:2])
+        return {'ok': True, 'route': 'archived',
+                'answer': ('No camera is running right now, so this is the last recorded snapshot from %s, '
+                           'not what is happening this second: %s. Start a camera and I will keep watching.'
+                           % (when, detail)),
+                'sources': [best['source']], 'snapshot_at': stamp,
+                'spoken': ('No camera is running, so I am reading you the last snapshot from %s. %s. '
+                           'Start a camera and I will keep watching.' % (when, detail.rstrip('.'))),
+                'measurement': {'state': 'no_data', 'reliable': False, 'text': 'No camera is monitoring'},
+                'zones': [], 'cues': []}
 
     def _search(self, question, top=3, prefer=None, definitions=False):
         """Search the project documents and the ingested analytics corpus.
@@ -726,7 +802,7 @@ class Assistant:
             return lead + ('Over the last %ss, %s peaked at %s observed people with a mean of %s across %s samples.'
                            % (_fmt(trend['window_s']), label, _fmt(trend['peak']), _fmt(trend['mean'], 2), trend['samples']))
 
-        if intent == 'summary':
+        if intent in ('summary', 'metrics'):
             return lead + self._compose_story(zones, cues, p.get('trend'))
 
         # occupancy
@@ -818,7 +894,7 @@ class Assistant:
             return ('%s%s has averaged %s people and peaked at %s. Want me to keep watching it?'
                     % (trust, label, say_count(round(trend['mean'])), say_count(trend['peak'])))
 
-        if intent == 'summary':
+        if intent in ('summary', 'metrics'):
             if not top:
                 return '%sNothing to report yet. Start a camera and I will watch it for you. ' % trust
             if cues:

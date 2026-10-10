@@ -240,7 +240,15 @@ class BriefingService:
             except Exception as error:            # never let the loop kill the app
                 append_log({'at': datetime.now(timezone.utc).isoformat(timespec='seconds'),
                             'status': 'error', 'detail': str(error)[:200]})
-            await asyncio.sleep(20)
+            # Keep the assistant's corpus current while a camera is running, so a question
+            # asked when nothing is live can still be answered from the last snapshot.
+            try:
+                refresh = getattr(self.assistant, 'ingest', None)
+                if refresh is not None:
+                    await asyncio.to_thread(refresh)
+            except Exception:
+                pass
+            await asyncio.sleep(30)
 
     def stop(self):
         self._stop.set()
