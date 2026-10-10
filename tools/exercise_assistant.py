@@ -35,7 +35,10 @@ CASES = [
     ('which zone is most crowded', {'metric', 'document'}, ('DOI:', '**', 'None'), ()),
 
     # --- documentation -----------------------------------------------------
-    ('what does partial visible dwell mean', {'document'}, ('None',), ('dwell',)),
+    ('what does partial visible dwell mean', {'concept'}, ('None', 'C_k'), ('dwell',)),
+    ('what is a bottleneck', {'concept'}, ('C_k', 'integral'), ('spike',)),
+    ('what is a dead zone', {'concept'}, ('None',), ('measured',)),
+    ('what is occupancy', {'concept'}, ('None',), ('feet',)),
     ('what is the measurement limitation', {'document', 'limits'}, ('None',), ()),
     ('how accurate is this', {'document'}, ('None',), ()),
 

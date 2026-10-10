@@ -35,31 +35,6 @@
           ],
           "crowd_threshold": 3,
           "role": "aisle"
-        },
-        {
-          "id": "store_entrance",
-          "semantic_id": "store_entrance",
-          "label": "Store entrance",
-          "polygon": [
-            [
-              0.6,
-              0.03
-            ],
-            [
-              0.72,
-              0.02
-            ],
-            [
-              0.75,
-              0.46
-            ],
-            [
-              0.61,
-              0.47
-            ]
-          ],
-          "crowd_threshold": 2,
-          "role": "entrance"
         }
       ],
       "demo_catalog_id": "cctv_multi_aisle",
@@ -76,19 +51,19 @@
           "label": "Upper walkway",
           "polygon": [
             [
-              0.0,
+              0,
               0.03
             ],
             [
-              1.0,
-              0.0
+              1,
+              0
             ],
             [
-              1.0,
+              1,
               0.22
             ],
             [
-              0.0,
+              0,
               0.26
             ]
           ],
