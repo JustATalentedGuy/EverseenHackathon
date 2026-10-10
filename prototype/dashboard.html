@@ -3,73 +3,31 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Everseen | Store Intelligence</title>
-<style>
-:root{font-family:Inter,Segoe UI,Arial,sans-serif;background:#09121b;color:#ecf4fa;--card:#121f2b;--border:#263846;--muted:#9caebd;--aqua:#65e2c9;--amber:#f3bf70}
-*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer;border:1px solid #365261;border-radius:9px;padding:10px 14px;color:#eef6f6;background:#213442}button:hover{border-color:var(--aqua)}button:disabled{opacity:.5;cursor:wait}button.primary{background:var(--aqua);color:#06352e;border-color:var(--aqua);font-weight:750}
-input,select{background:#101e2a;color:#edf7ff;border:1px solid #344a59;border-radius:9px;padding:11px;width:100%;min-width:0}label{display:block;color:var(--muted);font-size:13px;margin-bottom:7px}
-.shell{max-width:1600px;margin:auto;padding:22px 30px 50px}header{border-bottom:1px solid var(--border);background:#0e1923}.top{max-width:1600px;margin:auto;padding:18px 30px;display:flex;align-items:center;gap:18px;justify-content:space-between}.brand{font-size:23px;letter-spacing:-1px;font-weight:800}.brand em{color:var(--aqua);font-style:normal}.nav{display:flex;align-items:center;gap:14px}.nav a{color:var(--muted);text-decoration:none;font-size:14px}.nav a.active{color:var(--aqua)}.tag{border:1px solid #34524b;background:#18372f;border-radius:20px;color:var(--aqua);font-size:12px;padding:7px 11px}
-h1{font-size:clamp(26px,3vw,38px);margin:8px 0 6px;letter-spacing:-1.2px}h2{font-size:18px;margin:0 0 16px}h3{margin:0 0 9px;font-size:15px}p{color:var(--muted);line-height:1.55;margin:6px 0 12px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--aqua);font-weight:800}.intro{display:flex;align-items:center;justify-content:space-between;gap:24px}.hint{max-width:630px}.card{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:19px;min-width:0}.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:24px 0}.kpi small{color:var(--muted);font-size:12px}.kpi b{display:block;font-size:29px;margin:6px 0 3px;letter-spacing:-1px}.kpi p{font-size:12px;margin:0}.columns{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(330px,1fr);gap:16px;align-items:start}.columns>div{display:contents}.subtle{color:var(--muted);font-size:12px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:15px}.toolbar select{width:auto;max-width:240px}.toolbar button{padding:9px 11px}.pill{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:6px 10px;background:#283b47;font-size:12px;color:#c8d8df}.pill:before{content:'';width:7px;height:7px;border-radius:50%;background:#8795a2}.pill.live:before{background:var(--aqua)}.pill.failed:before{background:#ef8279}
-.video-frame{background:#050b10;border:1px solid #2c4353;border-radius:10px;position:relative;overflow:hidden;min-height:220px;display:grid;place-items:center}.video-frame img{display:block;width:100%;height:auto;min-height:220px;object-fit:contain}.video-frame canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.video-frame.marking canvas{pointer-events:auto;cursor:crosshair}.placeholder{position:absolute;text-align:center;color:#788c98;background:#050b10a9;padding:30px;max-width:100%}.video-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:13px;flex-wrap:wrap}.video-foot small{color:var(--muted)}.formrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:10px}.formrow button{grid-column:1/-1}.section-list{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 0}.section-chip{background:#1c3a40;border:1px solid #356269;padding:8px 9px;border-radius:8px;font-size:12px}.section-chip button{padding:0 4px;background:none;border:none;color:#eea7a7;margin-left:6px}.divider{border-top:1px solid var(--border);margin:16px 0}.mini{font-size:12px}.controls{display:flex;flex-wrap:wrap;gap:5px}.heat img{width:100%;border-radius:9px;display:block;min-height:180px;background:#0b141d}.empty{border:1px dashed #3f5262;border-radius:10px;padding:20px;color:var(--muted);text-align:center;font-size:13px}.analytics{margin-top:16px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse}th{text-align:left;font-weight:500;font-size:12px;color:var(--muted);white-space:nowrap}td,th{padding:11px;border-bottom:1px solid var(--border)}td{font-size:13px}td strong{color:var(--aqua)}.alerts{display:grid;gap:8px}.alert{padding:11px;border-radius:9px;border:1px solid #806334;background:#3c3024;color:#f3deb8;font-size:13px}.note{background:#142b32;border:1px solid #294852;border-radius:10px;padding:12px 15px;color:#a6d2cc;font-size:12px;line-height:1.6}.chart{width:100%;height:130px;display:block;background:#0c1925;border-radius:10px}.statusline{min-height:20px;color:var(--aqua);font-size:13px;margin:9px 0}.muted{color:var(--muted)}.small-link{color:var(--aqua);text-decoration:none;font-size:13px}.sectionheader{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}#heat{object-fit:contain}#zoneName{max-width:230px}
-@media(max-width:1050px){.columns>div{display:contents}
-.columns{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}}@media(max-width:630px){.top,.shell{padding-left:15px;padding-right:15px}.intro{display:block}.kpis{gap:8px}.card{padding:13px}.formrow{grid-template-columns:1fr}.nav{gap:8px}.brand{font-size:19px}.tag{display:none}}
-.section-list{display:grid;gap:8px}.section-chip{display:flex;flex-wrap:wrap;align-items:center;gap:7px}.section-chip span{min-width:130px;flex:1}.section-chip select{width:115px;padding:6px}.section-chip input{width:70px;padding:6px}.section-chip button{padding:6px 8px;margin:0;color:#eef6f6;background:#213442;border:1px solid #365261}
-.demo-list{display:grid;gap:10px;max-height:465px;overflow:auto;padding-right:3px}.demo-item{border:1px solid #315064;background:#112634;padding:13px;border-radius:10px}.demo-item h3{font-size:14px;margin:0 0 3px}.demo-item p{font-size:12px;margin:5px 0}.demo-item .demo-foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.demo-item button{padding:6px 9px;font-size:12px}.demo-item .demo-license{color:#f5c38a}.demo-item .demo-ready{color:#88deb5}.demo-item .demo-missing{color:#a8b9c7}
-.heat-header{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}.heat-header h2{margin:0}.heat-select{width:auto;padding:6px 9px;font-size:12px}.heat-key{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin:12px 0 7px}.heat-key span{font-size:11px;text-align:center;color:#fff;padding:8px 2px;border-radius:5px}.heat-key span:nth-child(1){background:#4480e2}.heat-key span:nth-child(2){background:#37bf89;color:#092a27}.heat-key span:nth-child(3){background:#f5b744;color:#34240a}.heat-key span:nth-child(4){background:#ed4441}.heat-brief{font-size:13px;color:#d6ecec;line-height:1.55;padding:10px 12px;border-radius:9px;border:1px solid #355b60;background:#132b31;margin:10px 0}
-.viewtabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}.viewtab{background:#14212b;border:1px solid var(--border);color:var(--muted);padding:9px 15px;border-radius:9px;font-size:13px;cursor:pointer}.viewtab:hover{color:#dceaf2;border-color:#3c5b6c}.viewtab.active{background:#123a3f;border-color:#2f7d76;color:var(--aqua)}.card[data-view],.note[data-view]{display:none}body[data-view="live"] .card[data-view="live"],body[data-view="live"] .note[data-view="live"],body[data-view="footage"] .card[data-view="footage"]{display:block}
-/* ---- agent launcher: a four-pointed sparkle in a blue-to-violet gradient ---- */
-#agentLauncher{position:fixed;top:18px;right:20px;z-index:60;width:54px;height:54px;border-radius:50%;
- border:1px solid #35506b;background:radial-gradient(circle at 30% 25%,#1b2b3d,#0d1620);cursor:pointer;
- display:grid;place-items:center;box-shadow:0 6px 22px rgba(0,0,0,.45);transition:transform .18s ease,box-shadow .18s ease}
-#agentLauncher:hover{transform:scale(1.06);box-shadow:0 8px 26px rgba(108,140,255,.35)}
-#agentLauncher:focus-visible{outline:2px solid #8ab4ff;outline-offset:3px}
-#agentLauncher svg{width:30px;height:30px}
-.spark-path{transform-origin:32px 32px;animation:sparkPulse 4.5s ease-in-out infinite}
-@keyframes sparkPulse{0%,100%{transform:scale(1) rotate(0deg);opacity:.95}50%{transform:scale(1.08) rotate(8deg);opacity:1}}
-@media (prefers-reduced-motion:reduce){.spark-path{animation:none}}
-#agentLauncher.thinking .spark-path{animation:sparkThink .9s ease-in-out infinite}
-@keyframes sparkThink{0%,100%{transform:scale(.86) rotate(-12deg)}50%{transform:scale(1.16) rotate(12deg)}}
-.agent-badge{position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;
- background:#61e7be;color:#06231d;font-size:11px;font-weight:600;display:grid;place-items:center}
-/* ---- drawer ---- */
-#agentDrawer[hidden],#agentScrim[hidden],#agentLauncher[hidden]{display:none!important}
-#agentScrim{position:fixed;inset:0;background:#03080cb3;z-index:59;backdrop-filter:blur(2px)}
-#agentDrawer{position:fixed;top:0;right:0;height:100vh;width:min(560px,94vw);z-index:60;display:flex;flex-direction:column;
- background:linear-gradient(180deg,#0e1b26,#0a141d 40%);border-left:1px solid #2c4353;
- box-shadow:-18px 0 46px rgba(0,0,0,.55);animation:drawerIn .22s ease}
-@keyframes drawerIn{from{transform:translateX(24px);opacity:.4}to{transform:none;opacity:1}}
-@media (prefers-reduced-motion:reduce){#agentDrawer{animation:none}}
-.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #22384a}
-.drawer-title{font-weight:600;letter-spacing:.2px}
-.drawer-head button{background:none;border:none;color:#9fb6c6;font-size:24px;line-height:1;cursor:pointer;padding:0 4px;border-radius:6px}
-.drawer-head button:hover{color:#e6f2f8}
-.drawer-body{padding:16px 18px 28px;overflow-y:auto;flex:1}
-.drawer-body .card{margin-top:0 !important;margin-bottom:16px}
-</style></head>
+<link rel="stylesheet" href="/assets/dashboard.css"></head>
 <body data-view="live">
-<header><div class="top"><div class="brand">EVERSEEN<em> / intelligence</em></div><div class="nav"><a class="active" href="/">Live operations</a><a href="/layout">Layout design &amp; topology</a><a href="/setup">Replay &amp; calibration</a><span class="tag">LOCAL ANALYTICS</span></div></div></header>
+<header><div class="top"><div class="brand">EV<span>ER</span>SEEN <em> / intelligence</em></div><div class="nav"><a class="active" href="/">Overview</a><a href="/layout">Floor plan</a><a href="/setup">Advanced setup</a></div></div></header>
 <div class="shell">
- <div class="intro"><div><div class="eyebrow">RETAIL OPERATIONS · CAMERA INTELLIGENCE</div><h1>See how spaces are actually used.</h1><p class="hint">Monitor observed occupancy, visible dwell and motion across your store. Every insight is traceable to camera observations—not an inferred customer identity.</p></div><a href="/setup" class="small-link">Analyze recorded footage →</a></div>
- <div class="kpis"><div class="card kpi"><small>ACTIVE VIDEO SOURCES</small><b id="activeCount">0</b><p>Connected inference sessions</p></div><div class="card kpi"><small>PEOPLE · SELECTED CAMERA</small><b id="peopleCount">—</b><p>Not a store-unique count</p></div><div class="card kpi"><small>ZONES CONFIGURED</small><b id="zoneCount">0</b><p>Floor regions defined by operators</p></div><div class="card kpi"><small>REVIEW RECOMMENDATIONS</small><b id="cueCount">0</b><p>Sustained observations only</p></div></div>
- <nav class="viewtabs" role="tablist" aria-label="Dashboard sections"><button class="viewtab active" data-view="live" role="tab" aria-selected="true">Live operations</button><button class="viewtab" data-view="footage" role="tab" aria-selected="false">Footage library</button></nav>
+ <div class="intro"><div><div class="eyebrow">STORE INTELLIGENCE / LIVE OVERVIEW</div><h1>Know your store at a glance.</h1><p class="hint">Live activity, dwell patterns, and the areas that need attention.</p></div><a href="/layout" class="intro-action">Explore floor plan <span aria-hidden="true">↗</span></a></div>
+ <div class="kpis"><div class="card kpi"><small>CAMERAS MONITORING</small><b id="activeCount">0</b><p>Live feeds</p></div><div class="card kpi"><small>PEOPLE IN VIEW</small><b id="peopleCount">—</b><p>Selected camera</p></div><div class="card kpi"><small>TRACKED AREAS</small><b id="zoneCount">0</b><p>Configured zones</p></div><div class="card kpi"><small>NEEDS ATTENTION</small><b id="cueCount">0</b><p>Review signals</p></div></div>
+ <nav class="viewtabs" role="tablist" aria-label="Dashboard sections"><button class="viewtab active" data-view="live" role="tab" aria-selected="true">Live dashboard</button><button class="viewtab" data-view="footage" role="tab" aria-selected="false">Camera library</button></nav>
 <div class="columns">
   <div>
-   <div class="card" data-view="live"><div class="sectionheader"><h2>Camera monitoring</h2><span id="statePill" class="pill">Not started</span></div>
-    <div class="toolbar"><select id="camera" aria-label="Select camera"></select><button class="primary" id="start">Start monitoring</button><button id="stop">Stop</button><button id="snapshot">Show original frame</button><a id="download" class="small-link" hidden>Export event log</a><a id="csv" class="small-link" hidden>Export zone report (.csv)</a></div>
+   <div class="card" id="monitorCard" data-view="live"><div class="sectionheader"><h2>Live camera</h2><span id="statePill" class="pill">Not started</span></div>
+    <div class="toolbar"><select id="camera" aria-label="Select camera"></select><button class="primary" id="start">Start monitoring</button><button id="stop">Stop</button><button id="snapshot">Preview</button><a id="download" class="small-link" hidden>Events ↓</a><a id="csv" class="small-link" hidden>Report ↓</a></div>
     <div id="videoWrap" class="video-frame"><img id="feed" alt="Live annotated camera feed"><canvas id="canvas" aria-label="Zone boundary editor"></canvas><div id="placeholder" class="placeholder">Choose a camera and start monitoring, or preview its original video frame.</div></div>
-    <div class="video-foot"><small id="frameInfo">No frames processed yet</small><div class="controls"><button id="mark">Draw new zone</button><button id="undo">Undo vertex</button><button id="finish">Finish zone</button><button id="cancel">Cancel</button></div></div>
-    <div style="margin-top:12px"><label for="zoneName">New zone name</label><input id="zoneName" placeholder="e.g. Checkout / dairy aisle" maxlength="70"><div class="formrow" style="margin-top:9px"><div><label for="zoneRole">Business area type</label><select id="zoneRole"><option value="checkout">Checkout</option><option value="aisle">Aisle</option><option value="display">Product display</option><option value="entrance">Entrance</option><option value="other" selected>Other / general</option></select></div><div><label for="zoneThreshold">Review threshold (observed people)</label><input type="number" id="zoneThreshold" min="1" max="100" value="4"></div></div><div id="zones" class="section-list"></div></div>
-    <p class="subtle">Draw the visible floor (3+ points). Saving zone changes stops active sessions; restart to use the new layout. Overlapping equal-priority zones are intentionally marked ambiguous.</p><div id="notice" class="statusline" role="status"></div>
+    <div class="video-foot"><small id="frameInfo">Ready to monitor</small></div>
+    <details class="zone-editor" id="zoneEditor"><summary>Manage camera zones <span>Draw boundaries, edit areas</span></summary><div class="zone-editor-body"><div class="controls"><button id="mark">Draw new zone</button><button id="undo">Undo</button><button id="finish">Save shape</button><button id="cancel">Cancel</button></div>
+    <div class="zone-name-row"><label for="zoneName">Zone name</label><input id="zoneName" placeholder="Checkout, produce aisle, entrance…" maxlength="70"><div class="formrow"><div><label for="zoneRole">Area type</label><select id="zoneRole"><option value="checkout">Checkout</option><option value="aisle">Aisle</option><option value="display">Display</option><option value="entrance">Entrance</option><option value="other" selected>Other</option></select></div><div><label for="zoneThreshold">Review threshold</label><input type="number" id="zoneThreshold" min="1" max="100" value="4"></div></div></div><div id="zones" class="section-list"></div></div></details><div id="notice" class="statusline" role="status"></div>
    </div>
-    <div class="card analytics" data-view="live"><div class="sectionheader"><h2>Zone performance</h2><small class="subtle">Rolling 5-minute samples</small></div><div class="tablewrap"><table><thead><tr><th>Zone / type</th><th>Now</th><th>Peak</th><th>P90</th><th>Track IDs seen</th><th>Visible dwell (partial)</th></tr></thead><tbody id="metrics"><tr><td colspan="6" class="muted">Start a camera to see measurements.</td></tr></tbody></table></div><h3 style="margin-top:20px">Observed occupancy trend</h3><canvas id="trend" class="chart"></canvas><p class="subtle" id="trendLabel">Select a camera with configured zones to see its occupancy.</p></div>
+    <div class="card analytics" id="metricsCard" data-view="live"><div class="sectionheader"><h2>Area performance</h2><small class="subtle">Last 5 minutes</small></div><div class="tablewrap"><table><thead><tr><th>Area</th><th>Now</th><th>Peak</th><th>P90</th><th>Tracks</th><th>Dwell*</th></tr></thead><tbody id="metrics"><tr><td colspan="6" class="muted">Start a camera to see measurements.</td></tr></tbody></table></div><h3 style="margin-top:20px">Activity trend</h3><canvas id="trend" class="chart"></canvas><p class="subtle" id="trendLabel">Select a camera with configured zones to see its occupancy.</p></div>
   </div>
   <div>
-   <div class="card heat" data-view="live"><div class="heat-header"><h2>Where did people spend observed time?</h2><label for="heatWindow" style="margin:0">Time range <select id="heatWindow" class="heat-select"><option value="30">Last 30 seconds</option><option value="120" selected>Last 2 minutes</option><option value="300">Last 5 minutes</option></select></label></div><p class="subtle">Each square is 1/16 of camera width × 1/9 of camera height. Stronger colors mean more continuously observed tracked presence, not necessarily more unique shoppers.</p><img id="heat" alt="Image-area grid showing average continuously observed tracked people per tile"><div class="heat-key" aria-label="Fixed scale for observed average tracked people per image tile"><span>Blue: 0–0.25</span><span>Green: 0.25–0.5</span><span>Amber: 0.5–1</span><span>Red: 1+</span></div><p class="subtle">Color scale: average tracked people per image square during the selected period. An uncolored square means no *verified continuous* presence, not guaranteed absence. This fixed scale does not change between camera frames.</p><div id="heatBrief" class="heat-brief" aria-live="polite">Start monitoring to calculate observed person-time.</div><p class="subtle">Example: 1 person continuously visible in the same square for 10 of the observed 20 seconds = 10 person-seconds, or 0.5 average people in that square. Tracking gaps are excluded; no physical floor area, sales or unique visitors are inferred.</p></div>
-   <div class="card" style="margin-top:16px" data-view="live"><h2>What should I check?</h2><div id="health" class="note" role="status">Waiting for camera observations.</div><div id="alerts" class="alerts" style="margin-top:12px"><div class="empty">No recommendations yet.</div></div><p class="subtle">Review cues require multiple sustained, recent observations. They are not proof of queueing, customer intent or lost sales.</p></div>
-   <div class="card" style="margin-top:16px" data-view="footage"><div class="sectionheader"><h2>Curated demonstration footage</h2><span id="demoTotal" class="subtle">Checking local videos…</span></div><p class="subtle">Choose a validated sample to add it as a camera. Videos are stored locally; the GitHub repository contains only source credits and download instructions.</p><div id="demoList" class="demo-list" aria-live="polite"><div class="empty">Loading available samples…</div></div><p class="subtle">Research-only footage must not be used for commercial marketing without appropriate rights. Predictions are not verified counts.</p></div>
-    <div class="card" style="margin-top:16px" data-view="footage"><h2>Add a camera / video URL</h2><div class="formrow"><div><label for="newName">Camera name</label><input id="newName" placeholder="Aisle A" maxlength="80"></div><div><label for="newSource">RTSP, HTTP video, webcam index or local file</label><input id="newSource" placeholder="rtsp://… / https://… / 0 / samples/demo.mp4"></div><button id="add">+ Add camera source</button></div><p class="subtle">Files must already be inside the project. Webcam “0” uses the first connected camera. Credentials in URLs remain in the local configuration—use a dedicated demo account.</p><div class="divider"></div><div class="toolbar"><button id="remove">Remove selected camera</button><a href="/setup" class="small-link">Advanced setup: source, calibration, inference options ↗</a></div></div>
-   <div class="note" style="margin-top:16px" data-view="live"><strong>Measurement integrity</strong><div>Tracks are camera-local, and “track entries” can repeat when a tracker loses somebody. Dwell is accrued only between reliable successive sightings. No full-store unique visitors, completed checkouts or cross-camera identity matching are claimed without appropriate verification.</div>
-</div>
-<section class="card analytics" style="margin-top:18px" id="overall-layout"><div class="sectionheader"><h2>Whole-store section analytics</h2><a href="/layout" class="small-link">Design or map the floor plan →</a></div><p>Mapped camera-zone observations across the schematic store. Each section uses the highest fresh camera view, not the sum of possibly overlapping feeds.</p><div class="tablewrap"><table><thead><tr><th>Floor section</th><th>Observed now</th><th>P90 occupancy · 5m</th><th>Partial visible dwell</th><th>Live / mapped cameras</th><th>State</th></tr></thead><tbody id="layoutOverall"><tr><td colspan="6" class="muted">Load or create a layout to see combined section analytics.</td></tr></tbody></table></div><p class="subtle">Section counts are not verified unique customers; overlapping physical areas and unsynchronized cameras may still duplicate people.</p></section>
+   <div class="card heat" id="heatCard" data-view="live"><div class="heat-header"><h2>Activity heatmap</h2><label for="heatWindow" style="margin:0">Period <select id="heatWindow" class="heat-select"><option value="30">30 sec</option><option value="120" selected>2 min</option><option value="300">5 min</option></select></label></div><img id="heat" alt="Camera heatmap of observed presence"><div class="heat-key" aria-label="Average observed presence per image cell"><span>Low</span><span>Moderate</span><span>Busy</span><span>Very busy</span></div><div id="heatBrief" class="heat-brief" aria-live="polite">Start monitoring to see activity.</div></div>
+   <div class="card" id="insightsCard" data-view="live"><div class="sectionheader"><h2>Insights</h2><span class="pill">Live signals</span></div><div id="alerts" class="alerts"><div class="empty">No areas need attention yet.</div></div><details class="health-details"><summary>Camera health</summary><div id="health" class="note" role="status">Waiting for camera observations.</div></details></div>
+   <div class="card" id="libraryCard" data-view="footage"><div class="sectionheader"><h2>Video library</h2><span id="demoTotal" class="subtle">Loading…</span></div><div id="demoList" class="demo-list" aria-live="polite"><div class="empty">Loading videos…</div></div></div>
+    <div class="card" id="sourceCard" data-view="footage"><h2>Add camera</h2><div class="formrow"><div><label for="newName">Name</label><input id="newName" placeholder="Entrance camera" maxlength="80"></div><div><label for="newSource">Video URL / local path</label><input id="newSource" placeholder="rtsp://… or camera.mp4"></div><button class="primary" id="add">Add source</button></div><div class="divider"></div><div class="toolbar"><button id="remove">Remove selected camera</button><a href="/setup" class="small-link">Advanced calibration →</a></div></div>
+</div></div>
+<section class="card analytics" id="overall-layout"><div class="sectionheader"><h2>Store-wide area analytics</h2><a href="/layout" class="small-link">View floor plan ↗</a></div><div class="tablewrap"><table><thead><tr><th>Area</th><th>People*</th><th>Peak range</th><th>Dwell</th><th>Feeds</th><th>State</th></tr></thead><tbody id="layoutOverall"><tr><td colspan="6" class="muted">Connect your cameras to floor areas to see combined analytics.</td></tr></tbody></table></div><p class="subtle">*Camera-observed counts, not deduplicated store visitors. Dwell is partial.</p></section>
 </div>
 <button id="agentLauncher" aria-label="Open the store assistant" aria-expanded="false" title="Ask the store">
  <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
@@ -90,21 +48,21 @@ h1{font-size:clamp(26px,3vw,38px);margin:8px 0 6px;letter-spacing:-1.2px}h2{font
   <span class="drawer-title">Store assistant</span>
   <button id="agentClose" aria-label="Close the assistant">&times;</button>
  </div>
- <div class="drawer-body"><div class="card" id="assistantCard">
-     <div class="sectionheader"><h2>Ask the store</h2><small class="subtle" id="assistCaps">voice and text</small></div>
-     <p class="subtle">Answers come from the same measured values shown above: observed zone occupancy, peak, 90th percentile, partial visible dwell, observed track entries and review cues. The assistant never calculates or estimates a figure itself.</p>
+  <div class="agent-tabs" role="tablist"><button type="button" class="active" data-agent-view="assistant" aria-selected="true">Ask Everseen</button><button type="button" data-agent-view="briefing" aria-selected="false">WhatsApp briefings</button></div>
+  <div class="drawer-body"><div class="card" id="assistantCard">
+     <div class="sectionheader"><h2>Ask Everseen</h2><small class="subtle" id="assistCaps">Ready</small></div>
      <div class="toolbar" style="margin-top:10px">
       <input id="askInput" placeholder="How many people are in the checkout zone right now?" maxlength="300" style="flex:1;min-width:240px">
       <button class="primary" id="askSend">Ask</button>
       <button id="askMic" title="Speak your question" hidden>Speak</button>
       <button id="askSpeak" title="Read the answer aloud" hidden>Read aloud</button>
      </div>
-     <div id="askReply" class="note" style="margin-top:12px" role="status">Ask about the current zone status, dwell analytics, active review cues or what a documented metric means.</div>
+     <div id="askReply" class="note" style="margin-top:12px" role="status">Ask about activity, dwell time or areas needing attention.</div>
      <p class="subtle" id="askSources" style="margin-top:8px"></p>
     </div>
     <div class="card" id="briefCard">
-     <div class="sectionheader"><h2>Hourly briefing to managers</h2><small class="subtle">WhatsApp · free · no business account</small></div>
-     <p class="subtle">Builds a short briefing from the current measurements and hands it to WhatsApp with the message pre-filled. Each recipient presses send once. Uses WhatsApp’s official click-to-chat link, so there is no business account, no template approval and no cost.</p>
+     <div class="sectionheader"><h2>Manager briefings</h2><small class="subtle">WhatsApp</small></div>
+     <p class="subtle">Prepare a summary for each manager. WhatsApp opens with the message ready; you confirm sending it.</p>
      <div class="divider"></div>
      <div class="sectionheader"><h2 style="font-size:15px">Recipients</h2><small class="subtle" id="briefCount">none yet</small></div>
      <div class="tablewrap"><table><thead><tr><th>Name</th><th>WhatsApp number (E.164)</th><th>Role</th><th></th></tr></thead><tbody id="briefRecipients"><tr><td colspan="4" class="muted">No recipients configured.</td></tr></tbody></table></div>
@@ -127,325 +85,5 @@ h1{font-size:clamp(26px,3vw,38px);margin:8px 0 6px;letter-spacing:-1.2px}h2{font
 </div>
 </aside>
 <div id="agentScrim" hidden></div>
-<script>
-'use strict';
-const $ = id => document.getElementById(id);
-let config = null, selected = null, cloudStt = false, sessions = {}, demoCatalog = [], drawing = false, vertices = [], preview = false, lastLive = '', chartPoints = {}, polling = false, heatRequest = 0;
-const ctx = $('canvas').getContext('2d');
-function notice(s){$('notice').textContent=s}
-async function api(url, options){const r=await fetch(url,options);const j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.detail||`Request failed (${r.status})`);return j}
-const jsonOpt=(method,data)=>({method,headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-function cam(){return config?.cameras?.find(c=>c.id===selected)}
-function choose(id){selected=id;heatRequest++;$('heatBrief').textContent='Start monitoring to calculate observed person-time.';$('camera').value=id; vertices=[]; drawing=false; $('videoWrap').classList.remove('marking');preview=false;lastLive='';$('feed').removeAttribute('src');$('heat').removeAttribute('src');$('placeholder').hidden=false;draw();renderZoneList();renderSelected();}
-function renderCameraList(){const keep=selected;const select=$('camera');select.replaceChildren();for(const c of config.cameras){const o=document.createElement('option');o.value=c.id;o.textContent=c.name||c.id;select.append(o)}choose(config.cameras.some(c=>c.id===keep)?keep:config.cameras[0].id)}
-async function loadConfig(){config=await api('/api/config');renderCameraList()}
-async function loadDemoCatalog(){const data=await api('/api/demo/catalog');demoCatalog=data.videos;renderDemoCatalog()}
-function renderDemoCatalog(){
- const holder=$('demoList');holder.replaceChildren();
- const available=demoCatalog.filter(x=>x.available).length;
- $('demoTotal').textContent=`${available} ready / ${demoCatalog.length} sources`;
- for(const d of demoCatalog){
-  const card=document.createElement('div');card.className='demo-item';
-  const title=document.createElement('h3');title.textContent=d.title;card.append(title);
-  const description=document.createElement('p');description.textContent=d.best_use;card.append(description);
-  const warning=document.createElement('p');warning.textContent=d.caveat;card.append(warning);
-  const licence=document.createElement('p');licence.className='demo-license';licence.textContent=d.license;card.append(licence);
-  const foot=document.createElement('div');foot.className='demo-foot';
-  const status=document.createElement('span');status.className=d.available?'demo-ready':'demo-missing';
-  status.textContent=d.available?`${d.measurements.estimated_duration_s}s · ${d.measurements.resolution} · sampled detections ${d.measurements.mean_predicted_persons}/frame`:'Not ready: '+d.state;
-  foot.append(status);
-  const action=document.createElement('button');action.textContent=d.available?'Add demo camera':'Download / validate locally';action.disabled=!d.available;
-  action.onclick=withError(async()=>{
-    if(d.research_only&&!confirm('This video is research-only / permission-limited. Use it only where the license and permissions allow. Continue locally?'))return;
-    const result=await api('/api/demo/activate/'+encodeURIComponent(d.id),{method:'POST'});
-    await loadConfig();choose(result.id);$('zoneRole').value=d.role||'other';
-    $('snapshot').click();notice('Demo clip ready. Draw and save the relevant floor zone, then click Start monitoring. '+d.caveat);
-  });foot.append(action);
-  const link=document.createElement('a');link.href=d.source_page;link.target='_blank';link.rel='noopener noreferrer';link.className='small-link';link.textContent='Dataset / credits ↗';foot.append(link);
-  card.append(foot);holder.append(card);
- }
-}
-function withError(fn){return async()=>{try{await fn()}catch(e){notice(e.message)}}}
-function mode(){return sessions[selected]?.status||'not started'}
-function renderSelected(){
- const s=sessions[selected], live=s&&['starting','connecting','live','reconnecting'].includes(s.status);
- $('statePill').textContent=s?.status||'Not started';
- $('statePill').className='pill'+(s?.status==='live'?' live':s?.status==='failed'?' failed':'');
- $('start').disabled=!!live;$('stop').disabled=!live;$('remove').disabled=config?.cameras?.length<=1;
- $('download').hidden=!s||!s.frames;$('csv').hidden=!s||!s.frames;
- $('download').href='/api/live/events/'+encodeURIComponent(selected);
- $('csv').href='/api/live/report/'+encodeURIComponent(selected)+'.csv';
- const m=s?.measurement;
- $('frameInfo').textContent=s?`${s.frames} samples · ${s.elapsed_s}s session · ${m?.observed_fps_30s??0} processed FPS (target ${m?.target_hz??0})`:'No frames processed yet';
- const health=$('health');
- if(!m)health.textContent='Start monitoring to measure camera health.';
- else health.textContent=({observing:'Observing',limited:'Limited throughput',warming:'Warming up',stale:'Stale / not live',no_data:'Waiting for frames'}[m.state]||m.state)+
-   ` · Last analyzed frame: ${m.age_s??'—'}s ago · Decode/inference lag: ${m.capture_lag_s??'—'}s · ${m.backend??'model'} backend. `+m.note;
- if(s?.error)notice(s.error);
- if(live&&lastLive!==selected){$('feed').src='/api/live/video/'+encodeURIComponent(selected)+'?t='+Date.now();$('placeholder').hidden=true;preview=false;lastLive=selected;}
- else if(!live&&!preview&&lastLive){$('feed').removeAttribute('src');$('placeholder').hidden=false;lastLive='';}
- renderMetrics(s);
-}
-function renderZoneList(){
- const el=$('zones');el.replaceChildren();
- for(const [i,z] of (cam()?.zones||[]).entries()){
-  const wrap=document.createElement('div');wrap.className='section-chip';
-  const name=document.createElement('span');name.textContent=z.label||z.id;wrap.append(name);
-  const role=document.createElement('select');role.setAttribute('aria-label','Area type for '+name.textContent);
-  for(const v of ['checkout','aisle','display','entrance','other']){let option=document.createElement('option');option.value=v;option.textContent=v;role.append(option)}
-  role.value=z.role||'other';wrap.append(role);
-  const threshold=document.createElement('input');threshold.type='number';threshold.min='1';threshold.max='100';threshold.value=z.crowd_threshold??4;
-  threshold.title='Minimum observed people for sustained review cue';threshold.setAttribute('aria-label','Review threshold for '+name.textContent);wrap.append(threshold);
-  const update=document.createElement('button');update.textContent='Save limits';update.onclick=withError(async()=>{
-    const old={...z},n=Number(threshold.value);
-    if(!Number.isInteger(n)||n<1||n>100)throw Error('Set a review threshold between 1 and 100');
-    z.role=role.value;z.crowd_threshold=n;
-    try{await save()}catch(e){Object.assign(z,old);throw e}
-    notice('Business area type and review threshold saved. Restart live monitoring.');renderZoneList();
-  });wrap.append(update);
-  const remove=document.createElement('button');remove.textContent='Remove';remove.onclick=withError(async()=>{
-    const before=[...cam().zones];cam().zones.splice(i,1);
-    try{await save()}catch(e){cam().zones=before;throw e}
-    notice('Zone removed. Restart monitoring to apply.');renderZoneList();draw();
-  });wrap.append(remove);el.append(wrap);
- }draw();
-}
-function draw(){const c=$('canvas'),rect=$('feed').getBoundingClientRect();const width=rect.width||768,height=rect.height||432;c.width=Math.max(1,Math.round(width));c.height=Math.max(1,Math.round(height));ctx.clearRect(0,0,c.width,c.height);function poly(pts,color,close){if(!pts?.length)return;ctx.beginPath();ctx.moveTo(pts[0][0]*c.width,pts[0][1]*c.height);for(const p of pts.slice(1))ctx.lineTo(p[0]*c.width,p[1]*c.height);if(close)ctx.closePath();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.stroke();if(close){ctx.fillStyle=color+'26';ctx.fill()}for(const p of pts){ctx.fillStyle=color;ctx.beginPath();ctx.arc(p[0]*c.width,p[1]*c.height,3,0,7);ctx.fill()}}for(const z of (cam()?.zones||[]))poly(z.polygon,'#61e7be',true);poly(vertices,'#f4c16f',false)}
-async function save(){const r=await api('/api/config',jsonOpt('PUT',config));sessions={};chartPoints={};preview=false;lastLive='';$('feed').removeAttribute('src');$('placeholder').hidden=false;renderSelected();return r}
-async function add(){const name=$('newName').value.trim(),source=$('newSource').value.trim();if(!name||!source)throw Error('Enter both a camera name and source');const r=await api('/api/cameras',jsonOpt('POST',{name,source}));$('newName').value='';$('newSource').value='';config=await api('/api/config');renderCameraList();choose(r.id);sessions={};notice('Camera added. Preview it, draw zones, then start monitoring.')}
-async function remove(){if(!confirm('Remove this camera and its zone configuration?'))return;await api('/api/cameras/'+encodeURIComponent(selected),{method:'DELETE'});sessions={};await loadConfig();notice('Camera removed from configuration. Saved live observations remain on disk.')}
-async function finish(){
- if(vertices.length<3)throw Error('Click at least three floor points');
- const name=$('zoneName').value.trim(),n=Number($('zoneThreshold').value);
- if(!name)throw Error('Enter the new zone name');
- if(!Number.isInteger(n)||n<1||n>100)throw Error('Set a review threshold between 1 and 100');
- const id='zone_'+Date.now(),zone={id,label:name,semantic_id:id,
-   role:$('zoneRole').value,crowd_threshold:n,persistence_s:5,polygon:vertices.map(p=>[...p])};
- cam().zones.push(zone);try{await save()}catch(e){cam().zones.pop();throw e}
- vertices=[];drawing=false;$('videoWrap').classList.remove('marking');$('zoneName').value='';renderZoneList();
- notice('Zone saved. Monitoring sessions stopped to avoid stale data.');
-}
-function renderMetrics(s){
- const tbody=$('metrics');tbody.replaceChildren();const zones=s?.zones||[];
- let total=0;
- for(const z of zones){
-  if(z.occupancy!==null)total+=z.occupancy;
-  const tr=document.createElement('tr');
-  for(const t of [`${z.label} / ${z.role}`,z.occupancy??'—',z.peak,z.p90_occupancy_5m,
-      z.observed_track_entries,`${z.partial_dwell_mean_s}s (${z.partial_dwell_tracks} tracks)`]){
-    const td=document.createElement('td');td.textContent=t;tr.append(td);
-  }tbody.append(tr);
- }
- if(!zones.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;
-   td.textContent='Draw a zone and start monitoring to see metrics.';tr.append(td);tbody.append(tr)}
- const alerts=$('alerts');alerts.replaceChildren();
- if(!s?.inspection_cues?.length){const e=document.createElement('div');e.className='empty';
-   e.textContent=s?.measurement?.state==='limited'?'Recommendations suppressed: camera throughput is below the configured target.':'No sustained, fresh review cues for this camera.';alerts.append(e)}
- for(const a of s?.inspection_cues||[]){const el=document.createElement('div');el.className='alert';
-   const name=document.createElement('strong');name.textContent=a.zone_label+' · Review';el.append(name);
-   for(const t of [a.message,a.reason,a.note]){let p=document.createElement('p');p.textContent=t;el.append(p)}alerts.append(el)}
- const hist=chartPoints[selected]||(chartPoints[selected]=[]);
- if(s?.measurement?.fresh&&s.last_observation_s!==null&&hist.at(-1)?.t!==s.last_observation_s){
-   hist.push({t:s.last_observation_s,n:total});if(hist.length>60)hist.shift()}
- paintTrend(hist);
- $('trendLabel').textContent=`${s?.name||cam()?.name||selected}: sampled selected-camera occupancy across ${hist.length} dashboard observations (not unique shoppers)`;
-}
-function paintTrend(hist){const canvas=$('trend'),dpr=window.devicePixelRatio||1,w=canvas.clientWidth||600,h=canvas.clientHeight||130;canvas.width=w*dpr;canvas.height=h*dpr;const c=canvas.getContext('2d');c.scale(dpr,dpr);c.clearRect(0,0,w,h);c.strokeStyle='#284154';for(let k=1;k<=3;k++){c.beginPath();c.moveTo(15,h*k/4);c.lineTo(w-10,h*k/4);c.stroke()}if(!hist.length)return;const max=Math.max(1,...hist.map(x=>x.n)),minT=hist[0].t,maxT=hist[hist.length-1].t;c.beginPath();c.strokeStyle='#65e2c9';c.lineWidth=3;hist.forEach((p,i)=>{const x=16+(w-32)*(maxT>minT?(p.t-minT)/(maxT-minT):i/Math.max(hist.length-1,1)),y=h-14-(h-30)*p.n/max;i?c.lineTo(x,y):c.moveTo(x,y)});c.stroke();c.fillStyle='#9caebd';c.font='12px Segoe UI';c.fillText('0',2,h-3);c.fillText(String(max),2,12)}
-async function poll(){
- if(polling)return;polling=true;
- try{
-  const data=await api('/api/live/status');sessions=Object.fromEntries(data.cameras.map(c=>[c.id,c]));
-  $('activeCount').textContent=data.cameras.filter(c=>['starting','connecting','live','reconnecting'].includes(c.status)).length;
-  $('zoneCount').textContent=config?.cameras?.reduce((n,c)=>n+c.zones.length,0)||0;
-  const s=sessions[selected];
-  $('peopleCount').textContent=s?.measurement?.fresh?s.zones.reduce((n,z)=>n+(z.occupancy??0),0):'—';
-  $('cueCount').textContent=data.cameras.reduce((n,c)=>n+c.inspection_cues.length,0);
-  if(selected){renderSelected();if(s?.frames){await refreshHeat(selected);}}
- }catch(e){notice(e.message)}finally{polling=false}
-}
-async function pollLayoutOverall(){
- try{const data=await api('/api/layout/analytics'),tbody=$('layoutOverall');tbody.replaceChildren();
-  if(!data.sections.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;td.textContent='No sections created yet. Open Layout Design to build a floor plan.';tr.append(td);tbody.append(tr);return}
-  for(const s of data.sections){const tr=document.createElement('tr');
-   for(const v of [s.name,s.count??'—',s.p90_5m??'—',s.partial_dwell_s==null?'—':s.partial_dwell_s+' s',s.active_feeds+' / '+s.configured_links,s.state==='observing'?'Observed':'No live data']){const td=document.createElement('td');td.textContent=v;tr.append(td)}tbody.append(tr)}
- }catch(e){const tbody=$('layoutOverall');tbody.textContent='Layout analytics temporarily unavailable: '+e.message}
-}
-async function refreshHeat(cameraId){
- const request=++heatRequest, windowS=Number($('heatWindow').value);
- const summary=await api('/api/live/heat/'+encodeURIComponent(cameraId)+'/summary?window_s='+windowS);
- if(request!==heatRequest || selected!==cameraId)return;
- $('heat').src='/api/live/heat/'+encodeURIComponent(cameraId)+'.jpg?window_s='+windowS+'&v='+Date.now();
- const brief=$('heatBrief');
- if(summary.elapsed_s<=0){brief.textContent='Waiting for two consecutive observations of a tracked person before assigning observed time.';return;}
- const coverage=Math.round(summary.coverage_fraction*100);
- const namedZones=Object.entries(summary.zones_person_seconds||{}).map(([id,seconds])=>({
-   name:cam()?.zones?.find(z=>z.id===id)?.label||id,seconds
- })).sort((a,b)=>b.seconds-a.seconds).slice(0,3);
- brief.textContent=`${summary.person_seconds.toFixed(1)} observed person-seconds across the camera image · `+
-   `${coverage}% of the ${summary.elapsed_s.toFixed(1)}s measured period has adjacent readable frames · `+
-   `hottest square: ${summary.peak_observed_avg_people_per_tile.toFixed(2)} average tracked people. `+
-   (summary.status==='live'?'Live observation.':'Recorded observation; clip is no longer live.')+
-   (coverage<75?' Low coverage: the colors may substantially understate activity.':'')+
-   (namedZones.length?' Within configured zones: '+namedZones.map(z=>`${z.name}: ${z.seconds.toFixed(1)} person-seconds`).join(' · ')+'. These are total observed times, not size-normalized densities.':'');
-}
-$('camera').onchange=()=>choose($('camera').value);
-$('heatWindow').onchange=()=>{if(sessions[selected]?.frames){refreshHeat(selected).catch(e=>notice(e.message))}};
-$('add').onclick=withError(add);$('remove').onclick=withError(remove);
-$('start').onclick=withError(async()=>{await api('/api/live/start/'+encodeURIComponent(selected),{method:'POST'});lastLive='';await poll();notice('Monitoring started. First processed frame will appear shortly.')});
-$('stop').onclick=withError(async()=>{await api('/api/live/stop/'+encodeURIComponent(selected),{method:'POST'});lastLive='';preview=false;await poll();notice('Monitoring stopped. Observations can be exported.')});
-$('snapshot').onclick=()=>{preview=true;lastLive='';$('feed').src='/api/frame/'+encodeURIComponent(selected)+'?t='+Date.now();$('placeholder').hidden=true;notice('Original frame preview. Start monitoring for tracked video.');};
-$('feed').onload=()=>{draw();$('placeholder').hidden=true};$('feed').onerror=()=>{if(!lastLive){$('placeholder').hidden=false;notice('Unable to decode a frame. Check that the URL points directly to playable video (not a webpage); some MP4 HTTP servers require fast-start or byte-range support.')}};
-$('mark').onclick=()=>{if(!$('feed').getAttribute('src')){notice('Preview or start the camera first.');return}drawing=true;vertices=[];$('videoWrap').classList.add('marking');notice('Click floor boundary corners. Then choose Finish zone.');draw()};
-$('canvas').onclick=e=>{if(!drawing)return;const r=$('canvas').getBoundingClientRect();vertices.push([Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))]);draw()};
-$('undo').onclick=()=>{vertices.pop();draw()};$('cancel').onclick=()=>{drawing=false;vertices=[];$('videoWrap').classList.remove('marking');draw()};$('finish').onclick=withError(finish);
-new ResizeObserver(draw).observe($('videoWrap'));window.addEventListener('resize',()=>paintTrend(chartPoints[selected]||[]));
-document.querySelectorAll('.viewtab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.viewtab').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false')});b.classList.add('active');b.setAttribute('aria-selected','true');document.body.dataset.view=b.dataset.view;});
-
-/* ---- agent launcher behaviour ---- */
-const agentOpen=()=>{$('agentDrawer').hidden=false;$('agentScrim').hidden=false;$('agentLauncher').setAttribute('aria-expanded','true');$('agentLauncher').hidden=true;$('askInput').focus()};
-const agentClose=()=>{$('agentDrawer').hidden=true;$('agentScrim').hidden=true;$('agentLauncher').setAttribute('aria-expanded','false');$('agentLauncher').hidden=false;$('agentLauncher').focus()};
-$('agentLauncher').onclick=()=>{agentOpen();loadBriefing();initAssistant()};
-$('agentClose').onclick=agentClose;$('agentScrim').onclick=agentClose;
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('agentDrawer').hidden)agentClose()});
-
-loadConfig().then(async()=>{await loadDemoCatalog();poll();pollLayoutOverall();setInterval(poll,1800);setInterval(pollLayoutOverall,3500)}).catch(e=>notice(e.message));
-/* ---------------- assistant (text + voice) ---------------- */
-let lastAnswer='', speechRecognition=null, recorder=null, chunks=[];
-const SUPPORTED='speechSynthesis' in window;
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-let assistantReady=false;
-async function initAssistant(){
- if(assistantReady)return;
- try{
-  const caps=await (await fetch('/api/assistant/capabilities')).json();
-  cloudStt=!!caps.cloud_stt;
-const hasSpeech=!!(window.SpeechRecognition||window.webkitSpeechRecognition)||cloudStt;
-   const lines=[];
-   lines.push(hasSpeech?'voice and text':'text only · this browser has no speech recognition');
-   if(caps.llm)lines.push('local model '+caps.llm_model);else lines.push('no local model, answers are template-based');
-   $('assistCaps').textContent=lines.join(' · ');
-   if(SUPPORTED)$('askSpeak').hidden=false;
-   // Browser speech recognition needs no backend. faster-whisper (caps.speech_to_text) is only
-   // a heavier local fallback, so it must not gate the microphone button.
-   if(hasSpeech){
-    $('askMic').hidden=false;
-    if(window.SpeechRecognition||window.webkitSpeechRecognition){
-     const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-     speechRecognition=new SR();speechRecognition.lang='en-US';speechRecognition.interimResults=false;
-     speechRecognition.onresult=e=>{$('askInput').value=e.results[0][0].transcript;askQuestion()};
-    }
-   }
- }catch(e){}
-}
-async function askQuestion(){
- const question=$('askInput').value.trim();
- if(!question)return;
- $('askReply').textContent='Checking the current observations…';
- try{
-  const r=await (await fetch('/api/assistant/ask',{method:'POST',headers:{'Content-Type':'application/json'},
-   body:JSON.stringify({question,camera_id:selected||null})})).json();
-  lastAnswer=r.answer||'';
-  $('askReply').textContent=r.answer||'No answer.';
-  $('askSources').textContent=(r.sources&&r.sources.length)?('Source: '+r.sources.join(' · ')):'';
-  if(SUPPORTED)speak(lastAnswer);
- }catch(e){$('askReply').textContent='Assistant unavailable: '+e.message}
-}
-$('askSend').onclick=askQuestion;
-$('askInput').addEventListener('keydown',e=>{if(e.key==='Enter')askQuestion()});
-async function recordAndTranscribe(){
- const stream=await navigator.mediaDevices.getUserMedia({audio:true});
- const recorder=new MediaRecorder(stream);const chunks=[];
- recorder.ondataavailable=e=>chunks.push(e.data);
- const stopped=new Promise(r=>recorder.onstop=r);
- recorder.start();$('askMic').textContent='Listening…';
- await new Promise(r=>setTimeout(r,5000));
- recorder.stop();await stopped;stream.getTracks().forEach(t=>t.stop());
- $('askMic').textContent='Transcribing…';
- const body=new FormData();body.append('audio',new Blob(chunks,{type:recorder.mimeType||'audio/webm'}),'clip.webm');
- const response=await fetch('/api/assistant/transcribe',{method:'POST',body});
- const data=await response.json();
- $('askMic').textContent='Speak';
- if(response.ok&&data.text){$('askInput').value=data.text;askQuestion()}
- else{notice(data.detail||'Nothing recognised')}
-}
-$('askMic').onclick=async()=>{
- if(speechRecognition){try{speechRecognition.start();$('askMic').textContent='Listening…'}
-  catch(e){notice('Microphone unavailable: '+e.message)}finally{setTimeout(()=>$('askMic').textContent='Speak',4000)};return}
- if(!cloudStt){notice('This browser has no speech recognition and no transcription key is configured');return}
- try{await recordAndTranscribe()}catch(e){$('askMic').textContent='Speak';notice('Microphone unavailable: '+e.message)}};
-$('askSpeak').onclick=()=>{if(lastAnswer)speak(lastAnswer)};
-function speak(text){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);
- u.rate=1.02;speechSynthesis.speak(u)}catch(e){}}
-
-/* ---------------- briefing ---------------- */
-let briefCfg={recipients:[],frequency_minutes:60,paused:false,frequencies:[15,30,60,120,240,1440]};
-async function loadBriefing(){
- try{
-  briefCfg=await (await fetch('/api/briefing/config')).json();
-  const sel=$('briefFreq');
-  sel.innerHTML=(briefCfg.frequencies||[]).map(m=>`<option value="${m}">${m>=1440?'End of day':m+' minutes'}${m===60?' (default)':''}</option>`).join('');
-  sel.value=briefCfg.frequency_minutes;
-  renderRecipients();
-  renderLog(briefCfg.deliveries||[]);
-  const due=briefCfg.next_due_in_s;
-  $('briefDue').textContent=briefCfg.paused?'paused':(due===null||due===undefined?'counting down to the first briefing':'next in '+Math.floor(due/60)+'m '+due%60+'s');
-  $('briefPause').textContent=briefCfg.paused?'Resume':'Pause';
- }catch(e){$('briefDue').textContent='briefing config unavailable'}
-}
-function renderRecipients(){
- const rows=briefCfg.recipients||[];
- $('briefCount').textContent=rows.length?rows.length+' configured':('none yet — add your number to test');
- $('briefRecipients').innerHTML=rows.length?rows.map((r,i)=>
-  `<tr><td>${esc(r.name)}</td><td>${esc(r.number)}</td><td>${esc(r.role||'')}</td>
-   <td><button data-rm="${i}" style="background:none;border:none;color:#eea7a7">remove</button></td></tr>`).join('')
-  :'<tr><td colspan="4" class="muted">No recipients configured.</td></tr>';
- $('briefRecipients').querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>saveRecipients(rows.filter((_,i)=>i!==+b.dataset.rm)));
-}
-function renderLog(list){
- $('briefLog').innerHTML=list.length?list.slice().reverse().map(d=>
-  `<tr><td>${esc((d.at||'').replace('T',' ').slice(0,19))}</td><td>${esc(d.name||'—')}</td>
-   <td>${esc(({link_ready:'link ready',sent_confirmed:'sent (confirmed)'}[d.status]||d.status||''))}</td><td>${d.link?`<a class="small-link" href="${esc(d.link)}" target="_blank" rel="noopener">open WhatsApp</a> <button class="small-link" data-confirm-at="${esc(d.at)}" data-confirm-num="${esc(d.number)}" style="background:none;border:none;color:#61e7be;cursor:pointer;text-decoration:underline">mark sent</button> <button class="small-link" data-copymsg="${encodeURIComponent(decodeURIComponent((d.link.split('text=')[1]||'')))}" style="background:none;border:none;color:#8fc7ff;cursor:pointer;text-decoration:underline">copy message</button>`:''}</td></tr>`).join('')
-  :'<tr><td colspan="4" class="muted">Nothing sent yet.</td></tr>';
-  $('briefLog').querySelectorAll('[data-confirm-at]').forEach(b=>b.onclick=async()=>{
-   try{await api('/api/briefing/confirm',jsonOpt('POST',{at:b.dataset.confirmAt,number:b.dataset.confirmNum}));
-       b.remove();loadBriefing()}catch(e){notice('Could not confirm: '+e.message)}});
-  $('briefLog').querySelectorAll('[data-copymsg]').forEach(b=>b.onclick=async()=>{
-   try{await navigator.clipboard.writeText(decodeURIComponent(b.dataset.copymsg));b.textContent='copied ✓'}
-   catch(e){b.textContent='copy failed'}});
-}
-async function saveRecipients(recipients){
- try{const r=await (await fetch('/api/briefing/config',{method:'PUT',headers:{'Content-Type':'application/json'},
-  body:JSON.stringify({recipients})})).json();briefCfg=r;renderRecipients()}catch(e){notice('Could not save recipients: '+e.message)}
-}
-$('rcAdd').onclick=()=>{
- const name=$('rcName').value.trim(),number=$('rcNumber').value.trim();
- if(!name||!number){notice('Both a name and a number are required.');return}
- saveRecipients([...(briefCfg.recipients||[]),{name,number,role:'manager'}]);
- $('rcName').value='';$('rcNumber').value='';
-};
-$('briefFreq').onchange=async e=>{await fetch('/api/briefing/config',{method:'PUT',headers:{'Content-Type':'application/json'},
- body:JSON.stringify({frequency_minutes:+e.target.value})});loadBriefing()};
-$('briefPause').onclick=async()=>{await fetch('/api/briefing/config',{method:'PUT',headers:{'Content-Type':'application/json'},
- body:JSON.stringify({paused:!briefCfg.paused})});loadBriefing()};
-$('briefSend').onclick=async()=>{
- const box=$('briefMsg');box.hidden=false;box.textContent='Building the briefing…';
- try{
-  const r=await (await fetch('/api/briefing/send',{method:'POST',headers:{'Content-Type':'application/json'},
-   body:JSON.stringify({camera_id:selected||null})})).json();
-  box.textContent=r.summary.text;
-  if(!(r.deliveries||[]).length){box.textContent+=r.note;return}
-const rows=r.deliveries.map(d=>`<div style="margin-top:8px">${esc(d.name)} · <a class="small-link" href="${esc(d.link)}" target="_blank" rel="noopener">open WhatsApp with the message ready</a> · <button class="small-link" data-copy="${esc(d.link)}" style="background:none;border:none;color:#8fc7ff;cursor:pointer;text-decoration:underline">copy link</button></div>`).join('');
-   box.innerHTML=`<div style="white-space:pre-wrap">${esc(r.summary.text)}</div>${rows}
-    <div class="subtle" style="margin-top:8px">${esc(r.note)}</div>`;
-   box.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{
-    const text=decodeURIComponent((b.dataset.copy.split('text=')[1]||''));
-    try{await navigator.clipboard.writeText(text);b.textContent='message copied ✓'}
-    catch(e){b.textContent='press Ctrl+C on the link above'}});
-   loadBriefing();
- }catch(e){box.textContent='Could not build the briefing: '+e.message}
-};
-initAssistant();loadBriefing();setInterval(loadBriefing,30000);
-
-</script>
+<script src="/assets/dashboard.js"></script>
 </body></html>

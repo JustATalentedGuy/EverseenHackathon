@@ -30,8 +30,8 @@ dist/
 *.pth
 *.onnx
 *.mp4
-# the six store CCTV clips are committed deliberately so site_cctv.json works on a clone
-!data/cctv/*.mp4
+# Operator-supplied CCTV cannot be redistributed without verified rights.
+/data/cctv/*.mp4
 *.mpg
 *.avi
 *.mov
@@ -115,6 +115,8 @@ dist/
 # Assistant + briefing local state (recipient phone numbers, delivery history)
 prototype/assistant_config.json
 runs/assistant/
+prototype/site_runtime.json
+prototype/floor_layout_runtime.json
 
 # local recovery helpers that reference paths outside the repo
 tools/merge_dashboard.py

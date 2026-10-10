@@ -25,7 +25,7 @@ with sync_playwright() as p:
     started_camera=None
     try:
         res=page.goto(BASE+'/layout',wait_until='networkidle');assert res.status==200
-        expect(page.get_by_role('heading',name='Floor plan designer')).to_be_visible()
+        expect(page.get_by_role('heading',name='Layout editor')).to_be_visible()
         expect(page.locator('#editor .edit-tile')).to_have_count(len(previous['sections']))
         page.locator('#starter').click()
         expect(page.locator('#editor .edit-tile')).to_have_count(7)

@@ -1,0 +1,323 @@
+'use strict';
+const $ = id => document.getElementById(id);
+let config = null, selected = null, cloudStt = false, sessions = {}, demoCatalog = [], drawing = false, vertices = [], preview = false, lastLive = '', chartPoints = {}, polling = false, heatRequest = 0;
+const ctx = $('canvas').getContext('2d');
+function notice(s){$('notice').textContent=s}
+async function api(url, options){const r=await fetch(url,options);const j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.detail||`Request failed (${r.status})`);return j}
+const jsonOpt=(method,data)=>({method,headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+function cam(){return config?.cameras?.find(c=>c.id===selected)}
+function choose(id){selected=id;heatRequest++;$('heatBrief').textContent='Start monitoring to calculate observed person-time.';$('camera').value=id; vertices=[]; drawing=false; $('videoWrap').classList.remove('marking');preview=false;lastLive='';$('feed').removeAttribute('src');$('heat').removeAttribute('src');$('placeholder').hidden=false;draw();renderZoneList();renderSelected();}
+ function renderCameraList(){const keep=selected;const select=$('camera');select.replaceChildren();for(const c of config.cameras){const o=document.createElement('option');o.value=c.id;o.textContent=c.name||c.id.replace(/_/g,' ').replace(/\b\w/g,letter=>letter.toUpperCase());select.append(o)}choose(config.cameras.some(c=>c.id===keep)?keep:config.cameras[0].id)}
+async function loadConfig(){config=await api('/api/config');renderCameraList()}
+async function loadDemoCatalog(){const data=await api('/api/demo/catalog');demoCatalog=data.videos;renderDemoCatalog()}
+function renderDemoCatalog(){
+ const holder=$('demoList');holder.replaceChildren();
+ const ready=demoCatalog.filter(x=>x.available);
+ $('demoTotal').textContent=`${ready.length} ready`;
+ if(!ready.length){const empty=document.createElement('div');empty.className='empty';
+   empty.textContent='No optional footage is validated on this machine. Add your own video or use the included demo setup instructions.';holder.append(empty)}
+ for(const d of ready){
+  const card=document.createElement('div');card.className='demo-item';
+  const title=document.createElement('h3');title.textContent=d.title;card.append(title);
+ const description=document.createElement('p');description.textContent=d.scene||d.best_use;card.append(description);
+ card.title=d.caveat||'';
+  const licence=document.createElement('p');licence.className='demo-license';licence.textContent=d.license;card.append(licence);
+  const foot=document.createElement('div');foot.className='demo-foot';
+  const status=document.createElement('span');status.className=d.available?'demo-ready':'demo-missing';
+ status.textContent=d.available?`${d.measurements.estimated_duration_s}s · ${d.measurements.resolution}`:'Not ready · '+d.state;
+  foot.append(status);
+ const action=document.createElement('button');action.textContent=d.available?'Use footage':'Unavailable';action.disabled=!d.available;
+  action.onclick=withError(async()=>{
+    if(d.research_only&&!confirm('This video is research-only / permission-limited. Use it only where the license and permissions allow. Continue locally?'))return;
+    const result=await api('/api/demo/activate/'+encodeURIComponent(d.id),{method:'POST'});
+    await loadConfig();choose(result.id);$('zoneRole').value=d.role||'other';
+    $('snapshot').click();notice('Demo clip ready. Draw and save the relevant floor zone, then click Start monitoring. '+d.caveat);
+  });foot.append(action);
+  const link=document.createElement('a');link.href=d.source_page;link.target='_blank';link.rel='noopener noreferrer';link.className='small-link';link.textContent='Dataset / credits ↗';foot.append(link);
+  card.append(foot);holder.append(card);
+ }
+}
+function withError(fn){return async()=>{try{await fn()}catch(e){notice(e.message)}}}
+function mode(){return sessions[selected]?.status||'not started'}
+function renderSelected(){
+ const s=sessions[selected], live=s&&['starting','connecting','live','reconnecting'].includes(s.status);
+ $('statePill').textContent=s?.status||'Not started';
+ $('statePill').className='pill'+(s?.status==='live'?' live':s?.status==='failed'?' failed':'');
+ $('start').disabled=!!live;$('stop').disabled=!live;$('remove').disabled=config?.cameras?.length<=1;
+ $('download').hidden=!s||!s.frames;$('csv').hidden=!s||!s.frames;
+ $('download').href='/api/live/events/'+encodeURIComponent(selected);
+ $('csv').href='/api/live/report/'+encodeURIComponent(selected)+'.csv';
+ const m=s?.measurement;
+ $('frameInfo').textContent=s?`${s.frames} analyzed frames · ${m?.observed_fps_30s??0} FPS`:'Ready to monitor';
+ const health=$('health');
+ if(!m)health.textContent='Start monitoring to measure camera health.';
+ else health.textContent=({observing:'Observing',limited:'Limited throughput',warming:'Warming up',stale:'Stale / not live',no_data:'Waiting for frames'}[m.state]||m.state)+
+   ` · Last analyzed frame: ${m.age_s??'—'}s ago · Decode/inference lag: ${m.capture_lag_s??'—'}s · ${m.backend??'model'} backend. `+m.note;
+ if(s?.error)notice(s.error);
+ if(live&&lastLive!==selected){$('feed').src='/api/live/video/'+encodeURIComponent(selected)+'?t='+Date.now();$('placeholder').hidden=true;preview=false;lastLive=selected;}
+ else if(!live&&!preview&&lastLive){$('feed').removeAttribute('src');$('placeholder').hidden=false;lastLive='';}
+ renderMetrics(s);
+}
+function renderZoneList(){
+ const el=$('zones');el.replaceChildren();
+ for(const [i,z] of (cam()?.zones||[]).entries()){
+  const wrap=document.createElement('div');wrap.className='section-chip';
+  const name=document.createElement('span');name.textContent=z.label||z.id;wrap.append(name);
+  const role=document.createElement('select');role.setAttribute('aria-label','Area type for '+name.textContent);
+  for(const v of ['checkout','aisle','display','entrance','other']){let option=document.createElement('option');option.value=v;option.textContent=v;role.append(option)}
+  role.value=z.role||'other';wrap.append(role);
+  const threshold=document.createElement('input');threshold.type='number';threshold.min='1';threshold.max='100';threshold.value=z.crowd_threshold??4;
+  threshold.title='Minimum observed people for sustained review cue';threshold.setAttribute('aria-label','Review threshold for '+name.textContent);wrap.append(threshold);
+  const update=document.createElement('button');update.textContent='Save limits';update.onclick=withError(async()=>{
+    const old={...z},n=Number(threshold.value);
+    if(!Number.isInteger(n)||n<1||n>100)throw Error('Set a review threshold between 1 and 100');
+    z.role=role.value;z.crowd_threshold=n;
+    try{await save()}catch(e){Object.assign(z,old);throw e}
+    notice('Business area type and review threshold saved. Restart live monitoring.');renderZoneList();
+  });wrap.append(update);
+  const remove=document.createElement('button');remove.textContent='Remove';remove.onclick=withError(async()=>{
+    const before=[...cam().zones];cam().zones.splice(i,1);
+    try{await save()}catch(e){cam().zones=before;throw e}
+    notice('Zone removed. Restart monitoring to apply.');renderZoneList();draw();
+  });wrap.append(remove);el.append(wrap);
+ }draw();
+}
+function draw(){const c=$('canvas'),rect=$('feed').getBoundingClientRect();const width=rect.width||768,height=rect.height||432;c.width=Math.max(1,Math.round(width));c.height=Math.max(1,Math.round(height));ctx.clearRect(0,0,c.width,c.height);function poly(pts,color,close){if(!pts?.length)return;ctx.beginPath();ctx.moveTo(pts[0][0]*c.width,pts[0][1]*c.height);for(const p of pts.slice(1))ctx.lineTo(p[0]*c.width,p[1]*c.height);if(close)ctx.closePath();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.stroke();if(close){ctx.fillStyle=color+'26';ctx.fill()}for(const p of pts){ctx.fillStyle=color;ctx.beginPath();ctx.arc(p[0]*c.width,p[1]*c.height,3,0,7);ctx.fill()}}for(const z of (cam()?.zones||[]))poly(z.polygon,'#61e7be',true);poly(vertices,'#f4c16f',false)}
+async function save(){const r=await api('/api/config',jsonOpt('PUT',config));sessions={};chartPoints={};preview=false;lastLive='';$('feed').removeAttribute('src');$('placeholder').hidden=false;renderSelected();return r}
+async function add(){const name=$('newName').value.trim(),source=$('newSource').value.trim();if(!name||!source)throw Error('Enter both a camera name and source');const r=await api('/api/cameras',jsonOpt('POST',{name,source}));$('newName').value='';$('newSource').value='';config=await api('/api/config');renderCameraList();choose(r.id);sessions={};notice('Camera added. Preview it, draw zones, then start monitoring.')}
+async function remove(){if(!confirm('Remove this camera and its zone configuration?'))return;await api('/api/cameras/'+encodeURIComponent(selected),{method:'DELETE'});sessions={};await loadConfig();notice('Camera removed from configuration. Saved live observations remain on disk.')}
+async function finish(){
+ if(vertices.length<3)throw Error('Click at least three floor points');
+ const name=$('zoneName').value.trim(),n=Number($('zoneThreshold').value);
+ if(!name)throw Error('Enter the new zone name');
+ if(!Number.isInteger(n)||n<1||n>100)throw Error('Set a review threshold between 1 and 100');
+ const id='zone_'+Date.now(),zone={id,label:name,semantic_id:id,
+   role:$('zoneRole').value,crowd_threshold:n,persistence_s:5,polygon:vertices.map(p=>[...p])};
+ cam().zones.push(zone);try{await save()}catch(e){cam().zones.pop();throw e}
+ vertices=[];drawing=false;$('videoWrap').classList.remove('marking');$('zoneName').value='';renderZoneList();
+ notice('Zone saved. Monitoring sessions stopped to avoid stale data.');
+}
+function renderMetrics(s){
+ const tbody=$('metrics');tbody.replaceChildren();const zones=s?.zones||[];
+ let total=0;
+ for(const z of zones){
+  if(z.occupancy!==null)total+=z.occupancy;
+  const tr=document.createElement('tr');
+  for(const t of [`${z.label} / ${z.role}`,z.occupancy??'—',z.peak,z.p90_occupancy_5m,
+      z.observed_track_entries,`${z.partial_dwell_mean_s}s (${z.partial_dwell_tracks} tracks)`]){
+    const td=document.createElement('td');td.textContent=t;tr.append(td);
+  }tbody.append(tr);
+ }
+ if(!zones.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;
+   td.textContent='Draw a zone and start monitoring to see metrics.';tr.append(td);tbody.append(tr)}
+ const alerts=$('alerts');alerts.replaceChildren();
+ if(!s?.inspection_cues?.length){const e=document.createElement('div');e.className='empty';
+   e.textContent=s?.measurement?.state==='limited'?'Recommendations suppressed: camera throughput is below the configured target.':'No sustained, fresh review cues for this camera.';alerts.append(e)}
+ for(const a of s?.inspection_cues||[]){const el=document.createElement('div');el.className='alert';
+   const name=document.createElement('strong');name.textContent=a.zone_label+' · Review';el.append(name);
+   for(const t of [a.message,a.reason,a.note]){let p=document.createElement('p');p.textContent=t;el.append(p)}alerts.append(el)}
+ const hist=chartPoints[selected]||(chartPoints[selected]=[]);
+ if(s?.measurement?.fresh&&s.last_observation_s!==null&&hist.at(-1)?.t!==s.last_observation_s){
+   hist.push({t:s.last_observation_s,n:total});if(hist.length>60)hist.shift()}
+ paintTrend(hist);
+ $('trendLabel').textContent=`${s?.name||cam()?.name||selected}: sampled selected-camera occupancy across ${hist.length} dashboard observations (not unique shoppers)`;
+}
+function paintTrend(hist){const canvas=$('trend'),dpr=window.devicePixelRatio||1,w=canvas.clientWidth||600,h=canvas.clientHeight||130;canvas.width=w*dpr;canvas.height=h*dpr;const c=canvas.getContext('2d');c.scale(dpr,dpr);c.clearRect(0,0,w,h);c.strokeStyle='#284154';for(let k=1;k<=3;k++){c.beginPath();c.moveTo(15,h*k/4);c.lineTo(w-10,h*k/4);c.stroke()}if(!hist.length)return;const max=Math.max(1,...hist.map(x=>x.n)),minT=hist[0].t,maxT=hist[hist.length-1].t;c.beginPath();c.strokeStyle='#65e2c9';c.lineWidth=3;hist.forEach((p,i)=>{const x=16+(w-32)*(maxT>minT?(p.t-minT)/(maxT-minT):i/Math.max(hist.length-1,1)),y=h-14-(h-30)*p.n/max;i?c.lineTo(x,y):c.moveTo(x,y)});c.stroke();c.fillStyle='#9caebd';c.font='12px Segoe UI';c.fillText('0',2,h-3);c.fillText(String(max),2,12)}
+async function poll(){
+ if(polling)return;polling=true;
+ try{
+  const data=await api('/api/live/status');sessions=Object.fromEntries(data.cameras.map(c=>[c.id,c]));
+  $('activeCount').textContent=data.cameras.filter(c=>['starting','connecting','live','reconnecting'].includes(c.status)).length;
+  $('zoneCount').textContent=config?.cameras?.reduce((n,c)=>n+c.zones.length,0)||0;
+  const s=sessions[selected];
+  $('peopleCount').textContent=s?.measurement?.fresh?s.zones.reduce((n,z)=>n+(z.occupancy??0),0):'—';
+  $('cueCount').textContent=data.cameras.reduce((n,c)=>n+c.inspection_cues.length,0);
+  if(selected){renderSelected();if(s?.frames){await refreshHeat(selected);}}
+ }catch(e){notice(e.message)}finally{polling=false}
+}
+async function pollLayoutOverall(){
+ try{const data=await api('/api/layout/analytics'),tbody=$('layoutOverall');tbody.replaceChildren();
+  if(!data.sections.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;td.textContent='No sections created yet. Open Layout Design to build a floor plan.';tr.append(td);tbody.append(tr);return}
+  for(const s of data.sections){const tr=document.createElement('tr');
+   for(const v of [s.name,s.count??'—',s.p90_5m??'—',s.partial_dwell_s==null?'—':s.partial_dwell_s+' s',s.active_feeds+' / '+s.configured_links,s.state==='observing'?'Observed':'No live data']){const td=document.createElement('td');td.textContent=v;tr.append(td)}tbody.append(tr)}
+ }catch(e){const tbody=$('layoutOverall');tbody.textContent='Layout analytics temporarily unavailable: '+e.message}
+}
+async function refreshHeat(cameraId){
+ const request=++heatRequest, windowS=Number($('heatWindow').value);
+ const summary=await api('/api/live/heat/'+encodeURIComponent(cameraId)+'/summary?window_s='+windowS);
+ if(request!==heatRequest || selected!==cameraId)return;
+ $('heat').src='/api/live/heat/'+encodeURIComponent(cameraId)+'.jpg?window_s='+windowS+'&v='+Date.now();
+ const brief=$('heatBrief');
+ if(summary.elapsed_s<=0){brief.textContent='Waiting for enough observations to map activity.';return;}
+ const coverage=Math.round(summary.coverage_fraction*100);
+ const namedZones=Object.entries(summary.zones_person_seconds||{}).map(([id,seconds])=>({
+   name:cam()?.zones?.find(z=>z.id===id)?.label||id,seconds
+ })).sort((a,b)=>b.seconds-a.seconds).slice(0,3);
+ brief.textContent=`${summary.person_seconds.toFixed(1)} person-seconds of activity · ${coverage}% coverage`+
+   (coverage<75?' · Some movement may be missing.':'')+
+   (namedZones.length?' · Most activity: '+namedZones.map(z=>z.name).join(', '):'');
+}
+$('camera').onchange=()=>choose($('camera').value);
+$('heatWindow').onchange=()=>{if(sessions[selected]?.frames){refreshHeat(selected).catch(e=>notice(e.message))}};
+$('add').onclick=withError(add);$('remove').onclick=withError(remove);
+$('start').onclick=withError(async()=>{await api('/api/live/start/'+encodeURIComponent(selected),{method:'POST'});lastLive='';await poll();notice('Monitoring started. First processed frame will appear shortly.')});
+$('stop').onclick=withError(async()=>{await api('/api/live/stop/'+encodeURIComponent(selected),{method:'POST'});lastLive='';preview=false;await poll();notice('Monitoring stopped. Observations can be exported.')});
+$('snapshot').onclick=()=>{preview=true;lastLive='';$('feed').src='/api/frame/'+encodeURIComponent(selected)+'?t='+Date.now();$('placeholder').hidden=true;notice('Original frame preview. Start monitoring for tracked video.');};
+$('feed').onload=()=>{draw();$('placeholder').hidden=true};$('feed').onerror=()=>{if(!lastLive){$('placeholder').hidden=false;notice('Unable to decode a frame. Check that the URL points directly to playable video (not a webpage); some MP4 HTTP servers require fast-start or byte-range support.')}};
+$('mark').onclick=()=>{if(!$('feed').getAttribute('src')){notice('Preview or start the camera first.');return}drawing=true;vertices=[];$('videoWrap').classList.add('marking');notice('Click floor boundary corners. Then choose Finish zone.');draw()};
+$('canvas').onclick=e=>{if(!drawing)return;const r=$('canvas').getBoundingClientRect();vertices.push([Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))]);draw()};
+$('undo').onclick=()=>{vertices.pop();draw()};$('cancel').onclick=()=>{drawing=false;vertices=[];$('videoWrap').classList.remove('marking');draw()};$('finish').onclick=withError(finish);
+new ResizeObserver(draw).observe($('videoWrap'));window.addEventListener('resize',()=>paintTrend(chartPoints[selected]||[]));
+document.querySelectorAll('.viewtab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.viewtab').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false')});b.classList.add('active');b.setAttribute('aria-selected','true');document.body.dataset.view=b.dataset.view;});
+
+/* ---- agent launcher behaviour ---- */
+const agentOpen=()=>{$('agentDrawer').hidden=false;$('agentScrim').hidden=false;$('agentLauncher').setAttribute('aria-expanded','true');$('agentLauncher').hidden=true;$('askInput').focus()};
+const agentClose=()=>{$('agentDrawer').hidden=true;$('agentScrim').hidden=true;$('agentLauncher').setAttribute('aria-expanded','false');$('agentLauncher').hidden=false;$('agentLauncher').focus()};
+$('agentLauncher').onclick=()=>{agentOpen();loadBriefing();initAssistant()};
+$('agentClose').onclick=agentClose;$('agentScrim').onclick=agentClose;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('agentDrawer').hidden)agentClose()});
+document.querySelectorAll('[data-agent-view]').forEach(button=>button.addEventListener('click',()=>{
+ const view=button.dataset.agentView;
+ document.querySelector('.drawer-body').dataset.agentView=view;
+ document.querySelectorAll('[data-agent-view]').forEach(tab=>{
+   const active=tab===button;tab.classList.toggle('active',active);tab.setAttribute('aria-selected',String(active));
+ });
+ if(view==='briefing')loadBriefing();else $('askInput').focus();
+}));
+
+loadConfig().then(async()=>{await loadDemoCatalog();poll();pollLayoutOverall();setInterval(poll,1800);setInterval(pollLayoutOverall,3500)}).catch(e=>notice(e.message));
+/* ---------------- assistant (text + voice) ---------------- */
+let lastAnswer='', speechRecognition=null, recorder=null, chunks=[];
+const SUPPORTED='speechSynthesis' in window;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+let assistantReady=false;
+async function initAssistant(){
+ if(assistantReady)return;
+ try{
+  const caps=await (await fetch('/api/assistant/capabilities')).json();
+  cloudStt=!!caps.cloud_stt;
+const hasSpeech=!!(window.SpeechRecognition||window.webkitSpeechRecognition)||cloudStt;
+   $('assistCaps').textContent=hasSpeech?'Text + voice':'Text ready';
+   assistantReady=true;
+   if(SUPPORTED)$('askSpeak').hidden=false;
+   // Browser speech recognition needs no backend. faster-whisper (caps.speech_to_text) is only
+   // a heavier local fallback, so it must not gate the microphone button.
+   if(hasSpeech){
+    $('askMic').hidden=false;
+    if(window.SpeechRecognition||window.webkitSpeechRecognition){
+     const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+     speechRecognition=new SR();speechRecognition.lang='en-US';speechRecognition.interimResults=false;
+     speechRecognition.onresult=e=>{$('askInput').value=e.results[0][0].transcript;askQuestion()};
+    }
+   }
+ }catch(e){}
+}
+async function askQuestion(){
+ const question=$('askInput').value.trim();
+ if(!question)return;
+ $('askReply').textContent='Checking the current observations…';
+ try{
+  const r=await api('/api/assistant/ask',{method:'POST',headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({question,camera_id:selected||null})});
+  lastAnswer=r.answer||'';
+  $('askReply').textContent=r.answer||'No answer.';
+  $('askSources').textContent=(r.sources&&r.sources.length)?('Source: '+r.sources.join(' · ')):'';
+  // Spoken replies are opt-in: do not unexpectedly read private store data aloud.
+ }catch(e){$('askReply').textContent='Assistant unavailable: '+e.message}
+}
+$('askSend').onclick=askQuestion;
+$('askInput').addEventListener('keydown',e=>{if(e.key==='Enter')askQuestion()});
+async function recordAndTranscribe(){
+ const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+ const recorder=new MediaRecorder(stream);const chunks=[];
+ recorder.ondataavailable=e=>chunks.push(e.data);
+ const stopped=new Promise(r=>recorder.onstop=r);
+ recorder.start();$('askMic').textContent='Listening…';
+ await new Promise(r=>setTimeout(r,5000));
+ recorder.stop();await stopped;stream.getTracks().forEach(t=>t.stop());
+ $('askMic').textContent='Transcribing…';
+ const body=new FormData();body.append('audio',new Blob(chunks,{type:recorder.mimeType||'audio/webm'}),'clip.webm');
+ const response=await fetch('/api/assistant/transcribe',{method:'POST',body});
+ const data=await response.json();
+ $('askMic').textContent='Speak';
+ if(response.ok&&data.text){$('askInput').value=data.text;askQuestion()}
+ else{notice(data.detail||'Nothing recognised')}
+}
+$('askMic').onclick=async()=>{
+ if(speechRecognition){try{speechRecognition.start();$('askMic').textContent='Listening…'}
+  catch(e){notice('Microphone unavailable: '+e.message)}finally{setTimeout(()=>$('askMic').textContent='Speak',4000)};return}
+ if(!cloudStt){notice('This browser has no speech recognition and no transcription key is configured');return}
+ try{await recordAndTranscribe()}catch(e){$('askMic').textContent='Speak';notice('Microphone unavailable: '+e.message)}};
+$('askSpeak').onclick=()=>{if(lastAnswer)speak(lastAnswer)};
+function speak(text){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);
+ u.rate=1.02;speechSynthesis.speak(u)}catch(e){}}
+
+/* ---------------- briefing ---------------- */
+let briefCfg={recipients:[],frequency_minutes:60,paused:false,frequencies:[15,30,60,120,240,1440]};
+async function loadBriefing(){
+ try{
+  briefCfg=await (await fetch('/api/briefing/config')).json();
+  const sel=$('briefFreq');
+  sel.innerHTML=(briefCfg.frequencies||[]).map(m=>`<option value="${m}">${m>=1440?'End of day':m+' minutes'}${m===60?' (default)':''}</option>`).join('');
+  sel.value=briefCfg.frequency_minutes;
+  renderRecipients();
+  renderLog(briefCfg.deliveries||[]);
+  const due=briefCfg.next_due_in_s;
+  $('briefDue').textContent=briefCfg.paused?'paused':(due===null||due===undefined?'counting down to the first briefing':'next in '+Math.floor(due/60)+'m '+due%60+'s');
+  $('briefPause').textContent=briefCfg.paused?'Resume':'Pause';
+ }catch(e){$('briefDue').textContent='briefing config unavailable'}
+}
+function renderRecipients(){
+ const rows=briefCfg.recipients||[];
+ $('briefCount').textContent=rows.length?rows.length+' configured':('none yet — add your number to test');
+ $('briefRecipients').innerHTML=rows.length?rows.map((r,i)=>
+  `<tr><td>${esc(r.name)}</td><td>${esc(r.number)}</td><td>${esc(r.role||'')}</td>
+   <td><button data-rm="${i}" style="background:none;border:none;color:#eea7a7">remove</button></td></tr>`).join('')
+  :'<tr><td colspan="4" class="muted">No recipients configured.</td></tr>';
+ $('briefRecipients').querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>saveRecipients(rows.filter((_,i)=>i!==+b.dataset.rm)));
+}
+function renderLog(list){
+ $('briefLog').innerHTML=list.length?list.slice().reverse().map(d=>
+  `<tr><td>${esc((d.at||'').replace('T',' ').slice(0,19))}</td><td>${esc(d.name||'—')}</td>
+   <td>${esc(({link_ready:'link ready',sent_confirmed:'sent (confirmed)'}[d.status]||d.status||''))}</td><td>${d.link?`<a class="small-link" href="${esc(d.link)}" target="_blank" rel="noopener">open WhatsApp</a> <button class="small-link" data-confirm-at="${esc(d.at)}" data-confirm-num="${esc(d.number)}" style="background:none;border:none;color:#61e7be;cursor:pointer;text-decoration:underline">mark sent</button> <button class="small-link" data-copymsg="${encodeURIComponent(decodeURIComponent((d.link.split('text=')[1]||'')))}" style="background:none;border:none;color:#8fc7ff;cursor:pointer;text-decoration:underline">copy message</button>`:''}</td></tr>`).join('')
+  :'<tr><td colspan="4" class="muted">Nothing sent yet.</td></tr>';
+  $('briefLog').querySelectorAll('[data-confirm-at]').forEach(b=>b.onclick=async()=>{
+   try{await api('/api/briefing/confirm',jsonOpt('POST',{at:b.dataset.confirmAt,number:b.dataset.confirmNum}));
+       b.remove();loadBriefing()}catch(e){notice('Could not confirm: '+e.message)}});
+  $('briefLog').querySelectorAll('[data-copymsg]').forEach(b=>b.onclick=async()=>{
+   try{await navigator.clipboard.writeText(decodeURIComponent(b.dataset.copymsg));b.textContent='copied ✓'}
+   catch(e){b.textContent='copy failed'}});
+}
+async function saveRecipients(recipients){
+ try{const r=await (await fetch('/api/briefing/config',{method:'PUT',headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({recipients})})).json();briefCfg=r;renderRecipients()}catch(e){notice('Could not save recipients: '+e.message)}
+}
+$('rcAdd').onclick=()=>{
+ const name=$('rcName').value.trim(),number=$('rcNumber').value.trim();
+ if(!name||!number){notice('Both a name and a number are required.');return}
+ saveRecipients([...(briefCfg.recipients||[]),{name,number,role:'manager'}]);
+ $('rcName').value='';$('rcNumber').value='';
+};
+$('briefFreq').onchange=async e=>{await fetch('/api/briefing/config',{method:'PUT',headers:{'Content-Type':'application/json'},
+ body:JSON.stringify({frequency_minutes:+e.target.value})});loadBriefing()};
+$('briefPause').onclick=async()=>{await fetch('/api/briefing/config',{method:'PUT',headers:{'Content-Type':'application/json'},
+ body:JSON.stringify({paused:!briefCfg.paused})});loadBriefing()};
+$('briefSend').onclick=async()=>{
+ const box=$('briefMsg');box.hidden=false;box.textContent='Building the briefing…';
+ try{
+  const r=await (await fetch('/api/briefing/send',{method:'POST',headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({camera_id:selected||null})})).json();
+  box.textContent=r.summary.text;
+  if(!(r.deliveries||[]).length){box.textContent+=r.note;return}
+const rows=r.deliveries.map(d=>`<div style="margin-top:8px">${esc(d.name)} · <a class="small-link" href="${esc(d.link)}" target="_blank" rel="noopener">open WhatsApp with the message ready</a> · <button class="small-link" data-copy="${esc(d.link)}" style="background:none;border:none;color:#8fc7ff;cursor:pointer;text-decoration:underline">copy link</button></div>`).join('');
+   box.innerHTML=`<div style="white-space:pre-wrap">${esc(r.summary.text)}</div>${rows}
+    <div class="subtle" style="margin-top:8px">${esc(r.note)}</div>`;
+   box.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{
+    const text=decodeURIComponent((b.dataset.copy.split('text=')[1]||''));
+    try{await navigator.clipboard.writeText(text);b.textContent='message copied ✓'}
+    catch(e){b.textContent='press Ctrl+C on the link above'}});
+   loadBriefing();
+ }catch(e){box.textContent='Could not build the briefing: '+e.message}
+};
+initAssistant();loadBriefing();setInterval(loadBriefing,30000);

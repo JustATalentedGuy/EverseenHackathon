@@ -15,8 +15,8 @@ DOC_FILES = [
     'research/EVERSEEN_FINAL_PROJECT_DOCUMENTATION.md',
     'research/METRICS_AND_BOTTLENECK_SIGNALS.md',
     'research/FINAL_DEADLINE_DATA_AND_DEPLOYMENT_ARCHITECTURE.md',
-    'prototype/INTEGRATION.md',
-    'prototype/README.md',
+    'docs/TECHNICAL.md',
+    'docs/OPERATIONS.md',
     'README.md',
 ]
 STOPWORDS = set("""a an and are as at be been by can do does for from has have how i if in is it its

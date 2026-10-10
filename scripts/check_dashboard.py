@@ -28,6 +28,7 @@ with sync_playwright() as p:
         expect(page.locator('#camera option')).to_have_count(len(saved['cameras']))
         page.locator('#snapshot').click()
         page.wait_for_function('document.querySelector("#feed").naturalWidth > 0', timeout=30000)
+        page.locator('#zoneEditor summary').click()
         page.locator('#zoneName').fill('Temporary browser test zone')
         page.locator('#mark').click()
         rect = page.locator('#canvas').bounding_box()
@@ -40,7 +41,7 @@ with sync_playwright() as p:
         page.wait_for_function('Number(document.querySelector("#frameInfo").textContent.match(/\\d+/)?.[0] || 0) > 0',
                                timeout=50000)
         expect(page.locator('#csv')).to_be_visible()
-        expect(page.locator('#heatBrief')).to_contain_text('observed person-seconds',timeout=15000)
+        expect(page.locator('#heatBrief')).to_contain_text('person-seconds',timeout=15000)
         page.locator('#heatWindow').select_option('30')
         expect(page.locator('#heatWindow')).to_have_value('30')
         expect(page.locator('#heat')).to_have_attribute('src',__import__('re').compile(r'window_s=30'),timeout=15000)

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "sections": [
+    {"id":"front_entry","name":"Store entrance","role":"entrance","x":4,"y":6,"w":4,"h":2,
+     "links":[{"camera_id":"front","zone_id":"store_front"}]},
+    {"id":"main_corridor","name":"Shopping corridor","role":"aisle","x":4,"y":3,"w":4,"h":3,
+     "links":[{"camera_id":"corridor","zone_id":"corridor_middle"}]},
+    {"id":"back_display","name":"Back display","role":"display","x":4,"y":0,"w":4,"h":3,
+     "links":[]}
+  ]
+}

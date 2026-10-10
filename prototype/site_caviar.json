@@ -75,5 +75,5 @@
   ],
   "cpu_threads": 4,
   "zone_persistence_s": 0.2,
-  "_note": "CAVIAR configuration kept for machines where scripts/prepare_retail_demo.py has been run. Those .mpg files are research-licensed and are not stored in the repository, so this config is inactive by default. Run: EVERSEEN_CONFIG=prototype/site_caviar.json python3 -m prototype.server"
+  "_note": "Public demo configuration using official CAVIAR research footage. Run python scripts/setup_demo.py --data once to acquire detector weights and video files, then start prototype.server."
 }

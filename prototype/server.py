@@ -1,6 +1,8 @@
 """Local camera-zone setup and replay dashboard. Bind loopback only."""
 import json
 import os
+import shutil
+from contextlib import asynccontextmanager
 from pathlib import Path
 import csv
 import io
@@ -9,6 +11,7 @@ import threading
 import time
 import cv2
 from fastapi import FastAPI,HTTPException,Request
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse,Response,StreamingResponse
 from .core import validate_config,propose_zones
 from .run import run
@@ -17,10 +20,25 @@ from .live import LiveManager
 from .topology import validate_layout, full_report
 ROOT=Path(__file__).resolve().parents[1]
 # Point EVERSEEN_CONFIG at another site file (e.g. site_cctv.json) to run a different camera set.
-CONFIG=Path(os.environ.get('EVERSEEN_CONFIG') or ROOT/'prototype'/'site.json')
+# Keep the shared, tested CCTV demo as an immutable seed. Operator changes live
+# in ignored per-machine files instead of modifying files committed to Git.
+CONFIG=Path(os.environ.get('EVERSEEN_CONFIG') or ROOT/'prototype'/'site_runtime.json')
 DEMO_CATALOG=ROOT/'prototype'/'demo_catalog.json'
-LAYOUT=ROOT/'prototype'/'floor_layout.json'
-app=FastAPI(title='Everseen setup')
+LAYOUT=Path(os.environ.get('EVERSEEN_LAYOUT') or ROOT/'prototype'/'floor_layout_runtime.json')
+@asynccontextmanager
+async def lifespan(_app):
+    global briefing_service
+    briefing_service=briefing_mod.BriefingService(_get_assistant())
+    briefing_service.start()
+    try:
+        yield
+    finally:
+        briefing_service.stop()
+        live.stop_all()
+
+
+app=FastAPI(title='Everseen',lifespan=lifespan)
+app.mount('/assets',StaticFiles(directory=str(ROOT/'prototype'/'assets')),name='assets')
 lock=threading.Lock(); job={'status':'idle'}
 live=LiveManager(ROOT)
 
@@ -33,7 +51,24 @@ async def local_only(request:Request,call_next):
         return Response('Origin not allowed',403)
     return await call_next(request)
 
-def load(): return json.loads(CONFIG.read_text(encoding='utf-8'))
+def load():
+    if not CONFIG.exists():
+        # Prefer the private store-demo configuration only when the operator
+        # actually has every source locally. The public clone falls back to
+        # the documented CAVIAR acquisition path instead.
+        store_seed=ROOT/'prototype'/'site_cctv.json'
+        has_store=False
+        if store_seed.exists():
+            try:
+                data=json.loads(store_seed.read_text(encoding='utf-8'))
+                has_store=all((ROOT/c['source']).is_file() for c in data['cameras'])
+            except (ValueError,KeyError,TypeError):
+                pass
+        seed=store_seed if has_store else ROOT/'prototype'/'site_caviar.json'
+        if not seed.exists():seed=ROOT/'prototype'/'site.json'
+        CONFIG.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copyfile(seed,CONFIG)
+    return json.loads(CONFIG.read_text(encoding='utf-8'))
 
 @app.get('/')
 def index(): return FileResponse(ROOT/'prototype'/'dashboard.html')
@@ -48,7 +83,26 @@ def layout_page(): return FileResponse(ROOT/'prototype'/'layout.html')
 def layout_script():return FileResponse(ROOT/'prototype'/'layout.js', media_type='text/javascript')
 
 def load_layout():
-    if not LAYOUT.exists():return {'version':1,'sections':[]}
+    if not LAYOUT.exists():
+        # Select a complete, *compatible* floor-plan template rather than
+        # presuming camera names from one demo or mixing unrelated sources.
+        config=load()
+        compatible=[]
+        for seed in [ROOT/'prototype'/'floor_layout.json',
+                     ROOT/'prototype'/'floor_layout_caviar.json']:
+            if not seed.is_file():continue
+            try:
+                document=json.loads(seed.read_text(encoding='utf-8'))
+                validate_layout(document,config)
+                mappings=sum(len(s.get('links',[])) for s in document['sections'])
+                compatible.append((mappings,seed))
+            except (ValueError,KeyError,TypeError):
+                continue
+        if compatible:
+            seed=max(compatible,key=lambda item:item[0])[1]
+            LAYOUT.parent.mkdir(parents=True,exist_ok=True)
+            if seed.resolve()!=LAYOUT.resolve():shutil.copyfile(seed,LAYOUT)
+        if not LAYOUT.exists():return {'version':1,'sections':[]}
     return json.loads(LAYOUT.read_text(encoding='utf-8'))
 
 @app.get('/api/layout')
@@ -363,12 +417,6 @@ def _get_assistant():
         obj.llm=assistant_llm.build()
         _ASSISTANT=obj
     return _ASSISTANT
-
-@app.on_event('startup')
-async def _start_briefing():
-    global briefing_service
-    briefing_service=briefing_mod.BriefingService(_get_assistant())
-    briefing_service.start()
 
 @app.get('/api/assistant/capabilities')
 def assistant_capabilities():

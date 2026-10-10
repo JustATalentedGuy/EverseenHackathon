@@ -2,8 +2,10 @@
 
 ## Store CCTV clips in `data/cctv/`
 
-Six retail CCTV clips are included so the camera configuration `prototype/site_cctv.json`
-works from a fresh clone:
+Six retail CCTV clips may be present locally from the teammate's experimental branch.
+They are **not included in the final public `main` tree** because permission to
+redistribute them has not been established. The optional `prototype/site_cctv.json`
+configuration works only when an operator has placed authorized clips at those paths:
 
 | File | Size | Scene |
 |---|---|---|
@@ -30,17 +32,17 @@ They are therefore treated as **research and demonstration material only**:
   requirements were met at the location and that the uploader had the right to share the
   footage, or replace them with footage you own.
 
-Every person visible in these clips is captured on shop premises. None of it is
-identifying material, and the system makes no attempt to identify anyone: it reports only
-zone occupancy, observed track entries and partial visible dwell. Even so, footage of
-identifiable people in a workplace carries privacy expectations, and these clips should
-be handled the way you would handle any CCTV recording.
+These clips capture people on shop premises; some faces may be identifiable.
+The system does not attempt to identify anyone: it reports only zone occupancy,
+track entries and partial visible dwell. Treat the files as sensitive workplace CCTV.
 
 ### Contrast with the other footage in this repository
 
 `datasets/caviar` (CC BY-SA, CAVIAR project) and the MERL / CUHK Mall samples referenced in
-`prototype/DEMO_FOOTAGE.md` come from documented research datasets with explicit terms,
+`prototype/demo_catalog.json` come from documented research datasets with explicit terms,
 which is why those are fetched by `scripts/prepare_retail_demo.py` rather than committed.
 
-If this repository is going to be published, replacing `data/cctv/` with consented or
-publicly licensed footage is the right thing to do.
+The final submission leaves these files untracked and Git-ignored. Previous commits or
+other branches may still reference footage until repository history is separately
+rewritten or those branches are removed; removing them from `main` does not purge
+historic objects. Use the CAVIAR setup for publicly reproducible testing.

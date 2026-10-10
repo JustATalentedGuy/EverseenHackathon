@@ -22,12 +22,15 @@ with sync_playwright() as p:
     evidence={'scenario':'Shopkeeper operating a checkout camera from a direct HTTP URL'}
     try:
         page.goto(BASE,wait_until='networkidle')
+        page.get_by_role('tab',name='Camera library').click()
         page.locator('#newName').fill('Shopkeeper demo checkout')
         page.locator('#newSource').fill(URL)
         page.locator('#add').click()
         expect(page.locator('#camera')).to_have_value('shopkeeper_demo_checkout',timeout=12000)
         page.locator('#snapshot').click()
+        page.get_by_role('tab',name='Live dashboard').click()
         page.wait_for_function('document.querySelector("#feed").naturalWidth > 0',timeout=35000)
+        page.locator('#zoneEditor summary').click()
         evidence['http_video_preview']=True
         page.locator('#zoneName').fill('Front checkout queue area')
         page.locator('#zoneRole').select_option('checkout')

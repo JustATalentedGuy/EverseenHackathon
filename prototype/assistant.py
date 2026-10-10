@@ -19,7 +19,7 @@ from . import assistant_docs
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# Claims the system deliberately cannot support (see prototype/INTEGRATION.md).
+# Claims the system deliberately cannot support (see docs/TECHNICAL.md).
 UNSUPPORTED = [
     (r'\b(unique|distinct|total)\s+(shoppers?|visitors?|people|customers?)\b',
      'store-wide unique visitor counts'),
@@ -43,7 +43,7 @@ NUM_WORDS = r'(?:how many|persons?|people|count|occupancy|occupied|busy|crowded|
 DEFINITION_MARKERS = r'\b(meaning|mean|means|define|definition|explain|stands for)\b'
 # "how do I know if X" asks for the rule behind the metric, so the documents answer it,
 # even though it names a metric the live path would otherwise claim.
-OPERATIONAL_DOCS = ('prototype/INTEGRATION.md', 'prototype/README.md', 'README.md')
+OPERATIONAL_DOCS = ('docs/OPERATIONS.md', 'docs/TECHNICAL.md', 'README.md')
 RULE_MARKERS = (r'\bhow do i know\b|\bhow would you know\b|\bhow do you (?:decide|know|judge)\b'
                 r'|\bwhat counts\b|\bwhat makes\b|\bwhen is .*flagged\b'
                 r'|\bhow is .*(?:defined|calculated|measured|decided)\b')
@@ -425,7 +425,7 @@ class Assistant:
                            'cameras are not verified as synchronized, so that number is not derivable. '
                            'I can report per-zone observed occupancy, partial visible dwell, observed track '
                            'entries and the review cues.' % blocked),
-                'sources': ['prototype/INTEGRATION.md'],
+                'sources': ['docs/TECHNICAL.md'],
             }
 
         wants_definition = re.search(DEFINITION_MARKERS, question.lower()) is not None

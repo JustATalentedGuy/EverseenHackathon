@@ -252,3 +252,5 @@ class BriefingService:
 
     def stop(self):
         self._stop.set()
+        if self._task and not self._task.done():
+            self._task.cancel()

@@ -21,10 +21,11 @@ with sync_playwright() as p:
     report={}
     try:
         page.goto(BASE,wait_until='networkidle')
+        page.get_by_role('tab',name='Camera library').click()
         catalog=page.request.get(BASE+'/api/demo/catalog').json()['videos']
         ready=[r for r in catalog if r['available']]
         assert len(ready)>=6,(len(ready),[x['state'] for x in catalog])
-        expect(page.locator('#demoList .demo-item')).to_have_count(len(catalog))
+        expect(page.locator('#demoList .demo-item')).to_have_count(len(ready))
         report['total']=len(catalog)
         report['ready']=len(ready)
         for identifier in ['caviar_walkby','mall_crowd','merl_shelf']:
