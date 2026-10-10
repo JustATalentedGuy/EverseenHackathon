@@ -63,6 +63,22 @@ SYSTEM = (
 )
 
 
+# The shared prompt is written for live answers and would turn a definition into a status
+# claim ("the data is stale") when handed explanatory text. This one may only restate.
+DOCUMENT_SYSTEM = (
+    'You explain a documented metric or rule to a shopkeeper, in your own warm, spoken words. '
+    'Rules: keep the meaning exactly as given, in the same order, and do not shorten it into a '
+    'different claim. Never say anything about the shop right now - no cameras, no occupancy, no '
+    '"currently", "at the moment", or "I cannot see". You are explaining what the words mean, '
+    'not reporting a status. Do not add numbers that are not in the text, and do not drop any '
+    'that are. Two or three spoken sentences. Use contractions and plain names, never the internal '
+    'terms "partial visible dwell", "camera-local", "P90" or "threshold" - say "the time you can '
+    'actually see someone", "the cameras", "nine times out of ten" and "your limit". '
+    'End with one short offer, such as "Want me to show that for your floor right now?" '
+    'Plain text only: no markdown, no bullets, no source names.'
+)
+
+
 def _get(url, timeout=1.5):
     request = urllib.request.Request(url, headers={'User-Agent': 'everseen-prototype/1.0'})
     with urllib.request.urlopen(request, timeout=timeout) as response:
@@ -149,18 +165,19 @@ class Phraser:
 
     # ---- generation -------------------------------------------------------
     @staticmethod
-    def _cloud(facts):
+    def _cloud(facts, system=None):
         body = {'model': CLOUD_MODEL, 'temperature': 0.3, 'max_tokens': 512,
-                'messages': [{'role': 'system', 'content': SYSTEM},
+                'messages': [{'role': 'system', 'content': system or SYSTEM},
                              {'role': 'user', 'content': facts}]}
         data = _post(CLOUD_URL + '/chat/completions', body, TIMEOUT_S,
                      headers={'Authorization': 'Bearer ' + CLOUD_KEY})
         message = data.get('choices', [{}])[0].get('message', {})
         return (message.get('content') or '').strip()
 
-    def _complete(self, facts):
+    def _complete(self, facts, system=None):
+        system = system or SYSTEM
         if self._ready == 'cloud':
-            return self._cloud(facts)
+            return self._cloud(facts, system)
         # Branch on the *detected* backend: with ASSISTANT_BACKEND=auto the requested
         # backend stays 'auto' while _ready holds what was actually found.
         if self._ready == 'llamacpp':
@@ -172,12 +189,13 @@ class Phraser:
             return (data.get('choices', [{}])[0].get('message', {}).get('content') or '').strip()
         body = {'model': self.model, 'stream': False, 'think': False,
                 'options': {'temperature': 0.2, 'num_predict': 160},
-                'messages': [{'role': 'system', 'content': SYSTEM},
+                'messages': [{'role': 'system', 'content': system or SYSTEM},
                              {'role': 'user', 'content': facts}]}
         data = _post(OLLAMA_URL + '/api/chat', body, TIMEOUT_S)
         return (data.get('message', {}).get('content') or '').strip()
 
-    def phrase(self, question, answer, payload):
+    def phrase(self, question, answer, payload, system=None):
+        """Rewrite an answer. `system` defaults to the live-answer contract."""
         if not self.ready():
             return None
         facts = json.dumps({
@@ -188,7 +206,7 @@ class Phraser:
             'active_cues': len(payload.get('cues') or []),
         }, ensure_ascii=False)
         try:
-            text = self._complete(facts)
+            text = self._complete(facts, system)
         except (urllib.error.URLError, TimeoutError, ValueError, OSError):
             return None
         if not text or len(text) > 600:

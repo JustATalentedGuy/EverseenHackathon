@@ -43,6 +43,7 @@ NUM_WORDS = r'(?:how many|persons?|people|count|occupancy|occupied|busy|crowded|
 DEFINITION_MARKERS = r'\b(meaning|mean|means|define|definition|explain|stands for)\b'
 # "how do I know if X" asks for the rule behind the metric, so the documents answer it,
 # even though it names a metric the live path would otherwise claim.
+DOCUMENT_PROMPT = None      # set lazily to avoid an import cycle
 OPERATIONAL_DOCS = ('prototype/INTEGRATION.md', 'prototype/README.md', 'README.md')
 RULE_MARKERS = (r'\bhow do i know\b|\bhow would you know\b|\bhow do you (?:decide|know|judge)\b'
                 r'|\bwhat counts\b|\bwhat makes\b|\bwhen is .*flagged\b'
@@ -428,9 +429,28 @@ class Assistant:
                 'sources': ['prototype/INTEGRATION.md'],
             }
 
+        from . import assistant_concepts
         wants_definition = re.search(DEFINITION_MARKERS, question.lower()) is not None
         asks_for_rule = re.search(RULE_MARKERS, question.lower()) is not None
         stats, events_path = self._stats(camera_id)
+        # A concept answer replaces retrieval only when the question asks what a word means
+        # and is not also asking for a current value ("what is the occupancy now").
+        concept = None
+        state_question = re.search(
+            r'\b(now|right now|at the moment|currently|today|this minute|where|which|'
+            r'show|list|any|are the|is the|do we have|mine)\b', question.lower())
+        if assistant_concepts.is_asking_for_definition(question) and not state_question:
+            concept = assistant_concepts.lookup(question)
+        if concept is not None:
+            text, source, name = concept
+            spoken = None
+            if use_llm and self.llm is not None:
+                spoken = self.llm.phrase(question, text, {}, system=self._document_prompt())
+            return {'ok': True, 'route': 'concept', 'answer': text, 'spoken': spoken or text,
+                    'sources': [source], 'concept': name,
+                    'measurement': {'state': 'no_data', 'reliable': False, 'text': 'Definition'},
+                    'zones': [], 'cues': []}
+
         if stats is None:
             # A documentation question does not need a live camera to be answerable.
             if wants_definition:
@@ -493,9 +513,19 @@ class Assistant:
 
         spoken = self.compose_spoken(question, payload) if route == 'metric' else None
         if use_llm and self.llm is not None:
-            polished = self.llm.phrase(question, answer, payload)
-            if polished:
-                answer = polished
+            if route == 'metric':
+                polished = self.llm.phrase(question, answer, payload)
+                if polished:
+                    answer = polished
+                if spoken:
+                    spoken_polished = self.llm.phrase(question, spoken, payload)
+                    if spoken_polished:
+                        spoken = spoken_polished
+            else:
+                # Explanations use their own contract, or the live-answer prompt turns a
+                # definition into a claim about what is happening in the shop right now.
+                spoken = self.llm.phrase(question, answer, payload,
+                                         system=self._document_prompt()) or answer
             # the voice line is what a shopkeeper actually hears, so it gets the same pass
             if spoken:
                 spoken_polished = self.llm.phrase(question, spoken, payload)
@@ -512,8 +542,10 @@ class Assistant:
             from . import assistant_ingest
         except Exception:
             return None
-        prefer = OPERATIONAL_DOCS if asks_for_rule else None
-        hits = self.docs.search(question, top=3, only=prefer) or []
+        # This path exists to answer from the last snapshot, so the ingested corpus is
+        # preferred over the research notes even when they score higher on wording.
+        prefer = [OPERATIONAL_DOCS, _docs.KNOWLEDGE_DIR] if asks_for_rule else [_docs.KNOWLEDGE_DIR]
+        hits = self.docs.search(question, top=5, prefer=prefer) or []
         ingested = [h for h in hits if _docs.KNOWLEDGE_DIR in h.get('source', '')]
         stamp = assistant_ingest.latest_stamp()
         if not ingested or not stamp:
@@ -553,6 +585,11 @@ class Assistant:
         # words with high frequency, so they would otherwise bury the explanation.
         exclude = ('runs/assistant/knowledge',) if definitions else None
         return self.docs.search(question, top=top, only=prefer, exclude=exclude)
+
+    @staticmethod
+    def _document_prompt():
+        from . import assistant_llm
+        return assistant_llm.DOCUMENT_SYSTEM
 
     def _zone_in_question(self, question, zones):
         q = question.lower()
@@ -936,4 +973,4 @@ class Assistant:
             return ('The project notes cover that, but only in engineering terms I would not read aloud. '
                     'I can still tell you what the cameras are seeing right now.')
         doc, text = readable[0]
-        return '%s (From %s.)' % (text, doc['source'].split('/')[-1])
+        return text

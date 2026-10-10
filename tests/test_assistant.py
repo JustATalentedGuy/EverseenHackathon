@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from prototype import assistant as A, assistant_docs as D, briefing as B
+from prototype import assistant as A, assistant_concepts, assistant_docs as D, briefing as B
 
 STATS = {
     'id': 'cam1', 'name': 'Corridor', 'status': 'live', 'frames': 240,
@@ -79,8 +79,10 @@ def test_definition_answers_without_a_camera():
     with tempfile.TemporaryDirectory() as tmp:
         a = make_assistant(tmp)
         result = a.answer('what does partial visible dwell mean')
-        assert result['route'] == 'document'
+        # a known concept is answered from the canonical definition, not a document chunk
+        assert result['route'] == 'concept', result['route']
         assert result['sources']
+        assert 'dwell' in result['answer'].lower()
 
 
 def test_stale_data_leads_with_the_caveat():
@@ -235,6 +237,39 @@ def test_dead_zone_answer_is_caveated():
             'cues': [], 'intent': 'dead'})
         assert 'Quiet corner' in text
         assert 'not proof' in text.lower() or 'cannot see' in text.lower()
+
+
+def test_core_concepts_answer_in_plain_english():
+    """Dwell, bottleneck and dead zone must never come back as notation or a bibliography."""
+    questions = {
+        'what does dwell mean': 'dwell',
+        'what does partial visible dwell mean': 'dwell',
+        'what is a bottleneck': 'bottleneck',
+        'how do I know if something is a bottleneck': 'bottleneck',
+        'what is a dead zone': 'dead zone',
+        'what does occupancy mean': 'occupancy',
+        'what counts as a review cue': 'cue',
+        'what is the heatmap': 'heatmap',
+    }
+    for question, expected in questions.items():
+        text = assistant_concepts.lookup(question)
+        assert text is not None, f'no concept for {question!r}'
+        answer = text[0]
+        assert expected.split()[0] in answer.lower(), f'{question}: {answer[:80]}'
+        for jargon in ('C_k', 'integral', 'persistence =', 'threshold s.t', 'Normalized',
+                       'DOI:', 'Status:', 'Research date'):
+            assert jargon not in answer, f'{question} leaked {jargon!r}'
+        assert 30 <= len(answer.split()) <= 90, f'{question}: wrong length'
+
+
+def test_concepts_are_answered_without_a_camera():
+    with tempfile.TemporaryDirectory() as tmp:
+        a = make_assistant(tmp)
+        a.live.sessions = {}            # nothing running
+        a.live.cameras = {}
+        result = a.answer('what is a bottleneck')
+        assert result['route'] == 'concept', result['route']
+        assert 'spike' in result['answer'].lower()
 
 
 def test_analytics_questions_report_the_store_not_a_document():
