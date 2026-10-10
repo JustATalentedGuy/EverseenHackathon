@@ -273,6 +273,63 @@ def test_stale_data_leads_the_spoken_answer():
         assert text.lower().startswith('heads up'), text
 
 
+def test_cloud_backend_is_used_when_a_key_is_present():
+    """Cloud is the auto-detected last resort, and it never invents numbers."""
+    import json as _json
+    import threading
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+    from prototype import assistant_llm
+
+    seen = {}
+
+    class Handler(BaseHTTPRequestHandler):
+        def do_POST(self):
+            length = int(self.headers.get('Content-Length') or 0)
+            seen['auth'] = self.headers.get('Authorization')
+            seen['body'] = _json.loads(self.rfile.read(length) or b'{}')
+            raw = _json.dumps({'choices': [{'message': {
+                'content': 'The main aisle has five people in it, so you can leave it be.'}}]}).encode()
+            self.send_response(200); self.send_header('Content-Type', 'application/json')
+            self.send_header('Content-Length', str(len(raw))); self.end_headers(); self.wfile.write(raw)
+
+        def log_message(self, *a):
+            pass
+
+    server = HTTPServer(('127.0.0.1', 0), Handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    original = {k: getattr(assistant_llm, k) for k in ('CLOUD_URL', 'CLOUD_KEY', 'CLOUD_MODEL', 'LLAMACPP_URL')}
+    try:
+        assistant_llm.CLOUD_URL = 'http://127.0.0.1:%d/v1' % server.server_port
+        assistant_llm.CLOUD_KEY = 'test-key-not-real'
+        assistant_llm.CLOUD_MODEL = 'test-model'
+        phraser = assistant_llm.Phraser(backend='cloud')
+        assert phraser.ready(), 'cloud should be detected when a key is set'
+        assert phraser._ready == 'cloud'
+        text = phraser.phrase('how many people', 'Main aisle currently shows 5 observed people.',
+                              {'measurement': {'state': 'observing'}, 'zones': [], 'cues': []})
+        assert text.startswith('The main aisle')
+        assert seen['auth'] == 'Bearer test-key-not-real'
+        # the contract must reach the model, and no key may appear in the prompt
+        assert 'ANSWER FIRST' in seen['body']['messages'][0]['content']
+        assert 'test-key-not-real' not in _json.dumps(seen['body']['messages'])
+    finally:
+        for k, v in original.items():
+            setattr(assistant_llm, k, v)
+        server.shutdown(); server.server_close()
+
+
+def test_no_key_means_no_cloud():
+    from prototype import assistant_llm
+    original = (assistant_llm.CLOUD_KEY, assistant_llm.GGUF)
+    try:
+        assistant_llm.CLOUD_KEY = ''
+        assistant_llm.GGUF = ''
+        assert assistant_llm.Phraser(backend='cloud').ready() is False
+        assert assistant_llm.Phraser(backend='auto').ready() is False
+    finally:
+        assistant_llm.CLOUD_KEY, assistant_llm.GGUF = original
+
+
 if __name__ == '__main__':
     for name, test in sorted(globals().items()):
         if name.startswith('test_'):

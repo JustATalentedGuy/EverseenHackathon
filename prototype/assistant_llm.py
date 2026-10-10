@@ -19,12 +19,19 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-BACKEND = os.environ.get('ASSISTANT_BACKEND', 'auto').strip().lower()   # auto|llamacpp|ollama|none
+BACKEND = os.environ.get('ASSISTANT_BACKEND', 'auto').strip().lower()  # auto|llamacpp|ollama|cloud|none
 MODEL = os.environ.get('ASSISTANT_MODEL', 'qwen3:1.7b')
 GGUF = os.environ.get('ASSISTANT_GGUF', '')            # path to the .gguf for llama.cpp
 OLLAMA_URL = os.environ.get('OLLAMA_URL', 'http://127.0.0.1:11434')
 LLAMACPP_URL = os.environ.get('LLAMACPP_URL', 'http://127.0.0.1:8081')
 TIMEOUT_S = float(os.environ.get('ASSISTANT_LLM_TIMEOUT', '12'))
+
+# Optional cloud fallback. Any OpenAI-compatible endpoint works (Groq, OpenRouter, ...).
+# The key is read from the environment and never stored or logged: only the composed answer
+# and its measured figures are sent, never video, images or the raw observation log.
+CLOUD_URL = os.environ.get('ASSISTANT_CLOUD_URL', 'https://api.groq.com/openai/v1').rstrip('/')
+CLOUD_MODEL = os.environ.get('ASSISTANT_CLOUD_MODEL', 'qwen/qwen3.8-27b')
+CLOUD_KEY = os.environ.get('ASSISTANT_CLOUD_API_KEY') or os.environ.get('GROQ_API_KEY') or ''
 
 SPOKEN_CONTRACT = (
     'Output format for spoken answers, in this exact order: '
@@ -57,15 +64,48 @@ SYSTEM = (
 
 
 def _get(url, timeout=1.5):
-    with urllib.request.urlopen(url, timeout=timeout) as response:
+    request = urllib.request.Request(url, headers={'User-Agent': 'everseen-prototype/1.0'})
+    with urllib.request.urlopen(request, timeout=timeout) as response:
         return response.status == 200
 
 
-def _post(url, body, timeout):
-    request = urllib.request.Request(url, data=json.dumps(body).encode('utf-8'),
-                                     headers={'Content-Type': 'application/json'})
+def _post(url, body, timeout, headers=None):
+    # Groq sits behind Cloudflare, which rejects Python's default urllib User-Agent
+    # with error 1010 ("browser signature banned"), so send an ordinary one.
+    request = urllib.request.Request(
+        url, data=json.dumps(body).encode('utf-8'),
+        headers={'Content-Type': 'application/json', 'Accept': 'application/json',
+                 'User-Agent': 'everseen-prototype/1.0 (+local analytics)', **(headers or {})})
     with urllib.request.urlopen(request, timeout=timeout) as response:
         return json.loads(response.read().decode('utf-8'))
+
+
+_WORD_NUMBERS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
+                 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12,
+                 'thirteen': 13, 'fourteen': 14, 'fifteen': 15, 'sixteen': 16,
+                 'seventeen': 17, 'eighteen': 18, 'nineteen': 19, 'twenty': 20}
+
+
+def _figures_preserved(source, text):
+    """Every figure in the source answer must survive the rewrite.
+
+    Models paraphrase. Left unchecked they will quietly drop "peak 7" or turn a count
+    into a different one, which turns a phrasing pass into a data error. Digits are
+    accepted in either form, because the contract asks for "five" over "5".
+    """
+    import re
+    digits = re.findall(r'\d+', text)
+    words = {w for w in re.findall(r'[a-z]+', text.lower()) if w in _WORD_NUMBERS}
+    values = {int(d) for d in digits} | {_WORD_NUMBERS[w] for w in words}
+    values |= {int(d) for d in digits}          # compound forms like "twenty-two"
+    for compound in re.findall(r'([a-z]+)-([a-z]+)', text.lower()):
+        tens, ones = _WORD_NUMBERS.get(compound[0]), _WORD_NUMBERS.get(compound[1])
+        if tens is not None and ones is not None:
+            values.add(tens + ones)
+    for number in re.findall(r'\d+', source):
+        if int(number) not in values:
+            return False
+    return True
 
 
 class Phraser:
@@ -76,11 +116,14 @@ class Phraser:
         self.model = model
         self.gguf = gguf
         self._ready = None
+        self.cloud = bool(CLOUD_KEY)
 
     # ---- detection --------------------------------------------------------
     def _detect(self):
         if self.backend == 'none':
             return 'none'
+        if self.backend == 'cloud':
+            return 'cloud' if CLOUD_KEY else 'none'
         if self.backend in ('auto', 'llamacpp') and self.gguf and Path(self.gguf).is_file() \
                 and _get(LLAMACPP_URL + '/health'):
             return 'llamacpp'
@@ -94,6 +137,9 @@ class Phraser:
                         return 'ollama'
             except Exception:
                 pass
+        # auto: a configured cloud key is the last resort, after the local runtimes
+        if self.backend == 'auto' and CLOUD_KEY:
+            return 'cloud'
         return 'none'
 
     def ready(self):
@@ -102,7 +148,19 @@ class Phraser:
         return self._ready != 'none'
 
     # ---- generation -------------------------------------------------------
+    @staticmethod
+    def _cloud(facts):
+        body = {'model': CLOUD_MODEL, 'temperature': 0.3, 'max_tokens': 512,
+                'messages': [{'role': 'system', 'content': SYSTEM},
+                             {'role': 'user', 'content': facts}]}
+        data = _post(CLOUD_URL + '/chat/completions', body, TIMEOUT_S,
+                     headers={'Authorization': 'Bearer ' + CLOUD_KEY})
+        message = data.get('choices', [{}])[0].get('message', {})
+        return (message.get('content') or '').strip()
+
     def _complete(self, facts):
+        if self._ready == 'cloud':
+            return self._cloud(facts)
         # Branch on the *detected* backend: with ASSISTANT_BACKEND=auto the requested
         # backend stays 'auto' while _ready holds what was actually found.
         if self._ready == 'llamacpp':
@@ -131,11 +189,28 @@ class Phraser:
         }, ensure_ascii=False)
         try:
             text = self._complete(facts)
-            return text if 0 < len(text) <= 600 else None
         except (urllib.error.URLError, TimeoutError, ValueError, OSError):
             return None
+        if not text or len(text) > 600:
+            return None
+        # A rewrite that loses a figure is worse than no rewrite: keep the measured answer.
+        if not _figures_preserved(answer, text):
+            return None
+        for term in ('unique shopper', 'unique visitor', 'revenue', 'checkout wait'):
+            if term in text.lower():
+                return None                     # the model broke a refusal boundary
+        return text
 
 
 def build():
     phraser = Phraser()
     return phraser if phraser.ready() else None
+
+
+def describe(phraser):
+    """Human-readable backend for the dashboard, without ever exposing the key."""
+    if phraser is None:
+        return 'none (template answers)'
+    active = phraser._ready or 'unknown'
+    label = {'llamacpp': 'llama.cpp', 'ollama': 'Ollama', 'cloud': 'cloud (%s)' % CLOUD_MODEL}.get(active, active)
+    return '%s · %s' % (label, phraser.model if active != 'cloud' else CLOUD_MODEL)

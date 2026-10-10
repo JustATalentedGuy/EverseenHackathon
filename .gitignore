@@ -118,3 +118,8 @@ runs/assistant/
 tools/merge_dashboard.py
 tools/build_cctv_calibration.py
 tools/check_calibration.py
+
+# local secrets: never commit API keys
+.env
+.env.local
+*.key

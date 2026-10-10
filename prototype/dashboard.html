@@ -268,9 +268,11 @@ const hasSpeech=(window.SpeechRecognition||window.webkitSpeechRecognition);
    // a heavier local fallback, so it must not gate the microphone button.
    if(hasSpeech){
     $('askMic').hidden=false;
-    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-    speechRecognition=new SR();speechRecognition.lang='en-US';speechRecognition.interimResults=false;
-    speechRecognition.onresult=e=>{$('askInput').value=e.results[0][0].transcript;askQuestion()};
+    if(window.SpeechRecognition||window.webkitSpeechRecognition){
+     const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+     speechRecognition=new SR();speechRecognition.lang='en-US';speechRecognition.interimResults=false;
+     speechRecognition.onresult=e=>{$('askInput').value=e.results[0][0].transcript;askQuestion()};
+    }
    }
  }catch(e){}
 }

@@ -38,26 +38,57 @@ generates a message plus a WhatsApp link. Microphone capture uses the browser's 
 recognition when present; replies are spoken with `speechSynthesis`, which is built into the
 browser.
 
-### 2. Optional: local model for smoother phrasing
+### 2. Optional: a model for conversational phrasing
 
-Both runtimes execute the same GGUF weights. **llama.cpp is the lighter option**: one static
-`llama-server` binary, an OpenAI-compatible endpoint, no bundled runtime and no daemon.
+The answers are already composed from measured values; a model only rewrites them into
+something a manager wants to listen to. There are three ways, and you can mix them.
+
+#### Option A — local model, fully offline (nothing leaves the machine)
 
 ```bash
-# llama.cpp (preferred: smallest footprint, no background service)
-curl -L -o llama.zip https://github.com/ggml-org/llama.cpp/releases/latest/download/llama-*-bin-ubuntu-x64.zip && unzip llama.zip
-./llama-server -m qwen3-1.7b-q4_k_m.gguf --host 127.0.0.1 --port 8081 -c 4096 -t 4 &
+# llama.cpp (preferred: one static binary, no daemon, ~1 GB with the model)
+git clone --depth 1 https://github.com/ggml-org/llama.cpp
+cmake -B build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
+cmake --build build --target llama-server -j2        # -j2 on an 8 GB machine; -j8 gets OOM-killed
+curl -L -o qwen3-1.7b-q4_k_m.gguf https://huggingface.co/Qwen/Qwen3-1.7B-GGUF/resolve/main/Qwen3-1.7B-Q4_K_M.gguf
+./build/bin/llama-server -m qwen3-1.7b-q4_k_m.gguf --host 127.0.0.1 --port 8081 -c 4096 -t 4 &
 export ASSISTANT_BACKEND=llamacpp
-export ASSISTANT_GGUF=/path/to/qwen3-1.7b-q4_k_m.gguf
-
-# or Ollama (one command, larger install)
-ollama pull qwen3:1.7b
-export ASSISTANT_BACKEND=ollama
+export ASSISTANT_GGUF=$PWD/qwen3-1.7b-q4_k_m.gguf
 ```
 
-`ASSISTANT_BACKEND=auto` (default) prefers llama.cpp when a GGUF is configured and the
-server answers `/health`, otherwise Ollama, otherwise no model. Qwen3 thinking mode is
-disabled in both paths so replies stay short.
+or Ollama, which is one command but a ~1.5 GB runtime and a background daemon:
+
+```bash
+ollama pull qwen3:1.7b && export ASSISTANT_BACKEND=ollama
+```
+
+`ASSISTANT_BACKEND=auto` (default) prefers llama.cpp when a GGUF is configured and its
+`/health` answers, then Ollama, then the cloud option below, then no model at all.
+
+#### Option B — a free API key (Groq and friends)
+
+Any OpenAI-compatible endpoint works, so Groq, OpenRouter or a self-hosted gateway all
+use the same code path. No SDK and no new dependency — it is one HTTPS call.
+
+```bash
+export ASSISTANT_CLOUD_API_KEY=...            # or GROQ_API_KEY
+export ASSISTANT_BACKEND=cloud                # optional; 'auto' also finds it
+export ASSISTANT_CLOUD_MODEL=llama-3.1-8b-instant
+```
+
+Groq's free tier is genuinely free and fast, and `llama-3.1-8b-instant` is more than
+capable of this job: the model is rewriting one already-correct paragraph into two spoken
+sentences. It never sees the video, never sees the observation log, and is told never to
+alter a figure.
+
+**What leaves the machine:** the composed answer and the handful of numbers in it — zone
+labels, occupancy, dwell. That is store performance data, so treat it the same way you
+would treat any other data leaving the site. Option A is the one to choose if that matters
+or if the store runs without internet.
+
+**What either option can and cannot change:** phrasing, warmth and ordering only. If a
+model is unavailable, slow or returns something unusable, the answer is discarded and the
+deterministic text is served instead, so the assistant never degrades to a wrong figure.
 
 ### 3. Optional: microphone transcription
 
@@ -105,9 +136,12 @@ violate WhatsApp's terms and risk a permanent number ban.
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `ASSISTANT_BACKEND` | `auto` | `auto`, `llamacpp`, `ollama`, `none` |
+| `ASSISTANT_BACKEND` | `auto` | `auto`, `llamacpp`, `ollama`, `cloud`, `none` |
 | `ASSISTANT_GGUF` | *(unset)* | path to the GGUF when using llama.cpp |
 | `ASSISTANT_MODEL` | `qwen3:1.7b` | Ollama model tag |
 | `ASSISTANT_LLM_TIMEOUT` | `12` | seconds before falling back to the deterministic answer |
 | `LLAMACPP_URL` | `http://127.0.0.1:8081` | llama.cpp server |
 | `OLLAMA_URL` | `http://127.0.0.1:11434` | Ollama daemon |
+| `ASSISTANT_CLOUD_API_KEY` | *(unset)* | Key for the cloud fallback; never logged or written to disk |
+| `ASSISTANT_CLOUD_URL` | Groq | Any OpenAI-compatible base URL |
+| `ASSISTANT_CLOUD_MODEL` | `llama-3.1-8b-instant` | Cloud model used for phrasing only |

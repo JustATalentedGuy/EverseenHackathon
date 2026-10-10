@@ -374,10 +374,26 @@ def assistant_capabilities():
     llm=_get_assistant().llm
     try: stt=bool(importlib.util.find_spec('faster_whisper'))
     except Exception: stt=False
+    from . import assistant_stt as _stt
     return {'ready':True,'llm':bool(llm and llm.ready()),
-            'llm_model':getattr(llm,'model',None),'speech_to_text':stt,
+            'llm_model':assistant_llm.describe(llm),'speech_to_text':stt,'cloud_stt':_stt.available(),
             'speech_output':'browser speechSynthesis',
             'transports':['text','microphone'] if stt else ['text']}
+
+@app.post('/api/assistant/transcribe')
+async def assistant_transcribe(request:Request):
+    from . import assistant_stt
+    if not assistant_stt.available():
+        raise HTTPException(503,'No speech-to-text key configured; the browser recogniser is used instead.')
+    form=await request.form()
+    upload=form.get('audio')
+    audio=await upload.read() if upload is not None and hasattr(upload,'read') else b''
+    filename=getattr(upload,'filename',None) or 'clip.webm'
+    text,error=assistant_stt.transcribe(audio,filename)
+    if error: raise HTTPException(422,error)
+    return {'text':text,'model':assistant_stt.MODEL,
+            'note':'Audio is transcribed by a third-party service; video never leaves the machine.'}
+
 
 @app.post('/api/assistant/ask')
 def assistant_ask(payload:dict):

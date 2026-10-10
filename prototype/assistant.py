@@ -401,6 +401,11 @@ class Assistant:
             polished = self.llm.phrase(question, answer, payload)
             if polished:
                 answer = polished
+            # the voice line is what a shopkeeper actually hears, so it gets the same pass
+            if spoken:
+                spoken_polished = self.llm.phrase(question, spoken, payload)
+                if spoken_polished:
+                    spoken = spoken_polished
         return {'ok': True, 'route': route, 'answer': answer, 'spoken': spoken,
                 'sources': self._sources(payload, route),
                 'measurement': health, 'zones': zones, 'cues': payload['cues']}
