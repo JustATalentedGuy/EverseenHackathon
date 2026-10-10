@@ -56,8 +56,4 @@ This is a hackathon prototype, **not** validated retail decision-making software
 
 See [Implementation & evidence](docs/TECHNICAL.md) for architecture, formulas, experimental model choice, integration tests and research limitations, and [Operations & sources](docs/OPERATIONS.md) for the store workflow, alternative camera datasets and assistant options. The original research history and numeric evaluations remain in `research/` and `experiments/` as an auditable appendix.
 
-## Footage and rights
-
-The optional six CCTV clips supplied in the teammate branch had **unverified redistribution rights**. They are deliberately **excluded from the final `main` tree**, though they may remain in a local installation. Use your own consented store video or the officially attributed CAVIAR research examples for demonstrations. The CAVIAR dataset retains its Creative Commons terms; consult [Data and provenance](docs/OPERATIONS.md). Clips appearing in older Git history or other branches may need separate removal before publishing a repository archive.
-
 © Everseen hackathon team — research prototype. No claim of independently validated deployment accuracy.
