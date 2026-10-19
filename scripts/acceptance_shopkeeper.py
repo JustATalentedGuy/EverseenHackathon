@@ -27,10 +27,9 @@ with sync_playwright() as p:
         page.locator('#newSource').fill(URL)
         page.locator('#add').click()
         expect(page.locator('#camera')).to_have_value('shopkeeper_demo_checkout',timeout=12000)
-        page.locator('#snapshot').click()
         page.get_by_role('tab',name='Live dashboard').click()
         page.wait_for_function('document.querySelector("#feed").naturalWidth > 0',timeout=35000)
-        page.locator('#zoneEditor summary').click()
+        expect(page.locator('#zoneEditor')).to_be_visible()
         evidence['http_video_preview']=True
         page.locator('#zoneName').fill('Front checkout queue area')
         page.locator('#zoneRole').select_option('checkout')

@@ -81,8 +81,8 @@ button.primary:hover{background:#a5f9e3}button:disabled{cursor:not-allowed}
 .video-frame{min-height:360px;background:#07131d;border-color:#355061;border-radius:12px}
 .video-frame img{min-height:360px;max-height:560px}.placeholder{font-size:14px;line-height:1.65;color:#afc1ca}
 .zone-editor{margin-top:14px;background:#0d1c29;border:1px solid #293f4d;border-radius:11px}
-.zone-editor summary{cursor:pointer;padding:13px 16px;color:#d5f1ef;font-size:13px;font-weight:700;list-style-position:inside}
-.zone-editor summary span{font-size:11px;font-weight:400;color:#829da9;margin-left:9px}
+.zone-editor h3{padding:13px 16px;margin:0;color:#d5f1ef;font-size:13px;font-weight:700}
+.zone-editor h3 span{font-size:11px;font-weight:400;color:#829da9;margin-left:9px}
 .zone-editor-body{padding:4px 16px 16px}.zone-editor .controls{margin-bottom:15px}
 .zone-editor .zone-name-row>input{margin-bottom:12px}.zone-editor .zone-name-row{max-width:100%}
 .zone-editor input,.zone-editor select{font-size:13px}

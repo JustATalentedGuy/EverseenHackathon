@@ -30,8 +30,10 @@ with sync_playwright() as p:
         expect(page.locator('#monitorCard')).to_be_visible()
         expect(page.locator('#heatCard')).to_be_visible()
         expect(page.locator('#overall-layout')).to_be_visible()
-        expect(page.locator('#zoneEditor')).not_to_have_attribute('open', '')
-        results.append('concise Overview dashboard and collapsed advanced editing')
+        expect(page.locator('#zoneEditor')).to_be_visible()
+        expect(page.locator('#mark')).to_be_visible()
+        page.wait_for_function('document.querySelector("#feed").naturalWidth > 0',timeout=30000)
+        results.append('camera preview loaded on page open, with camera-zone editing always visible')
 
         cfg = page.request.get(BASE + '/api/config').json()
         layout = page.request.get(BASE + '/api/layout').json()

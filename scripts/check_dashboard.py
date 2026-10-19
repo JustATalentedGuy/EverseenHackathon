@@ -26,9 +26,11 @@ with sync_playwright() as p:
         response = page.goto(BASE, wait_until='networkidle')
         assert response.status == 200
         expect(page.locator('#camera option')).to_have_count(len(saved['cameras']))
-        page.locator('#snapshot').click()
+        # Each selected camera previews automatically; manual preview is refresh-only.
         page.wait_for_function('document.querySelector("#feed").naturalWidth > 0', timeout=30000)
-        page.locator('#zoneEditor summary').click()
+        expect(page.locator('#feed')).to_have_attribute('src', __import__('re').compile(r'/api/frame/'))
+        expect(page.locator('#zoneEditor')).to_be_visible()
+        expect(page.locator('#mark')).to_be_visible()
         page.locator('#zoneName').fill('Temporary browser test zone')
         page.locator('#mark').click()
         rect = page.locator('#canvas').bounding_box()

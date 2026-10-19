@@ -6,7 +6,14 @@ function notice(s){$('notice').textContent=s}
 async function api(url, options){const r=await fetch(url,options);const j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.detail||`Request failed (${r.status})`);return j}
 const jsonOpt=(method,data)=>({method,headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
 function cam(){return config?.cameras?.find(c=>c.id===selected)}
-function choose(id){selected=id;heatRequest++;$('heatBrief').textContent='Start monitoring to calculate observed person-time.';$('camera').value=id; vertices=[]; drawing=false; $('videoWrap').classList.remove('marking');preview=false;lastLive='';$('feed').removeAttribute('src');$('heat').removeAttribute('src');$('placeholder').hidden=false;draw();renderZoneList();renderSelected();}
+function showPreview(){
+ if(!selected)return;
+ preview=true;lastLive='';
+ $('placeholder').textContent='Loading camera preview…';
+ $('placeholder').hidden=false;
+ $('feed').src='/api/frame/'+encodeURIComponent(selected)+'?t='+Date.now();
+}
+function choose(id){selected=id;heatRequest++;$('heatBrief').textContent='Start monitoring to calculate observed person-time.';$('camera').value=id; vertices=[]; drawing=false; $('videoWrap').classList.remove('marking');preview=false;lastLive='';$('feed').removeAttribute('src');$('heat').removeAttribute('src');$('placeholder').hidden=false;renderZoneList();showPreview();renderSelected();}
  function renderCameraList(){const keep=selected;const select=$('camera');select.replaceChildren();for(const c of config.cameras){const o=document.createElement('option');o.value=c.id;o.textContent=c.name||c.id.replace(/_/g,' ').replace(/\b\w/g,letter=>letter.toUpperCase());select.append(o)}choose(config.cameras.some(c=>c.id===keep)?keep:config.cameras[0].id)}
 async function loadConfig(){config=await api('/api/config');renderCameraList()}
 async function loadDemoCatalog(){const data=await api('/api/demo/catalog');demoCatalog=data.videos;renderDemoCatalog()}
@@ -83,8 +90,8 @@ function renderZoneList(){
  }draw();
 }
 function draw(){const c=$('canvas'),rect=$('feed').getBoundingClientRect();const width=rect.width||768,height=rect.height||432;c.width=Math.max(1,Math.round(width));c.height=Math.max(1,Math.round(height));ctx.clearRect(0,0,c.width,c.height);function poly(pts,color,close){if(!pts?.length)return;ctx.beginPath();ctx.moveTo(pts[0][0]*c.width,pts[0][1]*c.height);for(const p of pts.slice(1))ctx.lineTo(p[0]*c.width,p[1]*c.height);if(close)ctx.closePath();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.stroke();if(close){ctx.fillStyle=color+'26';ctx.fill()}for(const p of pts){ctx.fillStyle=color;ctx.beginPath();ctx.arc(p[0]*c.width,p[1]*c.height,3,0,7);ctx.fill()}}for(const z of (cam()?.zones||[]))poly(z.polygon,'#61e7be',true);poly(vertices,'#f4c16f',false)}
-async function save(){const r=await api('/api/config',jsonOpt('PUT',config));sessions={};chartPoints={};preview=false;lastLive='';$('feed').removeAttribute('src');$('placeholder').hidden=false;renderSelected();return r}
-async function add(){const name=$('newName').value.trim(),source=$('newSource').value.trim();if(!name||!source)throw Error('Enter both a camera name and source');const r=await api('/api/cameras',jsonOpt('POST',{name,source}));$('newName').value='';$('newSource').value='';config=await api('/api/config');renderCameraList();choose(r.id);sessions={};notice('Camera added. Preview it, draw zones, then start monitoring.')}
+async function save(){const r=await api('/api/config',jsonOpt('PUT',config));sessions={};chartPoints={};renderSelected();showPreview();return r}
+async function add(){const name=$('newName').value.trim(),source=$('newSource').value.trim();if(!name||!source)throw Error('Enter both a camera name and source');const r=await api('/api/cameras',jsonOpt('POST',{name,source}));$('newName').value='';$('newSource').value='';config=await api('/api/config');renderCameraList();choose(r.id);sessions={};notice('Camera added. Its preview loads automatically; draw zones and start monitoring when ready.')}
 async function remove(){if(!confirm('Remove this camera and its zone configuration?'))return;await api('/api/cameras/'+encodeURIComponent(selected),{method:'DELETE'});sessions={};await loadConfig();notice('Camera removed from configuration. Saved live observations remain on disk.')}
 async function finish(){
  if(vertices.length<3)throw Error('Click at least three floor points');
@@ -161,8 +168,8 @@ $('camera').onchange=()=>choose($('camera').value);
 $('heatWindow').onchange=()=>{if(sessions[selected]?.frames){refreshHeat(selected).catch(e=>notice(e.message))}};
 $('add').onclick=withError(add);$('remove').onclick=withError(remove);
 $('start').onclick=withError(async()=>{await api('/api/live/start/'+encodeURIComponent(selected),{method:'POST'});lastLive='';await poll();notice('Monitoring started. First processed frame will appear shortly.')});
-$('stop').onclick=withError(async()=>{await api('/api/live/stop/'+encodeURIComponent(selected),{method:'POST'});lastLive='';preview=false;await poll();notice('Monitoring stopped. Observations can be exported.')});
-$('snapshot').onclick=()=>{preview=true;lastLive='';$('feed').src='/api/frame/'+encodeURIComponent(selected)+'?t='+Date.now();$('placeholder').hidden=true;notice('Original frame preview. Start monitoring for tracked video.');};
+$('stop').onclick=withError(async()=>{await api('/api/live/stop/'+encodeURIComponent(selected),{method:'POST'});lastLive='';await poll();showPreview();notice('Monitoring stopped. Camera preview is available; observations can be exported.')});
+$('snapshot').onclick=()=>{showPreview();notice('Camera preview refreshed. Start monitoring for tracked video.');};
 $('feed').onload=()=>{draw();$('placeholder').hidden=true};$('feed').onerror=()=>{if(!lastLive){$('placeholder').hidden=false;notice('Unable to decode a frame. Check that the URL points directly to playable video (not a webpage); some MP4 HTTP servers require fast-start or byte-range support.')}};
 $('mark').onclick=()=>{if(!$('feed').getAttribute('src')){notice('Preview or start the camera first.');return}drawing=true;vertices=[];$('videoWrap').classList.add('marking');notice('Click floor boundary corners. Then choose Finish zone.');draw()};
 $('canvas').onclick=e=>{if(!drawing)return;const r=$('canvas').getBoundingClientRect();vertices.push([Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))]);draw()};
