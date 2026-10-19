@@ -88,6 +88,10 @@ Sections touching along an edge help Everseen understand which areas are next to
 
 This is just an example, not a required arrangement. Use the layout that makes sense for your shop.
 
+![Layout editor with the floor sections drawn](images/step-img10.png)
+
+*Figure: Layout editor with the floor sections drawn.*
+
 ### 3. Add cameras and mark the areas they can see
 
 Before a floor section can show people counts, it needs to be connected to a zone from a camera.
@@ -113,6 +117,10 @@ You can also select a validated video from **Video library** when available. A n
 
 **Important:** Draw a boundary around the area people actually stand or walk on. Avoid including unrelated spaces or overlapping zones unnecessarily. A camera can cover several zones. If you change and save camera zones while monitoring, active sessions stop; start monitoring again afterward.
 
+![Live camera with a drawn camera zone and the activity heatmap](images/step-img2.png)
+
+*Figure: Live camera with a drawn camera zone and the activity heatmap.*
+
 ### 4. Map camera zones to the floor plan
 
 This is the step that connects your video to your store layout.
@@ -127,6 +135,10 @@ This is the step that connects your video to your store layout.
 
 If the floor plan says **No live data**, the section may not have a mapped camera zone, its camera may not be running, or the camera may not yet have fresh observations. That is **not** the same as saying nobody is there.
 
+![Section details with a camera zone linked to the section](images/step-img3.png)
+
+*Figure: Section details with a camera zone linked to the section.*
+
 ### 5. Start monitoring your shop
 
 1. On **Overview → Live dashboard**, select a camera.
@@ -138,6 +150,10 @@ If the floor plan says **No live data**, the section may not have a mapped camer
 The current local prototype allows **up to four cameras to run analysis at the same time**. You can configure more camera sources and run them in groups. Video playback and real-time analysis speed depend on the computer.
 
 When you finish, click **Stop**. Use **Report ↓** to export a zone report as CSV, or **Events ↓** to export the camera's observation log when available.
+
+![Area performance, activity trend and store-wide analytics while monitoring](images/step-img4.png)
+
+*Figure: Area performance, activity trend and store-wide analytics while monitoring.*
 
 ### 6. Understand the Overview dashboard
 
@@ -176,6 +192,14 @@ The heatmap shows *observed time in image areas*, not exact customers per square
 
 The **Insights** panel highlights sustained patterns that might need attention. Open **Camera health** if the data looks wrong, the feed is slow, or recommendations are missing.
 
+![Overview summary cards, live camera and activity heatmap](images/step-img5.png)
+
+*Figure: Overview summary cards, live camera and activity heatmap.*
+
+![Activity heatmap with the 2 min period selected](images/step-img6.png)
+
+*Figure: Activity heatmap with the 2 min period selected.*
+
 ### 7. Use the 3D floor plan and store-wide analytics
 
 Open **Floor plan** after cameras are running.
@@ -189,6 +213,10 @@ Open **Floor plan** after cameras are running.
 If several cameras cover the same section, Everseen uses the **highest fresh camera count**, rather than simply adding them. This helps reduce double-counting, but the system **does not identify the same shopper across cameras**. Do not treat the store-wide sum as a verified unique visitor total.
 
 The floor-plan connections help suggest nearby sections, but they cannot tell whether there is a shelf, wall, or blocked passage. Check the real layout before acting.
+
+![3D store view with observed counts](images/step-img7.png)
+
+*Figure: 3D store view with observed counts.*
 
 ### 8. Turn observations into decisions
 
@@ -204,6 +232,10 @@ Here is a practical way to use Everseen during a shift:
 
 **A good decision has three steps:** (1) notice a repeated pattern, (2) check the camera and real-world situation, (3) try a small change and compare later observations. Recommendations are **suggestions for review**, not automatic instructions.
 
+![Store-wide analytics table with section status](images/step-img8.png)
+
+*Figure: Store-wide analytics table with section status.*
+
 ### 9. Ask Everseen questions
 
 On Overview, click the **Ask Everseen** button near the bottom-right corner.
@@ -216,6 +248,10 @@ You can ask questions such as:
 - “What should I check before moving a display?”
 
 Everseen answers using available observations and its supporting information. **If a camera has no fresh data, it cannot reliably answer a live-count question.** Text questions work without setting up a cloud AI service. Voice options depend on your browser and configuration.
+
+![Ask Everseen answering a question about the camera](images/step-img9.png)
+
+*Figure: Ask Everseen answering a question about the camera.*
 
 ### 10. Prepare a WhatsApp manager briefing
 
