@@ -19,13 +19,17 @@ py -3.12 -m venv .venv
 
 Open **http://127.0.0.1:8791**. The first run seeds a two-camera CAVIAR demo and its matching example floor plan. The evaluated detector weights and CAVIAR research footage are downloaded separately; third-party data and model weights are not committed. The project includes the original source URLs and research attribution.
 
-## The shopkeeper workflow
+## Start using your store
 
-1. **Overview** (`/`) — choose a camera, click **Start monitoring**, inspect live annotated video, activity heatmap, zone dwell and evidence-based insights. Use **Manage camera zones** when you need to adjust an area.
-2. **Floor plan** (`/layout`) — move and resize store sections on a grid, connect them to camera zones, and inspect the rotatable 3D view. Section observations and cautious layout suggestions update when sources are fresh.
-3. **Ask Everseen** — open the assistant in the bottom-right corner. Ask about measured people, activity, dwell or areas needing review. The assistant composes numbers from recorded analytics, not guesses from a language model. Text works without an LLM or microphone.
-4. **Manager briefings** — prepare a short update for your WhatsApp recipients. Everseen opens a **pre-filled** click-to-chat link; the user must press Send. It does **not** send messages automatically.
-5. **Camera library** — add a direct video URL, local video file or webcam, or import an audited research sample. **Advanced setup** (`/setup`) provides optional calibration and recorded replay tools.
+The easiest way to set up Everseen is to **build your floor plan first, then connect your cameras to it**:
+
+1. **Draw the store:** Open **[Floor plan](http://127.0.0.1:8791/layout)**. Click **+ Add section**, drag and resize each box, give it a name (such as *Entrance*, *Aisle*, or *Checkout*), and click **Save changes**.
+2. **Set up cameras:** On **[Overview](http://127.0.0.1:8791)**, open **Camera library** to add a camera or video. Return to **Live dashboard**, select a camera, click **Preview**, and expand **Manage camera zones** to draw the areas visible in that camera.
+3. **Connect cameras to the floor plan:** Go back to **Floor plan**. Select each section and tick the camera zone that covers it under **Camera zones covering this section**. Click **Save changes** again.
+4. **Start monitoring:** Return to Overview, select a camera and click **Start monitoring**. Check **Area performance**, the **Activity heatmap**, and **Insights**. The floor plan shows mapped counts and a rotatable 3D view as fresh camera observations arrive.
+5. **Decide what to check:** Review repeated busy areas, compare quieter sections, and confirm the situation in the video before moving a display or changing staff assignments. Use **Ask Everseen** for questions or prepare a **WhatsApp briefing** that you send yourself.
+
+**New to the app? Read the [Shopkeeper's step-by-step guide](docs/SHOPKEEPER_README.md).** It includes floor-plan examples, camera-zone mapping, explanations of every metric, daily checklists, and common fixes.
 
 Changes to cameras, recipients and floor layouts are stored in **Git-ignored, machine-local files**, preserving the documented sample configurations for every clone.
 
@@ -54,6 +58,6 @@ This is a hackathon prototype, **not** validated retail decision-making software
 .\.venv\Scripts\python.exe -m pytest -q tests
 ```
 
-See [Implementation & evidence](docs/TECHNICAL.md) for architecture, formulas, experimental model choice, integration tests and research limitations, and [Operations & sources](docs/OPERATIONS.md) for the store workflow, alternative camera datasets and assistant options. The original research history and numeric evaluations remain in `research/` and `experiments/` as an auditable appendix.
+See the [Shopkeeper's guide](docs/SHOPKEEPER_README.md) for everyday use, [Implementation & evidence](docs/TECHNICAL.md) for architecture, formulas and evaluation, and [Operations & sources](docs/OPERATIONS.md) for advanced configuration and dataset information. The original research history and numeric evaluations remain in `research/` and `experiments/` as an auditable appendix.
 
 © Everseen hackathon team — research prototype. No claim of independently validated deployment accuracy.
